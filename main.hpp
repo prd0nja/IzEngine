@@ -4,4 +4,5 @@
 #include <windows.h>
 
 BOOL APIENTRY DllMain(HMODULE hModule, DWORD  dwReason, LPVOID lpReserved);
-void OnAttach();
+DWORD GetProcessIdByName(const char* processName);
+int OnAttach();
