@@ -1,49 +1,42 @@
 cmake_minimum_required(VERSION 3.26)
-project(SR_Client)
-
+project(SR VERSION 1.0.0 LANGUAGES CXX)
+set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 set(CMAKE_CXX_STANDARD 23)
 
+# CoD4
+set(COD4_MILES $ENV{COD4}/miles)
+
+# CPack
+set(CPACK_PROJECT_NAME ${PROJECT_NAME})
+set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
+set(CPACK_GENERATOR 7Z)
+include(CPack)
+
+# Tests
+# include(CTest)
+# add_executable(SR.Tests)
+# add_test(NAME Tests COMMAND SR.Tests)
+
+# Build
+add_library(SR SHARED)
+add_subdirectory(src)
 if(CMAKE_SYSTEM_NAME MATCHES "Windows")
-    # Windows-specific configuration
-    message("Windows Configuration Detected!")
-    set(COD4_Miles $ENV{COD4_Root}/miles)
+    message("Windows Build")
 else()
-    # Non-Windows configuration
-    message("Non-Windows Configuration Detected!")
+	message("Linux Build")
 
-    # Change this to your local 'Call of Duty 4/miles' folder!
-    set(COD4_Miles
-        "/run/media/nitro/fae44900-26f0-45cc-b18a-a5303f6fc202/SteamLibrary/steamapps/common/Call of Duty 4/miles"
-    )
+	set(CMAKE_C_COMPILER i686-w64-mingw32-gcc)
+	set(CMAKE_CXX_COMPILER i686-w64-mingw32-g++)
+	set(CMAKE_SYSTEM_NAME Windows)
+	set(CMAKE_CROSSCOMPILING 1)
 
-    # Cross-Compilation Setup
-    set(CMAKE_C_COMPILER i686-w64-mingw32-gcc)
-    set(CMAKE_CXX_COMPILER i686-w64-mingw32-g++)
-    set(CMAKE_FIND_ROOT_PATH /usr/bin)
+	target_link_libraries(SR PRIVATE
+		-static-libgcc
+		-static-libstdc++
+		-static -lwinpthread)
 
-    set(CMAKE_SYSTEM_NAME Windows)
-    set(CMAKE_CROSSCOMPILING 1)
+	set_target_properties(SR PROPERTIES
+		LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}
+		PREFIX ""
+		SUFFIX .dll)
 endif()
-
-add_library(SR_Client SHARED
-        main.cpp
-        main.h
-)
-
-target_link_libraries(SR_Client PRIVATE
-    -static-libgcc
-    -static-libstdc++
-    -static -lwinpthread
-)
-
-set_target_properties(SR_Client PROPERTIES
-    LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}
-    PREFIX ""
-    SUFFIX .dll
-)
-
-add_custom_command(TARGET SR_Client POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy
-    ${CMAKE_BINARY_DIR}/SR_Client.dll
-    ${COD4_Miles}/mssSRClient.asi
-)
