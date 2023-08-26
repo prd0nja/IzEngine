@@ -1,5 +1,4 @@
 target_sources(SR PRIVATE
-	main.hpp
 	main.cpp)
 
 target_include_directories(SR PUBLIC .)
