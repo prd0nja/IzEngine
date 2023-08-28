@@ -1,9 +1,10 @@
 cmake_minimum_required(VERSION 3.26)
 project(IW3SR VERSION 1.0.0 LANGUAGES CXX)
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
-set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# CoD4
+# Env
 set(COD4_MILES $ENV{COD4}/miles)
 
 # CPack
@@ -16,17 +17,11 @@ include(CPack)
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()
 
-# Tests
-# include(CTest)
-# add_executable(IW3SR.Tests)
-# add_test(NAME Tests COMMAND IW3SR.Tests)
-
 # Build
-add_library(IW3SR SHARED)
 add_subdirectory(src)
-target_link_libraries(IW3SR PRIVATE ${CONAN_LIBS})
 if(CMAKE_SYSTEM_NAME MATCHES "Windows")
-    message("Windows Build")
+	message("Windows Build")
+	target_link_libraries(IW3SR PRIVATE ${CONAN_LIBS})
 else()
 	message("Linux Build")
 
