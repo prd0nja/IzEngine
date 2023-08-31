@@ -26,7 +26,7 @@ namespace IW3SR
 		/// <param name="channel">The log channel.</param>
 		/// <param name="type">The error type.</param>
 		/// <param name="text">The text.</param>
-		void Write(int channel, int type, std::string text);
+		static void Write(int channel, int type, std::string text);
 
 		/// <summary>
 		/// Write to the console.
@@ -35,7 +35,7 @@ namespace IW3SR
 		/// <param name="fmt">The format string.</param>
 		/// <param name="...args">The format arguments.</param>
 		template <typename... Args>
-		void Write(std::format_string<Args...> fmt, Args&&... args)
+		static void Write(std::format_string<Args...> fmt, Args&&... args)
 		{
 			Write(0, 0, std::format(fmt, std::forward<Args>(args)...));
 		}
@@ -48,7 +48,7 @@ namespace IW3SR
 		/// <param name="fmt">The format string.</param>
 		/// <param name="...args">The format arguments.</param>
 		template <typename... Args>
-		void Write(int channel, std::format_string<Args...> fmt, Args&&... args)
+		static void Write(int channel, std::format_string<Args...> fmt, Args&&... args)
 		{
 			Write(channel, 0, std::format(fmt, std::forward<Args>(args)...));
 		}
@@ -60,12 +60,12 @@ namespace IW3SR
 		/// <param name="fmt">The format string.</param>
 		/// <param name="...args">The format arguments.</param>
 		template <typename... Args>
-		void WriteLine(std::format_string<Args...> fmt, Args&&... args)
+		static void WriteLine(std::format_string<Args...> fmt, Args&&... args)
 		{
 			Write(0, 0, std::format(fmt, std::forward<Args>(args)...) + "\n");
 		}
 
 	private:
-		Hook<Com_PrintMessage_t> Com_PrintMessage_h;
+		static inline Hook<Com_PrintMessage_t> Com_PrintMessage_h;
 	};
 }
