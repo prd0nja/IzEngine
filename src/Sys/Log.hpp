@@ -1,6 +1,10 @@
 #pragma once
-#include "Game/Definitions.hpp"
 #include "Sys/Hook.hpp"
+#include "Game/Definitions.hpp"
+
+#include <format>
+#include <string>
+#include <iostream>
 
 namespace IW3SR
 {
@@ -10,12 +14,58 @@ namespace IW3SR
 	class Log
 	{
 	public:
-		static inline Hook<Com_PrintMessage_t> Com_PrintMessage_h;
-
 		/// <summary>
 		/// Initialize a new logger.
 		/// </summary>
 		Log();
 		~Log() = default;
+
+		/// <summary>
+		/// Write to the console.
+		/// </summary>
+		/// <param name="channel">The log channel.</param>
+		/// <param name="type">The error type.</param>
+		/// <param name="text">The text.</param>
+		void Write(int channel, int type, std::string text);
+
+		/// <summary>
+		/// Write to the console.
+		/// </summary>
+		/// <typeparam name="...Args">The format arguments.</typeparam>
+		/// <param name="fmt">The format string.</param>
+		/// <param name="...args">The format arguments.</param>
+		template <typename... Args>
+		void Write(std::format_string<Args...> fmt, Args&&... args)
+		{
+			Write(0, 0, std::format(fmt, std::forward<Args>(args)...));
+		}
+
+		/// <summary>
+		/// Write to the console.
+		/// </summary>
+		/// <typeparam name="...Args">The format arguments.</typeparam>
+		/// <param name="channel">The log channel.</param>
+		/// <param name="fmt">The format string.</param>
+		/// <param name="...args">The format arguments.</param>
+		template <typename... Args>
+		void Write(int channel, std::format_string<Args...> fmt, Args&&... args)
+		{
+			Write(channel, 0, std::format(fmt, std::forward<Args>(args)...));
+		}
+
+		/// <summary>
+		/// Write line to the console.
+		/// </summary>
+		/// <typeparam name="...Args">The format arguments.</typeparam>
+		/// <param name="fmt">The format string.</param>
+		/// <param name="...args">The format arguments.</param>
+		template <typename... Args>
+		void WriteLine(std::format_string<Args...> fmt, Args&&... args)
+		{
+			Write(0, 0, std::format(fmt, std::forward<Args>(args)...) + "\n");
+		}
+
+	private:
+		Hook<Com_PrintMessage_t> Com_PrintMessage_h;
 	};
 }

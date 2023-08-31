@@ -1,4 +1,5 @@
 #pragma once
+#include <cstdint>
 #include <Windows.h>
 #include <MinHook.h>
 
@@ -20,6 +21,11 @@ namespace IW3SR
         /// Initialize a new Hook instance.
         /// </summary>
         Hook() = default;
+
+        /// <summary>
+        /// @TODO Release the hook.
+        /// </summary>
+        ~Hook() = default;
 
         /// <summary>
         /// Initialize a new Hook instance.

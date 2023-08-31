@@ -10,7 +10,7 @@ namespace IW3SR
     {
     public:
         /// <summary>
-        /// Initialize the console.
+        /// Initialize the module.
         /// </summary>
         Console();
         ~Console();
