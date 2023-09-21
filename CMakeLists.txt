@@ -10,10 +10,40 @@ set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 set(CPACK_GENERATOR 7Z)
 include(CPack)
 
-# Conan
-include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
-conan_basic_setup()
+# Dependencies
+find_package(imgui CONFIG REQUIRED)
+find_package(glm CONFIG REQUIRED)
+find_package(minhook CONFIG REQUIRED)
+
+# Tests
+if(BUILD_TESTING)
+	include(CTest)
+	find_package(GTest CONFIG REQUIRED)
+
+	if(MSVC)
+		set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+	endif()
+
+	add_library(IW3SR.Lib STATIC)
+	add_executable(IW3SR.Tests)
+
+	target_link_libraries(IW3SR.Lib PUBLIC IW3SR)
+	target_include_directories(IW3SR.Lib PUBLIC IW3SR)
+
+	target_link_libraries(IW3SR.Tests PRIVATE
+		IW3SR.Lib
+		GTest::gtest
+		GTest::gtest_main
+		GTest::gmock
+		GTest::gmock_main)
+
+	add_test(NAME Tests COMMAND IW3SR.Tests)
+endif()
 
 # Build
 add_subdirectory(src)
-target_link_libraries(IW3SR PRIVATE ${CONAN_LIBS})
+
+target_link_libraries(IW3SR PUBLIC
+	imgui::imgui
+	glm::glm
+	minhook::minhook)

@@ -1,18 +1,12 @@
 @echo off
-set ROOT="%cd%"
-set CONAN=--profile %ROOT%/.conan/windows.conf --build missing -s compiler.version=13
-
-:: Dependencies
-echo [+] Dependencies
-conan create deps/minhook %CONAN%
 
 :: Build
 echo [+] Build
+rmdir build /s /q
 mkdir build
 cd build
-conan install .. %CONAN%
-cmake .. -A Win32
-cmake --build .
+cmake .. -A Win32 -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE=.vcpkg/windows.cmake
+cmake --build . --config Release
 
 :: Binary
-copy /v bin\IW3SR.dll "%COD4%\miles\mssIW3SR.asi"
+copy /v bin\Release\IW3SR.dll "%COD4%\miles\mssIW3SR.asi"

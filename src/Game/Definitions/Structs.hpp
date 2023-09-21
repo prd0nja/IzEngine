@@ -1,4 +1,7 @@
 #pragma once
+#pragma warning(push)
+#pragma warning(disable: 4359)
+
 #include <cstdint>
 #include <d3d9.h>
 
@@ -6568,3 +6571,5 @@ struct dynBrushModelsArray_t
 	int mapped_bmodels;
 	dynBrushModel_t brushes[16];
 };
+
+#pragma warning(pop)

@@ -1,5 +1,4 @@
 # IW3SR
-
 [![Checks](https://img.shields.io/github/checks-status/Iswenzz/IW3SR/master?logo=github)](https://github.com/Iswenzz/IW3SR/actions)
 [![CodeFactor](https://img.shields.io/codefactor/grade/github/Iswenzz/IW3SR?label=codefactor&logo=codefactor)](https://www.codefactor.io/repository/github/iswenzz/IW3SR)
 [![CodeCov](https://img.shields.io/codecov/c/github/Iswenzz/IW3SR?label=codecov&logo=codecov)](https://codecov.io/gh/Iswenzz/IW3SR)
@@ -8,11 +7,11 @@
 ## Building
 _Pre-Requisites:_
 1. [Visual Studio](https://visualstudio.microsoft.com/)
-2. [CMake](https://cmake.org/) and [Conan](https://conan.io/).
+2. [CMake](https://cmake.org/) and [vcpkg](https://vcpkg.io/en/).
 
 _Build Command:_
 
-    ./install.sh
+    ./install.bat
 
 ### [Download](https://github.com/Iswenzz/IW3SR/releases)
 
