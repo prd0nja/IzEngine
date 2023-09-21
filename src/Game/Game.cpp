@@ -12,6 +12,8 @@ namespace IW3SR
 		Log = std::make_unique<class Log>();
 		Render = std::make_unique<class Render>();
 		Modules = std::make_unique<class Modules>();
+
+		Patch();
 	}
 
 	Game::~Game()

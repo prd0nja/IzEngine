@@ -16,6 +16,11 @@ void Init()
         std::this_thread::sleep_for(std::chrono::milliseconds(500));
 }
 
+EXPORT bool STDCALL RIB_Main(int a, int b)
+{
+    return true;
+}
+
 BOOL APIENTRY DllMain(HMODULE hModule, DWORD dwReason, LPVOID lpReserved) 
 {
     switch (dwReason) 

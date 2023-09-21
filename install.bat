@@ -1,15 +1,18 @@
 @echo off
-set ROOT=%cd%
+set ROOT="%cd%"
+set CONAN=--profile %ROOT%/.conan/windows.conf --build missing -s compiler.version=13
 
-:: Deps
+:: Dependencies
 echo [+] Dependencies
-cd deps\minhook
-conan create . --profile %ROOT%\.conan\windows.conf
-cd %ROOT%
+conan create deps/minhook %CONAN%
 
 :: Build
 echo [+] Build
 mkdir build
 cd build
-conan install .. --build missing --profile %ROOT%\.conan\windows.conf
+conan install .. %CONAN%
 cmake .. -A Win32
+cmake --build .
+
+:: Binary
+copy /v bin\IW3SR.dll "%COD4%\miles\mssIW3SR.asi"

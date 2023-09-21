@@ -14,6 +14,9 @@ namespace IW3SR
 	class Log
 	{
 	public:
+		Hook<Com_PrintMessage_t> Com_PrintMessage_h;
+		Hook<Com_PrintMessage_t> Com_PrintMessage2_h;
+
 		/// <summary>
 		/// Initialize a new logger.
 		/// </summary>
@@ -65,7 +68,17 @@ namespace IW3SR
 			Write(0, 0, std::format(fmt, std::forward<Args>(args)...) + "\n");
 		}
 
-	private:
-		static inline Hook<Com_PrintMessage_t> Com_PrintMessage_h;
+		/// <summary>
+		/// Write line to the console.
+		/// </summary>
+		/// <typeparam name="...Args">The format arguments.</typeparam>
+		/// <param name="channel">The log channel.</param>
+		/// <param name="fmt">The format string.</param>
+		/// <param name="...args">The format arguments.</param>
+		template <typename... Args>
+		static void WriteLine(int channel, std::format_string<Args...> fmt, Args&&... args)
+		{
+			Write(channel, 0, std::format(fmt, std::forward<Args>(args)...) + "\n");
+		}
 	};
 }

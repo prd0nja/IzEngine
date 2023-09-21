@@ -1,5 +1,7 @@
 #pragma once
 #include "Game/Definitions.hpp"
+#include "Sys/Hook.hpp"
+
 #include <glm/glm.hpp>
 
 namespace IW3SR
@@ -28,5 +30,8 @@ namespace IW3SR
 		/// <param name="to">Point B.</param>
 		/// <param name="color">Line color.</param>
 		void DrawLine(glm::vec3 from, glm::vec3 to, glm::vec4 color);
+
+	private:
+		Hook<RB_EndSceneRendering_t> RB_EndSceneRendering_h;
 	};
 }
