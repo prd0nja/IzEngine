@@ -1,4 +1,6 @@
 target_sources(IW3SR PRIVATE
+	Environment.hpp
+	Environment.cpp
 	Function.hpp
 	Hook.hpp
 	Log.hpp

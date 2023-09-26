@@ -342,9 +342,7 @@ struct dvar_s
 {
 	const char* name;
 	const char* description;
-	// unsigned short flags;
 	DvarFlags flags;
-	// char type;
 	DvarType type;
 	bool modified;
 	DvarValue current;

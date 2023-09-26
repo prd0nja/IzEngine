@@ -33,6 +33,11 @@ namespace IW3SR
 		}
 
 		/// <summary>
+		/// Load dynamic modules.
+		/// </summary>
+		void LoadDynamic();
+
+		/// <summary>
 		/// Enable a module.
 		/// </summary>
 		/// <param name="id">The module id.</param>

@@ -8,6 +8,11 @@ namespace IW3SR
 		Load<Console>();
 	}
 
+	void Modules::LoadDynamic()
+	{
+
+	}
+
 	void Modules::Enable(std::string id)
 	{
 		auto entry = Entries.find(id);

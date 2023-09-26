@@ -8,5 +8,5 @@ using namespace IW3SR;
 void Com_PrintMessage(int channel, const char* msg, int type);
 void RB_EndSceneRendering(GfxCmdBufInput* input, GfxViewInfo* viewInfo, GfxCmdBufSourceState* src, GfxCmdBufState* buf);
 
-static Function<void(int count, int width, GfxPointVertex* verts, bool depthTest)> RB_DrawLines3D = 0x613040;
+static Function<dvar_s*(const char* name)> Dvar_FindVar = 0x56B5D0;
 static Hook<void(int channel, const char* msg, int type)> Com_PrintMessage_h(0x4FCA50, Com_PrintMessage);
