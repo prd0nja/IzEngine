@@ -1,3 +1,5 @@
+add_subdirectory(Render)
+
 target_sources(IW3SR PRIVATE
 	Environment.hpp
 	Environment.cpp
@@ -6,6 +8,4 @@ target_sources(IW3SR PRIVATE
 	Log.hpp
 	Log.cpp
 	Memory.hpp
-	Memory.cpp
-	Render.hpp
-	Render.cpp)
+	Memory.cpp)

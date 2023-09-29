@@ -18,6 +18,7 @@ extern cg_s* cgs;
 extern GfxBuffers* gfx_buf;
 extern GfxWorld* gfx_world;
 extern GfxScene* scene;
+extern GfxViewParms* viewParms;
 extern clipMap_t* cm;
 extern ComWorld* com;
 extern int* com_frameTime;

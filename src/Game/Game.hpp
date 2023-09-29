@@ -1,8 +1,10 @@
 #pragma once
 #include "Definitions.hpp"
+#include "Game/Render/Render.hpp"
 #include "Modules/Modules.hpp"
+
 #include "Sys/Log.hpp"
-#include "Sys/Render.hpp"
+#include "Sys/Render/D3D9EX.hpp"
 
 #include <memory>
 
@@ -25,14 +27,9 @@ namespace IW3SR
 		~Game();
 
 		/// <summary>
-		/// Patch for clients.
+		/// CoD4X patch.
 		/// </summary>
-		void Patch();
-
-		/// <summary>
-		/// Install hooks.
-		/// </summary>
-		void Hooks();
+		void CoD4X();
 
 		/// <summary>
 		/// Game frame.

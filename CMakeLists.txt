@@ -45,4 +45,5 @@ add_subdirectory(src)
 target_link_libraries(IW3SR PUBLIC
 	imgui::imgui
 	glm::glm
-	PolyHook_2::PolyHook_2)
+	PolyHook_2::PolyHook_2
+	d3d9)

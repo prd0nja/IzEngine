@@ -1,15 +1,9 @@
-#include "Render.hpp"
-#include "Game/Game.hpp"
+#include "Draw.hpp"
 #include "Utils/Math.hpp"
 
 namespace IW3SR
 {
-	void Render::Frame()
-	{
-		
-	}
-
-	int Render::DrawLine(glm::vec3 start, glm::vec3 end, glm::vec4 color, bool depthTest, 
+	int Draw::Line(glm::vec3 start, glm::vec3 end, glm::vec4 color, bool depthTest, 
 		std::vector<GfxPointVertex> verts)
 	{
 		float colorArray[4];

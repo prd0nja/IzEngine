@@ -14,6 +14,7 @@ cg_s* cgs = reinterpret_cast<cg_s*>(0x74E338);
 GfxBuffers* gfx_buf = reinterpret_cast<GfxBuffers*>(0xD2B0840);
 GfxWorld* gfx_world = reinterpret_cast<GfxWorld*>(0xD0701E0);
 GfxScene* scene = reinterpret_cast<GfxScene*>(0xCF10280);
+GfxViewParms* viewParms = reinterpret_cast<GfxViewParms*>(0xD540220);
 clipMap_t* cm = reinterpret_cast<clipMap_t*>(0x14098C0);
 ComWorld* com = reinterpret_cast<ComWorld*>(0x1435CB8);
 int* com_frameTime = reinterpret_cast<int*>(0x1476EFC);
