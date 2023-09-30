@@ -38,6 +38,20 @@ namespace IW3SR
         static std::vector<uintptr_t> ScanAll(std::string moduleName, std::string bytes, size_t size, bool first);
 
         /// <summary>
+        /// Set bytes.
+        /// </summary>
+        /// <typeparam name="T">The type to set.</typeparam>
+        /// <param name="address">The address.</param>
+        /// <param name="value">The value.</param>
+        template <typename T>
+        static void Set(uintptr_t address, T value)
+        {
+            int size = sizeof(T);
+            std::string bytes(reinterpret_cast<char*>(&value), size);
+            Write(address, bytes, size);
+        }
+
+        /// <summary>
         /// NOP instruction.
         /// </summary>
         /// <param name="address"></param>
