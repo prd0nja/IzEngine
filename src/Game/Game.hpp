@@ -24,7 +24,12 @@ namespace IW3SR
 		/// Initialize the game.
 		/// </summary>
 		Game();
-		~Game();
+		~Game() = default;
+
+		/// <summary>
+		/// Initialize game.
+		/// </summary>
+		void Initialize();
 
 		/// <summary>
 		/// CoD4X patch.

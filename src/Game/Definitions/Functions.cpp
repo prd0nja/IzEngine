@@ -10,7 +10,7 @@ Hook<IDirect3D9* STDCALL(UINT sdk)>
 
 void Com_PrintMessage(int channel, const char* msg, int type)
 {
-	SR->Log->Write(channel, type, msg);
+	Log::Write(channel, type, msg);
 	Com_PrintMessage_h(channel, msg, type);
 }
 

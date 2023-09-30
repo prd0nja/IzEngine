@@ -10,7 +10,11 @@ std::thread Thread;
 
 void Init()
 {
+    while (!*dx9_device)
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+
     SR = std::make_unique<Game>();
+    SR->Initialize();
 
     while (Running)
         std::this_thread::sleep_for(std::chrono::milliseconds(500));

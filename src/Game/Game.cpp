@@ -14,7 +14,10 @@ namespace IW3SR
 		Modules = std::make_unique<class Modules>();
 	}
 
-	Game::~Game() { }
+	void Game::Initialize()
+	{
+		Modules->Initialize();
+	}
 
 	void Game::CoD4X()
 	{

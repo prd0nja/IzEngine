@@ -18,8 +18,13 @@ namespace IW3SR
 		/// <summary>
 		/// Initialize the modules.
 		/// </summary>
-		Modules();
+		Modules() = default;
 		~Modules() = default;
+
+		/// <summary>
+		/// Initialize the modules.
+		/// </summary>
+		void Initialize();
 
 		/// <summary>
 		/// Load a module.

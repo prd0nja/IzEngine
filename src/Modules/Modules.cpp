@@ -3,9 +3,10 @@
 
 namespace IW3SR
 {
-	Modules::Modules()
+	void Modules::Initialize()
 	{
 		Load<Console>();
+		LoadDynamic();
 	}
 
 	void Modules::LoadDynamic()
