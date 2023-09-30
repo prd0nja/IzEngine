@@ -5,6 +5,9 @@
 #include <map>
 #include <memory>
 
+#define ModuleCallback(method, ...) \
+	SR->Modules->Callback([&](const std::unique_ptr<Module>& entry) { entry->method(__VA_ARGS__); });
+
 namespace IW3SR
 {
 	/// <summary>
@@ -31,9 +34,13 @@ namespace IW3SR
 		/// </summary>
 		/// <typeparam name="M">The module type.</typeparam>
 		template <class M = Module>
-		void Load()
+		void Load(bool initialize = true)
 		{
 			std::unique_ptr<M> entry = std::make_unique<M>();
+			if (initialize)
+				entry->Initialize();
+			entry->IsEnabled = initialize;
+
 			Entries.insert({ entry->ID, std::move(entry) });
 		}
 
@@ -53,5 +60,17 @@ namespace IW3SR
 		/// </summary>
 		/// <param name="id">The module id.</param>
 		void Disable(std::string id);
+
+		/// <summary>
+		/// Dispatch callback.
+		/// </summary>
+		/// <typeparam name="Func">The callback type.</typeparam>
+		/// <param name="callback">The function callback.</param>
+		template <typename Func>
+		void Callback(Func callback)
+		{
+			for (const auto& [_, entry] : Entries)
+				callback(entry);
+		}
 	};
 }

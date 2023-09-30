@@ -13,16 +13,11 @@ namespace IW3SR
         /// Initialize the module.
         /// </summary>
         ESP();
-        ~ESP();
+        virtual ~ESP() = default;
 
         /// <summary>
-        /// Initialize the module.
+        /// Render frame callback.
         /// </summary>
-        void Initialize() override;
-
-        /// <summary>
-        /// Shutdown the module.
-        /// </summary>
-        void Shutdown() override;
+        void OnFrame() override;
     };
 }

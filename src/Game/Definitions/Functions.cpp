@@ -16,7 +16,7 @@ void Com_PrintMessage(int channel, const char* msg, int type)
 
 void RB_EndSceneRendering(GfxCmdBufInput* input, GfxViewInfo* viewInfo, GfxCmdBufSourceState* src, GfxCmdBufState* buf)
 {
-	// RB_DrawDebug(viewParms);
+	SR->Render->Frame();
 	RB_EndSceneRendering_h(input, viewInfo, src, buf);
 }
 

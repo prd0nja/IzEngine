@@ -13,15 +13,15 @@ namespace IW3SR
         /// Initialize the module.
         /// </summary>
         Console();
-        ~Console();
+        virtual ~Console() = default;
 
         /// <summary>
-        /// Initialize the module.
+        /// Initialize the console.
         /// </summary>
         void Initialize() override;
 
         /// <summary>
-        /// Shutdown the module.
+        /// Shutdown the console.
         /// </summary>
         void Shutdown() override;
     };

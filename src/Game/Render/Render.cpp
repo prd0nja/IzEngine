@@ -18,5 +18,8 @@ namespace IW3SR
 		R_Direct3DCreate9_h.Install();
 	}
 
-	void Render::Frame() { }
+	void Render::Frame() 
+	{
+		ModuleCallback(OnFrame);
+	}
 }

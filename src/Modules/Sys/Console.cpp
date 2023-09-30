@@ -9,13 +9,6 @@ namespace IW3SR
     {
         ID = "sr.sys.console";
         Name = "External Console";
-
-        Initialize();
-    }
-
-    Console::~Console()
-    {
-        Shutdown();
     }
 
     void Console::Initialize()

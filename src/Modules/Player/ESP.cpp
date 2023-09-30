@@ -7,21 +7,9 @@ namespace IW3SR
     {
         ID = "sr.player.esp";
         Name = "ESP";
-
-        Initialize();
     }
 
-    ESP::~ESP()
-    {
-        Shutdown();
-    }
-
-    void ESP::Initialize()
-    {
-        
-    }
-
-    void ESP::Shutdown()
+    void ESP::OnFrame()
     {
         
     }

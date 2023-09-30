@@ -3,5 +3,12 @@
 
 namespace IW3SR
 {
-	void Module::Frame() { }
+	Module::~Module()
+	{
+		Shutdown();
+	}
+
+	void Module::Initialize() { }
+	void Module::Shutdown() { }
+	void Module::OnFrame() { }
 }

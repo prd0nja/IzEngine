@@ -11,21 +11,26 @@ namespace IW3SR
 	public:
 		std::string ID;
 		std::string Name;
-		bool IsEnabled = true;
+		bool IsEnabled;
+
+		/// <summary>
+		/// Release the module.
+		/// </summary>
+		virtual ~Module();
 
 		/// <summary>
 		/// Initialize the module.
 		/// </summary>
-		virtual void Initialize() = 0;
+		virtual void Initialize();
 
 		/// <summary>
 		/// Shutdown the module.
 		/// </summary>
-		virtual void Shutdown() = 0;
+		virtual void Shutdown();
 
 		/// <summary>
-		/// Module frame.
+		/// Render frame callback.
 		/// </summary>
-		virtual void Frame();
+		virtual void OnFrame();
 	};
 }

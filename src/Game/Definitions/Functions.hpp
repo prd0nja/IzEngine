@@ -13,8 +13,6 @@ static Function<dvar_s*(const char* name)>
 	Dvar_FindVar = 0x56B5D0;
 static Function<void(int count, int width, GfxPointVertex* verts, bool depthTest)> 
 	RB_DrawLines3D = 0x613040;
-static Function<char(GfxViewParms* viewParms)>
-	RB_DrawDebug = 0x658860;
 static Function<void FASTCALL(const float* colorFloat, char* colorBytes)> 
 	R_ConvertColorToBytes = 0x493530;
 

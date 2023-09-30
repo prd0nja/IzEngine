@@ -1,11 +1,14 @@
 #include "Modules.hpp"
 #include "Modules/Sys/Console.hpp"
+#include "Modules/Player/ESP.hpp"
 
 namespace IW3SR
 {
 	void Modules::Initialize()
 	{
 		Load<Console>();
+		Load<ESP>();
+
 		LoadDynamic();
 	}
 
