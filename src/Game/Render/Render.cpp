@@ -11,7 +11,7 @@ namespace IW3SR
 		//Memory::NOP(0x6496D8, 3);
 
 		//RB_EndSceneRendering_h.Install();
-		direct3d_create9_h.Install();
+		R_Direct3DCreate9_h.Install();
 	}
 
 	void Render::Frame() { }

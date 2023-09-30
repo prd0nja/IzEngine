@@ -7,7 +7,7 @@ namespace IW3SR
 	class D3D9 : public IDirect3D9
 	{
 	public:
-		D3D9(IDirect3D9* pOriginal);
+		D3D9(IDirect3D9* d3d9);
 		virtual ~D3D9() = default;
 
 		COM_DECLSPEC_NOTHROW HRESULT STDCALL QueryInterface(REFIID riid, void** ppvObj) override;
@@ -35,7 +35,7 @@ namespace IW3SR
 	class D3D9Device : public IDirect3DDevice9
 	{
 	public:
-		D3D9Device(IDirect3DDevice9* pOriginal);
+		D3D9Device(IDirect3DDevice9* d3d9_device);
 		virtual ~D3D9Device() = default;
 
 		COM_DECLSPEC_NOTHROW HRESULT STDCALL QueryInterface(REFIID riid, void** ppvObj) override;

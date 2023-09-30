@@ -9,7 +9,7 @@ namespace IW3SR
 	class D3D9EX : public IDirect3D9Ex
 	{
 	public:
-		D3D9EX(IDirect3D9Ex* pOriginal);
+		D3D9EX(IDirect3D9Ex* d3d9ex);
 		virtual ~D3D9EX() = default;
 
 		COM_DECLSPEC_NOTHROW HRESULT STDCALL QueryInterface(REFIID riid, void** ppvObj) override;

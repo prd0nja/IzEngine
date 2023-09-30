@@ -2,7 +2,7 @@
 
 namespace IW3SR
 {
-	D3D9EX::D3D9EX(IDirect3D9Ex* pOriginal) : pIDirect3D9Ex(pOriginal) { }
+	D3D9EX::D3D9EX(IDirect3D9Ex* d3d9ex) : pIDirect3D9Ex(d3d9ex) { }
 
 	HRESULT D3D9EX::QueryInterface(REFIID riid, void** ppvObj)
 	{

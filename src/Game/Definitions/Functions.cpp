@@ -6,7 +6,7 @@ Hook<void(int channel, const char* msg, int type)>
 Hook<void(GfxCmdBufInput* input, GfxViewInfo* viewInfo, GfxCmdBufSourceState* src, GfxCmdBufState* buf)> 
 	RB_EndSceneRendering_h(0x6496EC, RB_EndSceneRendering);
 Hook<IDirect3D9* STDCALL(UINT sdk)>
-	direct3d_create9_h(0x69142C, direct3d_create9);
+	R_Direct3DCreate9_h(0x670284, R_Direct3DCreate9);
 
 void Com_PrintMessage(int channel, const char* msg, int type)
 {
@@ -20,15 +20,14 @@ void RB_EndSceneRendering(GfxCmdBufInput* input, GfxViewInfo* viewInfo, GfxCmdBu
 	RB_EndSceneRendering_h(input, viewInfo, src, buf);
 }
 
-IDirect3D9* STDCALL direct3d_create9(UINT sdk)
+IDirect3D9* STDCALL R_Direct3DCreate9(UINT sdk)
 {
 	IDirect3D9Ex* d3d9ex_device = nullptr;
+	Log::WriteLine("Getting Direct3D 9 EX interface...");
 
 	if (SUCCEEDED(Direct3DCreate9Ex(sdk, &d3d9ex_device)))
-	{
 		return (new D3D9EX(d3d9ex_device));
-	}
-	Log::WriteLine("Direct3D9Ex failed to initialize. Defaulting to Direct3D9.");
 
+	Log::WriteLine("Direct3D 9 EX failed to initialize. Defaulting to Direct3D 9.");
 	return (new D3D9(Direct3DCreate9(sdk)));
 }

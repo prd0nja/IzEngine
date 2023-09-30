@@ -1,9 +1,8 @@
 #include "D3D9.hpp"
-#include "Sys/Log.hpp"
 
 namespace IW3SR
 {
-	D3D9::D3D9(IDirect3D9* pOriginal) : pIDirect3D9(pOriginal) { }
+	D3D9::D3D9(IDirect3D9* d3d9) : pIDirect3D9(d3d9) { }
 
 	HRESULT D3D9::QueryInterface(REFIID riid, void** ppvObj)
 	{
@@ -110,7 +109,7 @@ namespace IW3SR
 		return hres;
 	}
 
-	D3D9Device::D3D9Device(IDirect3DDevice9* pOriginal) : pIDirect3DDevice9(pOriginal) { }
+	D3D9Device::D3D9Device(IDirect3DDevice9* d3d9_device) : pIDirect3DDevice9(d3d9_device) { }
 
 	HRESULT D3D9Device::QueryInterface(REFIID riid, void** ppvObj)
 	{
@@ -361,7 +360,6 @@ namespace IW3SR
 
 	HRESULT D3D9Device::EndScene()
 	{
-		Log::WriteLine("Frame");
 		return pIDirect3DDevice9->EndScene();
 	}
 

@@ -7,7 +7,7 @@ using namespace IW3SR;
 
 void Com_PrintMessage(int channel, const char* msg, int type);
 void RB_EndSceneRendering(GfxCmdBufInput* input, GfxViewInfo* viewInfo, GfxCmdBufSourceState* src, GfxCmdBufState* buf);
-IDirect3D9* STDCALL direct3d_create9(UINT sdk);
+IDirect3D9* STDCALL R_Direct3DCreate9(UINT sdk);
 
 static Function<dvar_s*(const char* name)> 
 	Dvar_FindVar = 0x56B5D0;
@@ -23,4 +23,4 @@ extern Hook<void(int channel, const char* msg, int type)>
 extern Hook<void(GfxCmdBufInput* input, GfxViewInfo* viewInfo, GfxCmdBufSourceState* src, GfxCmdBufState* buf)> 
 	RB_EndSceneRendering_h;
 extern Hook<IDirect3D9* STDCALL(UINT sdk)> 
-	direct3d_create9_h;
+	R_Direct3DCreate9_h;
