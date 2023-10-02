@@ -11,4 +11,5 @@ namespace IW3SR
 	void Module::Initialize() { }
 	void Module::Shutdown() { }
 	void Module::OnFrame() { }
+	void Module::OnDraw() { }
 }

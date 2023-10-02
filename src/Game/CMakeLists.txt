@@ -4,4 +4,6 @@ add_subdirectory(Render)
 target_sources(IW3SR PRIVATE
 	Definitions.hpp
 	Game.hpp
-	Game.cpp)
+	Game.cpp
+	Player.hpp
+	Player.cpp)

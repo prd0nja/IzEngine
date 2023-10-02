@@ -22,5 +22,11 @@ namespace IW3SR
 		/// Render frame.
 		/// </summary>
 		void Frame();
+
+		/// <summary>
+		/// Draw 2D.
+		/// </summary>
+		/// <param name="isScoreboardVisible">Scoreboard visible.</param>
+		void Draw(bool isScoreboardVisible);
 	};
 }

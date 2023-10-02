@@ -26,6 +26,16 @@ namespace IW3SR
 		static void Line(glm::vec3 start, glm::vec3 end, glm::vec4 color);
 
 		/// <summary>
+		/// Draw a 2D Rect.
+		/// </summary>
+		/// <param name="color">The color.</param>
+		/// <param name="x">The X coord.</param>
+		/// <param name="y">The Y coord.</param>
+		/// <param name="w">The width.</param>
+		/// <param name="h">The height.</param>
+		static void Rect2D(glm::vec4 color, float x, float y, float w, float h);
+
+		/// <summary>
 		/// Draw frame.
 		/// </summary>
 		static void Frame();

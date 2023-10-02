@@ -19,6 +19,13 @@ namespace IW3SR
 		LinesCount += 2;
     }
 
+	void Draw::Rect2D(glm::vec4 color, float x, float y, float w, float h)
+	{
+		float c[4];
+		glm::set_float4(c, color);
+		CG_FillRect(x, y, w, h, c);
+	}
+
 	void Draw::Frame()
 	{
 		RB_DrawLines3D(LinesCount / 2, LinesWidth, LinesVerts.data(), LinesDepthTest);

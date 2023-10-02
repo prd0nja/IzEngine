@@ -2,6 +2,8 @@
 #include "Sys/Memory.hpp"
 #include "Sys/Environment.hpp"
 
+#include <array>
+
 namespace IW3SR
 {
 	Game::Game()
@@ -17,6 +19,7 @@ namespace IW3SR
 	void Game::Initialize()
 	{
 		Modules->Initialize();
+		Player::Initialize();
 	}
 
 	void Game::CoD4X()
@@ -32,8 +35,5 @@ namespace IW3SR
 		Memory::Write(localTagMatrix, "\x51\x53\x8B\x5C\x24", 5);
 	}
 
-	void Game::Frame()
-	{
-
-	}
+	void Game::Frame() { }
 }

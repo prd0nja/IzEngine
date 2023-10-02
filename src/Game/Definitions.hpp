@@ -30,6 +30,9 @@ if (Scr_GetNumParam() != count)			\
 	return;								\
 }
 
+#define SCREEN_WIDTH	640
+#define SCREEN_HEIGHT	480
+
 #include "Definitions/Declaration.hpp"
 #include "Definitions/Functions.hpp"
 #include "Definitions/Structs.hpp"

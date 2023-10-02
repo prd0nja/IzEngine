@@ -165,7 +165,7 @@ struct field_t
 	char buffer[256];
 };
 
-struct Console
+struct Con
 {
 	int initialized;
 	MessageWindow consoleWindow;
@@ -2069,10 +2069,33 @@ struct LerpEntityState
 	LerpEntityStateTypeUnion u;
 };
 
+enum entityType_t
+{
+	ET_GENERAL = 0x0,
+	ET_PLAYER = 0x1,
+	ET_PLAYER_CORPSE = 0x2,
+	ET_ITEM = 0x3,
+	ET_MISSILE = 0x4,
+	ET_INVISIBLE = 0x5,
+	ET_SCRIPTMOVER = 0x6,
+	ET_SOUND_BLEND = 0x7,
+	ET_FX = 0x8,
+	ET_LOOP_FX = 0x9,
+	ET_PRIMARY_LIGHT = 0xA,
+	ET_MG42 = 0xB,
+	ET_HELICOPTER = 0xC,
+	ET_PLANE = 0xD,
+	ET_VEHICLE = 0xE,
+	ET_VEHICLE_COLLMAP = 0xF,
+	ET_VEHICLE_CORPSE = 0x10,
+	ET_EVENTS = 0x11,
+	ET_MOVER = 0x99
+};
+
 struct entityState_s
 {
 	int number;
-	int eType;
+	enum entityType_t eType;
 	LerpEntityState lerp;
 	int time2;
 	int otherEntityNum;
@@ -6568,6 +6591,13 @@ struct dynBrushModelsArray_t
 	bool initiated;
 	int mapped_bmodels;
 	dynBrushModel_t brushes[16];
+};
+
+struct range_t
+{
+	float x1;
+	float x2;
+	bool split;
 };
 
 #pragma warning(pop)

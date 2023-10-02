@@ -1,8 +1,8 @@
 #include "Declaration.hpp"
 
 // Modules
-const uintptr_t IW3MP = reinterpret_cast<uintptr_t>(GetModuleHandleA("iw3mp.exe"));
-const uintptr_t COD4X = reinterpret_cast<uintptr_t>(GetModuleHandleA("cod4x_021.dll"));
+const uintptr_t IW3MP = reinterpret_cast<uintptr_t>(GetModuleHandle("iw3mp.exe"));
+const uintptr_t COD4X = reinterpret_cast<uintptr_t>(GetModuleHandle("cod4x_021.dll"));
 
 // Game
 CmdArgs* cmd_args = reinterpret_cast<CmdArgs*>(0x1410B40);
@@ -11,6 +11,7 @@ clientActive_t* clients = reinterpret_cast<clientActive_t*>(0xC5F930);
 clientStatic_t* cls = reinterpret_cast<clientStatic_t*>(0x956D80);
 clientConnection_t& clc = *reinterpret_cast<clientConnection_t*>(0x8F4CE0);
 cg_s* cgs = reinterpret_cast<cg_s*>(0x74E338);
+centity_s* cg_entities = reinterpret_cast<centity_s*>(0x84F2D8);
 GfxBuffers* gfx_buf = reinterpret_cast<GfxBuffers*>(0xD2B0840);
 GfxWorld* gfx_world = reinterpret_cast<GfxWorld*>(0xD0701E0);
 GfxScene* scene = reinterpret_cast<GfxScene*>(0xCF10280);
@@ -76,7 +77,7 @@ float* con_matchtxtColor_defaultValue = reinterpret_cast<float*>(0x6BDF34);
 float* con_matchtxtColor_dvarDescription = reinterpret_cast<float*>(0x6BDF54);
 float* con_matchtxtColor_domainDescription = reinterpret_cast<float*>(0x6BDF44);
 ConDrawInputGlob* con_drawInputGlob = reinterpret_cast<ConDrawInputGlob*>(0x8CC2C8);
-Console* con = reinterpret_cast<Console*>(0x8DC8C0);
+Con* con = reinterpret_cast<Con*>(0x8DC8C0);
 bool* con_isCatcherActive = reinterpret_cast<bool*>(0xC5F8F8);
 float* con_screenMinLeft = reinterpret_cast<float*>(0x8ECB14);
 float* con_screenMinTop = reinterpret_cast<float*>(0x8ECB18);

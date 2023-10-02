@@ -1,12 +1,16 @@
 #pragma once
 #include "Definitions.hpp"
+
 #include "Game/Render/Render.hpp"
+#include "Game/Player.hpp"
 #include "Modules/Modules.hpp"
 
 #include "Sys/Log.hpp"
 #include "Sys/Render/D3D9EX.hpp"
+#include "Utils/Math.hpp"
 
 #include <memory>
+#include <array>
 
 namespace IW3SR
 {
@@ -19,6 +23,8 @@ namespace IW3SR
 		std::unique_ptr<Log> Log;
 		std::unique_ptr<Render> Render;
 		std::unique_ptr<Modules> Modules;
+
+		std::array<std::shared_ptr<Player>, 64> Players;
 
 		/// <summary>
 		/// Initialize the game.

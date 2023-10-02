@@ -1,5 +1,6 @@
 #pragma once
 #include "Modules/Module.hpp"
+#include <glm/glm.hpp>
 
 namespace IW3SR
 {
@@ -9,6 +10,8 @@ namespace IW3SR
     class ESP : public Module
     {
     public:
+        glm::vec4 Color;
+
         /// <summary>
         /// Initialize the module.
         /// </summary>
@@ -16,8 +19,8 @@ namespace IW3SR
         virtual ~ESP() = default;
 
         /// <summary>
-        /// Render frame callback.
+        /// Draw callback.
         /// </summary>
-        void OnFrame() override;
+        void OnDraw() override;
     };
 }

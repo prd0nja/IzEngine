@@ -15,6 +15,7 @@ namespace IW3SR
 		Memory::Set<uint8_t>(0x500176, 8);
 		Memory::Set<uint8_t>(0x500179, 8);
 
+		CG_DrawCrosshair_h.Install();
 		RB_EndSceneRendering_h.Install();
 		R_Direct3DCreate9_h.Install();
 	}
@@ -23,5 +24,10 @@ namespace IW3SR
 	{
 		Draw::Frame();
 		ModuleCallback(OnFrame);
+	}
+
+	void Render::Draw(bool isScoreboardVisible)
+	{
+		ModuleCallback(OnDraw);
 	}
 }
