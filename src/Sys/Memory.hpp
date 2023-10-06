@@ -38,15 +38,31 @@ namespace IW3SR
         static std::vector<uintptr_t> ScanAll(std::string moduleName, std::string bytes, size_t size, bool first);
 
         /// <summary>
-        /// Reinterpret set bytes.
+        /// Assign values from reinterpret cast.
         /// </summary>
-        /// <typeparam name="T">The type to set.</typeparam>
+        /// <typeparam name="R">The reinterpret cast type.</typeparam>
+        /// <typeparam name="T">The first type to set.</typeparam>
+        /// <typeparam name="U">The second type to set.</typeparam>
         /// <param name="dst">The destination.</param>
         /// <param name="src">The source.</param>
-        template <typename R, typename T>
-        static void Reinterpret(T dst, T src)
+        template <typename R, typename T, typename U>
+        static void Assign(T& dst, U& src)
         {
-            *reinterpret_cast<R*>(dst) = *reinterpret_cast<R*>(src);
+            *reinterpret_cast<R*>(&dst) = *reinterpret_cast<R*>(&src);
+        }
+
+        /// <summary>
+        /// Assign array from reinterpret cast.
+        /// </summary>
+        /// <typeparam name="R">The reinterpret cast type.</typeparam>
+        /// <typeparam name="T">The first type to set.</typeparam>
+        /// <typeparam name="U">The second type to set.</typeparam>
+        /// <param name="dst">The destination.</param>
+        /// <param name="src">The source.</param>
+        template <int size, typename R, typename T, typename U>
+        static void Assign(T& dst, U& src)
+        {
+            std::copy_n(static_cast<R*>(src), size, dst);
         }
 
         /// <summary>

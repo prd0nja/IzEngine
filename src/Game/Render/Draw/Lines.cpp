@@ -20,9 +20,9 @@ namespace IW3SR
 			Count = 0;
 
 		R_ConvertColorToBytes(color, Verts[Count].color);
-		Memory::Reinterpret<int>(Verts[Count + 1].color, Verts[Count].color);
-		Memory::Reinterpret<float*>(Verts[Count].xyz, start);
-		Memory::Reinterpret<float*>(Verts[Count + 1].xyz, start);
+		Memory::Assign<int>(Verts[Count + 1].color, Verts[Count].color);
+		Memory::Assign<3, float>(Verts[Count].xyz, start);
+		Memory::Assign<3, float>(Verts[Count + 1].xyz, end);
 
 		Count += 2;
 	}
