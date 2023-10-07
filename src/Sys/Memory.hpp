@@ -16,7 +16,7 @@ namespace IW3SR
         /// <param name="address">The target address.</param>
         /// <param name="bytes">The bytes to write.</param>
         /// <param name="size">The size of the bytes.</param>
-        static void Write(uintptr_t address, std::string bytes, int size);
+        static void Write(uintptr_t address, const char* bytes, int size);
 
         /// <summary>
         /// Memory scan.
@@ -25,7 +25,7 @@ namespace IW3SR
         /// <param name="bytes">The bytes to scan.</param>
         /// <param name="size">The bytes size.</param>
         /// <returns></returns>
-        static uintptr_t Scan(std::string moduleName, std::string bytes, size_t size);
+        static uintptr_t Scan(std::string moduleName, const char* bytes, size_t size);
 
         /// <summary>
         /// Memory scan all results.
@@ -35,7 +35,7 @@ namespace IW3SR
         /// <param name="size">The bytes size.</param>
         /// <param name="first">Should only scan until the first result.</param>
         /// <returns></returns>
-        static std::vector<uintptr_t> ScanAll(std::string moduleName, std::string bytes, size_t size, bool first);
+        static std::vector<uintptr_t> ScanAll(std::string moduleName, const char* bytes, size_t size, bool first);
 
         /// <summary>
         /// Assign values from reinterpret cast.
@@ -46,7 +46,7 @@ namespace IW3SR
         /// <param name="dst">The destination.</param>
         /// <param name="src">The source.</param>
         template <typename R, typename T, typename U>
-        static void Assign(T& dst, U& src)
+        static inline void Assign(T& dst, U& src)
         {
             *reinterpret_cast<R*>(&dst) = *reinterpret_cast<R*>(&src);
         }
@@ -60,7 +60,7 @@ namespace IW3SR
         /// <param name="dst">The destination.</param>
         /// <param name="src">The source.</param>
         template <int size, typename R, typename T, typename U>
-        static void Assign(T& dst, U& src)
+        static inline void Assign(T& dst, U& src)
         {
             std::copy_n(static_cast<R*>(src), size, dst);
         }
@@ -76,7 +76,7 @@ namespace IW3SR
         {
             int size = sizeof(T);
             std::string bytes(reinterpret_cast<char*>(&value), size);
-            Write(address, bytes, size);
+            Write(address, bytes.c_str(), size);
         }
 
         /// <summary>

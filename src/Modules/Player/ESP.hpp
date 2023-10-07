@@ -11,7 +11,6 @@ namespace IW3SR
     {
     public:
         vec4 Color;
-        std::unique_ptr<class Lines> Lines;
 
         /// <summary>
         /// Initialize the module.
@@ -20,7 +19,7 @@ namespace IW3SR
         virtual ~ESP() = default;
 
         /// <summary>
-        /// Draw callback.
+        /// Frame callback.
         /// </summary>
         void OnFrame() override;
     };

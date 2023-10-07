@@ -2,6 +2,7 @@
 #include "Definitions.hpp"
 
 #include "Game/Render/Render.hpp"
+#include "Game/Render/GUI.hpp"
 #include "Game/Player.hpp"
 #include "Modules/Modules.hpp"
 
@@ -23,6 +24,7 @@ namespace IW3SR
 		std::unique_ptr<Log> Log;
 		std::unique_ptr<Render> Render;
 		std::unique_ptr<Modules> Modules;
+		std::unique_ptr<GUI> GUI;
 
 		std::array<std::shared_ptr<Player>, 64> Players;
 

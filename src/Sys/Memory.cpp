@@ -7,23 +7,23 @@
 
 namespace IW3SR
 {
-    void Memory::Write(uintptr_t address, std::string bytes, int size)
+    void Memory::Write(uintptr_t address, const char* bytes, int size)
     {
         DWORD oldProtect;
         LPVOID lpAddress = reinterpret_cast<LPVOID>(address);
 
         VirtualProtect(lpAddress, size, PAGE_EXECUTE_READWRITE, &oldProtect);
-        memcpy(lpAddress, reinterpret_cast<const void*>(bytes.c_str()), size);
+        memcpy(lpAddress, bytes, size);
         VirtualProtect(lpAddress, size, oldProtect, nullptr);
     }
 
-    uintptr_t Memory::Scan(std::string moduleName, std::string bytes, size_t size)
+    uintptr_t Memory::Scan(std::string moduleName, const char* bytes, size_t size)
     {
         std::vector<uintptr_t> addresses = ScanAll(moduleName, bytes, size, true);
         return addresses.size() ? addresses.back() : 0;
     }
 
-    std::vector<uintptr_t> Memory::ScanAll(std::string moduleName, std::string bytes, size_t size, bool first)
+    std::vector<uintptr_t> Memory::ScanAll(std::string moduleName, const char* bytes, size_t size, bool first)
     {
         std::vector<uintptr_t> addresses;
         HMODULE hModule = GetModuleHandleA(moduleName.c_str());
@@ -42,7 +42,7 @@ namespace IW3SR
 
         for (uintptr_t address = moduleBase; address < moduleEnd - size; ++address)
         {
-            if (!memcmp(&buffer[address - moduleBase], bytes.c_str(), size))
+            if (!memcmp(&buffer[address - moduleBase], bytes, size))
             {
                 addresses.push_back(address);
                 if (first) return addresses;
@@ -54,7 +54,7 @@ namespace IW3SR
     void Memory::NOP(uintptr_t address, int size)
     {
         std::string bytes(size, '\x90');
-        Write(address, bytes, size);
+        Write(address, bytes.c_str(), size);
     }
 
     void Memory::JMP(uintptr_t address, uintptr_t to, int size)
@@ -64,7 +64,7 @@ namespace IW3SR
         bytes.append(reinterpret_cast<char*>(&nearAddress), sizeof(to));
 
         NOP(address, size);
-        Write(address, bytes, 5);
+        Write(address, bytes.c_str(), 5);
     }
 
     uintptr_t Memory::LE(uintptr_t value)

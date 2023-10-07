@@ -12,8 +12,6 @@ namespace IW3SR
 		Verts.resize(limit);
 	}
 
-	void test(float *a) {}
-
 	void Lines::Add(const vec3& start, const vec3& end, const vec4& color)
 	{
 		if (Count + 2 > Limit)

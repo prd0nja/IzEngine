@@ -18,13 +18,13 @@ void Com_PrintMessage(int channel, const char* msg, int type)
 
 void CG_DrawCrosshair(bool isScoreboardVisible)
 {
-	SR->Render->Draw(isScoreboardVisible);
+	SR->Render->Draw2D(isScoreboardVisible);
 	CG_DrawCrosshair_h(isScoreboardVisible);
 }
 
 void RB_EndSceneRendering(GfxCmdBufInput* input, GfxViewInfo* viewInfo, GfxCmdBufSourceState* src, GfxCmdBufState* buf)
 {
-	SR->Render->Frame();
+	SR->Render->Draw3D();
 	RB_EndSceneRendering_h(input, viewInfo, src, buf);
 }
 

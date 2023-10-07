@@ -1,4 +1,5 @@
 #include "D3D9.hpp"
+#include "Game/Game.hpp"
 
 namespace IW3SR
 {
@@ -200,6 +201,12 @@ namespace IW3SR
 
 	HRESULT D3D9Device::Reset(D3DPRESENT_PARAMETERS* pPresentationParameters)
 	{
+		if (GUI::Active)
+		{
+			ImGui_ImplDX9_InvalidateDeviceObjects();
+			pIDirect3DDevice9->Reset(pPresentationParameters);
+			ImGui_ImplDX9_CreateDeviceObjects();
+		}
 		return pIDirect3DDevice9->Reset(pPresentationParameters);
 	}
 
@@ -360,6 +367,7 @@ namespace IW3SR
 
 	HRESULT D3D9Device::EndScene()
 	{
+		SR->Render->Frame();
 		return pIDirect3DDevice9->EndScene();
 	}
 

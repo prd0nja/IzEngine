@@ -30,13 +30,18 @@ namespace IW3SR
 		virtual void Shutdown();
 
 		/// <summary>
-		/// Render frame callback.
+		/// Draw 3D callback.
 		/// </summary>
-		virtual void OnFrame();
+		virtual void OnDraw3D();
 
 		/// <summary>
 		/// Draw 2D callback.
 		/// </summary>
-		virtual void OnDraw();
+		virtual void OnDraw2D();
+
+		/// <summary>
+		/// Render frame callback.
+		/// </summary>
+		virtual void OnFrame();
 	};
 }

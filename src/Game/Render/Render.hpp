@@ -19,14 +19,19 @@ namespace IW3SR
 		~Render() = default;
 		
 		/// <summary>
-		/// Render frame.
+		/// Draw 3D.
 		/// </summary>
-		void Frame();
+		void Draw3D();
 
 		/// <summary>
 		/// Draw 2D.
 		/// </summary>
-		/// <param name="isScoreboardVisible">Scoreboard visible.</param>
-		void Draw(bool isScoreboardVisible);
+		/// <param name="scoreboard">Scoreboard visible.</param>
+		void Draw2D(bool scoreboard);
+
+		/// <summary>
+		/// Render frame.
+		/// </summary>
+		void Frame();
 	};
 }

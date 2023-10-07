@@ -19,14 +19,22 @@ namespace IW3SR
 		R_Direct3DCreate9_h.Install();
 	}
 
-	void Render::Frame() 
+	void Render::Draw3D()
 	{
 		Draw::Frame();
-		ModuleCallback(OnFrame);
+		ModuleCallback(OnDraw3D);
 	}
 
-	void Render::Draw(bool isScoreboardVisible)
+	void Render::Draw2D(bool scoreboard)
 	{
-		ModuleCallback(OnDraw);
+		ModuleCallback(OnDraw2D);
+	}
+
+	void Render::Frame()
+	{
+		GUI::Initialize();
+		GUI::Begin();
+		ModuleCallback(OnFrame);
+		GUI::End();
 	}
 }
