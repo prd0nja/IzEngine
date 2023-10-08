@@ -22,7 +22,7 @@ namespace IW3SR
         };
 
         if (transform[2] < 0.01)
-            return vec2{ };
+            return { };
 
         return {
             centerX * (1 - (transform[0] / cgs->refdef.tanHalfFovX / transform[2])),

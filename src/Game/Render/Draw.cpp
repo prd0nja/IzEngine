@@ -16,10 +16,50 @@ namespace IW3SR
 		LinesCount += 2;
     }
 
-	void Draw::Rect2D(float x, float y, float w, float h, const vec4& color)
+	void Draw::HUD(float x, float y, float w, float h, const vec4& color)
 	{
 		FillRect(x, y, w, h, color);
 	}
+
+    void Draw::Box2D(const vec3& position, const vec3& size, const vec4& color, int thickness)
+    {
+        ImDrawList* draw = ImGui::GetBackgroundDrawList();
+
+        vec3 tfl3 = { position.x + size.x, position.y - size.y, position.z + size.z };
+        vec3 tfr3 = { position.x + size.x, position.y + size.y, position.z + size.z };
+        vec3 tbl3 = { position.x - size.x, position.y + size.y, position.z + size.z };
+        vec3 tbr3 = { position.x - size.x, position.y - size.y, position.z + size.z };
+
+        vec2 tfl = WorldToScreen(tfl3);
+        vec2 tfr = WorldToScreen(tfr3);
+        vec2 tbl = WorldToScreen(tbl3);
+        vec2 tbr = WorldToScreen(tbr3);
+
+        vec3 bfl3 = { position.x + size.x, position.y - size.y, position.z };
+        vec3 bfr3 = { position.x + size.x, position.y + size.y, position.z };
+        vec3 bbl3 = { position.x - size.x, position.y + size.y, position.z };
+        vec3 bbr3 = { position.x - size.x, position.y - size.y, position.z };
+
+        vec2 bfl = WorldToScreen(bfl3);
+        vec2 bfr = WorldToScreen(bfr3);
+        vec2 bbl = WorldToScreen(bbl3);
+        vec2 bbr = WorldToScreen(bbr3);
+
+        draw->AddLine(tbl, tfr, color, thickness);
+        draw->AddLine(tfl, tfr, color, thickness);
+        draw->AddLine(tfl, tbr, color, thickness);
+        draw->AddLine(tbl, tbr, color, thickness);
+
+        draw->AddLine(bbl, bfr, color, thickness);
+        draw->AddLine(bfr, bfl, color, thickness);
+        draw->AddLine(bfl, bbr, color, thickness);
+        draw->AddLine(bbr, bbl, color, thickness);
+
+        draw->AddLine(bbr, tbr, color, thickness);
+        draw->AddLine(bbl, tbl, color, thickness);
+        draw->AddLine(bfr, tfr, color, thickness);
+        draw->AddLine(bfl, tfl, color, thickness);
+    }
 
 	void Draw::Frame()
 	{

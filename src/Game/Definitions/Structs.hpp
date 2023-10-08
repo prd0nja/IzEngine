@@ -5470,7 +5470,7 @@ struct centity_s
 	cpose_t pose;
 	LerpEntityState currentState;
 	entityState_s nextState;
-	bool nextValid;
+	bool isAlive;
 	bool bMuzzleFlash;
 	bool bTrailMade;
 	int previousEventSequence;
@@ -5612,7 +5612,7 @@ struct clientControllers_t
 struct __declspec(align(4)) clientInfo_t
 {
 	int infoValid;
-	int nextValid;
+	int isAlive;
 	int clientNum;
 	char name[16];
 	team_t team;

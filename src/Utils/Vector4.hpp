@@ -1,5 +1,6 @@
 #pragma once
 #include "GLM.hpp"
+#include <imgui.h>
 
 namespace IW3SR
 {
@@ -12,6 +13,13 @@ namespace IW3SR
         using vec4 = Vector4<T>;
 
     public:
+        static Vector4<float> Zero;
+        static Vector4<float> One;
+        static Vector4<float> X;
+        static Vector4<float> Y;
+        static Vector4<float> Z;
+        static Vector4<float> W;
+
         /// <summary>
         /// Initialize vector.
         /// </summary>
@@ -44,6 +52,12 @@ namespace IW3SR
         /// </summary>
         /// <param name="v">The values.</param>
         Vector4(gvec4<T> v) : gvec4<T>(v) { }
+
+        /// <summary>
+        /// Initialize the vector.
+        /// </summary>
+        /// <param name="v">The initial value.</param>
+        Vector4(ImVec4 v) : gvec4<T>(v[0], v[1], v[2], v[3]) { }
 
         /// <summary>
         /// Normalize the vector.
@@ -132,16 +146,15 @@ namespace IW3SR
         /// <summary>
         /// Compares two vec4 vectors element-wise within a specified epsilon range.
         /// </summary>
-        /// <param name="v1">First vec4 vector to compare.</param>
-        /// <param name="v2">Second vec4 vector to compare.</param>
+        /// <param name="v">Vector to compare.</param>
         /// <param name="epsilon">Epsilon value for tolerance in comparisons.</param>
         /// <returns>True if all elements of the vectors are within epsilon range, otherwise false.</returns>
-        bool NearEqual(const vec4& v1, const vec4& v2, float epsilon) const
+        bool NearEqual(const vec4& v, float epsilon) const
         {
-            return ((v1[0] - epsilon <= v2[0] && v1[0] + epsilon >= v2[0])
-                && (v1[1] - epsilon <= v2[1] && v1[1] + epsilon >= v2[1])
-                && (v1[2] - epsilon <= v2[2] && v1[2] + epsilon >= v2[2])
-                && (v1[3] - epsilon <= v2[3] && v1[3] + epsilon >= v2[3]));
+            return (((*this)[0] - epsilon <= v[0] && (*this)[0] + epsilon >= v[0])
+                && ((*this)[1] - epsilon <= v[1] && (*this)[1] + epsilon >= v[1])
+                && ((*this)[2] - epsilon <= v[2] && (*this)[2] + epsilon >= v[2])
+                && ((*this)[3] - epsilon <= v[3] && (*this)[3] + epsilon >= v[3]));
         }
 
         /// <summary>
@@ -152,5 +165,50 @@ namespace IW3SR
         {
             return reinterpret_cast<T*>(const_cast<vec4*>(this));
         }
+
+        /// <summary>
+        /// Convert to imgui vector.
+        /// </summary>
+        operator ImVec4() const
+        {
+            return *reinterpret_cast<const ImVec4*>(this);
+        }
+
+        /// <summary>
+        /// Convert to imgui data.
+        /// </summary>
+        operator ImU32() const
+        {
+            ImU32 u32 = 0;
+            u32 |= (static_cast<ImU32>(this->x * 255) & 0xFF) << 0;
+            u32 |= (static_cast<ImU32>(this->y * 255) & 0xFF) << 8;
+            u32 |= (static_cast<ImU32>(this->z * 255) & 0xFF) << 16;
+            u32 |= (static_cast<ImU32>(this->w * 255) & 0xFF) << 24;
+            return u32;
+        }
+
+        /// <summary>
+        /// Vector is not zero.
+        /// </summary>
+        operator bool() const
+        {
+            return *this != Zero;
+        }
+
+        /// <summary>
+        /// Vector is zero.
+        /// </summary>
+        /// <returns></returns>
+        bool operator!() const
+        {
+            return !operator bool();
+        }
     };
+
+    vec4f vec4f::Zero = (0, 0, 0, 0);
+    vec4f vec4f::One = (1, 1, 1, 1);
+    vec4f vec4f::X = (1, 0, 0, 0);
+    vec4f vec4f::Y = (0, 1, 0, 0);
+    vec4f vec4f::Z = (0, 0, 1, 0);
+    vec4f vec4f::W = (0, 0, 0, 1);
 }

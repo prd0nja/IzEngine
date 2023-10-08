@@ -11,6 +11,8 @@ namespace IW3SR
     {
     public:
         vec4 Color;
+        vec3 Box;
+        int Size;
 
         /// <summary>
         /// Initialize the module.

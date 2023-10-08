@@ -14,21 +14,20 @@ namespace IW3SR
 		return c->nextState.clientNum == cgs->clientNum;
 	}
 
+	bool Player::IsAlive()
+	{
+		return c->isAlive;
+	}
+
 	void Player::Initialize()
 	{
 		for (int i = 0; i < 64; i++) 
 			SR->Players[i] = std::make_shared<Player>(i);
 	}
 
-	std::array<std::shared_ptr<Player>, 64> Player::GetAll()
+	std::array<std::shared_ptr<Player>, 64>& Player::GetAll()
 	{
-		std::array<std::shared_ptr<Player>, 64> players{ };
-		for (int i = 0; i < 64; i++)
-		{
-			const auto& player = SR->Players[i];
-			if (player) players[i] = player;
-		}
-		return players;
+		return SR->Players;
 	}
 
 	std::shared_ptr<Player> Player::Get(int index)

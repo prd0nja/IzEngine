@@ -27,14 +27,23 @@ namespace IW3SR
 		static void Line(const vec3& start, const vec3& end, const vec4& color);
 
 		/// <summary>
-		/// Draw a 2D Rect.
+		/// Draw a HUD Rect.
 		/// </summary>
 		/// <param name="x">The X coord.</param>
 		/// <param name="y">The Y coord.</param>
 		/// <param name="w">The width.</param>
 		/// <param name="h">The height.</param>
 		/// <param name="color">The color.</param>
-		static void Rect2D(float x, float y, float w, float h, const vec4& color);
+		static void HUD(float x, float y, float w, float h, const vec4& color);
+
+		/// <summary>
+		/// Draw a 2D box.
+		/// </summary>
+		/// <param name="position">The position.</param>
+		/// <param name="size">The box size.</param>
+		/// <param name="color">The box color.</param>
+		/// <param name="thickness">The box thickness.</param>
+		static void Box2D(const vec3& position, const vec3& size, const vec4& color, int thickness);
 
 		/// <summary>
 		/// Draw frame.

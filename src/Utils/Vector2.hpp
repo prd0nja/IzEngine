@@ -1,5 +1,6 @@
 #pragma once
 #include "GLM.hpp"
+#include <imgui.h>
 
 namespace IW3SR
 {
@@ -12,6 +13,11 @@ namespace IW3SR
         using vec2 = Vector2<T>;
 
     public:
+        static Vector2<float> Zero;
+        static Vector2<float> One;
+        static Vector2<float> X;
+        static Vector2<float> Y;
+
         /// <summary>
         /// Initialize vector.
         /// </summary>
@@ -41,6 +47,12 @@ namespace IW3SR
         /// </summary>
         /// <param name="v">The initial value.</param>
         Vector2(gvec2<T> v) : gvec2<T>(v) { }
+
+        /// <summary>
+        /// Initialize the vector.
+        /// </summary>
+        /// <param name="v">The initial value.</param>
+        Vector2(ImVec2 v) : gvec2<T>(v[0], v[1]) { }
 
         /// <summary>
         /// Normalize the vector.
@@ -130,14 +142,13 @@ namespace IW3SR
         /// <summary>
         /// Compares two vec2 vectors element-wise within a specified epsilon range.
         /// </summary>
-        /// <param name="v1">First vec2 vector to compare.</param>
-        /// <param name="v2">Second vec2 vector to compare.</param>
+        /// <param name="v">Vector to compare.</param>
         /// <param name="epsilon">Epsilon value for tolerance in comparisons.</param>
         /// <returns>True if all elements of the vectors are within epsilon range, otherwise false.</returns>
-        bool NearEqual(const vec2& v1, const vec2& v2, float epsilon) const
+        bool NearEqual(const vec2& v, float epsilon) const
         {
-            return ((v1[0] - epsilon <= v2[0] && v1[0] + epsilon >= v2[0])
-                && (v1[1] - epsilon <= v2[1] && v1[1] + epsilon >= v2[1]));
+            return (((*this)[0] - epsilon <= v[0] && (*this)[0] + epsilon >= v[0])
+                && ((*this)[1] - epsilon <= v[1] && (*this)[1] + epsilon >= v[1]));
         }
 
         /// <summary>
@@ -148,5 +159,35 @@ namespace IW3SR
         {
             return reinterpret_cast<T*>(const_cast<vec2*>(this));
         }
+
+        /// <summary>
+        /// Convert to imgui vector.
+        /// </summary>
+        operator ImVec2() const
+        {
+            return *reinterpret_cast<const ImVec2*>(this);
+        }
+
+        /// <summary>
+        /// Vector is not zero.
+        /// </summary>
+        operator bool() const
+        {
+            return *this != Zero;
+        }
+
+        /// <summary>
+        /// Vector is zero.
+        /// </summary>
+        /// <returns></returns>
+        bool operator!() const
+        {
+            return !operator bool();
+        }
     };
+
+    vec2f vec2f::Zero = (0, 0);
+    vec2f vec2f::One = (1, 1);
+    vec2f vec2f::X = (1, 0);
+    vec2f vec2f::Y = (0, 1);
 }

@@ -12,6 +12,16 @@ namespace IW3SR
 		using vec3 = Vector3<T>;
 
 	public:
+		static Vector3<float> Zero;
+		static Vector3<float> One;
+		static Vector3<float> X;
+		static Vector3<float> Y;
+		static Vector3<float> Z;
+		static Vector3<float> Up;
+		static Vector3<float> Down;
+		static Vector3<float> Left;
+		static Vector3<float> Right;
+
 		/// <summary>
 		/// Initialize vector.
 		/// </summary>
@@ -147,15 +157,14 @@ namespace IW3SR
 		/// <summary>
 		/// Compares two vec3 vectors element-wise within a specified epsilon range.
 		/// </summary>
-		/// <param name="v1">First vec3 vector to compare.</param>
-		/// <param name="v2">Second vec3 vector to compare.</param>
+		/// <param name="v">Vector to compare.</param>
 		/// <param name="epsilon">Epsilon value for tolerance in comparisons.</param>
 		/// <returns>True if all elements of the vectors are within epsilon range, otherwise false.</returns>
-		bool NearEqual(const vec3& v1, const vec3& v2, float epsilon) const
+		bool NearEqual(const vec3& v, float epsilon) const
 		{
-			return ((v1[0] - epsilon <= v2[0] && v1[0] + epsilon >= v2[0])
-				&& (v1[1] - epsilon <= v2[1] && v1[1] + epsilon >= v2[1])
-				&& (v1[2] - epsilon <= v2[2] && v1[2] + epsilon >= v2[2]));
+			return (((*this)[0] - epsilon <= v[0] && (*this)[0] + epsilon >= v[0])
+				&& ((*this)[1] - epsilon <= v[1] && (*this)[1] + epsilon >= v[1])
+				&& ((*this)[2] - epsilon <= v[2] && (*this)[2] + epsilon >= v[2]));
 		}
 
 		/// <summary>
@@ -166,5 +175,32 @@ namespace IW3SR
 		{
 			return reinterpret_cast<T*>(const_cast<vec3*>(this));
 		}
+
+		/// <summary>
+		/// Vector is not zero.
+		/// </summary>
+		operator bool() const
+		{
+			return *this != Zero;
+		}
+
+		/// <summary>
+		/// Vector is zero.
+		/// </summary>
+		/// <returns></returns>
+		bool operator!() const
+		{
+			return !operator bool();
+		}
 	};
+
+	vec3f vec3f::Zero = (0, 0, 0);
+	vec3f vec3f::One = (1, 1, 1);
+	vec3f vec3f::X = (1, 0, 0);
+	vec3f vec3f::Y = (0, 1, 0);
+	vec3f vec3f::Z = (0, 0, 1);
+	vec3f vec3f::Up = (0, 1, 0);
+	vec3f vec3f::Down = (0, -1, 0);
+	vec3f vec3f::Left = (-1, 0, 0);
+	vec3f vec3f::Right = (1, 0, 0);
 }

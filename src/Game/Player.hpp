@@ -32,6 +32,12 @@ namespace IW3SR
 		bool IsSelf();
 
 		/// <summary>
+		/// Is player alive.
+		/// </summary>
+		/// <returns></returns>
+		bool IsAlive();
+
+		/// <summary>
 		/// Initialize all players.
 		/// </summary>
 		static void Initialize();
@@ -40,7 +46,7 @@ namespace IW3SR
 		/// Get all players.
 		/// </summary>
 		/// <returns></returns>
-		static std::array<std::shared_ptr<Player>, 64> GetAll();
+		static std::array<std::shared_ptr<Player>, 64>& GetAll();
 
 		/// <summary>
 		/// Get a player.
