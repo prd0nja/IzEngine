@@ -1,13 +1,24 @@
 #include "Functions.hpp"
 #include "Game/Game.hpp"
 
+Hook<HWND STDCALL(DWORD dwExStyle, LPCSTR lpClassName, LPCSTR lpWindowName,
+	DWORD dwStyle, int X, int Y, int nWidth, int nHeight, HWND hWndParent, HMENU hMenu,
+	HINSTANCE hInstance, LPVOID lpParam)>
+	CreateWindowExA_h(CreateWindowExA, GUI::CreateMainWindow);
+
+Hook<LRESULT CALLBACK(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)>
+	MainWndProc_h(0x57BB20, GUI::MainWndProc);
+
 Hook<void(int channel, const char* msg, int type)> 
 	Com_PrintMessage_h(0x4FCA50, Com_PrintMessage);
-Hook<void(bool isScoreboardVisible)>
+
+Hook<void(bool scoreboard)>
 	CG_DrawCrosshair_h(0x42F6B5, CG_DrawCrosshair);
+
 Hook<void(GfxCmdBufInput* input, GfxViewInfo* viewInfo, GfxCmdBufSourceState* src, GfxCmdBufState* buf)> 
 	RB_EndSceneRendering_h(0x6496EC, RB_EndSceneRendering);
-Hook<IDirect3D9* STDCALL(UINT sdk)>
+
+Hook<IDirect3D9* STDCALL(UINT sdk)> 
 	R_Direct3DCreate9_h(0x670284, R_Direct3DCreate9);
 
 void Com_PrintMessage(int channel, const char* msg, int type)
@@ -16,10 +27,10 @@ void Com_PrintMessage(int channel, const char* msg, int type)
 	Com_PrintMessage_h(channel, msg, type);
 }
 
-void CG_DrawCrosshair(bool isScoreboardVisible)
+void CG_DrawCrosshair(bool scoreboard)
 {
-	SR->Render->Draw2D(isScoreboardVisible);
-	CG_DrawCrosshair_h(isScoreboardVisible);
+	SR->Render->Draw2D(scoreboard);
+	CG_DrawCrosshair_h(scoreboard);
 }
 
 void RB_EndSceneRendering(GfxCmdBufInput* input, GfxViewInfo* viewInfo, GfxCmdBufSourceState* src, GfxCmdBufState* buf)

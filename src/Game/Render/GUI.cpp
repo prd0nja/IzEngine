@@ -1,14 +1,6 @@
 #include "GUI.hpp"
 #include "Sys/Memory.hpp"
 
-Hook<HWND STDCALL(DWORD dwExStyle, LPCSTR lpClassName, LPCSTR lpWindowName, 
-	DWORD dwStyle, int X, int Y, int nWidth, int nHeight, HWND hWndParent, HMENU hMenu, 
-	HINSTANCE hInstance, LPVOID lpParam)>
-	CreateWindowExA_h((uintptr_t)CreateWindowExA, GUI::CreateMainWindow);
-
-Hook<LRESULT CALLBACK(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)>
-	MainWndProc_h(0x57BB20, GUI::MainWndProc);
-
 namespace IW3SR
 {
 	GUI::GUI()

@@ -8,7 +8,7 @@ using namespace IW3SR;
 void Com_PrintMessage(int channel, const char* msg, int type);
 void RB_EndSceneRendering(GfxCmdBufInput* input, GfxViewInfo* viewInfo, GfxCmdBufSourceState* src, GfxCmdBufState* buf);
 IDirect3D9* STDCALL R_Direct3DCreate9(UINT sdk);
-void CG_DrawCrosshair(bool isScoreboardVisible);
+void CG_DrawCrosshair(bool scoreboard);
 
 static Function<dvar_s*(const char* name)> 
 	Dvar_FindVar = 0x56B5D0;
@@ -22,9 +22,15 @@ static Function<char(Material* material, float x, float y, float w, float h, flo
 static Function<Material*(const char* fontName, int fontSize)>
 	Material_RegisterHandle = 0x5F2A80;
 
+extern Hook<HWND STDCALL(DWORD dwExStyle, LPCSTR lpClassName, LPCSTR lpWindowName,
+	DWORD dwStyle, int X, int Y, int nWidth, int nHeight, HWND hWndParent, HMENU hMenu,
+	HINSTANCE hInstance, LPVOID lpParam)>
+	CreateWindowExA_h;
+extern Hook<LRESULT CALLBACK(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)>
+	MainWndProc_h;
 extern Hook<void(int channel, const char* msg, int type)> 
 	Com_PrintMessage_h;
-extern Hook<void(bool isScoreboardVisible)>
+extern Hook<void(bool scoreboard)>
 	CG_DrawCrosshair_h;
 extern Hook<void(GfxCmdBufInput* input, GfxViewInfo* viewInfo, GfxCmdBufSourceState* src, GfxCmdBufState* buf)> 
 	RB_EndSceneRendering_h;

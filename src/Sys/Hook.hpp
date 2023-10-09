@@ -27,6 +27,13 @@ namespace IW3SR
         /// <summary>
         /// Initialize a new Hook instance.
         /// </summary>
+        /// <param name="target">The target function.</param>
+        /// <param name="callback">The callback function.</param>
+        Hook(T target, T callback) : Hook(reinterpret_cast<uintptr_t>(target), callback) { }
+
+        /// <summary>
+        /// Initialize a new Hook instance.
+        /// </summary>
         /// <param name="target">The target address.</param>
         /// <param name="callback">The callback function.</param>
         Hook(uintptr_t target, T callback)
