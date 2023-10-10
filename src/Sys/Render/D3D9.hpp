@@ -10,6 +10,8 @@ namespace IW3SR
 		D3D9(IDirect3D9* d3d9);
 		virtual ~D3D9() = default;
 
+		static IDirect3D9* STDCALL Direct3DCreate9(UINT sdk);
+
 		COM_DECLSPEC_NOTHROW HRESULT STDCALL QueryInterface(REFIID riid, void** ppvObj) override;
 		COM_DECLSPEC_NOTHROW ULONG STDCALL AddRef() override;
 		COM_DECLSPEC_NOTHROW ULONG STDCALL Release() override;

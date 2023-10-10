@@ -17,17 +17,22 @@ namespace IW3SR
 		/// </summary>
 		Render();
 		~Render() = default;
-		
+
 		/// <summary>
-		/// Draw 3D.
+		/// Draws 3D.
 		/// </summary>
-		void Draw3D();
+		/// <param name="input">Input commands for rendering.</param>
+		/// <param name="viewInfo">View information for the graphics.</param>
+		/// <param name="src">Source state for the graphics command buffer.</param>
+		/// <param name="buf">Graphics command buffer state.</param>
+		static void Draw3D(GfxCmdBufInput* input, GfxViewInfo* viewInfo, 
+			GfxCmdBufSourceState* src, GfxCmdBufState* buf);
 
 		/// <summary>
 		/// Draw 2D.
 		/// </summary>
 		/// <param name="scoreboard">Scoreboard visible.</param>
-		void Draw2D(bool scoreboard);
+		static void Draw2D(bool scoreboard);
 
 		/// <summary>
 		/// Render frame.

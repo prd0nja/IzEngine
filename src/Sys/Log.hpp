@@ -22,8 +22,16 @@ namespace IW3SR
 		/// </summary>
 		/// <param name="channel">The log channel.</param>
 		/// <param name="type">The error type.</param>
-		/// <param name="text">The text.</param>
-		static void Write(int channel, int type, std::string text);
+		/// <param name="msg">The message.</param>
+		static void Write(int channel, int type, std::string msg);
+
+		/// <summary>
+		/// Write to the console.
+		/// </summary>
+		/// <param name="channel">The log channel.</param>
+		/// <param name="msg">The message.</param>
+		/// <param name="type">The error type.</param>
+		static void Write(int channel, const char* msg, int type);
 
 		/// <summary>
 		/// Write to the console.

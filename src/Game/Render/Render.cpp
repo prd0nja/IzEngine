@@ -19,15 +19,17 @@ namespace IW3SR
 		R_Direct3DCreate9_h.Install();
 	}
 
-	void Render::Draw3D()
+	void Render::Draw3D(GfxCmdBufInput* input, GfxViewInfo* viewInfo, GfxCmdBufSourceState* src, GfxCmdBufState* buf)
 	{
 		Draw::Frame();
 		ModuleCallback(OnDraw3D);
+		RB_EndSceneRendering_h(input, viewInfo, src, buf);
 	}
 
 	void Render::Draw2D(bool scoreboard)
 	{
 		ModuleCallback(OnDraw2D);
+		CG_DrawCrosshair_h(scoreboard);
 	}
 
 	void Render::Frame()

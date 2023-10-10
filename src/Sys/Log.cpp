@@ -8,8 +8,14 @@ namespace IW3SR
 		Com_PrintMessage_h.Install();
 	}
 
-	void Log::Write(int channel, int type, std::string text)
+	void Log::Write(int channel, int type, std::string msg)
 	{
-		std::cout << text;
+		Write(channel, msg.c_str(), type);
+	}
+
+	void Log::Write(int channel, const char* msg, int type)
+	{
+		std::cout << msg;
+		Com_PrintMessage_h(channel, msg, type);
 	}
 }

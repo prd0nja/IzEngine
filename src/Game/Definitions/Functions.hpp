@@ -3,13 +3,6 @@
 #include "Sys/Hook.hpp"
 #include "Sys/Function.hpp"
 
-using namespace IW3SR;
-
-void Com_PrintMessage(int channel, const char* msg, int type);
-void RB_EndSceneRendering(GfxCmdBufInput* input, GfxViewInfo* viewInfo, GfxCmdBufSourceState* src, GfxCmdBufState* buf);
-IDirect3D9* STDCALL R_Direct3DCreate9(UINT sdk);
-void CG_DrawCrosshair(bool scoreboard);
-
 static Function<dvar_s*(const char* name)> 
 	Dvar_FindVar = 0x56B5D0;
 static Function<void(int count, int width, GfxPointVertex* verts, bool depthTest)> 
