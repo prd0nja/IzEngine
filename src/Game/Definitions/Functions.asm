@@ -26,7 +26,6 @@ R_AddCmdDrawText:
 	mov		ecx, dword [ebp + 2Ch]		; color
 	call	dword [R_AddCmdDrawText_a]
 	add		esp, 24h
-	cmp		ebp, esp
 	pop		ebp
 	ret
 
