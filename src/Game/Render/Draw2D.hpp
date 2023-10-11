@@ -19,7 +19,7 @@ namespace IW3SR
 		/// <param name="w">Width of the rectangle.</param>
 		/// <param name="h">Height of the rectangle.</param>
 		/// <param name="color">The rect color.</param>
-		static void Rect(std::string material, float x, float y, float w, float h, const vec4& color);
+		static void Rect(const std::string& material, float x, float y, float w, float h, const vec4& color);
 
 		/// <summary>
 		/// Draw a section of a circle with a specified yaw angle, starting and ending angles, and color.
@@ -31,7 +31,7 @@ namespace IW3SR
 		/// <param name="y">Y-coordinate of the circle's center.</param>
 		/// <param name="h">Radius of the circle.</param>
 		/// <param name="color">The color.</param>
-		static void AngleYaw(std::string material, float start, float end, float yaw, 
+		static void AngleYaw(const std::string& material, float start, float end, float yaw,
 			float y, float h, const vec4& color);
 
 		/// <summary>
@@ -44,18 +44,49 @@ namespace IW3SR
 		/// <param name="w">Width of the line.</param>
 		/// <param name="h">Height of the line.</param>
 		/// <param name="color">The color.</param>
-		static void LineYaw(std::string material, float angle, float yaw, float y, 
+		static void LineYaw(const std::string& material, float angle, float yaw, float y,
 			float w, float h, const vec4& color);
 
 		/// <summary>
-		/// Draw a text.
+        /// Draw text overload.
+        /// </summary>
+        /// <param name="text">The text.</param>
+        /// <param name="font">The font.</param>
+        /// <param name="pos">XY-coordinates of screen.</param>
+        /// <param name="size">Font size.</param>
+		/// <param name="horizonal">Horizontal screen rect alignment.</param>
+		/// <param name="vertical">Vertical screen rect alignment.</param>
+		/// <param name="color">The color.</param>
+		static void Text(const std::string& text, Font_s* font, const vec2& pos, const vec2& size, 
+			RectAlignHorizontal_t horizontal, RectAlignVertical_t vertical, const vec4& color);
+
+		/// <summary>
+		/// Draw text overload.
 		/// </summary>
 		/// <param name="text">The text.</param>
 		/// <param name="font">The font.</param>
 		/// <param name="x">X-coordinate.</param>
 		/// <param name="y">Y-coordinate.</param>
 		/// <param name="size">Font size.</param>
+		/// <param name="horizonal">Horizontal screen rect alignment.</param>
+		/// <param name="vertical">Vertical screen rect alignment.</param>
 		/// <param name="color">The color.</param>
-		static void Text(std::string text, Font_s* font, float x, float y, float size, const vec4& color);
+		static void Text(const std::string& text, Font_s* font, float x, float y, float size,
+			RectAlignHorizontal_t horizontal, RectAlignVertical_t vertical, const vec4& color);
+
+		/// <summary>
+		/// Draw text.
+		/// </summary>
+		/// <param name="text">The text.</param>
+		/// <param name="font">The font.</param>
+		/// <param name="x">X-coordinate of screen.</param>
+		/// <param name="y">Y-coordinate of screen.</param>
+		/// <param name="w">Text width.</param>
+		/// <param name="h">Horizontal text size.</param>
+		/// <param name="horizonal">Horizontal screen rect alignment.</param>
+		/// <param name="vertical">Vertical screen rect alignment.</param>
+		/// <param name="color">The color.</param>
+		static void Text(const std::string& text, Font_s* font, float x, float y, float w, float h,
+			RectAlignHorizontal_t horizontal, RectAlignVertical_t vertical, const vec4& color);
 	};
 }
