@@ -9,7 +9,7 @@ namespace IW3SR
 		ID = "sr.player.draw_velocity";
 		Name = "Velocity";
 
-		Pos = { 960, 540 };
+		Pos = { 320, 240 };
 		Size = { 2, 2 };
 	}
 
@@ -18,6 +18,6 @@ namespace IW3SR
 		const int velocity = vec2(pmove->ps->velocity).Length();
 		const std::string velocityString = std::to_string(velocity);
 
-		Draw2D::Text(velocityString, g_fonts->objectiveFont, Pos, Size);
+		Draw2D::Text(velocityString, g_fonts->objectiveFont, Pos, Size, HORIZONTAL_ALIGN_LEFT, VERTICAL_ALIGN_TOP);
 	}
 }

@@ -48,23 +48,39 @@ namespace IW3SR
 			float w, float h, const vec4& color);
 
 		/// <summary>
-		/// Draw a text.
-		/// </summary>
-		/// <param name="text">The text.</param>
-		/// <param name="font">The font.</param>
-		/// <param name="pos">XY-coordinates of screen.</param>
-		/// <param name="size">Text/Font size.</param>
-		static void Text(std::string text, Font_s* font, const vec2& pos, const vec2& size);
+        /// Draw text.
+        /// </summary>
+        /// <param name="text">The text.</param>
+        /// <param name="font">The font.</param>
+        /// <param name="x">X-coordinate of screen(0-640).</param>
+        /// <param name="y">Y-corrdinate of screen(0-480).</param>
+        /// <param name="w">Vertical text size.</param>
+        /// <param name="h">Horizontal text size.</param>
+		/// <param name="horizonal">horizontal Screen rect alignement.</param>
+		/// <param name="vertical">vertical Screen rect alignement.</param>
+		static void Text(std::string text, Font_s* font, float x, float y, float w, float h, RectAlignHorizontal_t horizontal, RectAlignVertical_t vertical);
 
 		/// <summary>
-		/// Draw a text.
+		/// Draw text overload.
 		/// </summary>
 		/// <param name="text">The text.</param>
 		/// <param name="font">The font.</param>
-		/// <param name="x">X-coordinate.</param>
-		/// <param name="y">Y-coordinate.</param>
+		/// <param name="x">X-coordinate(0-640).</param>
+		/// <param name="y">Y-coordinate(0-480).</param>
 		/// <param name="size">Text/Font size.</param>
-		/// <param name="color">The color.</param>
-		static void Text(std::string text, Font_s* font, float x, float y, float size);
+		/// <param name="horizonal">horizontal Screen rect alignement.</param>
+		/// <param name="vertical">vertical Screen rect alignement.</param>
+		static void Text(std::string text, Font_s* font, float x, float y, float size, RectAlignHorizontal_t horizontal, RectAlignVertical_t vertical);
+
+		/// <summary>
+        /// Draw text overload.
+        /// </summary>
+        /// <param name="text">The text.</param>
+        /// <param name="font">The font.</param>
+        /// <param name="pos">XY-coordinates of screen (x is 0-640, y is 0-480).</param>
+        /// <param name="size">Text/Font size.</param>
+		/// <param name="horizonal">horizontal Screen rect alignement.</param>
+		/// <param name="vertical">vertical Screen rect alignement.</param>
+		static void Text(std::string text, Font_s* font, const vec2& pos, const vec2& size, RectAlignHorizontal_t horizontal, RectAlignVertical_t vertical);
 	};
 }
