@@ -248,49 +248,6 @@ namespace IW3SR
 
         return angles;
     }
- 
-	void AdjustFrom640(float& x, float& y, float& w, float& h)
-	{
-		const float scaleX = static_cast<float>(cgs->refdef.width) / 640.0f;
-
-		x *= scaleX;
-		y *= scaleX;
-		w *= scaleX;
-		h *= scaleX;
-	}
-
-	void FillRect(float x, float y, float w, float h, const vec4& color)
-	{
-		if (!w || !h)
-			return;
-
-		AdjustFrom640(x, y, w, h);
-
-		const auto material = Material_RegisterHandle("white", 3);
-		R_AddCmdDrawStretchPic(material, x, y, w, h, 0.0f, 0.0f, 0.0f, 0.0f, color);
-	}
-
-	void FillAngleYaw(float start, float end, float yaw, float y, float h, const vec4& color)
-	{
-		const range_t range = AnglesToRange(start, end, yaw);
-		if (!range.split)
-			FillRect(range.x1, y, range.x2 - range.x1, h, color);
-		else
-		{
-			FillRect(0, y, range.x1, h, color);
-			FillRect(range.x2, y, SCREEN_WIDTH - range.x2, h, color);
-		}
-	}
-
-	void DrawLineYaw(float angle, float yaw, float y, float w, float h, const vec4& color)
-	{
-		angle = AngleNormalizePi(angle - yaw);
-		if (!AngleInFov(angle))
-			return;
-
-		float const x = AngleScreenProjection(angle);
-		FillRect(x - w / 2, y, w, h, color);
-	}
 
 	bool AngleInFov(float angle)
 	{

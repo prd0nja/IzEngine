@@ -21,8 +21,8 @@ namespace IW3SR
 
 	void Render::Draw3D(GfxCmdBufInput* input, GfxViewInfo* viewInfo, GfxCmdBufSourceState* src, GfxCmdBufState* buf)
 	{
-		Draw3D::Frame();
 		ModuleCallback(OnDraw3D);
+		Draw3D::Frame();
 		RB_EndSceneRendering_h(input, viewInfo, src, buf);
 	}
 

@@ -59,6 +59,7 @@ ScreenPlacement* scr_place = reinterpret_cast<ScreenPlacement*>(0xE34420);
 ScreenPlacement* scr_placeFull = reinterpret_cast<ScreenPlacement*>(0xE343D8);
 int* map_nameEnum = reinterpret_cast<int*>(0xCAF2330);
 int* g_typeEnum = reinterpret_cast<int*>(0xCAF1820);
+Fonts_t* g_fonts = reinterpret_cast<Fonts_t*>(0xCAF06F8);
 
 // GSC
 uintptr_t* gScrMemTreePub = reinterpret_cast<uintptr_t*>(0x14E8A04);

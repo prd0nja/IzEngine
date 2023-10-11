@@ -90,47 +90,6 @@ namespace IW3SR
     vec3 VectorToAnglesWithRoll(const vec3& forward, const vec3& up, bool flipPitch);
 
     /// <summary>
-    /// Adjusts the coordinates and size from a 640x480 resolution to the current resolution.
-    /// </summary>
-    /// <param name="x">Pointer to the X-coordinate.</param>
-    /// <param name="y">Pointer to the Y-coordinate.</param>
-    /// <param name="w">Pointer to the width.</param>
-    /// <param name="h">Pointer to the height.</param>
-    void AdjustFrom640(float& x, float& y, float& w, float& h);
-
-    /// <summary>
-    /// Fills a rectangle with the specified color.
-    /// </summary>
-    /// <param name="x">X-coordinate of the top-left corner.</param>
-    /// <param name="y">Y-coordinate of the top-left corner.</param>
-    /// <param name="w">Width of the rectangle.</param>
-    /// <param name="h">Height of the rectangle.</param>
-    /// <param name="color">The rect color.</param>
-    void FillRect(float x, float y, float w, float h, const vec4& color);
-
-    /// <summary>
-    /// Fills a section of a circle with a specified yaw angle, starting and ending angles, and color.
-    /// </summary>
-    /// <param name="start">Starting angle in radians.</param>
-    /// <param name="end">Ending angle in radians.</param>
-    /// <param name="yaw">Yaw angle in radians.</param>
-    /// <param name="y">Y-coordinate of the circle's center.</param>
-    /// <param name="h">Radius of the circle.</param>
-    /// <param name="color">The color.</param>
-    void FillAngleYaw(float start, float end, float yaw, float y, float h, const vec4& color);
-
-    /// <summary>
-    /// Draws a line at a specified yaw angle with a given width, height, and color.
-    /// </summary>
-    /// <param name="angle">Angle at which to draw the line in radians.</param>
-    /// <param name="yaw">Yaw angle in radians.</param>
-    /// <param name="y">Y-coordinate of the line's position.</param>
-    /// <param name="w">Width of the line.</param>
-    /// <param name="h">Height of the line.</param>
-    /// <param name="color">The color.</param>
-    void DrawLineYaw(float angle, float yaw, float y, float w, float h, const vec4& color);
-
-    /// <summary>
     /// Checks if an angle is within the field of view (FOV).
     /// </summary>
     /// <param name="angle">Angle to check in radians.</param>

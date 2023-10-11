@@ -12,13 +12,14 @@ namespace IW3SR
 	{ 
 		using R = typename std::function<T>::result_type;
 	public:
+		int Address = 0;
 		std::function<T> Func = nullptr;
 
 		/// <summary>
 		/// Initialize a new Function wrapper.
 		/// </summary>
 		/// <param name="address">The address of the function.</param>
-		Function(const uintptr_t& address) : Func(reinterpret_cast<T*>(address)) { }
+		Function(const uintptr_t& address) : Address(address), Func(reinterpret_cast<T*>(address)) { }
 
 		/// <summary>
 		/// Assign function address.
@@ -27,6 +28,7 @@ namespace IW3SR
 		/// <returns></returns>
 		Function& operator=(const uintptr_t& address)
 		{
+			Address = address;
 			Func = std::function<T>(reinterpret_cast<T*>(address));
 			return *this;
 		}

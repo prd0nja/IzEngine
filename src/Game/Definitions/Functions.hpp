@@ -12,6 +12,9 @@ static Function<void FASTCALL(const float* colorFloat, char* colorBytes)>
 static Function<char(Material* material, float x, float y, float w, float h, float s0,
 	float t0, int s1, int t1, float* color)> 
 	R_AddCmdDrawStretchPic = 0x5F65F0;
+static Function<const char*(const char* text, int maxChars, void* font, float x, float y, float xScale, 
+	float yScale, float rotation, int style)>
+	R_AddCmdDrawText = 0x5F6B00;
 static Function<Material*(const char* fontName, int fontSize)>
 	Material_RegisterHandle = 0x5F2A80;
 
@@ -29,3 +32,6 @@ extern Hook<void(GfxCmdBufInput* input, GfxViewInfo* viewInfo, GfxCmdBufSourceSt
 	RB_EndSceneRendering_h;
 extern Hook<IDirect3D9* STDCALL(UINT sdk)> 
 	R_Direct3DCreate9_h;
+
+void ScrPlace_ApplyRect(float& x, float& y, float& w, float& h,
+	RectAlignHorizontal_t horizontal, RectAlignVertical_t vertical);
