@@ -19,7 +19,10 @@ namespace IW3SR
 	void Velocity::OnDraw2D()
 	{
 		const int velocity = vec2(pmove->ps->velocity).Length();
-		VelocityText.Value = std::to_string(velocity);
+		const int fps = GetDvar<int>("com_maxfps");
+		SetDvar<int>("sm_shadow", 1);
+
+		VelocityText.Value = std::to_string(fps);
 		VelocityText.Render();
 	}
 }

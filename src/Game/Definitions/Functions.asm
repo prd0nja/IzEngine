@@ -1,16 +1,27 @@
 ; Exports
+	global Dvar_FindVar
 	global R_AddCmdDrawText
 	global R_AddCmdDrawStretchPic
 	global R_TextWidth
 
 SECTION .text
 
+; dvar_s* Dvar_FindVar(const char* name);
+Dvar_FindVar:
+	push	ebp
+	mov		ebp, esp
+	push	edi
+	mov		edi, dword [ebp + 8]	; name
+	call	dword [Dvar_FindVar_a]
+	pop		edi
+	pop		ebp
+	ret
+
 ; void R_AddCmdDrawText(const char* text, int maxChars, Font_s* font, float x, float y,
 ;	float xScale, float yScale, float rotation, int style, float* color);
 R_AddCmdDrawText:
 	push	ebp
 	mov		ebp, esp
-	pushad
 	push	dword [ebp + 28h]			; style
 	sub		esp, 14h
 	fld		dword [ebp + 24h]			; rotation
@@ -29,7 +40,6 @@ R_AddCmdDrawText:
 	mov		ecx, dword [ebp + 2Ch]		; color
 	call	dword [R_AddCmdDrawText_a]
 	add		esp, 24h
-	popad
 	pop		ebp
 	ret
 
@@ -41,7 +51,6 @@ R_AddCmdDrawStretchPic:
 	push	ebx
 	push	esi
 	push	edi
-	pushad
 	push	dword [ebp + 2Ch]		; color
 	mov		eax, dword [ebp + 8]	; material
 	sub		esp, 20h
@@ -63,7 +72,6 @@ R_AddCmdDrawStretchPic:
 	fstp	dword [esp]
 	call	dword [R_AddCmdDrawStretchPic_a]
 	add		esp, 24h
-	popad
 	pop		edi
 	pop		esi
 	pop		ebx
@@ -84,6 +92,7 @@ R_TextWidth:
 
 SECTION .rdata
 
+    Dvar_FindVar_a: dd 56B5D0h
     R_AddCmdDrawText_a: dd 5F6B00h
     R_AddCmdDrawStretchPic_a: dd 5F65F0h
     R_TextWidth_a: dd 5F1EE0h

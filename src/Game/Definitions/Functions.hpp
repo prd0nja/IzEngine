@@ -2,9 +2,8 @@
 #include "Game/Definitions.hpp"
 #include "Sys/Hook.hpp"
 #include "Sys/Function.hpp"
+#include "Sys/Memory.hpp"
 
-static Function<dvar_s*(const char* name)> 
-	Dvar_FindVar = 0x56B5D0;
 static Function<void(int count, int width, GfxPointVertex* verts, bool depthTest)> 
 	RB_DrawLines3D = 0x613040;
 static Function<void FASTCALL(const float* colorFloat, char* colorBytes)> 
@@ -31,6 +30,7 @@ extern Hook<IDirect3D9* STDCALL(UINT sdk)>
 
 EXTERN_C
 {
+	dvar_s* Dvar_FindVar(const char* name);
 	void ScrPlace_ApplyRect(float& x, float& y, float& w, float& h,
 		RectAlignHorizontal_t horizontal, RectAlignVertical_t vertical);
 	void R_AddCmdDrawText(const char* text, int maxChars, Font_s* font, float x, float y,
@@ -38,4 +38,28 @@ EXTERN_C
 	void R_AddCmdDrawStretchPic(Material* material, float x, float y, float w, float h, 
 		float null1, float null2, float null3, float null4, float* color);
 	int R_TextWidth(const char* text, int maxChars, Font_s* font);
+}
+
+template <typename T>
+T GetDvar(const std::string& name)
+{
+	dvar_s* dvar = Dvar_FindVar(name.c_str());
+	if (!dvar)
+	{
+		throw std::runtime_error("Dvar not found.");
+		return 0;
+	}
+	return *reinterpret_cast<T*>(&dvar->current.value);
+}
+
+template <typename T>
+void SetDvar(const std::string& name, const T& value)
+{
+	dvar_s* dvar = Dvar_FindVar(name.c_str());
+	if (!dvar)
+	{
+		throw std::runtime_error("Dvar not found.");
+		return;
+	}
+	//Memory::Assign<T>(dvar->current.value, value);
 }
