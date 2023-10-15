@@ -174,13 +174,16 @@ namespace IW3SR
 	void GUI::Frame()
 	{
 		if (!Open) return;
+
 		ImGui::Begin("Modules", &Open);
+		const float frameWidth = ImGui::GetContentRegionAvail().x - 16;
+
 		for (const auto& [_, entry] : SR->Modules->Entries)
 		{
 			ImGui::Button(ICON_FA_TOGGLE_ON);
 			ImGui::SameLine();
 			ImGui::Text(entry->Name.c_str());
-			ImGui::SameLine();
+			ImGui::SameLine(frameWidth);
 			ImGui::Button(ICON_FA_GEAR);
 		}
 		ImGui::End();

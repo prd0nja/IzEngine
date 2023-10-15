@@ -51,9 +51,17 @@ endif()
 # Build
 add_subdirectory(src)
 
+set_target_properties(IW3SR PROPERTIES
+	OUTPUT_NAME mssIW3SR
+	SUFFIX ".asi")
+
 target_link_libraries(IW3SR PUBLIC
 	IW3SR.ASM
 	imgui::imgui
 	glm::glm
 	PolyHook_2::PolyHook_2
 	d3d9)
+
+# Install
+install(TARGETS IW3SR RUNTIME DESTINATION ${COD4}/miles)
+install(DIRECTORY resources DESTINATION ${COD4}/iw3sr)

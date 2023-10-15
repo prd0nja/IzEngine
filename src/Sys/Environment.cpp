@@ -11,9 +11,9 @@ namespace IW3SR
 		IW3SRDirectory = BaseDirectory / "iw3sr";
 		ModulesDirectory = IW3SRDirectory / "modules";
 		PluginsDirectory = IW3SRDirectory / "plugins";
-		RessourcesDirectory = IW3SRDirectory / "ressources";
-		FontsDirectory = RessourcesDirectory / "fonts";
-		ImagesDirectory = RessourcesDirectory / "images";
+		ResourcesDirectory = IW3SRDirectory / "resources";
+		FontsDirectory = ResourcesDirectory / "fonts";
+		ImagesDirectory = ResourcesDirectory / "images";
 	}
 
 	void Environment::BuildProcessPath()
