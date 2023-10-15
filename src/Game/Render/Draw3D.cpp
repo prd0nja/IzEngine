@@ -10,8 +10,8 @@ namespace IW3SR
 
         R_ConvertColorToBytes(color, LinesVerts[LinesCount].color);
         Memory::Assign<int>(LinesVerts[LinesCount + 1].color, LinesVerts[LinesCount].color);
-        Memory::Assign<3, float>(LinesVerts[LinesCount].xyz, start);
-        Memory::Assign<3, float>(LinesVerts[LinesCount + 1].xyz, end);
+        Memory::AssignArray<3, float>(LinesVerts[LinesCount].xyz, start);
+        Memory::AssignArray<3, float>(LinesVerts[LinesCount + 1].xyz, end);
 
         LinesCount += 2;
     }

@@ -19,8 +19,8 @@ namespace IW3SR
 
 		R_ConvertColorToBytes(color, Verts[Count].color);
 		Memory::Assign<int>(Verts[Count + 1].color, Verts[Count].color);
-		Memory::Assign<3, float>(Verts[Count].xyz, start);
-		Memory::Assign<3, float>(Verts[Count + 1].xyz, end);
+		Memory::AssignArray<3, float>(Verts[Count].xyz, start);
+		Memory::AssignArray<3, float>(Verts[Count + 1].xyz, end);
 
 		Count += 2;
 	}

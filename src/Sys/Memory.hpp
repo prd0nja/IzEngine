@@ -48,7 +48,7 @@ namespace IW3SR
         template <typename R, typename T, typename U>
         static inline void Assign(T& dst, U& src)
         {
-            *reinterpret_cast<R*>(&dst) = *reinterpret_cast<R*>(&src);
+            *(R*)&dst = *(R*)&src;
         }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace IW3SR
         /// <param name="dst">The destination.</param>
         /// <param name="src">The source.</param>
         template <int size, typename R, typename T, typename U>
-        static inline void Assign(T& dst, U& src)
+        static inline void AssignArray(T& dst, U& src)
         {
             std::copy_n(static_cast<R*>(src), size, dst);
         }
