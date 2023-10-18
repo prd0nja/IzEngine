@@ -29,6 +29,12 @@ namespace IW3SR
 			y += textHeight;
 	}
 
+	void Text::SetFont(const std::string& font)
+	{
+		FontName = font;
+		Font = R_RegisterFont(font.c_str(), font.size());
+	}
+
 	void Text::Render()
 	{
 		float x = Position.x;

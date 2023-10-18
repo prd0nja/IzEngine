@@ -49,6 +49,11 @@ namespace IW3SR
 		void ComputeAlignment(float& x, float& y);
 
 		/// <summary>
+		/// Set/update font.
+		/// </summary>
+		void SetFont(const std::string& font);
+
+		/// <summary>
 		/// Render text.
 		/// </summary>
 		void Render() override;

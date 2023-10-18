@@ -34,6 +34,6 @@ namespace IW3SR
         static inline std::vector<const char*> fonts = { FONT_OBJECTIVE, FONT_NORMAL, FONT_CONSOLE,
             FONT_SMALL, FONT_SMALL_DEV, FONT_BIG, FONT_BIG_DEV, FONT_BOLD };
 
-        static inline int currentFont = 0;
+        static inline int currentFont = 1;
     };
 }

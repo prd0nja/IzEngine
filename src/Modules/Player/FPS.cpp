@@ -7,6 +7,7 @@ namespace IW3SR
 	{
 		ID = "sr.player.fps";
 		Name = "FPS";
+		MenuSize = { 400, 100 };
 
 		Color = { 1, 1, 1, 1 };
 		Pos = { 0, 20 };
@@ -19,16 +20,17 @@ namespace IW3SR
 	void FPS::OnMenu()
 	{	
 		ImGui::ColorEdit4("Color", Color, ImGuiColorEditFlags_Float);
+		
+		ImGui::SetNextItemWidth(ImGui::GetWindowWidth() * 0.35f);
 
-		ImGui::SetNextItemWidth(ImGui::GetWindowWidth() * 0.25f);
-		ImGui::Combo("FPS font", &currentFont, fonts.data(), 8);
+		if (ImGui::Combo("FPS font", &currentFont, fonts.data(), 8))
+			FPSText.SetFont(fonts[currentFont]);
 	}
 
 	void FPS::OnDraw2D()
 	{
 		int FPS = Dvar::Get<int>("com_maxfps");
 		FPSText.Value = std::to_string(FPS);
-		FPSText.FontName = fonts[currentFont];
 		FPSText.Color = Color;
 		FPSText.Render();
 	}
