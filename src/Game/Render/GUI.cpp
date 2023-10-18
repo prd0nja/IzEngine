@@ -1,4 +1,5 @@
 #include "GUI.hpp"
+#include "ImGUI.hpp"
 #include "Game/Game.hpp"
 
 #include "Sys/Environment.hpp"
@@ -141,7 +142,6 @@ namespace IW3SR
 
 		ImGui_ImplDX9_Shutdown();
 		ImGui_ImplWin32_Shutdown();
-
 		ResetMouse();
 
 		Active = false;
@@ -175,24 +175,23 @@ namespace IW3SR
 	{
 		if (!Open) return;
 
-		ImGui::SetNextWindowSize({ 400, 300 }, ImGuiCond_FirstUseEver);
 		ImGui::Begin("Modules", &Open);
+		ImGui::SetWindowSize({ 400, 300 }, ImGuiCond_FirstUseEver);
 		const float frameWidth = ImGui::GetContentRegionAvail().x - 16;
 
 		for (const auto& [_, entry] : SR->Modules->Entries)
 		{
 			const char* name = entry->Name.c_str();
-
-			ImGui::Button(ICON_FA_TOGGLE_ON);
+			ImGui::ButtonId(ICON_FA_TOGGLE_ON, entry->ID + "toggle");
 			ImGui::SameLine();
 			ImGui::Text(name);
 			ImGui::SameLine(frameWidth);
 
-			if (ImGui::Button(ICON_FA_GEAR) || entry->MenuOpen)
+			if (ImGui::ButtonId(ICON_FA_GEAR, entry->ID + "menu") || entry->MenuOpen)
 			{
 				entry->MenuOpen = true;
-				ImGui::SetNextWindowSize(entry->MenuSize, ImGuiCond_FirstUseEver);
 				ImGui::Begin(name, &entry->MenuOpen);
+				ImGui::SetWindowSize(entry->MenuSize, ImGuiCond_FirstUseEver);
 				entry->OnMenu();
 				ImGui::End();
 			}
