@@ -21,17 +21,23 @@ namespace IW3SR
 
 	}
 
-	void Modules::Enable(std::string id)
+	void Modules::Enable(const std::string& id)
 	{
 		auto entry = Entries.find(id);
 		if (entry != Entries.end() && !entry->second->IsEnabled)
+		{
+			entry->second->IsEnabled = true;
 			entry->second->Initialize();
+		}
 	}
 
-	void Modules::Disable(std::string id)
+	void Modules::Disable(const std::string& id)
 	{
 		auto entry = Entries.find(id);
 		if (entry != Entries.end() && entry->second->IsEnabled)
+		{
+			entry->second->IsEnabled = false;
 			entry->second->Shutdown();
+		}
 	}
 }

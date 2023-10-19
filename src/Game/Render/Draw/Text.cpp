@@ -1,4 +1,5 @@
 #include "Text.hpp"
+#include "Game/Render/Draw2D.hpp"
 
 namespace IW3SR
 {
@@ -8,6 +9,7 @@ namespace IW3SR
 		Value = text;
 		Font = nullptr;
 		FontName = font;
+		FontIndex = 0;
 	}
 
 	Text::Text(const std::string& text, const std::string& font, const vec2& pos, float size, const vec4& color) :
@@ -31,8 +33,9 @@ namespace IW3SR
 
 	void Text::SetFont(const std::string& font)
 	{
-		FontName = font;
 		Font = R_RegisterFont(font.c_str(), font.size());
+		FontName = font;
+		FontIndex = std::distance(Draw2D::Fonts.begin(), std::ranges::find(Draw2D::Fonts, font));
 	}
 
 	void Text::Render()

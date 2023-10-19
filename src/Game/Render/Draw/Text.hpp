@@ -13,6 +13,7 @@ namespace IW3SR
 
 		Font_s* Font;
 		std::string FontName;
+		int FontIndex;
 
 		/// <summary>
 		/// Initialize the Text.

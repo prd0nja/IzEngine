@@ -53,13 +53,13 @@ namespace IW3SR
 		/// Enable a module.
 		/// </summary>
 		/// <param name="id">The module id.</param>
-		void Enable(std::string id);
+		void Enable(const std::string& id);
 
 		/// <summary>
 		/// Disable a module.
 		/// </summary>
 		/// <param name="id">The module id.</param>
-		void Disable(std::string id);
+		void Disable(const std::string& id);
 
 		/// <summary>
 		/// Dispatch callback.
