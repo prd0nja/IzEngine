@@ -20,12 +20,12 @@ namespace ImGui
         float width = size * 1.55f;
         float radius = size * 0.50f;
 
-        bool clicked = InvisibleButton(id.c_str(), ImVec2(width, size));
-        if (clicked)
-            *v = !*v;
+        InvisibleButton(id.c_str(), ImVec2(width, size));
+        bool clicked = ImGui::IsItemClicked();
+        if (clicked) *v = !*v;
 
         float t = *v ? 1.0f : 0.0f;
-        float ANIM_SPEED = 0.08f;
+        const float ANIM_SPEED = 0.08f;
 
         if (g.LastActiveId == g.CurrentWindow->GetID(id.c_str()))
         {
