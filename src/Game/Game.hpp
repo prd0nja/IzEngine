@@ -21,12 +21,12 @@ namespace IW3SR
 	class Game
 	{
 	public:
-		std::unique_ptr<Log> Log;
-		std::unique_ptr<Render> Render;
-		std::unique_ptr<Modules> Modules;
-		std::unique_ptr<GUI> GUI;
+		std::unique_ptr<class Log> Log;
+		std::unique_ptr<class Render> Render;
+		std::unique_ptr<class Modules> Modules;
+		std::unique_ptr<class GUI> GUI;
 
-		std::array<std::shared_ptr<Player>, 64> Players;
+		std::array<std::shared_ptr<class Player>, 64> Players;
 
 		/// <summary>
 		/// Initialize the game.

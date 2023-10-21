@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.26)
 project(IW3SR VERSION 1.0.0 LANGUAGES CXX)
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 if(MSVC)
@@ -25,6 +25,7 @@ include(CPack)
 
 # Dependencies
 find_package(imgui CONFIG REQUIRED)
+find_package(nlohmann_json CONFIG REQUIRED)
 find_package(glm CONFIG REQUIRED)
 find_package(PolyHook_2 CONFIG REQUIRED)
 
@@ -58,6 +59,7 @@ set_target_properties(IW3SR PROPERTIES
 target_link_libraries(IW3SR PUBLIC
 	IW3SR.ASM
 	imgui::imgui
+	nlohmann_json::nlohmann_json
 	glm::glm
 	PolyHook_2::PolyHook_2
 	d3d9)

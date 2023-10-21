@@ -73,5 +73,7 @@ namespace IW3SR
 	private:
 		Material* Material;
 		std::string MaterialName;
+
+		NLOHMANN_DEFINE_TYPE_INTRUSIVE(HUD, Position, Size, Color, HorizontalAlign, VerticalAlign, AlignX, AlignY);
 	};
 }

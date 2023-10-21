@@ -8,7 +8,7 @@ namespace IW3SR
     Console::Console()
     {
         ID = "sr.sys.console";
-        Name = "External Console";
+        Name = "Console";
     }
 
     void Console::Initialize()

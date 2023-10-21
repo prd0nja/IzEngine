@@ -29,5 +29,8 @@ namespace IW3SR
         /// Frame callback.
         /// </summary>
         void OnFrame() override;
+
+        NLOHMANN_DEFINE_POLY(Module);
+        NLOHMANN_DEFINE_TYPE_INTRUSIVE(ESP, Color, Box, Size);
     };
 }

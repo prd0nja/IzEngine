@@ -1,6 +1,7 @@
 #pragma once
 #include "GLM.hpp"
 #include <imgui.h>
+#include <nlohmann/json.hpp>
 
 namespace IW3SR
 {
@@ -184,6 +185,8 @@ namespace IW3SR
         {
             return !operator bool();
         }
+
+        NLOHMANN_DEFINE_TYPE_INTRUSIVE(vec2, x, y);
     };
 
     vec2f vec2f::Zero = (0, 0);

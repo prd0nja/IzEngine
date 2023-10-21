@@ -1,5 +1,6 @@
 #pragma once
 #include "Utils/Math.hpp"
+#include "Utils/Macros.hpp"
 
 #include <string>
 #include <memory>
@@ -15,8 +16,9 @@ namespace IW3SR
 		std::string ID;
 		std::string Name;
 		bool IsEnabled;
-		bool MenuOpen;
-		vec2 MenuSize = { 400, 200 };
+		bool MenuOpen = false;
+		vec2 MenuSize = vec2::Zero;
+		vec2 MenuPosition = vec2::Zero;
 
 		/// <summary>
 		/// Release the module.
@@ -52,5 +54,8 @@ namespace IW3SR
 		/// Render frame callback.
 		/// </summary>
 		virtual void OnFrame();
+
+		NLOHMANN_DEFINE_POLY_BASE();
+		NLOHMANN_DEFINE_TYPE_INTRUSIVE(Module, IsEnabled, MenuSize, MenuPosition);
 	};
 }

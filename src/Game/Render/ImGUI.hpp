@@ -9,9 +9,10 @@ namespace ImGui
 	/// </summary>
 	/// <param name="label">The button label.</param>
 	/// <param name="id">The unique id.</param>
+	/// <param name="v">Toggle state.</param>
 	/// <param name="size">The button size.</param>
 	/// <returns></returns>
-	bool ButtonId(const std::string& label, const std::string& id, const ImVec2& size = ImVec2(0, 0));
+	bool ButtonId(const std::string& label, const std::string& id, bool* v, const ImVec2& size = ImVec2(0, 0));
 
 	/// <summary>
 	/// Toggle button.

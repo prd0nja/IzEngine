@@ -222,6 +222,8 @@ namespace IW3SR
         {
             return !operator bool();
         }
+
+        NLOHMANN_DEFINE_TYPE_INTRUSIVE(mat3, value);
     };
 
     mat3f mat3f::Zero = (0, 0, 0, 0, 0, 0, 0, 0, 0);

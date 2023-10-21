@@ -12,7 +12,7 @@ namespace IW3SR
     public:
         Text FPSText;
         vec4 Color;
-        vec2 Pos;
+        vec2 Position;
 
         /// <summary>
         /// Initialize the module.
@@ -29,5 +29,8 @@ namespace IW3SR
         /// Draw 2D.
         /// </summary>
         void OnDraw2D() override;
+
+        NLOHMANN_DEFINE_POLY(Module);
+        NLOHMANN_DEFINE_TYPE_INTRUSIVE(FPS, FPSText, Color, Position);
     };
 }

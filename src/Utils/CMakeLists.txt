@@ -1,5 +1,6 @@
 target_sources(IW3SR PRIVATE
 	GLM.hpp
+	Macros.hpp
 	Math.hpp
 	Math.cpp
 	Matrix3.hpp

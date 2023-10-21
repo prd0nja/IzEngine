@@ -175,8 +175,10 @@ namespace IW3SR
 	{
 		if (!Open) return;
 
+		const vec2 menuSize = { 400, 300 };
+		const vec2 menuPos = { 50, 50 };
 		ImGui::Begin("Modules", &Open);
-		ImGui::SetWindowSize({ 400, 300 }, ImGuiCond_FirstUseEver);
+		ImGui::SetWindowSize(menuSize, ImGuiCond_FirstUseEver);
 		const float frameWidth = ImGui::GetContentRegionAvail().x - 16;
 
 		for (const auto& [_, entry] : SR->Modules->Entries)
@@ -191,11 +193,14 @@ namespace IW3SR
 			ImGui::SameLine(frameWidth);
 
 			// Draw module menus
-			if (ImGui::ButtonId(ICON_FA_GEAR, entry->ID + "menu") || entry->MenuOpen)
+			ImGui::ButtonId(ICON_FA_GEAR, entry->ID + "menu", &entry->MenuOpen);
+			if (entry->MenuOpen)
 			{
-				entry->MenuOpen = true;
 				ImGui::Begin(name, &entry->MenuOpen);
-				ImGui::SetWindowSize(entry->MenuSize, ImGuiCond_FirstUseEver);
+				ImGui::SetWindowSize(entry->MenuSize ? entry->MenuSize : menuSize, ImGuiCond_FirstUseEver);
+				ImGui::SetWindowPos(entry->MenuPosition ? entry->MenuPosition : menuPos, ImGuiCond_FirstUseEver);
+				entry->MenuSize = ImGui::GetWindowSize();
+				entry->MenuPosition = ImGui::GetWindowPos();
 				entry->OnMenu();
 				ImGui::End();
 			}

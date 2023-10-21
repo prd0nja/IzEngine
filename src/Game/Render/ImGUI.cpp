@@ -3,12 +3,15 @@
 
 namespace ImGui
 {
-	bool ButtonId(const std::string& label, const std::string& id, const ImVec2& size)
+	bool ButtonId(const std::string& label, const std::string& id, bool* v, const ImVec2& size)
 	{
 		PushID(id.c_str());
-		bool state = Button(label.c_str(), size);
+		Button(label.c_str(), size);
 		PopID();
-		return state;
+
+        bool clicked = ImGui::IsItemClicked();
+        if (clicked) *v = !*v;
+		return clicked;
 	}
 
     bool ToggleButton(const std::string& id, float size, bool* v)

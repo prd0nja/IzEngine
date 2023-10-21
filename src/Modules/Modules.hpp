@@ -1,5 +1,6 @@
 #pragma once
 #include "Module.hpp"
+#include "Sys/Log.hpp"
 
 #include <string>
 #include <map>
@@ -17,12 +18,13 @@ namespace IW3SR
 	{
 	public:
 		std::map<std::string, std::unique_ptr<Module>> Entries;
+		nlohmann::json Serialized;
 
 		/// <summary>
 		/// Initialize the modules.
 		/// </summary>
-		Modules() = default;
-		~Modules() = default;
+		Modules();
+		~Modules();
 
 		/// <summary>
 		/// Initialize the modules.
@@ -37,9 +39,20 @@ namespace IW3SR
 		void Load(bool initialize = true)
 		{
 			std::unique_ptr<M> entry = std::make_unique<M>();
-			if (initialize)
-				entry->Initialize();
+			bool isSerialized = Serialized.contains(entry->ID);
+			
 			entry->IsEnabled = initialize;
+			if (isSerialized)
+			{
+				try 
+				{
+					nlohmann::from_json(Serialized[entry->ID], entry);
+				}
+				catch (...) { }
+			}
+			Log::WriteLine("[{}] {} ({}, {})", entry->ID, entry->IsEnabled, entry->MenuSize.x, entry->MenuSize.y);
+			if (entry->IsEnabled)
+				entry->Initialize();
 
 			Entries.insert({ entry->ID, std::move(entry) });
 		}
@@ -60,6 +73,16 @@ namespace IW3SR
 		/// </summary>
 		/// <param name="id">The module id.</param>
 		void Disable(const std::string& id);
+
+		/// <summary>
+		/// Deserialize the modules.
+		/// </summary>
+		void Deserialize();
+
+		/// <summary>
+		/// Serialize the modules.
+		/// </summary>
+		void Serialize();
 
 		/// <summary>
 		/// Dispatch callback.

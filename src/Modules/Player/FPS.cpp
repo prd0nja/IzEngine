@@ -11,9 +11,9 @@ namespace IW3SR
 		MenuSize = { 400, 100 };
 
 		Color = { 1, 1, 1, 1 };
-		Pos = { 0, 20 };
+		Position = { 0, 20 };
 
-		FPSText = Text("0", FONT_BIG_DEV, Pos, 1, Color);
+		FPSText = Text("0", FONT_BIG_DEV, Position, 1, Color);
 		FPSText.SetRectAlignment(HORIZONTAL_ALIGN_CENTER, VERTICAL_ALIGN_TOP);
 		FPSText.SetAlignment(HUDALIGN_CENTER, HUDALIGN_BOTTOM);
 	}
