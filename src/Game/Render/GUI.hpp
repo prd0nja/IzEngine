@@ -31,6 +31,11 @@ namespace IW3SR
 		static void Initialize();
 
 		/// <summary>
+		/// Shutdown ImGUI.
+		/// </summary>
+		static void Shutdown();
+
+		/// <summary>
 		/// GUI theme.
 		/// </summary>
 		static void Theme();

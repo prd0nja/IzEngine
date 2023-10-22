@@ -48,7 +48,7 @@ namespace ImGui
 
     void SetWindowVirtual(vec2& position, vec2& size, RectAlignHorizontal_t horizontal, RectAlignVertical_t vertical)
     {
-        ScrPlace_ApplyRect(position.x, position.y, size.x, size.y, horizontal, vertical);
+        ApplyRect(position.x, position.y, size.x, size.y, horizontal, vertical);
     }
 
     void SetWindowAlignment(vec2& position, const vec2& size, hudalign_t horizontal, hudalign_t vertical)

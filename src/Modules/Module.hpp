@@ -1,6 +1,8 @@
 #pragma once
 #include "Utils/Math.hpp"
 #include "Utils/Macros.hpp"
+#include "Game/Render/ImGUI.hpp"
+#include "Sys/Environment.hpp"
 
 #include <string>
 #include <memory>
@@ -16,9 +18,9 @@ namespace IW3SR
 		std::string ID;
 		std::string Name;
 		bool IsEnabled;
-		bool MenuOpen = false;
-		vec2 MenuSize = vec2::Zero;
 		vec2 MenuPosition = vec2::Zero;
+		vec2 MenuSize = vec2::Zero;
+		bool MenuOpen = false;
 
 		/// <summary>
 		/// Release the module.

@@ -42,6 +42,7 @@ namespace IW3SR
 				return;
 			}
 			Memory::Assign<T>(dvar->current.value, value);
+			Memory::Assign<T>(dvar->latched.value, value);
 		}
 	};
 }

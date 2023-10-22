@@ -50,7 +50,7 @@ namespace IW3SR
 			Material = Material_RegisterHandle(MaterialName.c_str(), 3);
 
 		ComputeAlignment(x, y);
-		ScrPlace_ApplyRect(x, y, w, h, HorizontalAlign, VerticalAlign);
+		ApplyRect(x, y, w, h, HorizontalAlign, VerticalAlign);
 		R_AddCmdDrawStretchPic(Material, x, y, w, h, 0.f, 0.f, 0.f, 0.f, Color);
 	}
 }

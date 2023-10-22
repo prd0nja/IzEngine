@@ -7,6 +7,7 @@
 #include "Modules/Modules.hpp"
 
 #include "Sys/Log.hpp"
+#include "Sys/Environment.hpp"
 #include "Sys/Render/D3D9EX.hpp"
 #include "Utils/Math.hpp"
 
@@ -32,7 +33,7 @@ namespace IW3SR
 		/// Initialize the game.
 		/// </summary>
 		Game();
-		~Game() = default;
+		~Game();
 
 		/// <summary>
 		/// Initialize game.
@@ -45,10 +46,20 @@ namespace IW3SR
 		void CoD4X();
 
 		/// <summary>
+		/// Hook game.
+		/// </summary>
+		void Hook();
+
+		/// <summary>
+		/// Unhook game.
+		/// </summary>
+		void Unhook();
+
+		/// <summary>
 		/// Game frame.
 		/// </summary>
 		void Frame();
 	};
 }
 
-extern std::unique_ptr<Game> SR;
+extern Game* SR;

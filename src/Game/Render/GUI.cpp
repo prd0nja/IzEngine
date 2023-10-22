@@ -2,10 +2,6 @@
 #include "ImGUI.hpp"
 #include "Game/Game.hpp"
 
-#include "Sys/Environment.hpp"
-#include "Sys/Fonts/IconsFontAwesome6.hpp"
-#include "Sys/Fonts/IconsFontAwesome6Brands.hpp"
-
 namespace IW3SR
 {
 	GUI::GUI()
@@ -15,13 +11,11 @@ namespace IW3SR
 			MainWndProc_h.Address = Memory::Scan("cod4x_021",
 				"\x55\x89\xE5\x53\x81\xEC\x84\x00\x00\x00\xC7\x04\x24\x02", 14);
 		}
-		CreateWindowExA_h.Install();
-		MainWndProc_h.Install();
 	}
 
 	void GUI::Initialize()
 	{
-		if (Active) return;
+		if (Active || !MainWindow) return;
 
 		ImGui::CreateContext();
 		ImGui_ImplWin32_Init(MainWindow);
@@ -29,6 +23,17 @@ namespace IW3SR
 		Theme();
 
 		Active = true;
+	}
+
+	void GUI::Shutdown()
+	{
+		if (!Active) return;
+
+		ImGui_ImplDX9_Shutdown();
+		ImGui_ImplWin32_Shutdown();
+		ImGui::DestroyContext();
+
+		Active = false;
 	}
 
 	void GUI::Theme()
@@ -142,11 +147,8 @@ namespace IW3SR
 	{
 		if (!Active) return;
 
-		ImGui_ImplDX9_Shutdown();
-		ImGui_ImplWin32_Shutdown();
 		ResetMouse();
-
-		Active = false;
+		Shutdown();
 	}
 
 	void GUI::ResetMouse()
@@ -176,41 +178,8 @@ namespace IW3SR
 	void GUI::Frame()
 	{
 		if (!Open) return;
-
-		vec2 menuPos = { -20, 20 };
-		vec2 menuSize = { 200, 100 };
-		ImGui::Begin("Modules", &Open);
-		ImGui::SetWindowAlignment(menuPos, menuSize, HUDALIGN_RIGHT, HUDALIGN_TOP);
-		ImGui::SetWindowVirtual(menuPos, menuSize, HORIZONTAL_ALIGN_RIGHT, VERTICAL_ALIGN_TOP);
-		ImGui::SetWindowPos(menuPos, ImGuiCond_FirstUseEver);
-		ImGui::SetWindowSize(menuSize, ImGuiCond_FirstUseEver);
-		const float frameWidth = menuSize.x - 30;
-
-		for (const auto& [_, entry] : SR->Modules->Entries)
-		{
-			const char* name = entry->Name.c_str();
-
-			// Enable/Disable module
-			if (ImGui::ToggleButton(entry->ID + "toggle", 20, &entry->IsEnabled))
-				entry->IsEnabled ? entry->Initialize() : entry->Shutdown();
-			ImGui::SameLine();
-			ImGui::Text(name);
-			ImGui::SameLine(frameWidth);
-
-			// Draw module menus
-			ImGui::ButtonId(ICON_FA_GEAR, entry->ID + "menu", &entry->MenuOpen);
-			if (entry->MenuOpen)
-			{
-				ImGui::Begin(name, &entry->MenuOpen);
-				ImGui::SetWindowSize(entry->MenuSize ? entry->MenuSize : menuSize, ImGuiCond_FirstUseEver);
-				ImGui::SetWindowPos(entry->MenuPosition ? entry->MenuPosition : menuPos, ImGuiCond_FirstUseEver);
-				entry->MenuSize = ImGui::GetWindowSize();
-				entry->MenuPosition = ImGui::GetWindowPos();
-				entry->OnMenu();
-				ImGui::End();
-			}
-		}
-		ImGui::End();
+		SR->Modules->MenuOpen = true;
+		SR->Modules->Frame();
 	}
 
 	HWND GUI::CreateMainWindow(DWORD dwExStyle, LPCSTR lpClassName, LPCSTR lpWindowName,

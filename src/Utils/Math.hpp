@@ -111,4 +111,16 @@ namespace IW3SR
     /// <param name="yaw">Yaw angle in radians.</param>
     /// <returns>Range structure representing the angles based on yaw.</returns>
     range_t AnglesToRange(float start, float end, float yaw);
+
+    /// <summary>
+    /// Virtual screen to real screen with rect aligment.
+    /// </summary>
+    /// <param name="x">X value.</param>
+    /// <param name="y">Y value.</param>
+    /// <param name="w">The witdth.</param>
+    /// <param name="h">The height.</param>
+    /// <param name="horizontal">Horizontal aligment.</param>
+    /// <param name="vertical">Vertical aligment.</param>
+    void ApplyRect(float& x, float& y, float& w, float& h,
+        RectAlignHorizontal_t horizontal, RectAlignVertical_t vertical);
 }

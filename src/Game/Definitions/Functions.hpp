@@ -31,8 +31,6 @@ extern Hook<IDirect3D9* STDCALL(UINT sdk)>
 EXTERN_C
 {
 	dvar_s* Dvar_FindVar(const char* name);
-	void ScrPlace_ApplyRect(float& x, float& y, float& w, float& h,
-		RectAlignHorizontal_t horizontal, RectAlignVertical_t vertical);
 	void R_AddCmdDrawText(const char* text, int maxChars, Font_s* font, float x, float y,
 		float xScale, float yScale, float rotation, int style, float* color);
 	void R_AddCmdDrawStretchPic(Material* material, float x, float y, float w, float h, 

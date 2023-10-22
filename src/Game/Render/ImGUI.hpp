@@ -2,6 +2,11 @@
 #include "Game/Definitions.hpp"
 #include "Utils/Math.hpp"
 
+#include "Sys/Fonts/IconsFontAwesome6.hpp"
+#include "Sys/Fonts/IconsFontAwesome6Brands.hpp"
+
+#include <nlohmann/json.hpp>
+
 namespace ImGui
 {
 	/// <summary>

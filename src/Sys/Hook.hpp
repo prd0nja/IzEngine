@@ -48,6 +48,9 @@ namespace IW3SR
         /// <returns></returns>
         void Install()
         {
+            if (Detour && Detour->isHooked())
+                throw std::runtime_error("Hook is already installed.");
+
             uint64_t trampoline = 0;
             Detour = std::make_unique<PLH::x86Detour>(Address, Callback, &trampoline);
             Detour->hook();
@@ -59,6 +62,9 @@ namespace IW3SR
         /// </summary>
         void Remove()
         {
+            if (!Detour || !Detour->isHooked())
+                throw std::runtime_error("Hook is not installed.");
+
             Detour->unHook();
         }
 
