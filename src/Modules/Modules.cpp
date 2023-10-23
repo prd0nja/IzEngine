@@ -8,6 +8,9 @@ namespace IW3SR
 {
 	Modules::Modules()
 	{
+		Menu = Window("Modules");
+		Menu.SetRect(-20, 20, 200, 100);
+
 		Deserialize();
 	}
 
@@ -73,16 +76,10 @@ namespace IW3SR
 
 	void Modules::Frame()
 	{
-		if (!MenuOpen) return;
+		if (!Menu.Open) return;
 
-		vec2 menuPos = { -20, 20 };
-		vec2 menuSize = { 200, 100 };
-		ImGui::Begin("Modules", &MenuOpen);
-		ImGui::SetWindowAlignment(menuPos, menuSize, HUDALIGN_RIGHT, HUDALIGN_TOP);
-		ImGui::SetWindowVirtual(menuPos, menuSize, HORIZONTAL_ALIGN_RIGHT, VERTICAL_ALIGN_TOP);
-		ImGui::SetWindowPos(menuPos, ImGuiCond_FirstUseEver);
-		ImGui::SetWindowSize(menuSize, ImGuiCond_FirstUseEver);
-		const float frameWidth = menuSize.x - 30;
+		Menu.Begin();
+		const float frameWidth = ImGui::GetWindowContentRegionMax().x - 30;
 
 		for (const auto& [_, entry] : Entries)
 		{
@@ -95,19 +92,15 @@ namespace IW3SR
 			ImGui::Text(name);
 			ImGui::SameLine(frameWidth);
 
-			// Draw module menus
-			ImGui::ButtonId(ICON_FA_GEAR, entry->ID + "menu", &entry->MenuOpen);
-			if (entry->MenuOpen)
+			// Draw module menu
+			ImGui::ButtonId(ICON_FA_GEAR, entry->ID + "menu", &entry->Menu.Open);
+			if (entry->Menu.Open)
 			{
-				ImGui::Begin(name, &entry->MenuOpen);
-				ImGui::SetWindowSize(entry->MenuSize ? entry->MenuSize : menuSize, ImGuiCond_FirstUseEver);
-				ImGui::SetWindowPos(entry->MenuPosition ? entry->MenuPosition : menuPos, ImGuiCond_FirstUseEver);
-				entry->MenuSize = ImGui::GetWindowSize();
-				entry->MenuPosition = ImGui::GetWindowPos();
+				entry->Menu.Begin();
 				entry->OnMenu();
-				ImGui::End();
+				entry->Menu.End();
 			}
 		}
-		ImGui::End();
+		Menu.End();
 	}
 }

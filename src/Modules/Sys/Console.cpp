@@ -5,11 +5,7 @@
 
 namespace IW3SR
 {
-    Console::Console()
-    {
-        ID = "sr.sys.console";
-        Name = "Console";
-    }
+    Console::Console() : Module("sr.sys.console", "Console") { }
 
     void Console::Initialize()
     {

@@ -15,6 +15,13 @@ namespace IW3SR
 	Text::Text(const std::string& text, const std::string& font, const vec2& pos, float size, const vec4& color) :
 		Text(text, font, pos.x, pos.y, size, color) { }
 
+	void Text::SetFont(const std::string& font)
+	{
+		Font = R_RegisterFont(font.c_str(), font.size());
+		FontName = font;
+		FontIndex = std::distance(Draw2D::Fonts.begin(), std::ranges::find(Draw2D::Fonts, font));
+	}
+
 	void Text::ComputeAlignment(float& x, float& y)
 	{
 		float textWidth = R_TextWidth(Value.c_str(), Value.size(), Font) * Size.x;
@@ -29,13 +36,6 @@ namespace IW3SR
 			y += textHeight / 2;
 		else if (AlignY & HUDALIGN_BOTTOM)
 			y += textHeight;
-	}
-
-	void Text::SetFont(const std::string& font)
-	{
-		Font = R_RegisterFont(font.c_str(), font.size());
-		FontName = font;
-		FontIndex = std::distance(Draw2D::Fonts.begin(), std::ranges::find(Draw2D::Fonts, font));
 	}
 
 	void Text::Render()

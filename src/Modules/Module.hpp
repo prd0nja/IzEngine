@@ -2,6 +2,7 @@
 #include "Utils/Math.hpp"
 #include "Utils/Macros.hpp"
 #include "Game/Render/ImGUI.hpp"
+#include "Game/Render/Draw/Window.hpp"
 #include "Sys/Environment.hpp"
 
 #include <string>
@@ -17,10 +18,15 @@ namespace IW3SR
 	public:
 		std::string ID;
 		std::string Name;
+		Window Menu;
 		bool IsEnabled;
-		vec2 MenuPosition = vec2::Zero;
-		vec2 MenuSize = vec2::Zero;
-		bool MenuOpen = false;
+
+		/// <summary>
+		/// Initialize the module.
+		/// </summary>
+		/// <param name="id">The module ID.</param>
+		/// <param name="name">The module name.</param>
+		Module(const std::string& id, const std::string& name);
 
 		/// <summary>
 		/// Release the module.
@@ -57,6 +63,6 @@ namespace IW3SR
 		/// </summary>
 		virtual void OnFrame();
 
-		NLOHMANN_DEFINE_POLY_BASE(Module, IsEnabled, MenuSize, MenuPosition);
+		NLOHMANN_DEFINE_POLY_BASE(Module, IsEnabled, Menu);
 	};
 }

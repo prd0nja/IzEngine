@@ -4,4 +4,6 @@ target_sources(IW3SR PRIVATE
 	Lines.hpp
 	Lines.cpp
 	Text.hpp
-	Text.cpp)
+	Text.cpp
+	Window.hpp
+	Window.cpp)

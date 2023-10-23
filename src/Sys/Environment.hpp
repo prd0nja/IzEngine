@@ -57,8 +57,7 @@ namespace IW3SR
 		template <typename T>
 		static void SetSettings(const std::string& id, const T& instance)
 		{
-			if (Settings.contains(id))
-				nlohmann::to_json(Settings[id], instance);
+			nlohmann::to_json(Settings[id], instance);
 		}
 	};
 }

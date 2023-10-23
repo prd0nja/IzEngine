@@ -3,11 +3,8 @@
 
 namespace IW3SR
 {
-    ESP::ESP()
+    ESP::ESP() : Module("sr.player.esp", "ESP")
     {
-        ID = "sr.player.esp";
-        Name = "ESP";
-
         Color = { 0, 1, 1, 1 };
         Box = { 12, 12, 65 };
         Size = 1;

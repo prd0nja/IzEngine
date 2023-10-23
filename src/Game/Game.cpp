@@ -20,7 +20,6 @@ namespace IW3SR
 
 	Game::~Game()
 	{
-		Environment::Save();
 		Unhook();
 	}
 

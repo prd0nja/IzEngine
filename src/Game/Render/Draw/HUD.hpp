@@ -18,6 +18,9 @@ namespace IW3SR
 		hudalign_t AlignX = HUDALIGN_LEFT;
 		hudalign_t AlignY = HUDALIGN_TOP;
 
+		Material* Material;
+		std::string MaterialName;
+
 		/// <summary>
 		/// Initialize the HUD.
 		/// </summary>
@@ -59,20 +62,17 @@ namespace IW3SR
 		void SetAlignment(hudalign_t horizontal, hudalign_t vertical);
 
 		/// <summary>
-		/// Compute the element alignment.
-		/// </summary>
-		/// <param name="x">X position.</param>
-		/// <param name="y">Y position.</param>
-		virtual void ComputeAlignment(float& x, float& y);
-
-		/// <summary>
 		/// Render HUD.
 		/// </summary>
 		virtual void Render();
 
 	private:
-		Material* Material;
-		std::string MaterialName;
+		/// <summary>
+		/// Compute the element alignment.
+		/// </summary>
+		/// <param name="x">X position.</param>
+		/// <param name="y">Y position.</param>
+		virtual void ComputeAlignment(float& x, float& y);
 
 		NLOHMANN_DEFINE_TYPE_INTRUSIVE(HUD, Position, Size, Color, HorizontalAlign, VerticalAlign, AlignX, AlignY);
 	};

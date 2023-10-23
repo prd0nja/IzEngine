@@ -4,12 +4,8 @@
 
 namespace IW3SR
 {
-	FPS::FPS()
+	FPS::FPS() : Module("sr.player.fps", "FPS")
 	{
-		ID = "sr.player.fps";
-		Name = "FPS";
-		MenuSize = { 400, 100 };
-
 		Color = { 1, 1, 1, 1 };
 		Position = { 0, 20 };
 

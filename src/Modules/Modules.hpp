@@ -19,9 +19,7 @@ namespace IW3SR
 	public:
 		std::map<std::string, std::unique_ptr<Module>> Entries;
 		nlohmann::json Serialized;
-		vec2 MenuPosition = vec2::Zero;
-		vec2 MenuSize = vec2::Zero;
-		bool MenuOpen = false;
+		Window Menu;
 
 		/// <summary>
 		/// Initialize the modules.
@@ -103,6 +101,6 @@ namespace IW3SR
 		/// </summary>
 		void Frame();
 
-		NLOHMANN_DEFINE_TYPE_INTRUSIVE(Modules, MenuPosition, MenuSize);
+		NLOHMANN_DEFINE_TYPE_INTRUSIVE(Modules, Menu);
 	};
 }

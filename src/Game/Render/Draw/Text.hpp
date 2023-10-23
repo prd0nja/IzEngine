@@ -43,13 +43,6 @@ namespace IW3SR
 		Text(const std::string& text, const std::string& font, const vec2& pos, float size, const vec4& color);
 
 		/// <summary>
-		/// Compute the text alignment.
-		/// </summary>
-		/// <param name="x">X position.</param>
-		/// <param name="y">Y position.</param>
-		void ComputeAlignment(float& x, float& y);
-
-		/// <summary>
 		/// Set/update font.
 		/// </summary>
 		void SetFont(const std::string& font);
@@ -58,6 +51,14 @@ namespace IW3SR
 		/// Render text.
 		/// </summary>
 		void Render() override;
+
+	private:
+		/// <summary>
+		/// Compute the text alignment.
+		/// </summary>
+		/// <param name="x">X position.</param>
+		/// <param name="y">Y position.</param>
+		void ComputeAlignment(float& x, float& y);
 
 		NLOHMANN_DEFINE_TYPE_INTRUSIVE(Text, Value, FontName, FontIndex);
 	};

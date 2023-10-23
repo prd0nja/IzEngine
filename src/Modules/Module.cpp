@@ -3,6 +3,14 @@
 
 namespace IW3SR
 {
+	Module::Module(const std::string& id, const std::string& name)
+	{
+		ID = id;
+		Name = name;
+		Menu = Window(name);
+		Menu.SetRect(0, 0, 180, 80);
+	}
+
 	Module::~Module()
 	{
 		Shutdown();

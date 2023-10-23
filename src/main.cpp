@@ -16,6 +16,7 @@ void Init()
 void Shutdown()
 {
     delete SR;
+    Environment::Save();
 }
 
 EXPORT BOOL STDCALL RIB_Main(HANDLE handle, INT upDown)

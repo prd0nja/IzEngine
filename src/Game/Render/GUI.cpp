@@ -178,7 +178,7 @@ namespace IW3SR
 	void GUI::Frame()
 	{
 		if (!Open) return;
-		SR->Modules->MenuOpen = true;
+		SR->Modules->Menu.Open = true;
 		SR->Modules->Frame();
 	}
 

@@ -4,12 +4,8 @@
 
 namespace IW3SR
 {
-	Velocity::Velocity()
+	Velocity::Velocity() : Module("sr.player.velocity", "Velocity")
 	{
-		ID = "sr.player.velocity";
-		Name = "Velocity";
-		MenuSize = { 400, 100 };
-
 		Color = { 0, 1, 1, 1 };
 
 		VelocityText = Text("0", FONT_OBJECTIVE, 0, 2, 0.6, Color);
