@@ -5,8 +5,6 @@
 #include <Windows.h>
 #include <iostream>
 
-Game* SR = nullptr;
-
 void Init()
 {
     SR = new Game();

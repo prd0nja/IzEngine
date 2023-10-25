@@ -12,7 +12,6 @@ namespace IW3SR
 		BaseDirectory = std::filesystem::path(buffer).parent_path();
 
 		IW3SRDirectory = BaseDirectory / "iw3sr";
-		ModulesDirectory = IW3SRDirectory / "modules";
 		PluginsDirectory = IW3SRDirectory / "plugins";
 		ResourcesDirectory = IW3SRDirectory / "resources";
 		FontsDirectory = ResourcesDirectory / "fonts";

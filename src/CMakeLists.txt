@@ -1,5 +1,7 @@
-add_library(IW3SR SHARED)
-add_library(IW3SR.ASM STATIC)
+add_library(IW3SR OBJECT)
+add_library(IW3SR.ASM OBJECT)
+add_library(IW3SR.DLL SHARED)
+add_library(IW3SR.API ALIAS IW3SR.DLL)
 
 add_subdirectory(Commands)
 add_subdirectory(Game)
@@ -7,12 +9,8 @@ add_subdirectory(Modules)
 add_subdirectory(Sys)
 add_subdirectory(Utils)
 
-target_sources(IW3SR PRIVATE main.cpp)
 target_include_directories(IW3SR PUBLIC .)
+target_sources(IW3SR.DLL PRIVATE main.cpp)
+target_link_libraries(IW3SR.DLL PRIVATE IW3SR)
 get_target_property(SOURCES IW3SR SOURCES)
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${SOURCES})
-
-if(BUILD_TESTING)
-	target_sources(IW3SR.Lib PRIVATE ${SOURCES})
-endif()
-

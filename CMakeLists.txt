@@ -33,14 +33,10 @@ find_package(PolyHook_2 CONFIG REQUIRED)
 if(BUILD_TESTING)
 	include(CTest)
 	find_package(GTest CONFIG REQUIRED)
-	add_library(IW3SR.Lib STATIC)
 	add_executable(IW3SR.Tests)
 
-	target_link_libraries(IW3SR.Lib PUBLIC IW3SR)
-	target_include_directories(IW3SR.Lib PUBLIC IW3SR)
-
 	target_link_libraries(IW3SR.Tests PRIVATE
-		IW3SR.Lib
+		IW3SR
 		GTest::gtest
 		GTest::gtest_main
 		GTest::gmock
@@ -52,18 +48,28 @@ endif()
 # Build
 add_subdirectory(src)
 
-set_target_properties(IW3SR PROPERTIES
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/private")
+    add_subdirectory(private)
+endif()
+
+set_target_properties(IW3SR.DLL PROPERTIES
 	OUTPUT_NAME IW3SR
 	SUFFIX ".asi")
 
 target_link_libraries(IW3SR PUBLIC
-	IW3SR.ASM
+	$<TARGET_OBJECTS:IW3SR.ASM>
 	imgui::imgui
 	nlohmann_json::nlohmann_json
 	glm::glm
 	PolyHook_2::PolyHook_2
 	d3d9)
 
+if(PRIVATE)
+	add_subdirectory(private)
+	add_compile_definitions(IW3SR_PRIVATE)
+	install(TARGETS IW3SR.Private RUNTIME DESTINATION ${COD4}/iw3sr/plugins)
+endif()
+
 # Install
-install(TARGETS IW3SR RUNTIME DESTINATION ${COD4}/miles)
+install(TARGETS IW3SR.DLL RUNTIME DESTINATION ${COD4}/miles)
 install(DIRECTORY resources DESTINATION ${COD4}/iw3sr)

@@ -14,7 +14,6 @@ namespace IW3SR
 		static inline nlohmann::json Settings;
 		static inline std::filesystem::path BaseDirectory;
 		static inline std::filesystem::path IW3SRDirectory;
-		static inline std::filesystem::path ModulesDirectory;
 		static inline std::filesystem::path PluginsDirectory;
 		static inline std::filesystem::path ResourcesDirectory;
 		static inline std::filesystem::path FontsDirectory;

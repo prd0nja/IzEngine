@@ -3,6 +3,8 @@
 
 #include <array>
 
+Game* SR = nullptr;
+
 namespace IW3SR
 {
 	Game::Game()
