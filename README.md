@@ -21,3 +21,4 @@ _Build Command:_
 Also feel free to post about any problems that may arise in the issues section of the repository.
 
 <a href="https://github.com/DavidMRyan"><img src="https://avatars.githubusercontent.com/u/39206040?v=4" height=64 style="border-radius: 50%"></a>
+<a href="https://github.com/Dualiteee"><img src="https://avatars.githubusercontent.com/u/134146664?v=4" height=64 style="border-radius: 50%"></a>
