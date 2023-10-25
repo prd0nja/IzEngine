@@ -2,12 +2,6 @@
 #include "Game/Definitions.hpp"
 #include "Game/Render/Draw/Window.hpp"
 
-#include <imgui.h>
-#include <imgui_impl_dx9.h>
-#include <imgui_impl_win32.h>
-
-extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
-
 namespace IW3SR
 {
 	/// <summary>
@@ -17,9 +11,11 @@ namespace IW3SR
 	{
 	public:
 		static inline HWND MainWindow = nullptr;
+		static inline Window Toolbar;
 		static inline bool Active = false;
 		static inline bool Open = false;
-		static inline Window ToolbarWindow = Window();
+
+		static inline ImVec4 Rainbow;
 
 		/// <summary>
 		/// Initialize ImGUI.
@@ -63,11 +59,6 @@ namespace IW3SR
 		static void End();
 
 		/// <summary>
-		/// Toolbar.
-		/// </summary>
-		static void Toolbar();
-
-		/// <summary>
 		/// Render frame.
 		/// </summary>
 		static void Frame();
@@ -101,5 +92,16 @@ namespace IW3SR
 		/// <param name="lParam">Additional message-specific information.</param>
 		/// <returns>The result of processing the message.</returns>
 		static LRESULT CALLBACK MainWndProc(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam);
+
+	private:
+		/// <summary>
+		/// Draw toolbar.
+		/// </summary>
+		static void DrawToolbar();
+
+		/// <summary>
+		/// Compute the rainbow effect.
+		/// </summary>
+		static void ComputeRainbow();
 	};
 }

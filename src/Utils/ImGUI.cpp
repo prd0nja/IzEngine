@@ -1,5 +1,4 @@
 #include "ImGUI.hpp"
-#include "imgui_internal.h"
 
 namespace ImGui
 {

@@ -1,7 +1,7 @@
 #pragma once
-#include "Utils/Math.hpp"
 #include "Utils/Macros.hpp"
-#include "Game/Render/ImGUI.hpp"
+#include "Utils/Math.hpp"
+#include "Utils/ImGUI.hpp"
 #include "Game/Render/Draw/Window.hpp"
 #include "Sys/Environment.hpp"
 

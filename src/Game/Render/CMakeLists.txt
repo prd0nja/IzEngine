@@ -9,7 +9,5 @@ target_sources(IW3SR PRIVATE
 	Draw3D.cpp
 	GUI.hpp
 	GUI.cpp
-	ImGUI.hpp
-	ImGUI.cpp
 	Render.hpp
 	Render.cpp)

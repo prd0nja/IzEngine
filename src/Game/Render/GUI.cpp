@@ -1,6 +1,4 @@
-#define IMGUI_DEFINE_MATH_OPERATORS
 #include "GUI.hpp"
-#include "ImGUI.hpp"
 #include "Game/Game.hpp"
 
 namespace IW3SR
@@ -12,9 +10,8 @@ namespace IW3SR
 			MainWndProc_h.Address = Memory::Scan("cod4x_021",
 				"\x55\x89\xE5\x53\x81\xEC\x84\x00\x00\x00\xC7\x04\x24\x02", 14);
 		}
-
-		ToolbarWindow = Window("Toolbar");
-		ToolbarWindow.SetRect(500, 20, 50, 35);
+		Toolbar = Window("Toolbar");
+		Toolbar.SetRect(500, 20, 50, 35);
 	}
 
 	void GUI::Initialize()
@@ -169,7 +166,7 @@ namespace IW3SR
 		ImGui_ImplDX9_NewFrame();
 		ImGui_ImplWin32_NewFrame();
 		ImGui::NewFrame();
-		Toolbar();
+		Frame();
 	}
 
 	void GUI::End()
@@ -179,38 +176,40 @@ namespace IW3SR
 		ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
 	}
 
-	void GUI::Toolbar()
+	void GUI::DrawToolbar()
 	{
-		if (!Open) return;
-
 		ImDrawList* draw = ImGui::GetForegroundDrawList();
-		const float rainbowSpeed = 2.5f;
-		static float rainbowOffset = 0.0f;
+		
+		const ImVec2 position = ImGui::GetWindowPos();
+		const ImVec2 size = ImGui::GetWindowSize();
+		Toolbar.Begin(ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoTitleBar);
 
-		ImVec4 rainbow = ImVec4(
-			0.5f + 0.5f * cosf(rainbowOffset),
-			0.5f + 0.5f * cosf(rainbowOffset + 2 * 3.14159f / 3),
-			0.5f + 0.5f * cosf(rainbowOffset + 4 * 3.14159f / 3),
+		draw->AddLine(position, position + ImVec2{ size.x, 0 }, ImGui::ColorConvertFloat4ToU32(Rainbow));
+		ImGui::ButtonId(ICON_FA_CUBES, "Toolbar", &Open);
+
+		Toolbar.End();
+	}
+
+	void GUI::ComputeRainbow()
+	{
+		const float speed = 2.5f;
+		static float offset = 0;
+
+		Rainbow = {
+			.5f + .5f * cosf(offset),
+			.5f + .5f * cosf(offset + 2 * M_PI / 3),
+			.5f + .5f * cosf(offset + 4 * M_PI / 3),
 			1.f
-		);
-
-		rainbowOffset += rainbowSpeed * ImGui::GetIO().DeltaTime;
-
-		ToolbarWindow.Begin(ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoTitleBar);
-
-		draw->AddLine(ImGui::GetWindowPos(), ImGui::GetWindowPos() + ImVec2{ ImGui::GetWindowSize().x, 0 }, ImGui::ColorConvertFloat4ToU32(rainbow));
-
-		ImGui::ButtonId(ICON_FA_CUBES, "Modules", &SR->Modules->Menu.Open);
-
-		if (SR->Modules->Menu.Open)
-			Frame();
-
-		ToolbarWindow.End();
+		};
+		offset += speed * ImGui::GetIO().DeltaTime;
 	}
 
 	void GUI::Frame()
 	{
 		if (!Open) return;
+
+		ComputeRainbow();
+		DrawToolbar();
 		SR->Modules->Frame();
 	}
 
