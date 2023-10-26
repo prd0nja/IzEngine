@@ -11,7 +11,7 @@ namespace IW3SR
 				"\x55\x89\xE5\x53\x81\xEC\x84\x00\x00\x00\xC7\x04\x24\x02", 14);
 		}
 		Toolbar = Window("Toolbar");
-		Toolbar.SetRect(300, 0, 50, 30);
+		Toolbar.SetRect(0, 0, 640, 0);
 	}
 
 	void GUI::Initialize()
@@ -72,17 +72,30 @@ namespace IW3SR
 	void GUI::DrawToolbar()
 	{
 		ImDrawList* draw = ImGui::GetForegroundDrawList();
-		
-		Toolbar.Begin(ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar | 
-			ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoBackground);
+		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, { 0, 0 });
+		ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, { 0, 0 });
+
+		Toolbar.Begin(ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | 
+			ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoMove);
 
 		const ImVec2 position = ImGui::GetWindowPos();
 		const ImVec2 size = ImGui::GetWindowSize();
+		const ImVec2 buttonSize = { 30, 30 };
 
-		draw->AddLine(position + ImVec2{ 9, 7 }, position + ImVec2{ size.x, 7 }, ImGui::ColorConvertFloat4ToU32(Rainbow));
-		ImGui::ButtonId(ICON_FA_CUBES, "Modules", &SR->Modules->Menu.Open);
+		draw->AddLine(position + ImVec2{ 0, size.y }, position + ImVec2{size.x, size.y}, 
+			ImGui::ColorConvertFloat4ToU32(Rainbow));
+		ImGui::ButtonId(ICON_FA_GAMEPAD, "Modules", &SR->Modules->Menu.Open, buttonSize);
+		ImGui::SameLine();
+		ImGui::ButtonId(ICON_FA_PLUG, "Plugins", &SR->Modules->Menu.Open, buttonSize);
+		ImGui::SameLine();
+		ImGui::ButtonId(ICON_FA_ROTATE_RIGHT, "Reload", &SR->Modules->Menu.Open, buttonSize);
+		ImGui::SameLine();
+		ImGui::ButtonId(ICON_FA_CIRCLE_INFO, "About", &SR->Modules->Menu.Open, buttonSize);
+		ImGui::SameLine();
+		ImGui::ButtonId(ICON_FA_GEAR, "Settings", &SR->Modules->Menu.Open, buttonSize);
 
 		Toolbar.End();
+		ImGui::PopStyleVar(2);
 	}
 
 	void GUI::ComputeRainbow()
@@ -116,7 +129,7 @@ namespace IW3SR
 
 		io.IniFilename = nullptr;
 
-		const float fontSize = 18;
+		const float fontSize = 22;
 		const float iconSize = fontSize * 2.f / 3.f;
 
 		static const ImWchar rangesFa[] = { ICON_MIN_FA, ICON_MAX_FA, 0 };
@@ -238,12 +251,12 @@ namespace IW3SR
 
 		if (GetAsyncKeyState(VK_F10))
 			Open = !Open;
-		if (GetAsyncKeyState(VK_ESCAPE))
-			Open = false;
 
 		ImGuiIO& io = ImGui::GetIO();
 		if (Open)
 		{
+			if (GetAsyncKeyState(VK_ESCAPE))
+				Open = false;
 			ImGui_ImplWin32_WndProcHandler(hWnd, Msg, wParam, lParam);
 			io.MouseDrawCursor = true;
 			return true;
