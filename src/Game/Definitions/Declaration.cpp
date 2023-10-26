@@ -5,7 +5,6 @@ const uintptr_t IW3MP = reinterpret_cast<uintptr_t>(GetModuleHandle("iw3mp.exe")
 const uintptr_t COD4X = reinterpret_cast<uintptr_t>(GetModuleHandle("cod4x_021.dll"));
 
 // Game
-DxGlobals* dx = reinterpret_cast<DxGlobals*>(0x0CC9A400);
 CmdArgs* cmd_args = reinterpret_cast<CmdArgs*>(0x1410B40);
 cmd_function_s** cmds = reinterpret_cast<cmd_function_s**>(0x1410B3C);
 clientActive_t* clients = reinterpret_cast<clientActive_t*>(0xC5F930);
@@ -34,6 +33,7 @@ infoParm_t* info_params = reinterpret_cast<infoParm_t*>(0x71FBD0);
 WeaponDef** bg_weaponNames = reinterpret_cast<WeaponDef**>(0x736DB8);
 
 // Render
+DxGlobals* dx = reinterpret_cast<DxGlobals*>(0xCC9A400);
 MaterialLoadGlob* mtl_loadGlob = reinterpret_cast<MaterialLoadGlob*>(0xD541330);
 GfxRenderTarget* gfx_renderTargets = reinterpret_cast<GfxRenderTarget*>(0xD573EB0);
 float& v_aspectRatioWindow = *reinterpret_cast<float*>(0xCC9D0E4);

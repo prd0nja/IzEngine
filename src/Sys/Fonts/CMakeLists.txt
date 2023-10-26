@@ -1,4 +1,3 @@
 target_sources(IW3SR PRIVATE
 	IconsFontAwesome6.hpp
-	IconsFontAwesome6Brands.hpp
-        LogoBytes.hpp)
+	IconsFontAwesome6Brands.hpp)

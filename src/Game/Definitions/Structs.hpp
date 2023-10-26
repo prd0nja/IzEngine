@@ -4486,7 +4486,7 @@ struct __declspec(align(16)) ShadowCookie
 
 struct GfxWindowTarget
 {
-	HWND__* hwnd;
+	HWND* hwnd;
 	void* swapChain;
 	int width;
 	int height;
@@ -4494,7 +4494,7 @@ struct GfxWindowTarget
 
 struct __declspec(align(8)) DxGlobals
 {
-	HINSTANCE__* hinst;
+	HINSTANCE* hinst;
 	IDirect3D9* d3d9;
 	IDirect3DDevice9* device;
 	unsigned int adapterIndex;

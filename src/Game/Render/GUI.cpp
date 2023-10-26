@@ -1,8 +1,5 @@
 #include "GUI.hpp"
 #include "Game/Game.hpp"
-#include "Sys/Fonts/LogoBytes.hpp"
-
-#include <d3dx9.h>
 
 namespace IW3SR
 {
@@ -183,15 +180,14 @@ namespace IW3SR
 	{
 		ImDrawList* draw = ImGui::GetForegroundDrawList();
 		
-		Toolbar.Begin(ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoBackground);
+		Toolbar.Begin(ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar | 
+			ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoBackground);
 
 		const ImVec2 position = ImGui::GetWindowPos();
 		const ImVec2 size = ImGui::GetWindowSize();
 
-		draw->AddLine(position + ImVec2{9, 7}, position + ImVec2{size.x, 7}, ImGui::ColorConvertFloat4ToU32(Rainbow));
-		draw->AddImageRounded(Logo, ImVec2{ 100, 50 }, ImVec2{ 250, 200 }, ImVec2{ 0, 0 }, ImVec2{ 1, 1 }, IM_COL32(255, 255, 255, 255), 150);
+		draw->AddLine(position + ImVec2{ 9, 7 }, position + ImVec2{ size.x, 7 }, ImGui::ColorConvertFloat4ToU32(Rainbow));
 		ImGui::ButtonId(ICON_FA_CUBES, "Modules", &SR->Modules->Menu.Open);
-		///More buttons to come for completing the line.
 
 		Toolbar.End();
 	}
@@ -210,20 +206,11 @@ namespace IW3SR
 		offset += speed * ImGui::GetIO().DeltaTime;
 	}
 
-	void GUI::ComputeLogo()
-	{
-		if (!Logo)
-			D3DXCreateTextureFromFileInMemoryEx(dx->device, &LogoData, sizeof(LogoData), 50, 50,
-				D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_DEFAULT, D3DX_DEFAULT,
-				D3DX_DEFAULT, 0, NULL, NULL, &Logo);
-	}
-
 	void GUI::Frame()
 	{
 		if (!Open) return;
 
 		ComputeRainbow();
-		ComputeLogo();
 		DrawToolbar();
 		SR->Modules->Frame();
 	}

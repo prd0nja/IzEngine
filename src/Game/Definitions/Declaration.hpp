@@ -9,7 +9,6 @@ extern const uintptr_t IW3MP;
 extern const uintptr_t COD4X;
 
 // Game
-extern DxGlobals* dx;
 extern CmdArgs* cmd_args;
 extern cmd_function_s** cmds;
 extern clientActive_t* clients;
@@ -38,6 +37,7 @@ extern infoParm_t* info_params;
 extern WeaponDef** bg_weaponNames;
 
 // Render
+extern DxGlobals* dx;
 extern MaterialLoadGlob* mtl_loadGlob;
 extern GfxRenderTarget* gfx_renderTargets;
 extern float& v_aspectRatioWindow;
