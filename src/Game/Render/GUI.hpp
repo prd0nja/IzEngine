@@ -94,6 +94,8 @@ namespace IW3SR
 		static LRESULT CALLBACK MainWndProc(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam);
 
 	private:
+		static inline IDirect3DTexture9* Logo{};
+
 		/// <summary>
 		/// Draw toolbar.
 		/// </summary>
@@ -103,5 +105,10 @@ namespace IW3SR
 		/// Compute the rainbow effect.
 		/// </summary>
 		static void ComputeRainbow();
+
+		/// <summary>
+		/// Compute the logo.
+		/// </summary>
+		static void ComputeLogo();
 	};
 }

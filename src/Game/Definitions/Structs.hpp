@@ -4484,6 +4484,63 @@ struct __declspec(align(16)) ShadowCookie
 	__declspec(align(1)) GfxDrawSurfListInfo receiverInfo;
 };
 
+struct GfxWindowTarget
+{
+	HWND__* hwnd;
+	void* swapChain;
+	int width;
+	int height;
+};
+
+struct __declspec(align(8)) DxGlobals
+{
+	HINSTANCE__* hinst;
+	IDirect3D9* d3d9;
+	IDirect3DDevice9* device;
+	unsigned int adapterIndex;
+	bool adapterNativeIsValid;
+	int adapterNativeWidth;
+	int adapterNativeHeight;
+	int adapterFullscreenWidth;
+	int adapterFullscreenHeight;
+	int depthStencilFormat;
+	unsigned int displayModeCount;
+	void* displayModes[256];
+	const char* resolutionNameTable[257];
+	const char* refreshRateNameTable[257];
+	char modeText[5120];
+	void* fencePool[8];
+	unsigned int nextFence;
+	int gpuSync;
+	int multiSampleType;
+	unsigned int multiSampleQuality;
+	int sunSpriteSamples;
+	void* singleSampleDepthStencilSurface;
+	bool deviceLost;
+	bool inScene;
+	int targetWindowIndex;
+	int windowCount;
+	GfxWindowTarget windows[1];
+	int flushGpuQueryCount;
+	void* flushGpuQuery;
+	unsigned __int64 gpuSyncDelay;
+	unsigned __int64 gpuSyncStart;
+	unsigned __int64 gpuSyncEnd;
+	bool flushGpuQueryIssued;
+	int linearNonMippedMinFilter;
+	int linearNonMippedMagFilter;
+	int linearMippedMinFilter;
+	int linearMippedMagFilter;
+	int anisotropicMinFilter;
+	int anisotropicMagFilter;
+	int linearMippedAnisotropy;
+	int anisotropyFor2x;
+	int anisotropyFor4x;
+	int mipFilterMode;
+	unsigned int mipBias;
+	void* swapFence;
+};
+
 struct __declspec(align(16)) ShadowCookieList
 {
 	ShadowCookie cookies[24];

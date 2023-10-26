@@ -9,6 +9,7 @@ extern const uintptr_t IW3MP;
 extern const uintptr_t COD4X;
 
 // Game
+extern DxGlobals* dx;
 extern CmdArgs* cmd_args;
 extern cmd_function_s** cmds;
 extern clientActive_t* clients;
@@ -41,7 +42,6 @@ extern MaterialLoadGlob* mtl_loadGlob;
 extern GfxRenderTarget* gfx_renderTargets;
 extern float& v_aspectRatioWindow;
 extern float& v_postProcessAspect;
-extern IDirect3DDevice9** dx9_device;
 extern Material* floatz_display;
 extern GfxCmdBufSourceState* gfx_cmdBufSourceState;
 extern GfxCmdBufState* gfx_cmdBufState;

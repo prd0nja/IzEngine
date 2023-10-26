@@ -5,6 +5,7 @@ const uintptr_t IW3MP = reinterpret_cast<uintptr_t>(GetModuleHandle("iw3mp.exe")
 const uintptr_t COD4X = reinterpret_cast<uintptr_t>(GetModuleHandle("cod4x_021.dll"));
 
 // Game
+DxGlobals* dx = reinterpret_cast<DxGlobals*>(0x0CC9A400);
 CmdArgs* cmd_args = reinterpret_cast<CmdArgs*>(0x1410B40);
 cmd_function_s** cmds = reinterpret_cast<cmd_function_s**>(0x1410B3C);
 clientActive_t* clients = reinterpret_cast<clientActive_t*>(0xC5F930);
@@ -37,7 +38,6 @@ MaterialLoadGlob* mtl_loadGlob = reinterpret_cast<MaterialLoadGlob*>(0xD541330);
 GfxRenderTarget* gfx_renderTargets = reinterpret_cast<GfxRenderTarget*>(0xD573EB0);
 float& v_aspectRatioWindow = *reinterpret_cast<float*>(0xCC9D0E4);
 float& v_postProcessAspect = *reinterpret_cast<float*>(0xCC9D0FC);
-IDirect3DDevice9** dx9_device = reinterpret_cast<IDirect3DDevice9**>(0xCC9A408);
 Material* floatz_display = reinterpret_cast<Material*>(0xFA5378);
 GfxCmdBufSourceState* gfx_cmdBufSourceState = reinterpret_cast<GfxCmdBufSourceState*>(0xD53F5F0);
 GfxCmdBufState* gfx_cmdBufState = reinterpret_cast<GfxCmdBufState*>(0xD5404F0);
