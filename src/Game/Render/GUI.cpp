@@ -11,7 +11,7 @@ namespace IW3SR
 				"\x55\x89\xE5\x53\x81\xEC\x84\x00\x00\x00\xC7\x04\x24\x02", 14);
 		}
 		Toolbar = Window("Toolbar");
-		Toolbar.SetRect(500, 20, 50, 35);
+		Toolbar.SetRect(300, 0, 50, 30);
 	}
 
 	void GUI::Initialize()
@@ -35,6 +35,77 @@ namespace IW3SR
 		ImGui::DestroyContext();
 
 		Active = false;
+	}
+	
+	void GUI::Reset()
+	{
+		if (!Active) return;
+
+		ResetMouse();
+		Shutdown();
+	}
+
+	void GUI::ResetMouse()
+	{
+		dvar_s *mouse = Dvar_FindVar("in_mouse");
+		if (!mouse) return;
+
+		mouse->current.enabled = true;
+		s_wmv->mouseInitialized = true;
+	}
+
+	void GUI::Begin()
+	{
+		ImGui_ImplDX9_NewFrame();
+		ImGui_ImplWin32_NewFrame();
+		ImGui::NewFrame();
+		Frame();
+	}
+
+	void GUI::End()
+	{
+		ImGui::EndFrame();
+		ImGui::Render();
+		ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
+	}
+
+	void GUI::DrawToolbar()
+	{
+		ImDrawList* draw = ImGui::GetForegroundDrawList();
+		
+		Toolbar.Begin(ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar | 
+			ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoBackground);
+
+		const ImVec2 position = ImGui::GetWindowPos();
+		const ImVec2 size = ImGui::GetWindowSize();
+
+		draw->AddLine(position + ImVec2{ 9, 7 }, position + ImVec2{ size.x, 7 }, ImGui::ColorConvertFloat4ToU32(Rainbow));
+		ImGui::ButtonId(ICON_FA_CUBES, "Modules", &SR->Modules->Menu.Open);
+
+		Toolbar.End();
+	}
+
+	void GUI::ComputeRainbow()
+	{
+		const float speed = 2.5f;
+		static float offset = 0;
+
+		Rainbow = {
+			.5f + .5f * cosf(offset),
+			.5f + .5f * cosf(offset + 2 * M_PI / 3),
+			.5f + .5f * cosf(offset + 4 * M_PI / 3),
+			1.f
+		};
+		offset += speed * ImGui::GetIO().DeltaTime;
+	}
+
+	void GUI::Frame()
+	{
+		if (!Open) return;
+
+		ComputeRainbow();
+		DrawToolbar();
+		SR->Modules->Frame();
 	}
 
 	void GUI::Theme()
@@ -144,77 +215,6 @@ namespace IW3SR
 		style.TabRounding = 0;
 	}
 
-	void GUI::Reset()
-	{
-		if (!Active) return;
-
-		ResetMouse();
-		Shutdown();
-	}
-
-	void GUI::ResetMouse()
-	{
-		dvar_s *mouse = Dvar_FindVar("in_mouse");
-		if (!mouse) return;
-
-		mouse->current.enabled = true;
-		s_wmv->mouseInitialized = true;
-	}
-
-	void GUI::Begin()
-	{
-		ImGui_ImplDX9_NewFrame();
-		ImGui_ImplWin32_NewFrame();
-		ImGui::NewFrame();
-		Frame();
-	}
-
-	void GUI::End()
-	{
-		ImGui::EndFrame();
-		ImGui::Render();
-		ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
-	}
-
-	void GUI::DrawToolbar()
-	{
-		ImDrawList* draw = ImGui::GetForegroundDrawList();
-		
-		Toolbar.Begin(ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar | 
-			ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoBackground);
-
-		const ImVec2 position = ImGui::GetWindowPos();
-		const ImVec2 size = ImGui::GetWindowSize();
-
-		draw->AddLine(position + ImVec2{ 9, 7 }, position + ImVec2{ size.x, 7 }, ImGui::ColorConvertFloat4ToU32(Rainbow));
-		ImGui::ButtonId(ICON_FA_CUBES, "Modules", &SR->Modules->Menu.Open);
-
-		Toolbar.End();
-	}
-
-	void GUI::ComputeRainbow()
-	{
-		const float speed = 2.5f;
-		static float offset = 0;
-
-		Rainbow = {
-			.5f + .5f * cosf(offset),
-			.5f + .5f * cosf(offset + 2 * M_PI / 3),
-			.5f + .5f * cosf(offset + 4 * M_PI / 3),
-			1.f
-		};
-		offset += speed * ImGui::GetIO().DeltaTime;
-	}
-
-	void GUI::Frame()
-	{
-		if (!Open) return;
-
-		ComputeRainbow();
-		DrawToolbar();
-		SR->Modules->Frame();
-	}
-
 	HWND GUI::CreateMainWindow(DWORD dwExStyle, LPCSTR lpClassName, LPCSTR lpWindowName,
 		DWORD dwStyle, int X, int Y, int nWidth, int nHeight, HWND hWndParent, HMENU hMenu,
 		HINSTANCE hInstance, LPVOID lpParam)
@@ -238,6 +238,8 @@ namespace IW3SR
 
 		if (GetAsyncKeyState(VK_F10))
 			Open = !Open;
+		if (GetAsyncKeyState(VK_ESCAPE))
+			Open = false;
 
 		ImGuiIO& io = ImGui::GetIO();
 		if (Open)

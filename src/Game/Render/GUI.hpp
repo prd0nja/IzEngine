@@ -34,11 +34,6 @@ namespace IW3SR
 		static void Shutdown();
 
 		/// <summary>
-		/// GUI theme.
-		/// </summary>
-		static void Theme();
-
-		/// <summary>
 		/// Reset ImGUI.
 		/// </summary>
 		static void Reset();
@@ -103,5 +98,10 @@ namespace IW3SR
 		/// Compute the rainbow effect.
 		/// </summary>
 		static void ComputeRainbow();
+
+		/// <summary>
+		/// GUI theme.
+		/// </summary>
+		static void Theme();
 	};
 }
