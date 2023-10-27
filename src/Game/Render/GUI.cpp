@@ -1,5 +1,8 @@
 #include "GUI.hpp"
 #include "Game/Game.hpp"
+#include "Sys/Assets.hpp"
+
+#include <d3dx9.h>
 
 namespace IW3SR
 {
@@ -82,6 +85,11 @@ namespace IW3SR
 		const ImVec2 size = ImGui::GetWindowSize();
 		const ImVec2 buttonSize = { 30, 30 };
 
+		Logo = Assets::LoadTexture(Environment::ImagesDirectory / "SR.jpg", 1024, 1024);
+		//does not render in ctor!!! you need to add the image!!!
+
+		draw->AddImageRounded(Logo, ImVec2{ 1890, 0 }, ImVec2{ 1920, 30 },
+			ImVec2{ 0, 0 }, ImVec2{ 1, 1 }, IM_COL32(255, 255, 255, 255), 100);
 		draw->AddLine(position + ImVec2{ 0, size.y }, position + ImVec2{size.x, size.y}, 
 			ImGui::ColorConvertFloat4ToU32(Rainbow));
 		ImGui::ButtonId(ICON_FA_GAMEPAD, "Modules", &SR->Modules->Menu.Open, buttonSize);

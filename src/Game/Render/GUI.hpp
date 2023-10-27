@@ -12,6 +12,7 @@ namespace IW3SR
 	public:
 		static inline HWND MainWindow = nullptr;
 		static inline Window Toolbar;
+		static inline IDirect3DTexture9* Logo;
 		static inline bool Active = false;
 		static inline bool Open = false;
 
@@ -89,6 +90,7 @@ namespace IW3SR
 		static LRESULT CALLBACK MainWndProc(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam);
 
 	private:
+
 		/// <summary>
 		/// Draw toolbar.
 		/// </summary>
