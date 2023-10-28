@@ -87,12 +87,18 @@ namespace IW3SR
 
 		draw->AddLine(position + ImVec2{ 0, size.y }, position + ImVec2{size.x, size.y}, 
 			ImGui::ColorConvertFloat4ToU32(Rainbow));
+
 		ImGui::ButtonId(ICON_FA_GAMEPAD, "Modules", &SR->Modules->Menu.Open, buttonSize);
 		ImGui::SameLine();
 		ImGui::ButtonId(ICON_FA_PLUG, "Plugins", &SR->Modules->Menu.Open, buttonSize);
 		ImGui::SameLine();
-		ImGui::ButtonId(ICON_FA_ROTATE_RIGHT, "Reload", &SR->Modules->Menu.Open, buttonSize);
-		ImGui::SameLine();
+		
+		if (Utils::IsDebug())
+		{
+			ImGui::ButtonId(ICON_FA_ROTATE_RIGHT, "Reload", &SR->Modules->Menu.Open, buttonSize);
+			ImGui::SameLine();
+		}
+
 		ImGui::ButtonId(ICON_FA_CIRCLE_INFO, "About", &SR->Modules->Menu.Open, buttonSize);
 		ImGui::SameLine();
 		ImGui::ButtonId(ICON_FA_GEAR, "Settings", &SR->Modules->Menu.Open, buttonSize);

@@ -53,7 +53,7 @@ add_subdirectory(src)
 
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/private")
     add_subdirectory(private)
-	add_compile_definitions(PRIVATE)
+	add_compile_definitions(PRIVATE=true)
 	install(TARGETS IW3SR.Private RUNTIME DESTINATION ${COD4}/iw3sr/plugins)
 endif()
 

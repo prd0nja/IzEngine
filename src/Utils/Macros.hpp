@@ -31,6 +31,14 @@
 #define PLUGIN C_EXTERN EXPORT
 #endif
 
+#ifndef DEBUG
+#define DEBUG _DEBUG
+#endif
+
+#ifndef PRIVATE
+#define PRIVATE false
+#endif
+
 #define NLOHMANN_DEFINE_POLY(Type, ChildClass, ...) \
 	virtual void Serialize(nlohmann::json& json) override \
 	{ \

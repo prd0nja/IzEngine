@@ -10,6 +10,7 @@
 #include "Sys/Environment.hpp"
 #include "Sys/Render/D3D9EX.hpp"
 
+#include "Utils/Utils.hpp"
 #include "Utils/Math.hpp"
 #include "Utils/Macros.hpp"
 
