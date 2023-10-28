@@ -6,14 +6,10 @@
 #include <memory>
 #include <string>
 
+using namespace IW3SR;
+
 namespace IW3SR
 {
-	enum class DLLMode
-	{
-		DEFAULT,
-		PERSISTED
-	};
-
 	/// <summary>
 	/// Dynamic link library.
 	/// </summary>
@@ -25,7 +21,6 @@ namespace IW3SR
 		std::string FilePath;
 
 		HINSTANCE Instance;
-		DLLMode Mode;
 		Function<void(DLL* entry)> Initialize;
 		Function<void()> GUI;
 		Function<void()> Shutdown;

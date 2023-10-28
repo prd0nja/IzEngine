@@ -9,7 +9,6 @@ namespace IW3SR
 	{
 		FilePath = filePath;
 		Instance = LoadLibrary(filePath.c_str());
-		Mode = DLLMode::DEFAULT;
 
 		if (!Instance)
 			throw std::runtime_error("Couldn't load DLL.");
@@ -26,9 +25,6 @@ namespace IW3SR
 
 	DLL::~DLL()
 	{
-		if (Mode == DLLMode::PERSISTED)
-			return;
-
 		if (Shutdown)
 			Shutdown();
 

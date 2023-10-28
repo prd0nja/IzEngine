@@ -31,6 +31,10 @@
 #define PLUGIN C_EXTERN EXPORT
 #endif
 
+#ifndef ENTRY
+#define ENTRY C_EXTERN EXPORT
+#endif
+
 #ifndef DEBUG
 #define DEBUG _DEBUG
 #endif

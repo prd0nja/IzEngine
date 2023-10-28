@@ -5,19 +5,19 @@
 #include <Windows.h>
 #include <iostream>
 
-void Init()
+ENTRY void Init()
 {
     SR = new Game();
     SR->Initialize();
 }
 
-void Shutdown()
+ENTRY void Shutdown()
 {
     delete SR;
     Environment::Save();
 }
 
-EXPORT BOOL STDCALL RIB_Main(HANDLE handle, INT upDown)
+ENTRY BOOL STDCALL RIB_Main(HANDLE handle, INT upDown)
 {
     return TRUE;
 }

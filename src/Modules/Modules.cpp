@@ -28,7 +28,6 @@ namespace IW3SR
 
 	void Modules::LoadDynamic()
 	{
-		Sleep(2000);
 		if (!std::filesystem::is_directory(Environment::PluginsDirectory))
 			return;
 

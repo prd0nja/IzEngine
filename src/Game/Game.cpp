@@ -65,6 +65,4 @@ namespace IW3SR
 		R_Direct3DCreate9_h.Remove();
 		RB_EndSceneRendering_h.Remove();
 	}
-
-	void Game::Frame() { }
 }

@@ -57,11 +57,6 @@ namespace IW3SR
 		/// Unhook game.
 		/// </summary>
 		void Unhook();
-
-		/// <summary>
-		/// Game frame.
-		/// </summary>
-		void Frame();
 	};
 }
 
