@@ -11,6 +11,8 @@ add_subdirectory(Utils)
 
 target_include_directories(IW3SR PUBLIC .)
 target_sources(IW3SR.DLL PRIVATE main.cpp)
-target_link_libraries(IW3SR.DLL PRIVATE IW3SR)
-get_target_property(SOURCES IW3SR SOURCES)
-source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${SOURCES})
+target_link_libraries(IW3SR.DLL PUBLIC IW3SR)
+
+get_target_property(SOURCES_IW3SR IW3SR SOURCES)
+get_target_property(SOURCES_IW3SR_DLL IW3SR.DLL SOURCES)
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${SOURCES_IW3SR} ${SOURCES_IW3SR_DLL})

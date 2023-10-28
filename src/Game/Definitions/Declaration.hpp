@@ -14,7 +14,7 @@ extern cmd_function_s** cmds;
 extern clientActive_t* clients;
 extern clientStatic_t* cls;
 extern clientConnection_t& clc;
-extern cg_s* cgs;
+API extern cg_s* cgs;
 extern centity_s* cg_entities;
 extern GfxBuffers* gfx_buf;
 extern GfxWorld* gfx_world;

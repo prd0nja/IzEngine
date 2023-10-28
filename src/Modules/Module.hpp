@@ -13,7 +13,7 @@ namespace IW3SR
 	/// <summary>
 	/// Game module.
 	/// </summary>
-	class Module
+	class API Module
 	{
 	public:
 		std::string ID;

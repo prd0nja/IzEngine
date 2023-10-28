@@ -2,6 +2,8 @@
 #pragma warning(push)
 #pragma warning(disable: 4359)
 
+#include "Utils/Macros.hpp"
+
 #include <cstdint>
 #include <d3d9.h>
 

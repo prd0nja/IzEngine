@@ -9,7 +9,9 @@
 #include "Sys/Log.hpp"
 #include "Sys/Environment.hpp"
 #include "Sys/Render/D3D9EX.hpp"
+
 #include "Utils/Math.hpp"
+#include "Utils/Macros.hpp"
 
 #include <memory>
 #include <array>

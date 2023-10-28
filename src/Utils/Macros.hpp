@@ -1,5 +1,32 @@
 #pragma once
 
+#ifndef CDECL
+#define CDECL __cdecl
+#endif
+
+#ifndef STDCALL
+#define STDCALL __stdcall
+#endif
+
+#ifndef FASTCALL
+#define FASTCALL __fastcall
+#endif
+
+#define C_EXTERN extern "C"
+#define CPP_EXTERN extern "C++"
+
+#ifndef EXPORT
+#define EXPORT __declspec(dllexport)
+#endif
+
+#ifndef IMPORT
+#define IMPORT __declspec(dllimport)
+#endif
+
+#ifndef API
+#define API EXPORT
+#endif
+
 #define NLOHMANN_DEFINE_POLY(Type, ChildClass, ...) \
 	virtual void Serialize(nlohmann::json& json) override \
 	{ \
