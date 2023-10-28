@@ -28,7 +28,21 @@ namespace IW3SR
 
 	void Modules::LoadDynamic()
 	{
+		Sleep(2000);
+		if (!std::filesystem::is_directory(Environment::PluginsDirectory))
+			return;
 
+		for (const auto& entry : std::filesystem::directory_iterator(Environment::PluginsDirectory))
+		{
+			if (entry.path().extension() == ".dll")
+				DLLs.insert({ entry.path().filename().string(), std::make_unique<DLL>(entry.path().string()) });
+		}
+	}
+
+	void Modules::RefreshDynamicModules()
+	{
+		for (const auto& [_, dll] : DLLs)
+			dll->GUI();
 	}
 
 	void Modules::Enable(const std::string& id)

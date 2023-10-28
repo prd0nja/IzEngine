@@ -1,7 +1,8 @@
 #pragma once
 #include "Game/Game.hpp"
-#include "Module.hpp"
+#include "Sys/DLL.hpp"
 #include "Sys/Log.hpp"
+#include "Module.hpp"
 
 #include <string>
 #include <map>
@@ -19,6 +20,7 @@ namespace IW3SR
 	{
 	public:
 		static inline std::map<std::string, std::unique_ptr<Module>> Entries;
+		static inline std::map<std::string, std::unique_ptr<DLL>> DLLs;
 		static inline nlohmann::json Serialized;
 		static inline Window Menu;
 
@@ -59,6 +61,11 @@ namespace IW3SR
 		/// Load dynamic modules.
 		/// </summary>
 		void LoadDynamic();
+
+		/// <summary>
+		/// Refresh dynamic modules.
+		/// </summary>
+		void RefreshDynamicModules();
 
 		/// <summary>
 		/// Enable a module.

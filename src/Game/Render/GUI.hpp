@@ -10,6 +10,11 @@ namespace IW3SR
 	class API GUI
 	{
 	public:
+		static inline ImGuiContext* Context = nullptr;
+		static inline ImGuiMemAllocFunc Allocator = nullptr;
+		static inline ImGuiMemFreeFunc Free = nullptr;
+		static inline void* Data = nullptr;
+
 		static inline HWND MainWindow = nullptr;
 		static inline Window Toolbar;
 		static inline bool Active = false;

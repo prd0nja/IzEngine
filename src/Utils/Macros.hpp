@@ -27,6 +27,10 @@
 #define API EXPORT
 #endif
 
+#ifndef PLUGIN
+#define PLUGIN C_EXTERN EXPORT
+#endif
+
 #define NLOHMANN_DEFINE_POLY(Type, ChildClass, ...) \
 	virtual void Serialize(nlohmann::json& json) override \
 	{ \

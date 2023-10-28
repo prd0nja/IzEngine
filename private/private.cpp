@@ -1,19 +1,23 @@
-#include "Sys/Log.hpp"
+#include "Sys/DLL.hpp"
 
 #include "Modules/Modules.hpp"
 #include "Modules/ESP.hpp"
 
 namespace IW3SR
 {
-	EXPORT void Initialize()
+	PLUGIN void Initialize(DLL* entry)
 	{
-		Log::WriteLine("[Private] Initialize");
+		entry->ID = "sr.private";
+		entry->Name = "Private";
 
 		Modules::Load<ESP>();
 	}
 
-	EXPORT void Shutdown()
+	PLUGIN void GUI()
 	{
-		Log::WriteLine("[Private] Shutdown");
+		ImGui::SetCurrentContext(GUI::Context);
+		ImGui::SetAllocatorFunctions(GUI::Allocator, GUI::Free, GUI::Data);
 	}
+
+	PLUGIN void Shutdown() { }
 }

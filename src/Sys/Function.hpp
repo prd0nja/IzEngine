@@ -16,6 +16,11 @@ namespace IW3SR
 		std::function<T> Func = nullptr;
 
 		/// <summary>
+		/// Initialize a new function wrapper.
+		/// </summary>
+		Function() = default;
+
+		/// <summary>
 		/// Initialize a new Function wrapper.
 		/// </summary>
 		/// <param name="address">The address of the function.</param>

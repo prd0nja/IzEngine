@@ -15,13 +15,16 @@ namespace IW3SR
 	}
 
 	void GUI::Initialize()
-	{
+	{ 
 		if (Active || !MainWindow) return;
 
-		ImGui::CreateContext();
+		Context = ImGui::CreateContext();
+		ImGui::GetAllocatorFunctions(&Allocator, &Free, &Data);
 		ImGui_ImplWin32_Init(MainWindow);
 		ImGui_ImplDX9_Init(dx->device);
 		Theme();
+
+		SR->Modules->RefreshDynamicModules();
 
 		Active = true;
 	}
@@ -32,7 +35,7 @@ namespace IW3SR
 
 		ImGui_ImplDX9_Shutdown();
 		ImGui_ImplWin32_Shutdown();
-		ImGui::DestroyContext();
+		ImGui::DestroyContext(Context);
 
 		Active = false;
 	}
