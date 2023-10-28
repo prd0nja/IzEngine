@@ -1,11 +1,19 @@
-#include <iostream>
+#include "Sys/Log.hpp"
 
-void Initialize()
-{
-	std::cout << "[Private] Initialize" << std::endl;
-}
+#include "Modules/Modules.hpp"
+#include "Modules/ESP.hpp"
 
-void Shutdown()
+namespace IW3SR
 {
-	std::cout << "[Private] Shutdown" << std::endl;
+	EXPORT void Initialize()
+	{
+		Log::WriteLine("[Private] Initialize");
+
+		Modules::Load<ESP>();
+	}
+
+	EXPORT void Shutdown()
+	{
+		Log::WriteLine("[Private] Shutdown");
+	}
 }

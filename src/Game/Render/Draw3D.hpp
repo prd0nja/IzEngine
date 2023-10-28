@@ -9,7 +9,7 @@ namespace IW3SR
 	/// <summary>
 	/// Drawing 3D class.
 	/// </summary>
-	class Draw3D
+	class API Draw3D
 	{
 	public:
 		static inline std::array<GfxPointVertex, 2735> LinesVerts{ };

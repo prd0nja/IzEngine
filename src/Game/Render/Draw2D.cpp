@@ -4,7 +4,7 @@ namespace IW3SR
 {
 	void Draw2D::Rect(const std::string& material, float x, float y, float w, float h, const vec4& color)
 	{
-		ApplyRect(x, y, w, h, HORIZONTAL_ALIGN_LEFT, VERTICAL_ALIGN_TOP);
+		Math::ApplyRect(x, y, w, h, HORIZONTAL_ALIGN_LEFT, VERTICAL_ALIGN_TOP);
 		Material* handle = Material_RegisterHandle(material.c_str(), 3);
 		R_AddCmdDrawStretchPic(handle, x, y, w, h, 0.f, 0.f, 0.f, 0.f, color);
 	}
@@ -12,7 +12,7 @@ namespace IW3SR
 	void Draw2D::AngleYaw(const std::string& material, float start, float end, float yaw, 
 		float y, float h, const vec4& color)
 	{
-		const range_t range = AnglesToRange(start, end, yaw);
+		const range_t range = Math::AnglesToRange(start, end, yaw);
 		if (!range.split)
 		{
 			Rect(material, range.x1, y, range.x2 - range.x1, h, color);
@@ -25,19 +25,19 @@ namespace IW3SR
 	void Draw2D::LineYaw(const std::string& material, float angle, float yaw, 
 		float y, float w, float h, const vec4& color)
 	{
-		angle = AngleNormalizePi(angle - yaw);
+		angle = Math::AngleNormalizePi(angle - yaw);
 
-		if (!AngleInFov(angle))
+		if (!Math::AngleInFov(angle))
 			return;
 
-		const float x = AngleScreenProjection(angle);
+		const float x = Math::AngleScreenProjection(angle);
 		Rect(material, x - w / 2, y, w, h, color);
 	}
 
 	void Draw2D::Text(const std::string& text, Font_s* font, float x, float y, float size, const vec4& color)
 	{
 		float w = size, h = size;
-		ApplyRect(x, y, w, h, HORIZONTAL_ALIGN_LEFT, VERTICAL_ALIGN_TOP);
+		Math::ApplyRect(x, y, w, h, HORIZONTAL_ALIGN_LEFT, VERTICAL_ALIGN_TOP);
 		R_AddCmdDrawText(text.c_str(), 0x7FFFFFFF, font, x, y, w, h, 0, 0, color);
 	}
 }

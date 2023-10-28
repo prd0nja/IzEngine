@@ -7,7 +7,7 @@ namespace IW3SR
 	/// <summary>
 	/// Drawing 2D class.
 	/// </summary>
-	class Draw2D
+	class API Draw2D
 	{
 	public:
 		static inline std::vector<const char*> Fonts = { FONT_OBJECTIVE, FONT_NORMAL, FONT_CONSOLE,

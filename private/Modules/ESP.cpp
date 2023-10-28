@@ -19,25 +19,25 @@ namespace IW3SR
     {
         ImDrawList* draw = ImGui::GetBackgroundDrawList();
         const vec2 center = { cgs->refdef.width / 2.f, cgs->refdef.height * 1.f };
-        //const int limit = center.y;
+        const int limit = center.y;
 
-        //for (const auto& player : Player::GetAll())
-        //{
-        //    if (!player || player->IsSelf() || !player->IsAlive())
-        //        continue;
+        for (const auto& player : Player::GetAll())
+        {
+            if (!player || player->IsSelf() || !player->IsAlive())
+                continue;
 
-        //    const vec3 self = cgs->lastVieworg;
-        //    const vec3 origin = player->c->pose.origin;
+            const vec3 self = cgs->lastVieworg;
+            const vec3 origin = player->c->pose.origin;
 
-        //    if (self.Distance(origin) < 50)
-        //        continue;
+            if (self.Distance(origin) < 50)
+                continue;
 
-        //    const vec2 position = WorldToScreen(origin);
-        //    if (!position || position.y > limit)
-        //        continue;
+            const vec2 position = Math::WorldToScreen(origin);
+            if (!position || position.y > limit)
+                continue;
 
-        //    //draw->AddLine(center, position, Color, Size);
-        //    //Draw::Box(origin, Box, Color, Size);
-        //}
+            draw->AddLine(center, position, Color, Size);
+            Draw::Box(origin, Box, Color, Size);
+        }
     }
 }

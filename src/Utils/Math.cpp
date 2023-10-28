@@ -2,7 +2,7 @@
 
 namespace IW3SR
 {
-    vec2 WorldToScreen(const vec3& worldPosition)
+    vec2 Math::WorldToScreen(const vec3& worldPosition)
     {
         const int centerX = cgs->refdef.width / 2;
         const int centerY = cgs->refdef.height / 2;
@@ -30,28 +30,28 @@ namespace IW3SR
         };
     }
 
-    float RadToDeg(const float radians)
+    float Math::RadToDeg(const float radians)
     {
         return radians * (180.0f / M_PI);
     }
 
-    float DegToRad(const float degrees)
+    float Math::DegToRad(const float degrees)
     {
         return degrees * M_PI / 180.0f;
     }
 
-    float AngleNormalize180(const float angle)
+    float Math::AngleNormalize180(const float angle)
     {
         return (angle * 0.0027777778f - floorf(angle * 0.0027777778f + 0.5f)) * 360.0f;
     }
 
-    float AngleNormalizePi(const float angle)
+    float Math::AngleNormalizePi(const float angle)
     {
         const float tAngle = fmodf(angle + M_PI, 2 * M_PI);
         return tAngle < 0 ? tAngle + M_PI : tAngle - M_PI;
     }
 
-    void AngleVectors(const vec3& angles, vec3& forward, vec3& right, vec3& up)
+    void Math::AngleVectors(const vec3& angles, vec3& forward, vec3& right, vec3& up)
     {
         float angle;
         static float sr, sp, sy, cr, cp, cy;
@@ -88,7 +88,7 @@ namespace IW3SR
         }
     }
 
-    vec3 AnglesToUp(const vec3& angles)
+    vec3 Math::AnglesToUp(const vec3& angles)
     {
         float angle;
         static float sr, sp, sy, cr, cp, cy;
@@ -112,7 +112,7 @@ namespace IW3SR
         };
     }
 
-    vec3 AngleToForward(const vec3& angles)
+    vec3 Math::AnglesToForward(const vec3& angles)
     {
         float angle;
         static float sp, sy, cr, cp, cy;
@@ -132,7 +132,7 @@ namespace IW3SR
         };
     }
 
-    vec3 AngleToRight(const vec3& angles)
+    vec3 Math::AnglesToRight(const vec3& angles)
     {
         float angle;
         static float sr, sp, sy, cr, cp, cy;
@@ -156,7 +156,7 @@ namespace IW3SR
         };
     }
 
-    vec3 VectorToAngles(const vec3& v)
+    vec3 Math::VectorToAngles(const vec3& v)
     {
         vec3 angles;
         float yaw, pitch;
@@ -193,7 +193,7 @@ namespace IW3SR
         return angles;
     }
 
-    vec3 VectorToAnglesWithRoll(const vec3& forward, const vec3& up, bool flipPitch)
+    vec3 Math::VectorToAnglesWithRoll(const vec3& forward, const vec3& up, bool flipPitch)
     {
         vec3 angles;
         if (forward[0] == 0.0f && forward[1] == 0.0f)
@@ -249,13 +249,13 @@ namespace IW3SR
         return angles;
     }
 
-	bool AngleInFov(float angle)
+	bool Math::AngleInFov(float angle)
 	{
 		float const half_fov_x = atanf(cgs->refdef.tanHalfFovX);
 		return angle > -half_fov_x && angle < half_fov_x;
 	}
 
-	float AngleScreenProjection(float angle)
+	float Math::AngleScreenProjection(float angle)
 	{
 		float const half_fov_x = atanf(cgs->refdef.tanHalfFovX);
 
@@ -267,7 +267,7 @@ namespace IW3SR
 		return SCREEN_WIDTH / 2 * (1 - tanf(angle) / tanf(half_fov_x));
 	}
 
-	range_t AnglesToRange(float start, float end, float yaw)
+	range_t Math::AnglesToRange(float start, float end, float yaw)
 	{
 		if (fabsf(end - start) > 2 * M_PI)
 			return { 0, SCREEN_WIDTH, false };
@@ -287,7 +287,7 @@ namespace IW3SR
 		return { AngleScreenProjection(start), AngleScreenProjection(end), split };
 	}
 
-    void ApplyRect(float& x, float& y, float& w, float& h,
+    void Math::ApplyRect(float& x, float& y, float& w, float& h,
         RectAlignHorizontal_t horizontal, RectAlignVertical_t vertical)
     {
         switch (horizontal)

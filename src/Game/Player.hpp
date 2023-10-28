@@ -7,7 +7,7 @@ namespace IW3SR
 	/// <summary>
 	/// Player class.
 	/// </summary>
-	class Player
+	class API Player
 	{
 	public:
 		centity_s* c;

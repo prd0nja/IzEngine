@@ -1,4 +1,6 @@
 #pragma once
+#include "Utils/Macros.hpp"
+
 #include <format>
 #include <string>
 #include <iostream>
@@ -8,7 +10,7 @@ namespace IW3SR
 	/// <summary>
 	/// Log class.
 	/// </summary>
-	class Log
+	class API Log
 	{
 	public:
 		/// <summary>

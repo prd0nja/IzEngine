@@ -49,7 +49,7 @@ namespace IW3SR
 			Font = R_RegisterFont(FontName.c_str(), FontName.size());
 
 		ComputeAlignment(x, y);
-		ApplyRect(x, y, w, h, HorizontalAlign, VerticalAlign);
+		Math::ApplyRect(x, y, w, h, HorizontalAlign, VerticalAlign);
 		R_AddCmdDrawText(Value.c_str(), 0x7FFFFFFF, Font, x, y, w, h, 0, 0, Color);
 	}
 }

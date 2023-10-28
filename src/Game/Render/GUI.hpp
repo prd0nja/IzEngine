@@ -7,7 +7,7 @@ namespace IW3SR
 	/// <summary>
 	/// ImGUI class.
 	/// </summary>
-	class GUI
+	class API GUI
 	{
 	public:
 		static inline HWND MainWindow = nullptr;

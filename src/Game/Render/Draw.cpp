@@ -11,20 +11,20 @@ namespace IW3SR
         vec3 tbl3 = { position.x - size.x, position.y + size.y, position.z + size.z };
         vec3 tbr3 = { position.x - size.x, position.y - size.y, position.z + size.z };
 
-        vec2 tfl = WorldToScreen(tfl3);
-        vec2 tfr = WorldToScreen(tfr3);
-        vec2 tbl = WorldToScreen(tbl3);
-        vec2 tbr = WorldToScreen(tbr3);
+        vec2 tfl = Math::WorldToScreen(tfl3);
+        vec2 tfr = Math::WorldToScreen(tfr3);
+        vec2 tbl = Math::WorldToScreen(tbl3);
+        vec2 tbr = Math::WorldToScreen(tbr3);
 
         vec3 bfl3 = { position.x + size.x, position.y - size.y, position.z };
         vec3 bfr3 = { position.x + size.x, position.y + size.y, position.z };
         vec3 bbl3 = { position.x - size.x, position.y + size.y, position.z };
         vec3 bbr3 = { position.x - size.x, position.y - size.y, position.z };
 
-        vec2 bfl = WorldToScreen(bfl3);
-        vec2 bfr = WorldToScreen(bfr3);
-        vec2 bbl = WorldToScreen(bbl3);
-        vec2 bbr = WorldToScreen(bbr3);
+        vec2 bfl = Math::WorldToScreen(bfl3);
+        vec2 bfr = Math::WorldToScreen(bfr3);
+        vec2 bbl = Math::WorldToScreen(bbl3);
+        vec2 bbr = Math::WorldToScreen(bbr3);
 
         draw->AddLine(tbl, tfr, color, thickness);
         draw->AddLine(tfl, tfr, color, thickness);

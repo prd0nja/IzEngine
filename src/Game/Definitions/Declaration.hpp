@@ -5,17 +5,17 @@
 #include <Windows.h>
 
 // Modules
-extern const uintptr_t IW3MP;
-extern const uintptr_t COD4X;
+API extern const uintptr_t IW3MP;
+API extern const uintptr_t COD4X;
 
 // Game
-extern CmdArgs* cmd_args;
-extern cmd_function_s** cmds;
-extern clientActive_t* clients;
-extern clientStatic_t* cls;
-extern clientConnection_t& clc;
+API extern CmdArgs* cmd_args;
+API extern cmd_function_s** cmds;
+API extern clientActive_t* clients;
+API extern clientStatic_t* cls;
+API extern clientConnection_t& clc;
 API extern cg_s* cgs;
-extern centity_s* cg_entities;
+API extern centity_s* cg_entities;
 extern GfxBuffers* gfx_buf;
 extern GfxWorld* gfx_world;
 extern GfxScene* scene;
@@ -24,20 +24,20 @@ extern clipMap_t* cm;
 extern ComWorld* com;
 extern int* com_frameTime;
 extern float* com_timescaleValue;
-extern int* g_entities;
-extern int* g_clients;
-extern playerState_s* ps_loc;
-extern pmove_t* pmove;
+API extern int* g_entities;
+API extern int* g_clients;
+API extern playerState_s* ps_loc;
+API extern pmove_t* pmove;
 extern const char* g_entityBeginParsePoint;
 extern const char* g_entityEndParsePoint;
-extern int* clientActiveCmdNumber;
+API extern int* clientActiveCmdNumber;
 extern XZone* g_zones;
 extern XAssetEntry* g_assetEntryPool;
 extern infoParm_t* info_params;
 extern WeaponDef** bg_weaponNames;
 
 // Render
-extern DxGlobals* dx;
+API extern DxGlobals* dx;
 extern MaterialLoadGlob* mtl_loadGlob;
 extern GfxRenderTarget* gfx_renderTargets;
 extern float& v_aspectRatioWindow;
@@ -66,14 +66,14 @@ extern ScreenPlacement* scr_placeFull;
 extern Fonts_t* g_fonts;
 
 // GSC
-extern uintptr_t* gScrMemTreePub;
-extern uintptr_t* scrVarPub;
+API extern uintptr_t* gScrMemTreePub;
+API extern uintptr_t* scrVarPub;
 extern int* scrVarPub_p4;
 extern char* errorMessage;
 extern char* errorType;
 extern int* scr_numParam;
-extern gentity_s* scr_g_entities;
-extern level_locals_t* level_locals;
+API extern gentity_s* scr_g_entities;
+API extern level_locals_t* level_locals;
 
 // Console
 extern float* con_matchtxtColor_currentDvar;

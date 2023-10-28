@@ -8,7 +8,7 @@ namespace IW3SR
 	/// <summary>
 	/// Drawing class.
 	/// </summary>
-	class Draw
+	class API Draw
 	{
 	public:
 		/// <summary>

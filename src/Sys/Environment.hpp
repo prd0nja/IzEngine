@@ -1,4 +1,6 @@
 #pragma once
+#include "Utils/Macros.hpp"
+
 #include <nlohmann/json.hpp>
 #include <filesystem>
 #include <cstdlib>
@@ -8,7 +10,7 @@ namespace IW3SR
 	/// <summary>
 	/// System environment.
 	/// </summary>
-	class Environment
+	class API Environment
 	{
 	public:
 		static inline nlohmann::json Settings;

@@ -1,4 +1,6 @@
 #pragma once
+#include "Utils/Macros.hpp"
+
 #include <string>
 #include <vector>
 #include <bit>
@@ -8,7 +10,7 @@ namespace IW3SR
     /// <summary>
     /// Memory class.
     /// </summary>
-    class Memory
+    class API Memory
     {
     public:
         /// <summary>

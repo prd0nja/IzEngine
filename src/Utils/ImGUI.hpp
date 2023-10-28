@@ -24,7 +24,8 @@ namespace ImGui
 	/// <param name="v">Toggle state.</param>
 	/// <param name="size">The button size.</param>
 	/// <returns></returns>
-	bool ButtonId(const std::string& label, const std::string& id, bool* v, const ImVec2& size = ImVec2(0, 0));
+	API bool ButtonId(const std::string& label, const std::string& id, bool* v,
+		const ImVec2& size = ImVec2(0, 0));
 
 	/// <summary>
 	/// Toggle button.
@@ -32,7 +33,7 @@ namespace ImGui
 	/// <param name="id">The ID.</param>
 	/// <param name="v">Toggle state.</param>
 	/// <return></returns>
-	bool ToggleButton(const std::string& id, float size, bool* v);
+	API bool ToggleButton(const std::string& id, float size, bool* v);
 }
 
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);

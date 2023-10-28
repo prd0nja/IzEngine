@@ -1,4 +1,5 @@
 #pragma once
+#include "Game/Game.hpp"
 #include "Module.hpp"
 #include "Sys/Log.hpp"
 
@@ -14,12 +15,12 @@ namespace IW3SR
 	/// <summary>
 	/// Game modules.
 	/// </summary>
-	class Modules
+	class API Modules
 	{
 	public:
-		std::map<std::string, std::unique_ptr<Module>> Entries;
-		nlohmann::json Serialized;
-		Window Menu;
+		static inline std::map<std::string, std::unique_ptr<Module>> Entries;
+		static inline nlohmann::json Serialized;
+		static inline Window Menu;
 
 		/// <summary>
 		/// Initialize the modules.
@@ -37,7 +38,7 @@ namespace IW3SR
 		/// </summary>
 		/// <typeparam name="M">The module type.</typeparam>
 		template <class M = Module>
-		void Load(bool initialize = true)
+		static void Load(bool initialize = true)
 		{
 			std::unique_ptr<M> entry = std::make_unique<M>();
 			bool isSerialized = Serialized.contains(entry->ID);
