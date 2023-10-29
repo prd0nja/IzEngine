@@ -1,17 +1,12 @@
 #include "Game/Game.hpp"
 
-#include <thread>
-#include <memory>
-#include <Windows.h>
-#include <iostream>
-
-ENTRY void Init()
+void Init()
 {
     SR = new Game();
     SR->Initialize();
 }
 
-ENTRY void Shutdown()
+void Shutdown()
 {
     delete SR;
     Environment::Save();
