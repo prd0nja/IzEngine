@@ -20,25 +20,30 @@ namespace IW3SR
 		std::string Name;
 		std::string FilePath;
 
-		HINSTANCE Instance;
-		Function<void(DLL* entry)> Initialize;
-		Function<void()> GUI;
-		Function<void()> Shutdown;
+		HINSTANCE Instance = nullptr;
+		Function<void(DLL* entry)> CallbackInitialize;
+		Function<void()> CallbackGUI;
+		Function<void()> CallbackShutdown;
 
 		/// <summary>
-		/// Initialize the DLL.
+		/// Create a new DLL.
 		/// </summary>
 		DLL() = default;
 		
 		/// <summary>
-		/// Initialize the DLL.
+		/// Create a new DLL.
 		/// </summary>
 		/// <param name="filePath">The DLL file path.</param>
 		DLL(std::string filePath);
 
 		/// <summary>
-		/// Shutdown the DLL.
+		/// Release the DLL.
 		/// </summary>
 		~DLL();
+
+		/// <summary>
+		/// Set ImGUI renderer.
+		/// </summary>
+		void SetRenderer();
 	};
 }

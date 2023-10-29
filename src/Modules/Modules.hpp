@@ -60,12 +60,17 @@ namespace IW3SR
 		/// <summary>
 		/// Load dynamic modules.
 		/// </summary>
-		void LoadDynamic();
+		void LoadDynamicModules();
 
 		/// <summary>
-		/// Refresh dynamic modules.
+		/// Set the dynamic modules renderer.
 		/// </summary>
-		void RefreshDynamicModules();
+		void SetDynamicModulesRenderer();
+
+		/// <summary>
+		/// Reload the dynamic modules.
+		/// </summary>
+		void ReloadDynamicModules();
 
 		/// <summary>
 		/// Enable a module.
@@ -78,6 +83,12 @@ namespace IW3SR
 		/// </summary>
 		/// <param name="id">The module id.</param>
 		void Disable(const std::string& id);
+
+		/// <summary>
+		/// Remove a module.
+		/// </summary>
+		/// <param name="id">The module id.</param>
+		static void Remove(const std::string& id);
 
 		/// <summary>
 		/// Deserialize the modules.

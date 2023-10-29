@@ -19,7 +19,6 @@ namespace IW3SR
 		static inline Window Toolbar;
 		static inline bool Active = false;
 		static inline bool Open = false;
-		static inline bool ReloadRequested = false;
 
 		static inline ImVec4 Rainbow;
 

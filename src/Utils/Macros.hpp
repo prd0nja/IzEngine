@@ -43,6 +43,10 @@
 #define PRIVATE false
 #endif
 
+#ifndef CMAKE_BINARY_DIR
+#define CMAKE_BINARY_DIR ""
+#endif
+
 #define NLOHMANN_DEFINE_POLY(Type, ChildClass, ...) \
 	virtual void Serialize(nlohmann::json& json) override \
 	{ \

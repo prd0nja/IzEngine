@@ -23,10 +23,11 @@ namespace IW3SR
 		Load<Console>();
 		Load<FPS>();
 		Load<Velocity>();
-		LoadDynamic();
+
+		LoadDynamicModules();
 	}
 
-	void Modules::LoadDynamic()
+	void Modules::LoadDynamicModules()
 	{
 		if (!std::filesystem::is_directory(Environment::PluginsDirectory))
 			return;
@@ -38,33 +39,41 @@ namespace IW3SR
 		}
 	}
 
-	void Modules::RefreshDynamicModules()
+	void Modules::SetDynamicModulesRenderer()
 	{
 		for (const auto& [_, dll] : DLLs)
-		{
-			if (dll->GUI)
-				dll->GUI();
-		}
+			dll->SetRenderer();
+	}
+
+	void Modules::ReloadDynamicModules()
+	{
+		DLLs.clear();
+
+		if (std::filesystem::exists(CMAKE_BINARY_DIR))
+			system(std::format(R"(cd "{}" && cmake --build . --config Debug)", CMAKE_BINARY_DIR).c_str());
+
+		LoadDynamicModules();
 	}
 
 	void Modules::Enable(const std::string& id)
 	{
-		auto entry = Entries.find(id);
-		if (entry != Entries.end() && !entry->second->IsEnabled)
-		{
-			entry->second->IsEnabled = true;
-			entry->second->Initialize();
-		}
+		auto& entry = Entries[id];
+		entry->IsEnabled = true;
+		entry->Initialize();
 	}
 
 	void Modules::Disable(const std::string& id)
 	{
-		auto entry = Entries.find(id);
-		if (entry != Entries.end() && entry->second->IsEnabled)
-		{
-			entry->second->IsEnabled = false;
-			entry->second->Shutdown();
-		}
+		auto& entry = Entries[id];
+		entry->IsEnabled = false;
+		entry->Shutdown();
+	}
+
+	void Modules::Remove(const std::string& id)
+	{
+		auto it = Entries.find(id);
+		if (it != Entries.end())
+			Entries.erase(it);
 	}
 
 	void Modules::Deserialize()

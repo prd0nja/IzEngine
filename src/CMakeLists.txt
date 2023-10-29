@@ -13,6 +13,10 @@ target_include_directories(IW3SR PUBLIC .)
 target_sources(IW3SR.DLL PRIVATE main.cpp)
 target_link_libraries(IW3SR.DLL PUBLIC IW3SR)
 
+if(${CMAKE_BUILD_TYPE} STREQUAL "Debug")
+	target_compile_definitions(IW3SR PUBLIC CMAKE_BINARY_DIR="${CMAKE_BINARY_DIR}")
+endif()
+
 # API
 target_link_libraries(IW3SR.API PUBLIC IW3SR.DLL)
 target_compile_definitions(IW3SR.API PUBLIC API=IMPORT)
