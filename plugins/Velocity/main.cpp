@@ -4,8 +4,7 @@
 
 PLUGIN void Initialize(DLL* entry)
 {
-	entry->ID = "sr.player.velocity";
-	entry->Name = "Private";
+	entry->SetInfos("sr.player.velocity", "Velocity");
 
 	Modules::Load<Velocity>();
 }

@@ -4,8 +4,7 @@
 
 PLUGIN void Initialize(DLL* entry)
 {
-	entry->ID = "sr.player.fps";
-	entry->Name = "FPS";
+	entry->SetInfos("sr.player.fps", "FPS");
 
 	Modules::Load<FPS>();
 }

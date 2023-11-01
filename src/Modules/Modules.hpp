@@ -23,6 +23,7 @@ namespace IW3SR
 		static inline std::map<std::string, std::unique_ptr<DLL>> DLLs;
 		static inline nlohmann::json Serialized;
 		static inline Window Menu;
+		static inline bool IsReloading = false;
 
 		/// <summary>
 		/// Initialize the modules.
@@ -33,12 +34,17 @@ namespace IW3SR
 		/// <summary>
 		/// Initialize the modules.
 		/// </summary>
-		static void Initialize();
+		void Initialize();
 
 		/// <summary>
 		/// Reload the modules.
 		/// </summary>
 		void Reload();
+
+		/// <summary>
+		/// Compile the plugins.
+		/// </summary>
+		void Compile();
 
 		/// <summary>
 		/// Load a module.

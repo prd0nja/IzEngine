@@ -4,8 +4,7 @@
 
 PLUGIN void Initialize(DLL* entry)
 {
-	entry->ID = "sr.sys.console";
-	entry->Name = "Console";
+	entry->SetInfos("sr.player.console", "Console");
 
 	Modules::Load<Console>();
 }

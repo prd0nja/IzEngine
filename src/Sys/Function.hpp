@@ -19,6 +19,7 @@ namespace IW3SR
 		/// Initialize a new function wrapper.
 		/// </summary>
 		Function() = default;
+		~Function() = default;
 
 		/// <summary>
 		/// Initialize a new Function wrapper.

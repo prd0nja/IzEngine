@@ -13,7 +13,7 @@ namespace IW3SR
 	/// <summary>
 	/// Dynamic link library.
 	/// </summary>
-	class DLL
+	class API DLL
 	{
 	public:
 		std::string ID;
@@ -45,5 +45,12 @@ namespace IW3SR
 		/// Set ImGUI renderer.
 		/// </summary>
 		void SetRenderer();
+
+		/// <summary>
+		/// Set DLL infos.
+		/// </summary>
+		/// <param name="id">The ID.</param>
+		/// <param name="name">The name.</param>
+		void SetInfos(const std::string& id, const std::string& name);
 	};
 }

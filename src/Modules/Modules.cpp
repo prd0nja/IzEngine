@@ -29,14 +29,22 @@ namespace IW3SR
 
 	void Modules::Reload()
 	{
-		DLLs.clear();
+		if (IsReloading) false;
+		IsReloading = true;
 
+		DLLs.clear();
+		std::thread([this] { Compile(); }).detach();
+	}
+
+	void Modules::Compile()
+	{
 		if (std::filesystem::exists(CMAKE_BINARY_DIR))
 		{
 			constexpr auto command = R"(cd "{}" && cmake --build . --config Debug --target Install)";
 			system(std::format(command, CMAKE_BINARY_DIR).c_str());
 		}
 		Initialize();
+		IsReloading = false;
 	}
 
 	void Modules::SetRenderer()

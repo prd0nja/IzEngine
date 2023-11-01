@@ -38,4 +38,10 @@ namespace IW3SR
 		if (CallbackGUI)
 			CallbackGUI();
 	}
+
+	void DLL::SetInfos(const std::string& id, const std::string& name)
+	{
+		ID = id;
+		Name = name;
+	}
 }
