@@ -16,8 +16,8 @@ namespace IW3SR
 		/// <summary>
 		/// Initialize a new logger.
 		/// </summary>
-		Log() = default;
-		~Log() = default;
+		Log();
+		~Log();
 
 		/// <summary>
 		/// Write to the console.
