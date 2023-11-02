@@ -8,6 +8,8 @@ target_sources(IW3SR PRIVATE
 	Environment.cpp
 	Function.hpp
 	Hook.hpp
+	KeyListener.hpp
+	KeyListener.cpp
 	Log.hpp
 	Log.cpp
 	Memory.hpp
