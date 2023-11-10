@@ -1,5 +1,7 @@
 #pragma once
 #include <Windows.h>
+#include <unordered_map>
+#include <nlohmann/json.hpp>
 
 namespace IW3SR
 {
@@ -9,9 +11,13 @@ namespace IW3SR
 	class KeyListener
 	{
 	public:
+		static inline std::unordered_map<int, int> Keys;
 		int Key = 0;
-		int Delay = 0;
-		int LastTime = 0;
+
+		/// <summary>
+		/// Initialize the KeyListener.
+		/// </summary>
+		KeyListener() = default;
 
 		/// <summary>
 		/// Initialize the KeyLister.
@@ -21,16 +27,30 @@ namespace IW3SR
 		~KeyListener() = default;
 
 		/// <summary>
-		/// Initialize the KeyListener.
-		/// </summary>
-		/// <param name="vk">The vk code.</param>
-		/// <param name="delay">The delay in ms.</param>
-		KeyListener(int vk, int delay);
-
-		/// <summary>
-		/// Is key pressed.
+		/// Is key up.
 		/// </summary>
 		/// <returns></returns>
-		bool IsPressed();
+		bool IsUp();
+
+		/// <summary>
+		/// Is key down.
+		/// </summary>
+		/// <returns></returns>
+		bool IsDown();
+
+		/// <summary>
+		/// Process keys.
+		/// </summary>
+		/// <param name="Msg">The message code.</param>
+		/// <param name="wParam">Additional message-specific information.</param>
+		/// <param name="lParam">Additional message-specific information.</param>
+		static void Process(UINT Msg, WPARAM wParam, LPARAM lParam);
+
+		/// <summary>
+		/// Reset keys.
+		/// </summary>
+		static void Reset();
+
+		NLOHMANN_DEFINE_TYPE_INTRUSIVE(KeyListener, Key);
 	};
 }

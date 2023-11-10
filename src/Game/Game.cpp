@@ -49,8 +49,8 @@ namespace IW3SR
 		CreateWindowExA_h.Install();
 		MainWndProc_h.Install();
 
-		CG_DrawCrosshair_h.Install();
 		Com_PrintMessage_h.Install();
+		CG_DrawCrosshair_h.Install();
 		R_Direct3DCreate9_h.Install();
 		RB_EndSceneRendering_h.Install();
 	}
@@ -60,8 +60,8 @@ namespace IW3SR
 		CreateWindowExA_h.Remove();
 		MainWndProc_h.Remove();
 
-		CG_DrawCrosshair_h.Remove();
 		Com_PrintMessage_h.Remove();
+		CG_DrawCrosshair_h.Remove();
 		R_Direct3DCreate9_h.Remove();
 		RB_EndSceneRendering_h.Remove();
 	}

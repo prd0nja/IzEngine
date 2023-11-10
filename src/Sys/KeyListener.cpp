@@ -7,21 +7,33 @@ namespace IW3SR
 		Key = vk;
 	}
 
-	KeyListener::KeyListener(int vk, int delay)
+	bool KeyListener::IsDown()
 	{
-		Key = vk;
-		Delay = delay;
+		return Keys[Key] == WM_KEYDOWN;
 	}
 
-	bool KeyListener::IsPressed()
+	bool KeyListener::IsUp()
 	{
-		bool pressed = GetAsyncKeyState(Key) & 0x8000;
-		if (!Delay) return pressed;
+		return Keys[Key] == WM_KEYUP;
+	}
 
-		int time = timeGetTime();
-		if (LastTime + Delay >= time)
-			return false;
-		LastTime = timeGetTime();
-		return pressed;
+	void KeyListener::Process(UINT Msg, WPARAM wParam, LPARAM lParam)
+	{
+		switch (Msg)
+		{
+		case WM_KEYDOWN:
+		case WM_SYSKEYDOWN:
+			Keys[wParam] = WM_KEYDOWN;
+			break;
+		case WM_KEYUP:
+		case WM_SYSKEYUP:
+			Keys[wParam] = WM_KEYUP;
+			break;
+		}
+	}
+
+	void KeyListener::Reset()
+	{
+		Keys.clear();
 	}
 }

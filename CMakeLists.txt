@@ -26,6 +26,9 @@ set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 set(CPACK_GENERATOR 7Z)
 include(CPack)
 
+# System dependencies
+set(SYSTEM_DEPENDENCY Winmm)
+
 # Dependencies
 find_package(DirectXSDK REQUIRED)
 find_package(imgui CONFIG REQUIRED)
@@ -62,6 +65,7 @@ set_target_properties(IW3SR.DLL PROPERTIES
 	SUFFIX ".asi")
 
 target_link_libraries(IW3SR PUBLIC
+	${SYSTEM_DEPENDENCY}
 	$<TARGET_OBJECTS:IW3SR.ASM>
 	DirectX::SDK
 	imgui::imgui

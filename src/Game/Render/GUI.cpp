@@ -12,6 +12,7 @@ namespace IW3SR
 		}
 		Toolbar = Window("Toolbar");
 		Toolbar.SetRect(0, 0, 640, 0);
+		OpenKey = KeyListener(VK_F10);
 	}
 
 	void GUI::Initialize()
@@ -257,11 +258,15 @@ namespace IW3SR
 
 	LRESULT GUI::MainWndProc(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
 	{
+		KeyListener::Process(Msg, wParam, lParam);
+
 		if (!Active)
 			return MainWndProc_h(hWnd, Msg, wParam, lParam);
-
-		if (GetAsyncKeyState(VK_F10))
+		
+		if (OpenKey.IsUp())
 			Open = !Open;
+
+		KeyListener::Reset(); // @TODO move
 
 		ImGuiIO& io = ImGui::GetIO();
 		if (Open)

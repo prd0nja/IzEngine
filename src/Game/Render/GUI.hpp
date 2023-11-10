@@ -1,6 +1,7 @@
 #pragma once
 #include "Game/Definitions.hpp"
 #include "Game/Render/Draw/Window.hpp"
+#include "Sys/KeyListener.hpp"
 
 namespace IW3SR
 {
@@ -17,6 +18,7 @@ namespace IW3SR
 
 		static inline HWND MainWindow = nullptr;
 		static inline Window Toolbar;
+		static inline KeyListener OpenKey;
 		static inline bool Active = false;
 		static inline bool Open = false;
 
