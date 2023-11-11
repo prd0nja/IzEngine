@@ -38,9 +38,9 @@ namespace IW3SR
 		bool IsAlive();
 
 		/// <summary>
-		/// Initialize all players.
+		/// Allocates all players.
 		/// </summary>
-		static void Initialize();
+		static void Allocates();
 
 		/// <summary>
 		/// Get all players.

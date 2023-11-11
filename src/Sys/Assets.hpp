@@ -16,12 +16,12 @@ namespace IW3SR
 		/// <summary>
 		/// Initialize the assets.
 		/// </summary>
-		static void Initialize();
+		Assets() = default;
 
 		/// <summary>
 		/// Shutdown the assets.
 		/// </summary>
-		static void Shutdown();
+		~Assets();
 
 		/// <summary>
 		/// Load image.

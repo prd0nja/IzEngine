@@ -19,7 +19,7 @@ namespace IW3SR
 		return c->isAlive;
 	}
 
-	void Player::Initialize()
+	void Player::Allocates()
 	{
 		for (int i = 0; i < 64; i++) 
 			SR->Players[i] = std::make_shared<Player>(i);

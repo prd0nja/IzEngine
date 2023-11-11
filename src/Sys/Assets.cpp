@@ -3,9 +3,7 @@
 
 namespace IW3SR
 {
-	void Assets::Initialize() { }
-
-	void Assets::Shutdown()
+	Assets::~Assets()
 	{
 		for (const auto& [name, image] : Images)
 			image->Release();

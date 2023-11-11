@@ -26,6 +26,7 @@ namespace IW3SR
 	class Game
 	{
 	public:
+		std::unique_ptr<class Assets> Assets;
 		std::unique_ptr<class Log> Log;
 		std::unique_ptr<class Render> Render;
 		std::unique_ptr<class Modules> Modules;
