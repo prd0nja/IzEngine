@@ -60,6 +60,9 @@ namespace IW3SR
 
 	void GUI::Begin()
 	{
+		if (OpenKey.IsPressed())
+			Open = !Open;
+
 		ImGui_ImplDX9_NewFrame();
 		ImGui_ImplWin32_NewFrame();
 		ImGui::NewFrame();
@@ -71,6 +74,7 @@ namespace IW3SR
 		ImGui::EndFrame();
 		ImGui::Render();
 		ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
+		KeyListener::Reset();
 	}
 
 	void GUI::DrawToolbar()
@@ -262,11 +266,6 @@ namespace IW3SR
 
 		if (!Active)
 			return MainWndProc_h(hWnd, Msg, wParam, lParam);
-		
-		if (OpenKey.IsUp())
-			Open = !Open;
-
-		KeyListener::Reset(); // @TODO move
 
 		ImGuiIO& io = ImGui::GetIO();
 		if (Open)

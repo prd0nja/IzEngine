@@ -7,14 +7,19 @@ namespace IW3SR
 		Key = vk;
 	}
 
-	bool KeyListener::IsDown()
-	{
-		return Keys[Key] == WM_KEYDOWN;
-	}
-
 	bool KeyListener::IsUp()
 	{
-		return Keys[Key] == WM_KEYUP;
+		return Keys[Key].State == WM_KEYUP;
+	}
+
+	bool KeyListener::IsDown()
+	{
+		return Keys[Key].State == WM_KEYDOWN;
+	}
+
+	bool KeyListener::IsPressed()
+	{
+		return Keys[Key].Repeat == 1 && IsDown();
 	}
 
 	void KeyListener::Process(UINT Msg, WPARAM wParam, LPARAM lParam)
@@ -23,17 +28,20 @@ namespace IW3SR
 		{
 		case WM_KEYDOWN:
 		case WM_SYSKEYDOWN:
-			Keys[wParam] = WM_KEYDOWN;
+			Keys[wParam].Repeat++;
+			Keys[wParam].State = WM_KEYDOWN;
 			break;
 		case WM_KEYUP:
 		case WM_SYSKEYUP:
-			Keys[wParam] = WM_KEYUP;
+			Keys[wParam].Repeat = 0;
+			Keys[wParam].State = WM_KEYUP;
 			break;
 		}
 	}
 
 	void KeyListener::Reset()
 	{
-		Keys.clear();
+		for (auto& [key, info] : Keys)
+			info.State = 0;
 	}
 }

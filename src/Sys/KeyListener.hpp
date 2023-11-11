@@ -1,4 +1,6 @@
 #pragma once
+#include "Utils/Macros.hpp"
+
 #include <Windows.h>
 #include <unordered_map>
 #include <nlohmann/json.hpp>
@@ -6,12 +8,21 @@
 namespace IW3SR
 {
 	/// <summary>
+	/// Key info struct.
+	/// </summary>
+	struct KeyInfo
+	{
+		int State;
+		int Repeat;
+	};
+
+	/// <summary>
 	/// Key listener.
 	/// </summary>
-	class KeyListener
+	class API KeyListener
 	{
 	public:
-		static inline std::unordered_map<int, int> Keys;
+		static inline std::unordered_map<int, KeyInfo> Keys;
 		int Key = 0;
 
 		/// <summary>
@@ -37,6 +48,12 @@ namespace IW3SR
 		/// </summary>
 		/// <returns></returns>
 		bool IsDown();
+
+		/// <summary>
+		/// Is key pressed.
+		/// </summary>
+		/// <returns></returns>
+		bool IsPressed();
 
 		/// <summary>
 		/// Process keys.
