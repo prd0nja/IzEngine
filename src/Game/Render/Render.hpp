@@ -12,6 +12,8 @@ namespace IW3SR
 	class Render
 	{
 	public:
+		bool Initialized = false;
+
 		/// <summary>
 		/// Initialize the rendering class.
 		/// </summary>

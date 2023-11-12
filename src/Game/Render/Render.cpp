@@ -15,8 +15,10 @@ namespace IW3SR
 
 	void Render::Initialize()
 	{
-		GUI::Initialize();
-		//Draw2D::Initialize();
+		if (Initialized) return;
+		Initialized = true;
+
+		Draw2D::Initialize();
 		Engine::Draw2D::Initialize();
 	}
 
