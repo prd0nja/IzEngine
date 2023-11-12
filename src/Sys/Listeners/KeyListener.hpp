@@ -12,8 +12,8 @@ namespace IW3SR
 	/// </summary>
 	struct KeyInfo
 	{
-		int State;
-		int Repeat;
+		int State = 0;
+		int PrevState = 0;
 	};
 
 	/// <summary>
