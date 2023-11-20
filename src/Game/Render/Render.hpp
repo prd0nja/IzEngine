@@ -21,6 +21,11 @@ namespace IW3SR
 		~Render() = default;
 
 		/// <summary>
+		/// Patch the game.
+		/// </summary>
+		void Patch();
+
+		/// <summary>
 		/// Initialize the renderer.
 		/// </summary>
 		void Initialize();
@@ -31,13 +36,19 @@ namespace IW3SR
 		void Shutdown();
 
 		/// <summary>
+		/// Text renderer.
+		/// </summary>
+		/// <param name="cmd">Render command.</param>
+		static void Text(GfxCmdDrawText2D* cmd);
+
+		/// <summary>
 		/// Draws 3D.
 		/// </summary>
-		/// <param name="input">Input commands for rendering.</param>
+		/// <param name="cmd">Render command.</param>
 		/// <param name="viewInfo">View information for the graphics.</param>
 		/// <param name="src">Source state for the graphics command buffer.</param>
 		/// <param name="buf">Graphics command buffer state.</param>
-		static void Draw3D(GfxCmdBufInput* input, GfxViewInfo* viewInfo,
+		static void Draw3D(GfxCmdBufInput* cmd, GfxViewInfo* viewInfo,
 			GfxCmdBufSourceState* src, GfxCmdBufState* buf);
 
 		/// <summary>

@@ -5,14 +5,19 @@ namespace IW3SR
 {
 	GUI::GUI()
 	{
-		if (COD4X)
-		{
-			MainWndProc_h.Address = Memory::Scan("cod4x_021",
-				"\x55\x89\xE5\x53\x81\xEC\x84\x00\x00\x00\xC7\x04\x24\x02", 14);
-		}
+		Patch();
 		Toolbar = Window("Toolbar");
 		Toolbar.SetRect(0, 0, 640, 0);
 		OpenKey = KeyListener(VK_F10);
+	}
+
+	void GUI::Patch()
+	{
+		if (COD4X)
+		{
+			MainWndProc_h.Address = Memory::Scan(COD4X_BIN,
+				"\x55\x89\xE5\x53\x81\xEC\x84\x00\x00\x00\xC7\x04\x24\x02", 14);
+		}
 	}
 
 	void GUI::Initialize()

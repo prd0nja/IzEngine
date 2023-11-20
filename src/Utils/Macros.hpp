@@ -14,6 +14,7 @@
 
 #define C_EXTERN extern "C"
 #define CPP_EXTERN extern "C++"
+#define ASM C_EXTERN
 
 #ifndef EXPORT
 #define EXPORT __declspec(dllexport)

@@ -34,7 +34,8 @@ namespace IW3SR
 		std::filesystem::path cod4x = Utils::GetFiles(Environment::BaseDirectory, "cod4x_", ".dll").back();
 		if (cod4x.empty()) return;
 
-		COD4X = reinterpret_cast<uintptr_t>(GetModuleHandle(cod4x.filename().string().c_str()));
+		COD4X_BIN = cod4x.filename().string();
+		COD4X = reinterpret_cast<uintptr_t>(GetModuleHandle(COD4X_BIN.c_str()));
 
 		uintptr_t antiHook = COD4X + 0x43580;
 		uintptr_t aimAssist = 0x452BFA;

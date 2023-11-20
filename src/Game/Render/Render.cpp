@@ -5,6 +5,11 @@ namespace IW3SR
 {
 	Render::Render()
 	{
+		Patch();
+	}
+
+	void Render::Patch()
+	{
 		// Disable <developer 1> check for drawing debug lines & collisions
 		Memory::NOP(0x6496D8, 3);
 
@@ -30,11 +35,11 @@ namespace IW3SR
 		Engine::Assets::Shutdown();
 	}
 
-	void Render::Draw3D(GfxCmdBufInput* input, GfxViewInfo* viewInfo, GfxCmdBufSourceState* src, GfxCmdBufState* buf)
+	void Render::Draw3D(GfxCmdBufInput* cmd, GfxViewInfo* viewInfo, GfxCmdBufSourceState* src, GfxCmdBufState* buf)
 	{
 		ModuleCallback(OnDraw3D);
 		Engine::Draw3D::Frame();
-		RB_EndSceneRendering_h(input, viewInfo, src, buf);
+		RB_EndSceneRendering_h(cmd, viewInfo, src, buf);
 	}
 
 	void Render::Draw2D(bool scoreboard)

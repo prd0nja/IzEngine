@@ -29,6 +29,11 @@ namespace IW3SR
 		~GUI() = default;
 
 		/// <summary>
+		/// Patch the game.
+		/// </summary>
+		void Patch();
+
+		/// <summary>
 		/// Initialize ImGUI.
 		/// </summary>
 		static void Initialize();
