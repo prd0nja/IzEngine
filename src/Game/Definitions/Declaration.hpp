@@ -5,8 +5,9 @@
 #include <Windows.h>
 
 // Modules
-API extern const uintptr_t IW3MP;
-API extern const uintptr_t COD4X;
+API extern uintptr_t COD4X;
+API extern uintptr_t IW3MP;
+API extern uintptr_t IW3XO;
 
 // Game
 API extern CmdArgs* cmd_args;

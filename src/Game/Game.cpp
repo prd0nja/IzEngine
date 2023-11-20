@@ -7,8 +7,8 @@ namespace IW3SR
 {
 	Game::Game()
 	{
-		CoD4X();
 		Environment::Load();
+		CoD4X();
 
 		Log = std::make_unique<class Log>();
 		Render = std::make_unique<class Render>();
@@ -31,7 +31,10 @@ namespace IW3SR
 
 	void Game::CoD4X()
 	{
-		if (!COD4X) return;
+		std::filesystem::path cod4x = Utils::GetFiles(Environment::BaseDirectory, "cod4x_", ".dll").back();
+		if (cod4x.empty()) return;
+
+		COD4X = reinterpret_cast<uintptr_t>(GetModuleHandle(cod4x.filename().string().c_str()));
 
 		uintptr_t antiHook = COD4X + 0x43580;
 		uintptr_t aimAssist = 0x452BFA;

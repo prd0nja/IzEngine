@@ -1,8 +1,9 @@
 #include "Declaration.hpp"
 
 // Modules
-const uintptr_t IW3MP = reinterpret_cast<uintptr_t>(GetModuleHandle("iw3mp.exe"));
-const uintptr_t COD4X = reinterpret_cast<uintptr_t>(GetModuleHandle("cod4x_021.dll"));
+uintptr_t COD4X = 0;
+uintptr_t IW3MP = reinterpret_cast<uintptr_t>(GetModuleHandle("iw3mp.exe"));
+uintptr_t IW3XO = reinterpret_cast<uintptr_t>(GetModuleHandle("iw3xo.dll"));
 
 // Game
 CmdArgs* cmd_args = reinterpret_cast<CmdArgs*>(0x1410B40);
