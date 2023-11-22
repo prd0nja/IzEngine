@@ -31,10 +31,7 @@ namespace IW3SR
 
 	void Game::CoD4X()
 	{
-		std::filesystem::path cod4x = Utils::GetFiles(Environment::BaseDirectory, "cod4x_", ".dll").back();
-		if (cod4x.empty()) return;
-
-		COD4X_BIN = cod4x.filename().string();
+		COD4X_BIN = "cod4x_021.dll";
 		COD4X = reinterpret_cast<uintptr_t>(GetModuleHandle(COD4X_BIN.c_str()));
 
 		if (!COD4X) return;
