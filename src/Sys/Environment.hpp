@@ -14,6 +14,8 @@ namespace IW3SR
 	{
 	public:
 		static inline nlohmann::json Settings;
+		static inline std::vector<std::string> Modules;
+
 		static inline std::filesystem::path BaseDirectory;
 		static inline std::filesystem::path IW3SRDirectory;
 		static inline std::filesystem::path PluginsDirectory;
@@ -60,5 +62,16 @@ namespace IW3SR
 		{
 			nlohmann::to_json(Settings[id], instance);
 		}
+
+	private:
+		/// <summary>
+		/// Build the environment.
+		/// </summary>
+		static void Build();
+
+		/// <summary>
+		/// Build the modules list.
+		/// </summary>
+		static void BuildModulesList();
 	};
 }

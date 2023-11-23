@@ -31,7 +31,11 @@ namespace IW3SR
 
 	void Game::CoD4X()
 	{
-		COD4X_BIN = "cod4x_021.dll";
+		auto cod4x = std::ranges::find_if(Environment::Modules, 
+			[](const auto& m) { return m.find("cod4x_") != std::string::npos; });
+
+		if (cod4x != Environment::Modules.end())
+			COD4X_BIN = *cod4x;
 		COD4X = reinterpret_cast<uintptr_t>(GetModuleHandle(COD4X_BIN.c_str()));
 
 		if (!COD4X) return;
@@ -43,6 +47,8 @@ namespace IW3SR
 		Memory::Write(antiHook, "\xC3", 1);
 		Memory::Write(aimAssist, "\xE8\xA1\xF9\xFA\xFF", 5);
 		Memory::Write(localTagMatrix, "\x51\x53\x8B\x5C\x24", 5);
+
+		bg_weaponNames = reinterpret_cast<WeaponDef**>(COD4X + 0x443DDE0);
 	}
 
 	void Game::Hook()

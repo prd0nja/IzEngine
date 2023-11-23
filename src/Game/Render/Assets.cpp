@@ -35,7 +35,7 @@ namespace IW3SR
 		D3DXCreateFont(dx->device, height, 0, FW_NORMAL, 1, FALSE, DEFAULT_CHARSET,
 			OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE, name.c_str(), &font);
 
-		if (std::find(FontNames.begin(), FontNames.end(), name) == FontNames.end())
+		if (std::ranges::find(FontNames, name) == FontNames.end())
 			FontNames.push_back(name.c_str());
 		Fonts.push_back(font);
 		return font;
@@ -43,7 +43,7 @@ namespace IW3SR
 
 	void Assets::UnloadFont(ID3DXFont* font)
 	{
-		auto it = std::find(Fonts.begin(), Fonts.end(), font);
+		auto it = std::ranges::find(Fonts, font);
 		font->Release();
 		Fonts.erase(it);
 	}
