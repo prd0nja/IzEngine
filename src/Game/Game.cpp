@@ -34,11 +34,11 @@ namespace IW3SR
 		auto cod4x = std::ranges::find_if(Environment::Modules, 
 			[](const auto& m) { return m.find("cod4x_") != std::string::npos; });
 
-		if (cod4x != Environment::Modules.end())
-			COD4X_BIN = *cod4x;
-		COD4X = reinterpret_cast<uintptr_t>(GetModuleHandle(COD4X_BIN.c_str()));
+		if (cod4x == Environment::Modules.end())
+			return;
 
-		if (!COD4X) return;
+		COD4X_BIN = *cod4x;
+		COD4X = reinterpret_cast<uintptr_t>(GetModuleHandle(COD4X_BIN.c_str()));
 
 		uintptr_t antiHook = COD4X + 0x43580;
 		uintptr_t aimAssist = 0x452BFA;
