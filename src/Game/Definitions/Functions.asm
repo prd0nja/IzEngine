@@ -113,7 +113,7 @@ R_TextWidth:
 
 SECTION .rdata
 
-	CG_TracePoint_a: dd 20A3E1CCh
+	CG_TracePoint_a: dd 459EF0h
     Dvar_FindVar_a: dd 56B5D0h
     R_AddCmdDrawText_a: dd 5F6B00h
     R_AddCmdDrawStretchPic_a: dd 5F65F0h
