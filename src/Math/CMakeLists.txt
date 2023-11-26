@@ -1,3 +1,6 @@
+target_precompile_headers(IW3SR PRIVATE
+	Math.hpp)
+
 target_sources(IW3SR PRIVATE
 	GLM.hpp
 	Math.hpp
