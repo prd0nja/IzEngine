@@ -1,4 +1,5 @@
 #include "HUD.hpp"
+#include "Draw2D.hpp"
 
 namespace IW3SR::Engine
 {
@@ -10,9 +11,6 @@ namespace IW3SR::Engine
 		Material = nullptr;
 		MaterialName = material;
 	}
-
-	HUD::HUD(const std::string& material, const vec2& pos, const vec2& size, const vec4& color) :
-		HUD(material, pos.x, pos.y, size.x, size.y, color) { }
 
 	void HUD::SetRectAlignment(RectAlignHorizontal_t horizontal, RectAlignVertical_t vertical)
 	{
@@ -43,6 +41,39 @@ namespace IW3SR::Engine
 			y += Size.y / 2.f;
 		else if (AlignY & HUDALIGN_BOTTOM)
 			y += Size.y;
+	}
+
+	void HUD::Menu(const std::string& label, bool open)
+	{
+		if (!ImGui::CollapsingHeader(label.c_str(), open ? ImGuiTreeNodeFlags_DefaultOpen : ImGuiTreeNodeFlags_None))
+			return;
+
+		const std::vector<std::string>& horizontals = Draw2D::HorizontalAlignment;
+		const std::vector<std::string>& verticals = Draw2D::VerticalAlignment;
+		const std::vector<std::string>& fonts = Assets::FontNames;
+
+		ImGui::DragFloat2("Position", Position);
+		ImGui::DragFloat2("Size", Size);
+		ImGui::ColorEdit4("Color", Color, ImGuiColorEditFlags_Float);
+
+		if (ImGui::CollapsingHeader("Alignment"))
+		{
+			int horizontal = HorizontalAlign - 1;
+			if (ImGui::Combo("Horizontal Alignment", &horizontal, horizontals))
+				HorizontalAlign = static_cast<RectAlignHorizontal_t>(horizontal + 1);
+
+			int vertical = VerticalAlign - 1;
+			if (ImGui::Combo("Vertical Alignment", &vertical, verticals))
+				VerticalAlign = static_cast<RectAlignVertical_t>(vertical + 1);
+
+			int alignX = AlignX / 4;
+			if (ImGui::Combo("Align X", &alignX, horizontals))
+				AlignX = static_cast<hudalign_t>(alignX * 4);
+
+			int alignY = AlignY;
+			if (ImGui::Combo("Align Y", &alignY, verticals))
+				AlignY = static_cast<hudalign_t>(alignY);
+		}
 	}
 
 	void HUD::Render()

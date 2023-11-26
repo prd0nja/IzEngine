@@ -15,9 +15,6 @@ namespace IW3SR
 		FontIndex = 0;
 	}
 
-	Text::Text(const std::string& text, const std::string& font, const vec2& pos, float size, const vec4& color) :
-		Text(text, font, pos.x, pos.y, size, color) { }
-
 	void Text::SetRectAlignment(RectAlignHorizontal_t horizontal, RectAlignVertical_t vertical)
 	{
 		HorizontalAlign = horizontal;
@@ -49,6 +46,43 @@ namespace IW3SR
 			y += Size.y / 2.f;
 		else if (AlignY & HUDALIGN_BOTTOM)
 			y += Size.y;
+	}
+
+	void Text::Menu(const std::string& label, bool open)
+	{
+		if (!ImGui::CollapsingHeader(label.c_str(), open ? ImGuiTreeNodeFlags_DefaultOpen : ImGuiTreeNodeFlags_None))
+			return;
+
+		const std::vector<std::string>& horizontals = Draw2D::HorizontalAlignment;
+		const std::vector<std::string>& verticals = Draw2D::VerticalAlignment;
+		const std::vector<std::string>& fonts = Assets::FontNames;
+
+		ImGui::DragFloat2("Position", Position);
+		ImGui::ColorEdit4("Color", Color, ImGuiColorEditFlags_Float);
+
+		if (ImGui::InputFloat("Font Size", &FontSize, 0.1))
+			SetFont(FontName);
+		if (ImGui::Combo("Font", &FontIndex, fonts))
+			SetFont(fonts[FontIndex]);
+
+		if (ImGui::CollapsingHeader("Alignment"))
+		{
+			int horizontal = HorizontalAlign - 1;
+			if (ImGui::Combo("Horizontal Alignment", &horizontal, horizontals))
+				HorizontalAlign = static_cast<RectAlignHorizontal_t>(horizontal + 1);
+
+			int vertical = VerticalAlign - 1;
+			if (ImGui::Combo("Vertical Alignment", &vertical, verticals))
+				VerticalAlign = static_cast<RectAlignVertical_t>(vertical + 1);
+
+			int alignX = AlignX / 4;
+			if (ImGui::Combo("Align X", &alignX, horizontals))
+				AlignX = static_cast<hudalign_t>(alignX * 4);
+
+			int alignY = AlignY;
+			if (ImGui::Combo("Align Y", &alignY, verticals))
+				AlignY = static_cast<hudalign_t>(alignY);
+		}
 	}
 
 	void Text::Render()

@@ -12,11 +12,7 @@ namespace IW3SR
 
 	void Velocity::OnMenu()
 	{
-		ImGui::ColorEdit4("Color", VelocityText.Color, ImGuiColorEditFlags_Float);
-
-		const std::vector<std::string>& fonts = Assets::FontNames;
-		if (ImGui::Combo("Font", &VelocityText.FontIndex, fonts))
-			VelocityText.SetFont(fonts[VelocityText.FontIndex]);
+		VelocityText.Menu("Text", true);
 	}
 
 	void Velocity::OnFrame()

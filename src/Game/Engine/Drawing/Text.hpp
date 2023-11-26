@@ -42,16 +42,6 @@ namespace IW3SR::Engine
 		Text(const std::string& text, const std::string& font, float x, float y, float size, const vec4& color);
 
 		/// <summary>
-		/// Initialize the Text.
-		/// </summary>
-		/// <param name="text">The text.</param>
-		/// <param name="font">The font.</param>
-		/// <param name="pos">XY-coordinates of screen.</param>
-		/// <param name="size">Font size.</param>
-		/// <param name="color">The color.</param>
-		Text(const std::string& text, const std::string& font, const vec2& pos, float size, const vec4& color);
-
-		/// <summary>
 		/// Set the rect alignment.
 		/// </summary>
 		/// <param name="horizontal">Horizontal aligment.</param>
@@ -69,6 +59,13 @@ namespace IW3SR::Engine
 		/// Set/update font.
 		/// </summary>
 		void SetFont(const std::string& font);
+
+		/// <summary>
+		/// Render menu.
+		/// </summary>
+		/// <param name="label">The label.</param>
+		/// <param name="open">Default open.</param>
+		virtual void Menu(const std::string& label, bool open = false);
 
 		/// <summary>
 		/// Render text.

@@ -11,11 +11,7 @@ namespace IW3SR
 
 	void FPS::OnMenu()
 	{	
-		ImGui::ColorEdit4("Color", FPSText.Color, ImGuiColorEditFlags_Float);
-
-		const std::vector<std::string>& fonts = Assets::FontNames;
-		if (ImGui::Combo("Font", &FPSText.FontIndex, fonts))
-			FPSText.SetFont(fonts[FPSText.FontIndex]);
+		FPSText.Menu("Text", true);
 	}
 
 	void FPS::OnFrame()

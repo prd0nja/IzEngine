@@ -94,7 +94,7 @@ namespace ImGui
 
     void Movable(const std::string& label, vec2& position, vec2& size, vec2& renderPosition, vec2& renderSize)
     {
-        if (!GUI::DesignMode) return;
+        if (!GUI::Open || !GUI::DesignMode) return;
 
         SetNextWindowBgAlpha(0.2f);
         PushStyleColor(ImGuiCol_Border, { 0.2, 0.2, 0.2, 0.2 });

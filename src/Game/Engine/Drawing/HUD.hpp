@@ -39,15 +39,6 @@ namespace IW3SR::Engine
 		HUD(const std::string& material, float x, float y, float w, float h, const vec4& color);
 
 		/// <summary>
-		/// Initialize the HUD.
-		/// </summary>
-		/// <param name="material">The material.</param>
-		/// <param name="pos">XY position.</param>
-		/// <param name="size">WH size.</param>
-		/// <param name="color">The color.</param>
-		HUD(const std::string& material, const vec2& pos, const vec2& size, const vec4& color);
-
-		/// <summary>
 		/// Set the rect alignment.
 		/// </summary>
 		/// <param name="horizontal">Horizontal aligment.</param>
@@ -66,6 +57,13 @@ namespace IW3SR::Engine
 		/// </summary>
 		/// <param name="material">The material name.</param>
 		void SetMaterial(const std::string& material);
+
+		/// <summary>
+		/// Render menu.
+		/// </summary>
+		/// <param name="label">The label.</param>
+		/// <param name="open">Default open.</param>
+		virtual void Menu(const std::string& label, bool open = false);
 
 		/// <summary>
 		/// Render HUD.

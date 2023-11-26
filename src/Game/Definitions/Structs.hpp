@@ -205,29 +205,6 @@ namespace IW3SR
 		float fontHeight;
 	};
 
-	enum scrHorzAlignment
-	{
-		HORZ_LEFT = 0,
-		HORZ_CENTER = 1,
-		HORZ_RIGHT = 2,
-		HORZ_FULLSCREEN = 3,
-		HORZ_NONE = 4,
-		HORZ_VIRTUAL = 5,
-		HORZ_CENTER_SAFE = 6,
-		HORZ_CONSOLE_SPECIAL = 7,
-	};
-
-	enum scrVertAlignment
-	{
-		VERT_TOP = 0,
-		VERT_CENTER = 1,
-		VERT_BOTTOM = 2,
-		VERT_FULLSCREEN = 3,
-		VERT_NONE = 4,
-		VERT_VIRTUAL = 5,
-		VERT_CENTER_SAFE = 6,
-	};
-
 	typedef enum RectAlignHorizontal_t
 	{
 		HORIZONTAL_ALIGN_SUBLEFT,			// Left edge of a 4:3 screen (safe area not included).

@@ -11,6 +11,9 @@ namespace IW3SR::Engine
 	class API Draw2D
 	{
 	public:
+		static inline std::vector<std::string> HorizontalAlignment = { "Left", "Center", "Right " };
+		static inline std::vector<std::string> VerticalAlignment = { "Top", "Center", "Bottom" };
+
 		/// <summary>
 		/// Draw a rectangle with the specified color.
 		/// </summary>
