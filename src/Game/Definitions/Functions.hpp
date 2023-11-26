@@ -7,6 +7,10 @@ namespace IW3SR
 	static Function<int(const char* name)>
 		BG_FindWeaponIndexByName = 0x416610;
 
+	static Function<void(trace_t* result, const vec3_t start, const vec3_t mins, const vec3_t maxs,
+		const vec3_t end, int skipEntity, int tracemask)>
+		CG_Trace = 0x45A230;
+
 	static Function<void(int localClientNum, int controllerIndex, const char* text)>
 		Cmd_ExecuteSingleCommand = 0x4F9AB0;
 
@@ -21,9 +25,6 @@ namespace IW3SR
 
 	static Function<void(int count, int width, GfxPointVertex* verts, bool depthTest)>
 		RB_DrawLines3D = 0x613040;
-
-	static Function<void(trace_t* result, const vec3_t start, const vec3_t mins, const vec3_t maxs, const vec3_t end, int skipEntity, int tracemask)>
-		CG_Trace = 0x45A230;
 
 	extern Hook<HWND STDCALL(DWORD dwExStyle, LPCSTR lpClassName, LPCSTR lpWindowName,
 		DWORD dwStyle, int X, int Y, int nWidth, int nHeight, HWND hWndParent, HMENU hMenu,
