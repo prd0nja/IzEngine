@@ -37,7 +37,7 @@ namespace IW3SR
 	extern Hook<void(int channel, const char* msg, int type)>
 		Com_PrintMessage_h;
 
-	extern Hook<void(bool scoreboard)>
+	extern Hook<void(int localClientNum)>
 		CG_DrawCrosshair_h;
 
 	extern Hook<void(usercmd_s* cmd)>

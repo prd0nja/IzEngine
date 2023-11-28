@@ -14,7 +14,7 @@ namespace IW3SR
 	Hook<void(int channel, const char* msg, int type)>
 		Com_PrintMessage_h(0x4FCA50, Log::Write);
 
-	Hook<void(bool scoreboard)>
+	Hook<void(int localClientNum)>
 		CG_DrawCrosshair_h(0x42F6B5, Render::Draw2D);
 
 	Hook<void(usercmd_s* cmd)>

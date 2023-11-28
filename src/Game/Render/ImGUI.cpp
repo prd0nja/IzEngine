@@ -10,7 +10,7 @@ namespace ImGui
 		PopID();
 
         bool clicked = IsItemClicked();
-        if (clicked) *v = !*v;
+        if (v && clicked) *v = !*v;
 		return clicked;
 	}
 
@@ -158,5 +158,13 @@ namespace ImGui
         }
         End();
         PopStyleColor();
+    }
+
+    void Rainbow(const vec2& position, const vec2& size)
+    {
+        ImDrawList* draw = ImGui::GetForegroundDrawList();
+
+        const auto& [rainbow1, rainbow2] = GUI::Rainbow;
+        draw->AddRectFilledMultiColor(position, size, rainbow1, rainbow2, rainbow2, rainbow1);
     }
 }

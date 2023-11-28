@@ -3,6 +3,8 @@
 #include "Drawing/Window.hpp"
 #include "Sys/Listeners/KeyListener.hpp"
 
+#include <tuple>
+
 namespace IW3SR
 {
 	/// <summary>
@@ -21,7 +23,7 @@ namespace IW3SR
 		static inline bool Open = false;
 		static inline bool DesignMode = false;
 
-		static inline ImVec4 Rainbow;
+		static inline std::tuple<ImColor, ImColor> Rainbow;
 
 		/// <summary>
 		/// Initialize ImGUI.

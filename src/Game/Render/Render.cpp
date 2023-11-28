@@ -42,10 +42,10 @@ namespace IW3SR
 		RB_EndSceneRendering_h(cmd, viewInfo, src, buf);
 	}
 
-	void Render::Draw2D(bool scoreboard)
+	void Render::Draw2D(int localClientNum)
 	{
 		ModuleCallback(OnDraw2D);
-		CG_DrawCrosshair_h(scoreboard);
+		CG_DrawCrosshair_h(localClientNum);
 	}
 
 	void Render::Frame()

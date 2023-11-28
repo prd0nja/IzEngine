@@ -48,8 +48,8 @@ namespace IW3SR
 		/// <summary>
 		/// Draw 2D.
 		/// </summary>
-		/// <param name="scoreboard">Scoreboard visible.</param>
-		static void Draw2D(bool scoreboard);
+		/// <param name="localClientNum">Local client index.</param>
+		static void Draw2D(int localClientNum);
 
 		/// <summary>
 		/// Render frame.

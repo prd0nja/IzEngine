@@ -83,6 +83,14 @@ namespace ImGui
 	/// <param name="renderSize">The render size.</param>
 	/// <returns></returns>
 	API void Movable(const std::string& label, vec2& position, vec2& size, vec2& renderPosition, vec2& renderSize);
+
+	/// <summary>
+	/// Rainbow rect.
+	/// </summary>
+	/// <param name="position">The position.</param>
+	/// <param name="size">The size.</param>
+	/// <returns></returns>
+	API void Rainbow(const vec2& position, const vec2& size);
 }
 
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
