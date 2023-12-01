@@ -31,8 +31,14 @@ namespace IW3SR
 			ImGui::Tooltip("Reload plugins");
 			ImGui::SameLine();
 		}
-		ImGui::ButtonToggle(ICON_FA_PAINTBRUSH, "Design", &GUI::DesignMode, buttonSize);
+		ImGui::ButtonToggle(ICON_FA_GRIP, "Design", &GUI::DesignMode, buttonSize);
 		ImGui::Tooltip("Design mode");
+		ImGui::SameLine();
+		ImGui::Button(ICON_FA_PAINTBRUSH, "Themes", &GUI::Themes.Open, buttonSize);
+		ImGui::Tooltip("Themes");
+		ImGui::SameLine();
+		ImGui::Button(ICON_FA_KEYBOARD, "Binds", &GUI::Binds.Open, buttonSize);
+		ImGui::Tooltip("Binds");
 		ImGui::SameLine();
 
 		if (Utils::IsDebug())

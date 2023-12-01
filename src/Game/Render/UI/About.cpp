@@ -3,5 +3,12 @@
 namespace IW3SR
 {
 	About::About() : Window("About") { }
-	void About::Frame() { }
+	
+	void About::Frame() 
+	{
+		if (!Open) return;
+
+		Begin();
+		End();
+	}
 }

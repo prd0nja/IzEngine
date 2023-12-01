@@ -9,7 +9,6 @@ namespace IW3SR
 		Name = name;
 		Group = group;
 		Menu = Window(name);
-		Menu.SetRect(20, 20, 180, 80);
 	}
 
 	Module::~Module()

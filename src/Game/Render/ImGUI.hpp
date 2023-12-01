@@ -20,6 +20,15 @@ namespace ImGui
 	/// Create a button.
 	/// </summary>
 	/// <param name="label">The button label.</param>
+	/// <param name="v">Toggle state.</param>
+	/// <param name="size">The button size.</param>
+	/// <returns></returns>
+	API bool Button(const std::string& label, bool* v, const ImVec2& size = ImVec2(0, 0));
+
+	/// <summary>
+	/// Create a button.
+	/// </summary>
+	/// <param name="label">The button label.</param>
 	/// <param name="id">The unique id.</param>
 	/// <param name="v">Toggle state.</param>
 	/// <param name="size">The button size.</param>

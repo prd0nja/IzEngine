@@ -3,5 +3,12 @@
 namespace IW3SR
 {
 	Settings::Settings() : Window("Settings") { }
-	void Settings::Frame() { }
+
+	void Settings::Frame() 
+	{ 
+		if (!Open) return;
+
+		Begin();
+		End();
+	}
 }

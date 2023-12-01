@@ -3,5 +3,12 @@
 namespace IW3SR
 {
 	Binds::Binds() : Window("Binds") { }
-	void Binds::Frame() { }
+	
+	void Binds::Frame() 
+	{
+		if (!Open) return;
+
+		Begin();
+		End();
+	}
 }
