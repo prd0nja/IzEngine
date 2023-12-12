@@ -32,6 +32,7 @@ set(SYSTEM_DEPENDENCY Winmm)
 # Dependencies
 find_package(DirectXSDK REQUIRED)
 find_package(imgui CONFIG REQUIRED)
+find_package(implot CONFIG REQUIRED)
 find_package(nlohmann_json CONFIG REQUIRED)
 find_package(glm CONFIG REQUIRED)
 find_package(PolyHook_2 CONFIG REQUIRED)
@@ -69,6 +70,7 @@ target_link_libraries(IW3SR PUBLIC
 	$<TARGET_OBJECTS:IW3SR.ASM>
 	DirectX::SDK
 	imgui::imgui
+	implot::implot
 	nlohmann_json::nlohmann_json
 	glm::glm
 	PolyHook_2::PolyHook_2)

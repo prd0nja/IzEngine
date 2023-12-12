@@ -10,7 +10,8 @@
 		}
 	},
 	"dependencies": [
-		{ "name": "imgui", "features": ["dx9-binding", "win32-binding"] },
+		{ "name": "imgui", "features": ["dx9-binding", "win32-binding", "club", "markdown"] },
+		"implot",
 		"directxsdk",
 		"polyhook2",
 		"nlohmann-json",
@@ -18,6 +19,7 @@
 	],
 	"overrides": [
         { "name": "imgui", "version": "1.89.9" },
+        { "name": "implot", "version": "0.16" },
         { "name": "directxsdk", "version-string": "jun10#7" },
         { "name": "polyhook2", "version": "2023-08-11" },
         { "name": "nlohmann-json", "version": "3.11.2" },
