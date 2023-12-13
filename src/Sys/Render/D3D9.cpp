@@ -5,7 +5,7 @@ namespace IW3SR
 {
 	D3D9::D3D9(IDirect3D9* d3d9) : pIDirect3D9(d3d9) { }
 
-	IDirect3D9* STDCALL D3D9::Direct3DCreate9(UINT sdk)
+	IDirect3D9* D3D9::Direct3DCreate9(UINT sdk)
 	{
 		IDirect3D9Ex* d3d9ex_device = nullptr;
 		Log::WriteLine("Getting Direct3D 9 EX interface...");
@@ -140,7 +140,6 @@ namespace IW3SR
 
 	ULONG D3D9Device::Release()
 	{
-		SR->Render->Shutdown();
 		ULONG count = pIDirect3DDevice9->Release();
 		if (!count) delete this;
 		return count;
@@ -381,7 +380,6 @@ namespace IW3SR
 	HRESULT D3D9Device::EndScene()
 	{
 		GUI::Initialize();
-		SR->Render->Initialize();
 
 		if (GUI::Active)
 			SR->Render->Frame();

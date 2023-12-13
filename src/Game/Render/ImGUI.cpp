@@ -101,13 +101,28 @@ namespace ImGui
         PopStyleVar();
     }
 
+    bool IsKeyUp(int vk)
+    {
+        return KeyListener(vk).IsUp();
+    }
+
+    bool IsKeyDown(int vk)
+    {
+        return KeyListener(vk).IsDown();
+    }
+
+    bool IsKeyPressed(int vk)
+    {
+        return KeyListener(vk).IsPressed();
+    }
+
     void Keybind(const std::string& label, int* key, const ImVec2& size)
     {
         char keyLabel[100];
         const int keyLabelSize = 100;
         const auto id = GetID(label.c_str());
 
-        ImGui::KeepAliveID(id);
+        KeepAliveID(id);
         PushID(id);
 
         DWORD code = MapVirtualKey(*key, MAPVK_VK_TO_VSC);
@@ -116,16 +131,14 @@ namespace ImGui
 
         if (GetActiveID() == id) 
         {
-            int k = 0;
-            ImGuiIO& io = ImGui::GetIO();
-
             PushStyleColor(ImGuiCol_Button, GetColorU32(ImGuiCol_ButtonActive));
             Button("...", size);
             PopStyleColor();
 
+            int k = 0;
             for (; k < ImGuiKey_COUNT; k++)
             {
-                if (ImGui::IsKeyPressed(static_cast<ImGuiKey>(k)))
+                if (IsKeyPressed(k))
                 {
                     *key = k;
                     break;
@@ -171,7 +184,7 @@ namespace ImGui
 
     void Rainbow(const vec2& position, const vec2& size)
     {
-        ImDrawList* draw = ImGui::GetForegroundDrawList();
+        ImDrawList* draw = GetForegroundDrawList();
 
         const auto& [rainbow1, rainbow2] = GUI::Themes.Rainbow;
         draw->AddRectFilledMultiColor(position, size, rainbow1, rainbow2, rainbow2, rainbow1);

@@ -20,6 +20,12 @@ namespace IW3SR
 	Hook<void(usercmd_s* cmd)>
 		CL_FinishMove_h(0x463A60, PMove::FinishMove);
 
+	Hook<void()>
+		R_Init_h(0x5F4EE0, Render::Initialize);
+
+	Hook<void(int window)>
+		R_Shutdown_h(0x5F4F90, Render::Shutdown);
+
 	Hook<IDirect3D9* STDCALL(UINT sdk)>
 		R_Direct3DCreate9_h(0x670284, D3D9::Direct3DCreate9);
 

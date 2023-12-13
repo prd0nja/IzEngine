@@ -12,8 +12,6 @@ namespace IW3SR
 	class Render
 	{
 	public:
-		bool Active = false;
-
 		/// <summary>
 		/// Initialize the rendering class.
 		/// </summary>
@@ -28,12 +26,13 @@ namespace IW3SR
 		/// <summary>
 		/// Initialize the renderer.
 		/// </summary>
-		void Initialize();
+		static void Initialize();
 
 		/// <summary>
 		/// Shutdown the renderer.
 		/// </summary>
-		void Shutdown();
+		/// <param name="window">The window.</param>
+		static void Shutdown(int window);
 
 		/// <summary>
 		/// Draws 3D.

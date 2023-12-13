@@ -7,10 +7,14 @@ namespace IW3SR::UI
 	void Binds::Frame() 
 	{
 		if (!Open) return;
+		const ImVec2 size = { ImGui::CalcItemWidth(), 0 };
 
 		Begin();
 		if (ImGui::CollapsingHeader("General", ImGuiTreeNodeFlags_DefaultOpen))
-			ImGui::Keybind("Menu", &GUI::OpenKey.Key);
+		{
+			ImGui::Keybind("Menu", &GUI::OpenKey.Key, size);
+			ImGui::Keybind("Close", &GUI::CloseKey.Key, size);
+		}
 		End();
 	}
 }

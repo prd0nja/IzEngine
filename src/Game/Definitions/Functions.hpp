@@ -43,6 +43,12 @@ namespace IW3SR
 	extern Hook<void(usercmd_s* cmd)>
 		CL_FinishMove_h;
 
+	extern Hook<void()>
+		R_Init_h;
+
+	extern Hook<void(int window)>
+		R_Shutdown_h;
+
 	extern Hook<IDirect3D9* STDCALL(UINT sdk)>
 		R_Direct3DCreate9_h;
 

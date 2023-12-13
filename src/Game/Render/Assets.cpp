@@ -22,8 +22,7 @@ namespace IW3SR
 
 	void Assets::LoadFonts()
 	{
-		auto openSans = Environment::FontsDirectory / "OpenSans-Regular.ttf";
-		AddFontResource(openSans.string().c_str());
+		LoadFont(Environment::FontsDirectory / "OpenSans-Regular.ttf", 22);
 
 		HDC hdc = GetDC(NULL);
 		auto callback = [](const LOGFONT* lpelf, const TEXTMETRIC* lpntm, DWORD FontType, LPARAM lParam)
@@ -52,6 +51,8 @@ namespace IW3SR
 
 	ID3DXFont* Assets::LoadFont(const std::filesystem::path& path, int height)
 	{
+		AddFontResource(path.string().c_str());
+
 		std::string name = path.stem().filename().string();
 		std::string id = std::format("{}_{}", name, height);
 		if (auto cache = Fonts.find(id); cache != Fonts.end())
