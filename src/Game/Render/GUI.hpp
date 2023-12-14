@@ -1,5 +1,7 @@
 #pragma once
 #include "Game/Definitions.hpp"
+
+#include "ImGUI.hpp"
 #include "Drawing/Window.hpp"
 #include "Sys/Listeners/KeyListener.hpp"
 
@@ -109,6 +111,12 @@ namespace IW3SR
 		/// <param name="lParam">Additional message-specific information.</param>
 		/// <returns>The result of processing the message.</returns>
 		static LRESULT CALLBACK MainWndProc(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam);
+
+		/// <summary>
+		/// Set the module context.
+		/// </summary>
+		/// <remarks>This can be called on dynamic libraries to share context.</remarks>
+		static void ModuleContext();
 
 		/// <summary>
 		/// ImGUI allocator.

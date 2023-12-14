@@ -39,6 +39,8 @@ namespace IW3SR
 
 		ImGui::SetAllocatorFunctions(&Allocator, &Free, &Data);
 		Context = ImGui::CreateContext();
+		ModuleContext();
+
 		ImGui_ImplWin32_Init(MainWindow);
 		ImGui_ImplDX9_Init(dx->device);
 		Themes.Initialize();
@@ -139,6 +141,13 @@ namespace IW3SR
 		}
 		io.MouseDrawCursor = false;
 		return MainWndProc_h(hWnd, Msg, wParam, lParam);
+	}
+
+	void GUI::ModuleContext()
+	{
+		ImPlot::SetImGuiContext(GUI::Context);
+		ImGui::SetCurrentContext(GUI::Context);
+		ImGui::SetAllocatorFunctions(GUI::Allocator, GUI::Free, GUI::Data);
 	}
 
 	void* GUI::Allocator(size_t size, void* data)

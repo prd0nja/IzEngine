@@ -10,8 +10,7 @@ PLUGIN void Initialize(DLL* entry)
 
 PLUGIN void GUI()
 {
-	ImGui::SetCurrentContext(GUI::Context);
-	ImGui::SetAllocatorFunctions(GUI::Allocator, GUI::Free, GUI::Data);
+	GUI::ModuleContext();
 }
 
 PLUGIN void Shutdown()

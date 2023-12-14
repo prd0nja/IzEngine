@@ -7,6 +7,10 @@
 #include <imgui_impl_dx9.h>
 #include <imgui_impl_win32.h>
 #include <imgui_stdlib.h>
+#include <imgui_markdown.h>
+#include <imgui_memory_editor.h>
+#include <implot.h>
+#include <implot_internal.h>
 #include <nlohmann/json.hpp>
 
 #include "Game/Definitions.hpp"
