@@ -1,0 +1,83 @@
+#include "Graphics.hpp"
+
+namespace IW3SR
+{
+	Graphics::Graphics() : Feature("sr.feature.graphics", "Graphics", "Feature")
+	{
+		DrawSpecular = true;// r_specular
+		DrawFog = false;// r_fog
+		DrawDecals = true;// r_drawDecals
+		WaterAnimation = false;// r_drawWater
+		DrawTweaks = false;// r_filmTweakEnable
+		DrawGlow = false;// r_glow
+		DrawSun = false;// r_drawSun
+
+		SunIntensity = 1;// r_envMapSunIntensity
+		SpecularColorScale = 1;// r_specularColorScale
+		TweakBrightness = 0;// r_filmTweakBrightness
+		TweakDesaturation = 0.2;// r_filmTweakDesaturation
+		GlowRadius = 5;// r_glowTweakRadius0
+		GlowBloomDesaturation = 0;// r_glowTweakBloomDesaturation (r_glowTweakBloomDesatura is on console)
+		GlowBloomIntensity = 1;// r_glowTweakBloomIntesity (r_glowTweakBloomIntensit is on console)
+		GlowBloomCutoff = 0.5;// r_glowTweakBloomCutoff
+
+		SunColor = { 1, 0.749, 0, 1 };// r_lightTweakSunColor
+		SunDirection = { 0, 0, 0 };// r_lightTweakSunDirection
+		TweakLightTint = { 1.1, 1.05, 0.85 };// r_filmTweakLightTint
+		TweakDarkTint = { 0.7, 0.85, 1 };// r_filmTweakDarkTint
+	}
+
+	void Graphics::OnMenu()// all the min/max values are set to dvar min/max values
+	{	
+		if (ImGui::CollapsingHeader("General"))
+		{
+			ImGui::Text("Specular");
+			ImGui::Separator();
+			ImGui::Toggle("Enabled", 20, &DrawSpecular);
+			ImGui::SliderFloat("Specular color scale", &SpecularColorScale, 0, 100);
+
+			ImGui::NewLine();
+
+			ImGui::Text("Misc");
+			ImGui::Separator();
+			ImGui::Toggle("fog", 20, &DrawFog);
+			ImGui::SameLine();
+			ImGui::Text("Fog");
+			ImGui::Toggle("decals", 20, &DrawDecals);
+			ImGui::SameLine();
+			ImGui::Text("Decals");
+			ImGui::Toggle("water anim", 20, &WaterAnimation);
+			ImGui::SameLine();
+			ImGui::Text("Water animation");
+		}
+		if (ImGui::CollapsingHeader("Tweaks"))
+		{
+			ImGui::Toggle("film tweaks", 20, &DrawTweaks);
+			ImGui::SameLine();
+			ImGui::Text("Enabled");
+			ImGui::SliderFloat("Brightness", &TweakBrightness, -1, 1);
+			ImGui::SliderFloat("Desaturation", &TweakDesaturation, 0, 1);
+			ImGui::ColorEdit3("Light tint", TweakLightTint, ImGuiColorEditFlags_Float);
+			ImGui::ColorEdit3("Dark tint", TweakDarkTint, ImGuiColorEditFlags_Float);
+		}
+		if (ImGui::CollapsingHeader("Glow"))
+		{
+			ImGui::Toggle("glow", 20, &DrawGlow);
+			ImGui::SameLine();
+			ImGui::Text("Enabled");
+			ImGui::SliderFloat("Radius", &GlowRadius, 0, 32);
+			ImGui::SliderFloat("Bloom desaturation", &GlowBloomDesaturation, 0, 1);
+			ImGui::SliderFloat("Bloom intensity", &GlowBloomIntensity, 0, 20);
+			ImGui::SliderFloat("Bloom cut-off", &GlowBloomCutoff, 0, 1);
+		}
+		if (ImGui::CollapsingHeader("Sun"))
+		{
+			ImGui::Toggle("sun", 20, &DrawSun);
+			ImGui::SameLine();
+			ImGui::Text("Enabled");
+			ImGui::SliderFloat("Sun intensity", &SunIntensity, 0, 4);
+			ImGui::ColorEdit4("Sun color", SunColor, ImGuiColorEditFlags_Float);
+			ImGui::SliderFloat3("Sun direction", SunDirection, -360, 360);
+		}
+	}
+}
