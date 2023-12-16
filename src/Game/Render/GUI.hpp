@@ -22,6 +22,7 @@ namespace IW3SR
 	{
 	public:
 		static inline ImGuiContext* Context = nullptr;
+		static inline ImPlotContext* PlotContext = nullptr;
 		static inline void* Data = nullptr;
 
 		static inline HWND MainWindow = nullptr;

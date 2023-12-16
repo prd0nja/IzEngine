@@ -40,6 +40,7 @@ namespace IW3SR
 
 		ImGui::SetAllocatorFunctions(&Allocator, &Free, &Data);
 		Context = ImGui::CreateContext();
+		PlotContext = ImPlot::CreateContext();
 		ModuleContext();
 
 		ImGui_ImplWin32_Init(MainWindow);
@@ -57,6 +58,7 @@ namespace IW3SR
 		ImGui_ImplDX9_Shutdown();
 		ImGui_ImplWin32_Shutdown();
 		ImGui::DestroyContext(Context);
+		ImPlot::DestroyContext(PlotContext);
 	}
 
 	void GUI::Reset()
@@ -147,9 +149,10 @@ namespace IW3SR
 
 	void GUI::ModuleContext()
 	{
-		ImPlot::SetImGuiContext(GUI::Context);
-		ImGui::SetCurrentContext(GUI::Context);
 		ImGui::SetAllocatorFunctions(GUI::Allocator, GUI::Free, GUI::Data);
+		ImGui::SetCurrentContext(GUI::Context);
+		ImPlot::SetImGuiContext(GUI::Context);
+		ImPlot::SetCurrentContext(GUI::PlotContext);
 	}
 
 	void* GUI::Allocator(size_t size, void* data)
