@@ -18,7 +18,7 @@ namespace IW3SR
 		TweakDesaturation = 0.2;// r_filmTweakDesaturation
 		GlowRadius = 5;// r_glowTweakRadius0
 		GlowBloomDesaturation = 0;// r_glowTweakBloomDesaturation (r_glowTweakBloomDesatura is on console)
-		GlowBloomIntensity = 1;// r_glowTweakBloomIntesity (r_glowTweakBloomIntensit is on console)
+		GlowBloomIntensity = 1;// r_glowTweakBloomIntensity (r_glowTweakBloomIntensit is on console)
 		GlowBloomCutoff = 0.5;// r_glowTweakBloomCutoff
 
 		SunColor = { 1, 0.749, 0, 1 };// r_lightTweakSunColor
@@ -78,6 +78,30 @@ namespace IW3SR
 			ImGui::SliderFloat("Sun intensity", &SunIntensity, 0, 4);
 			ImGui::ColorEdit4("Sun color", SunColor, ImGuiColorEditFlags_Float);
 			ImGui::SliderFloat3("Sun direction", SunDirection, -360, 360);
+		}
+		if (ImGui::Button("Apply changes"))
+		{
+			Dvar::Set<bool>("r_specular", DrawSpecular);
+			Dvar::Set<bool>("r_fog", DrawFog);
+			Dvar::Set<bool>("r_drawDecals", DrawDecals);
+			Dvar::Set<bool>("r_drawWater", WaterAnimation);
+			Dvar::Set<bool>("r_filmTweakEnable", DrawTweaks);
+			Dvar::Set<bool>("r_glow", DrawGlow);
+			Dvar::Set<bool>("r_drawSun", DrawSun);
+
+			Dvar::Set<float>("r_envMapSunIntensity", SunIntensity);
+			Dvar::Set<float>("r_specularColorScale", SpecularColorScale);
+			Dvar::Set<float>("r_filmTweakBrightness", TweakBrightness);
+			Dvar::Set<float>("r_filmTweakDesaturation", TweakDesaturation);
+			Dvar::Set<float>("r_glowTweakRadius0", GlowRadius);
+			Dvar::Set<float>("r_glowTweakBloomDesaturation", GlowBloomDesaturation);
+			//Dvar::Set<float>("r_glowTweakBloomIntensity", GlowBloomIntensity);runtime error
+			Dvar::Set<float>("r_glowTweakBloomCutoff", GlowBloomCutoff);
+
+			Dvar::Set<vec4>("r_lightTweakSunColor", SunColor);
+			Dvar::Set<vec3>("r_lightTweakSunDirection", SunDirection);
+			Dvar::Set<vec3>("r_filmTweakLightTint", TweakLightTint);
+			Dvar::Set<vec3>("r_filmTweakDarkTint", TweakDarkTint);
 		}
 	}
 }
