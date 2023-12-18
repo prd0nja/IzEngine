@@ -17,8 +17,8 @@ namespace IW3SR
 		TweakBrightness = 0;// r_filmTweakBrightness
 		TweakDesaturation = 0.2;// r_filmTweakDesaturation
 		GlowRadius = 5;// r_glowTweakRadius0
-		GlowBloomDesaturation = 0;// r_glowTweakBloomDesaturation (r_glowTweakBloomDesatura is on console)
-		GlowBloomIntensity = 1;// r_glowTweakBloomIntensity (r_glowTweakBloomIntensit is on console)
+		GlowBloomDesaturation = 0;// r_glowTweakBloomDesaturation
+		GlowBloomIntensity = 1;// r_glowTweakBloomIntensity
 		GlowBloomCutoff = 0.5;// r_glowTweakBloomCutoff
 
 		SunColor = { 1, 0.749, 0, 1 };// r_lightTweakSunColor
@@ -27,7 +27,7 @@ namespace IW3SR
 		TweakDarkTint = { 0.7, 0.85, 1 };// r_filmTweakDarkTint
 	}
 
-	void Graphics::OnMenu()// all the min/max values are set to dvar min/max values
+	void Graphics::OnMenu()
 	{	
 		if (ImGui::CollapsingHeader("General"))
 		{

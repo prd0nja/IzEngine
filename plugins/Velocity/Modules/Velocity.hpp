@@ -10,6 +10,7 @@ namespace IW3SR
 	{
 	public:
 		Text VelocityText;
+		bool DrawVelocityPlot;
 
 		/// <summary>
 		/// Initialize the module.

@@ -10,6 +10,7 @@ namespace IW3SR
     {
     public:
         Text FPSText;
+        bool DrawFpsPlot;
 
         /// <summary>
         /// Initialize the module.

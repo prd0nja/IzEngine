@@ -61,7 +61,7 @@ namespace IW3SR
 
     float Math::AngleDelta(float angle1, float angle2)
     {
-        return AngleNormalize180(angle1 - angle2);
+        return AngleNormalize360(angle1 - angle2);
     }
 
     void Math::AngleVectors(const vec3& angles, vec3& forward, vec3& right, vec3& up)
