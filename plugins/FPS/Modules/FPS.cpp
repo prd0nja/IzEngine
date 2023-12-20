@@ -8,12 +8,12 @@ namespace IW3SR
 		FPSText.SetRectAlignment(HORIZONTAL_ALIGN_CENTER, VERTICAL_ALIGN_TOP);
 		FPSText.SetAlignment(HUDALIGN_CENTER, HUDALIGN_BOTTOM);
 
-		DrawFpsPlot = false;
+		ShowPlot = false;
 	}
 
 	void FPS::OnMenu()
 	{	
-		ImGui::Checkbox("Draw FPS plot", &DrawFpsPlot);
+		ImGui::Checkbox("Graph", &ShowPlot);
 		FPSText.Menu("Text", true);
 	}
 
@@ -23,19 +23,19 @@ namespace IW3SR
 		FPSText.Value = std::to_string(FPS);
 		FPSText.Render();
 
-		if (!DrawFpsPlot)
+		if (!ShowPlot)
 			return;
 
 		static std::vector<int> fps, samples;
 		fps.push_back(FPS);
-		samples.push_back(clients->serverTime);//do not use server time
+		samples.push_back(clients->serverTime);
 
 		if (ImPlot::BeginPlot("FPS"))
 		{
-			ImPlot::SetupAxis(ImAxis_X1, "Frame number", ImPlotAxisFlags_AutoFit);
-		    ImPlot::SetupAxis(ImAxis_Y1, "Frame time");
+			ImPlot::SetupAxis(ImAxis_X1, "Time", ImPlotAxisFlags_AutoFit);
+		    ImPlot::SetupAxis(ImAxis_Y1, "FPS");
 			ImPlot::SetupAxisLimits(ImAxis_Y1, 0, 1000);
-			ImPlot::PlotLine("Frame rate", samples.data(), fps.data(), fps.size());
+			ImPlot::PlotLine("FPS", samples.data(), fps.data(), fps.size());
 			ImPlot::EndPlot();
 		}
 	}
