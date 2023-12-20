@@ -27,8 +27,8 @@ namespace IW3SR
 		if (ShowMaxVelocity)
 			ImGui::Keybind("Reset key", &ResetKey.Key, { 150, 0 });
 
-		VelocityText.Menu("Text");
-		MaxVelocityText.Menu("Text");
+		VelocityText.Menu("Velocity");
+		MaxVelocityText.Menu("Max velocity");
 	}
 
 	void Velocity::OnFrame()
@@ -42,7 +42,7 @@ namespace IW3SR
 			maxVelocity = 0;
 
 		VelocityText.Value = std::to_string(velocity);
-		MaxVelocityText.Value = std::to_string(maxVelocity);
+		MaxVelocityText.Value = "(" + std::to_string(maxVelocity) + ")";
 		VelocityText.Render();
 		if (ShowMaxVelocity)
 			MaxVelocityText.Render();
