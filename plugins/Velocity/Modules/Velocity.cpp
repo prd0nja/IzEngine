@@ -13,8 +13,8 @@ namespace IW3SR
 		MaxVelocityText.SetRectAlignment(HORIZONTAL_ALIGN_CENTER, VERTICAL_ALIGN_TOP);
 		MaxVelocityText.SetAlignment(HUDALIGN_CENTER, HUDALIGN_BOTTOM);
 
+		Plots = Window("Plots");
 		ResetKey = KeyListener('R');
-
 		ShowMaxVelocity = true;
 		ShowPlot = false;
 	}
@@ -48,14 +48,16 @@ namespace IW3SR
 		if (ShowMaxVelocity)
 			MaxVelocityText.Render();
 
-		if (ShowPlot && ImPlot::BeginPlot("Velocity plot"))
+		Plots.Begin(ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoBackground);
+		if (ShowPlot && ImPlot::BeginPlot("##NoTitle", vec2::Zero))
 		{
 			ImPlot::PushStyleColor(ImPlotCol_Line, ImVec4{ 0.96078431372, 0.15294117647, 0.15294117647, 1 });
-			ImPlot::SetupAxis(ImAxis_X1, "Time", ImPlotAxisFlags_AutoFit);
-			ImPlot::SetupAxis(ImAxis_Y1, "Velocity", ImPlotAxisFlags_AutoFit);
-			ImPlot::PlotLine("Player speed", Values.data(), Values.size(), 1, 0, ImPlotLineFlags_Shaded);
+			ImPlot::SetupAxis(ImAxis_X1, nullptr);
+			ImPlot::SetupAxis(ImAxis_Y1, nullptr, ImPlotAxisFlags_AutoFit);
+			ImPlot::PlotLine("Velocity", Values.data(), Values.size(), 1, 0, ImPlotLineFlags_Shaded);
 			ImPlot::PopStyleColor();
 			ImPlot::EndPlot();
 		}
+		Plots.End();
 	}
 }

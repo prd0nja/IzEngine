@@ -197,15 +197,17 @@ namespace IW3SR::UI
 	void Themes::Frame()
 	{
 		if (!Open) return;
-
 		Style = ImGui::GetStyle();
 
 		Begin();
+		if (ImGui::Button("Default Theme"))
+			Default();
+
 		ImGui::Separator();
 		ImGui::ShowStyleEditor();
+		ImGui::Separator();
+		ImPlot::ShowStyleEditor();
 
-		if (ImGui::Button("Reset to default"))
-			Default();
 		End();
 	}
 }
