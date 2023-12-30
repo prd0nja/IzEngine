@@ -16,6 +16,7 @@
 #include "Game/Definitions.hpp"
 #include "Game/Render/Fonts/IconsFontAwesome6.hpp"
 #include "Game/Render/Fonts/IconsFontAwesome6Brands.hpp"
+#include "Utils/CircularBuffer.hpp"
 
 #include "Math/Common.hpp"
 

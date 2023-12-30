@@ -114,6 +114,28 @@ namespace IW3SR::UI
 		colors[ImGuiCol_NavWindowingDimBg] = ImVec4(0.28f, 0.00f, 1.00f, 0.20f);
 		colors[ImGuiCol_ModalWindowDimBg] = ImVec4(0.35f, 0.00f, 1.00f, 0.35f);
 
+		plotColors[ImPlotCol_Line] = ImVec4(0.34f, 0.16f, 0.90f, 1.00f);
+		plotColors[ImPlotCol_Fill] = IMPLOT_AUTO_COL;
+		plotColors[ImPlotCol_MarkerOutline] = IMPLOT_AUTO_COL;
+		plotColors[ImPlotCol_MarkerFill] = IMPLOT_AUTO_COL;
+		plotColors[ImPlotCol_ErrorBar] = IMPLOT_AUTO_COL;
+		plotColors[ImPlotCol_FrameBg] = ImVec4(0.05f, 0.05f, 0.05f, 0.00f);
+		plotColors[ImPlotCol_PlotBg] = ImVec4(0.09f, 0.09f, 0.11f, 0.71f);
+		plotColors[ImPlotCol_PlotBorder] = IMPLOT_AUTO_COL;
+		plotColors[ImPlotCol_LegendBg] = IMPLOT_AUTO_COL;
+		plotColors[ImPlotCol_LegendBorder] = IMPLOT_AUTO_COL;
+		plotColors[ImPlotCol_LegendText] = IMPLOT_AUTO_COL;
+		plotColors[ImPlotCol_TitleText] = IMPLOT_AUTO_COL;
+		plotColors[ImPlotCol_InlayText] = IMPLOT_AUTO_COL;
+		plotColors[ImPlotCol_AxisText] = IMPLOT_AUTO_COL;
+		plotColors[ImPlotCol_AxisGrid] = ImVec4(0.25, 0.58f, 0.58f, 0.58f);
+		plotColors[ImPlotCol_AxisTick] = ImVec4(0.25, 0.54f, 0.54f, 0.54f);
+		plotColors[ImPlotCol_AxisBg] = IMPLOT_AUTO_COL;
+		plotColors[ImPlotCol_AxisBgHovered] = IMPLOT_AUTO_COL;
+		plotColors[ImPlotCol_AxisBgActive] = IMPLOT_AUTO_COL;
+		plotColors[ImPlotCol_Selection] = IMPLOT_AUTO_COL;
+		plotColors[ImPlotCol_Crosshairs] = IMPLOT_AUTO_COL;
+
 		style.WindowMenuButtonPosition = ImGuiDir_Right;
 		style.WindowPadding = ImVec2(10, 10);
 		style.FramePadding = ImVec2(8, 8);
@@ -138,6 +160,38 @@ namespace IW3SR::UI
 		style.GrabRounding = 0;
 		style.LogSliderDeadzone = 4;
 		style.TabRounding = 0;
+
+		plotStyle.AnnotationPadding = ImVec2(2, 2);
+		plotStyle.Colormap = 0;
+		plotStyle.DigitalBitGap = 4;
+		plotStyle.DigitalBitHeight = 8;
+		plotStyle.ErrorBarSize = 5;
+		plotStyle.ErrorBarWeight = 1.5;
+		plotStyle.FillAlpha = 1;
+		plotStyle.FitPadding = ImVec2(0, 0);
+		plotStyle.LabelPadding = ImVec2(5, 5);
+		plotStyle.LegendInnerPadding = ImVec2(5, 5);
+		plotStyle.LegendPadding = ImVec2(10, 10);
+		plotStyle.LegendSpacing = ImVec2(5, 0);
+		plotStyle.LineWeight = 1;
+		plotStyle.MajorGridSize = ImVec2(1, 1);
+		plotStyle.MajorTickLen = ImVec2(10, 10);
+		plotStyle.MajorTickSize = ImVec2(1, 1);
+		plotStyle.Marker = -1;
+		plotStyle.MarkerSize = 4;
+		plotStyle.MarkerWeight = 1;
+		plotStyle.MinorAlpha = 0;
+		plotStyle.MinorGridSize = ImVec2(1, 1);
+		plotStyle.MinorTickLen = ImVec2(18, 10);
+		plotStyle.MinorTickSize = ImVec2(1, 1);
+		plotStyle.MousePosPadding = ImVec2(18, 10);
+		plotStyle.PlotBorderSize = 0;
+		plotStyle.PlotDefaultSize = ImVec2(400, 250);
+		plotStyle.PlotMinSize = ImVec2(200, 150);
+		plotStyle.PlotPadding = ImVec2(0, 0);
+		plotStyle.Use24HourClock = false;
+		plotStyle.UseISO8601 = false;
+		plotStyle.UseLocalTime = false;
 
 		if (GUI::Active)
 		{
@@ -206,8 +260,6 @@ namespace IW3SR::UI
 
 		Style = ImGui::GetStyle();
 		PlotStyle = ImPlot::GetStyle();
-
-		ImPlot::ShowDemoWindow();
 
 		Begin();
 		if (ImGui::Button("Default Theme"))
