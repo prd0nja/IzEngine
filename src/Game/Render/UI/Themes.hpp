@@ -10,6 +10,7 @@ namespace IW3SR::UI
 	{
 	public:
 		ImGuiStyle Style;
+		ImPlotStyle PlotStyle;
 		std::tuple<ImColor, ImColor> Rainbow;
 		ImGui::MarkdownConfig Markdown;
 
@@ -64,6 +65,6 @@ namespace IW3SR::UI
 		/// <param name="start">Is the start of the token.</param>
 		static void MarkdownFormat(const ImGui::MarkdownFormatInfo& info, bool start);
 
-		NLOHMANN_SERIALIZE_DERIVED(Themes, Window, Style)
+		NLOHMANN_SERIALIZE_DERIVED(Themes, Window, Style, PlotStyle)
 	};
 }

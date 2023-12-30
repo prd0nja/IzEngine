@@ -14,6 +14,8 @@ namespace IW3SR::UI
 
 		ImGuiStyle& style = ImGui::GetStyle();
 		style = Style;
+		ImPlotStyle& plotStyle = ImPlot::GetStyle();
+		plotStyle = PlotStyle;
 
 		const float fontSize = 22;
 		const float iconSize = fontSize * 2.f / 3.f;
@@ -55,6 +57,8 @@ namespace IW3SR::UI
 	{
 		ImGuiStyle& style = Style;
 		ImVec4* colors = style.Colors;
+		ImPlotStyle& plotStyle = PlotStyle;
+		ImVec4* plotColors = plotStyle.Colors;
 
 		colors[ImGuiCol_Text] = ImVec4(1.00f, 1.00f, 1.00f, 1.00f);
 		colors[ImGuiCol_TextDisabled] = ImVec4(0.52f, 0.54f, 0.59f, 0.80f);
@@ -137,8 +141,10 @@ namespace IW3SR::UI
 
 		if (GUI::Active)
 		{
-			ImGuiStyle& current = ImGui::GetStyle();
-			current = style;
+			ImGuiStyle& imgui = ImGui::GetStyle();
+			imgui = style;
+			ImPlotStyle& implot = ImPlot::GetStyle();
+			implot = plotStyle;
 		}
 	}
 
@@ -197,7 +203,11 @@ namespace IW3SR::UI
 	void Themes::Frame()
 	{
 		if (!Open) return;
+
 		Style = ImGui::GetStyle();
+		PlotStyle = ImPlot::GetStyle();
+
+		ImPlot::ShowDemoWindow();
 
 		Begin();
 		if (ImGui::Button("Default Theme"))
@@ -205,9 +215,9 @@ namespace IW3SR::UI
 
 		ImGui::Separator();
 		ImGui::ShowStyleEditor();
+
 		ImGui::Separator();
 		ImPlot::ShowStyleEditor();
-
 		End();
 	}
 }
