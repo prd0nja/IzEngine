@@ -10,16 +10,22 @@ namespace IW3SR
 	{
 	public:
 		int Value;
+		int Average;
 		int Max;
+
 		CircularBuffer<int, 1000> Values;
+		CircularBuffer<int, 1000> Averages;
+		CircularBuffer<int, 1000> Maxs;
 
 		Text VelocityText;
-		Text MaxVelocityText;
-		Window Plots;
+		Text AverageText;
+		Text MaxText;
 
+		Window Graph;
 		KeyListener ResetKey;
-		bool ShowMaxVelocity;
-		bool ShowPlot;
+		bool ShowMax;
+		bool ShowAverage;
+		bool ShowGraph;
 
 		/// <summary>
 		/// Initialize the module.
@@ -37,7 +43,7 @@ namespace IW3SR
 		/// </summary>
 		void OnFrame() override;
 
-		NLOHMANN_SERIALIZE_POLY(Velocity, Module, VelocityText, MaxVelocityText, Plots, 
-			ResetKey, ShowMaxVelocity, ShowPlot)
+		NLOHMANN_SERIALIZE_POLY(Velocity, Module, VelocityText, MaxText, AverageText, Graph, 
+			ResetKey, ShowAverage, ShowMax, ShowGraph)
 	};
 }

@@ -152,11 +152,13 @@ namespace ImGui
         if (IsWindowHovered() && IsMouseDragging(ImGuiMouseButton_Left))
         {
             renderPosition = GetWindowPos();
-            renderSize = GetWindowSize();
-           
             position += vec2(scr_place->scaleRealToVirtual) * vec2(GetMouseDragDelta());
-            size = vec2(scr_place->scaleRealToVirtual) * renderSize;
             ResetMouseDragDelta();
+        }
+        else if (false)
+        {
+            renderSize = GetWindowSize();
+            size = vec2(scr_place->scaleRealToVirtual) * renderSize;
         }
         else
         {

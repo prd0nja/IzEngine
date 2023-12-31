@@ -9,9 +9,12 @@ namespace IW3SR
     class FPS : public Module
     {
     public:
+        int Value;
+        CircularBuffer<int, 1000> Values;
         Text FPSText;
-        std::vector<int> Values;
-        bool ShowPlot;
+
+        Window Graph;
+        bool ShowGraph;
 
         /// <summary>
         /// Initialize the module.

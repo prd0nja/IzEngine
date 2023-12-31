@@ -8,29 +8,40 @@ namespace IW3SR
 		FPSText.SetRectAlignment(HORIZONTAL_ALIGN_CENTER, VERTICAL_ALIGN_TOP);
 		FPSText.SetAlignment(HUDALIGN_CENTER, HUDALIGN_BOTTOM);
 
-		ShowPlot = false;
+		ShowGraph = false;
 	}
 
 	void FPS::OnMenu()
 	{	
-		ImGui::Checkbox("Graph", &ShowPlot);
+		ImGui::Checkbox("Display Graph", &ShowGraph);
 		FPSText.Menu("Text", true);
 	}
 
 	void FPS::OnFrame()
 	{
-		const int fps = Dvar::Get<int>("com_maxfps");
-		FPSText.Value = std::to_string(fps);
-		FPSText.Render();
-		Values.push_back(fps);
+		Value = Dvar::Get<int>("com_maxfps");
+		Values.Add(Value);
 
-		if (ShowPlot && ImPlot::BeginPlot("FPS"))
+		FPSText.Value = std::to_string(Value);
+		FPSText.Render();
+
+		if (ShowGraph)
 		{
-			ImPlot::SetupAxis(ImAxis_X1, "Time", ImPlotAxisFlags_AutoFit);
-		    ImPlot::SetupAxis(ImAxis_Y1, "FPS");
-			ImPlot::SetupAxisLimits(ImAxis_Y1, 0, 1000);
-			ImPlot::PlotLine("FPS", Values.data(), Values.size(), 1, 0, ImPlotLineFlags_Shaded);
-			ImPlot::EndPlot();
+			Graph.Begin(ImGuiWindowFlags_Graph);
+			if (ImPlot::BeginPlot("##FPS", Graph.RenderSize))
+			{
+				ImPlot::PushStyleColor(ImPlotCol_Line, static_cast<ImU32>(FPSText.Color));
+				ImPlot::SetupAxes(nullptr, nullptr, ImPlotAxisFlags_Canvas, ImPlotAxisFlags_Canvas);
+				ImPlot::SetupAxisLimits(ImAxis_X1, 0, Values.Size(), ImGuiCond_Always);
+				ImPlot::SetupAxisLimits(ImAxis_Y1, 0, 1000, ImGuiCond_Always);
+
+				ImPlot::SetNextFillStyle(IMPLOT_AUTO_COL, 0.5f);
+				ImPlot::PlotShaded("FPS", Values.Get(), Values.Size(), -INFINITY, 1, 0, 0, Values.Offset);
+				ImPlot::PlotLine("FPS", Values.Get(), Values.Size(), 1, 0, 0, Values.Offset);
+				ImPlot::PopStyleColor();
+				ImPlot::EndPlot();
+			}
+			Graph.End();
 		}
 	}
 }

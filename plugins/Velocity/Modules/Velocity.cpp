@@ -9,61 +9,99 @@ namespace IW3SR
 		VelocityText.SetRectAlignment(HORIZONTAL_ALIGN_CENTER, VERTICAL_ALIGN_TOP);
 		VelocityText.SetAlignment(HUDALIGN_CENTER, HUDALIGN_BOTTOM);
 
-		MaxVelocityText = Text("0", "Arial", 0, 20, 1.4, { 1, 0, 0, 1 });
-		MaxVelocityText.SetRectAlignment(HORIZONTAL_ALIGN_CENTER, VERTICAL_ALIGN_TOP);
-		MaxVelocityText.SetAlignment(HUDALIGN_CENTER, HUDALIGN_BOTTOM);
+		AverageText = Text("0", "Arial", 50, 2, 1.4, { 1, 1, 0, 1 });
+		AverageText.SetRectAlignment(HORIZONTAL_ALIGN_CENTER, VERTICAL_ALIGN_TOP);
+		AverageText.SetAlignment(HUDALIGN_CENTER, HUDALIGN_BOTTOM);
 
-		Plots = Window("Plots");
+		MaxText = Text("0", "Arial", 100, 2, 1.4, { 1, 0, 0, 1 });
+		MaxText.SetRectAlignment(HORIZONTAL_ALIGN_CENTER, VERTICAL_ALIGN_TOP);
+		MaxText.SetAlignment(HUDALIGN_CENTER, HUDALIGN_BOTTOM);
+
+		Graph = Window("Graph");
 		ResetKey = KeyListener('R');
-		ShowMaxVelocity = true;
-		ShowPlot = false;
+		ShowAverage = false;
+		ShowMax = false;
+		ShowGraph = false;
 	}
 
 	void Velocity::OnMenu()
 	{
-		ImGui::Checkbox("Graph", &ShowPlot);
-		ImGui::Checkbox("Max Velocity", &ShowMaxVelocity);
-
-		if (ShowMaxVelocity)
+		ImGui::Checkbox("Average Velocity", &ShowAverage);
+		ImGui::SameLine();
+		ImGui::Checkbox("Max Velocity", &ShowMax);
+		if (ShowMax)
+		{
+			ImGui::SameLine();
 			ImGui::Keybind("Reset", &ResetKey.Key, { 150, 0 });
+		}
+		ImGui::Checkbox("Display Graph", &ShowGraph);
 
 		VelocityText.Menu("Velocity");
-		MaxVelocityText.Menu("Max Velocity");
+		AverageText.Menu("Average Velocity");
+		MaxText.Menu("Max Velocity");
 	}
 
 	void Velocity::OnFrame()
 	{
-		if (ResetKey.IsPressed())
-			Max = 0;
-
-		Values.Add(Value);
 		Value = vec2(pmove->ps->velocity).Length();
+		Values.Add(Value);
+		Average = std::accumulate(Values.Data.begin(), Values.Data.end(), 0) / Values.Size();
+		Averages.Add(Average);
+
 		if (Value > Max) 
 			Max = Value;
+		Maxs.Add(Max);
 
 		VelocityText.Value = std::to_string(Value);
-		MaxVelocityText.Value = std::format("({})", Max);
+		AverageText.Value = std::to_string(Average);
+		MaxText.Value = std::to_string(Max);
 
 		VelocityText.Render();
-		if (ShowMaxVelocity)
-			MaxVelocityText.Render();
+		if (ShowAverage) 
+			AverageText.Render();
+		if (ShowMax) 
+			MaxText.Render();
 
-		Plots.Begin(ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoScrollbar);
-		if (ImPlot::BeginPlot("##Velocity", Plots.RenderSize))
+		if (ResetKey.IsPressed())
 		{
-			constexpr int axisFlags = ImPlotAxisFlags_NoTickLabels | ImPlotAxisFlags_NoTickMarks
-				| ImPlotAxisFlags_NoGridLines;
+			Value = 0;
+			Average = 0;
+			Max = 0;
 
-			ImPlot::PushStyleColor(ImPlotCol_Line, static_cast<ImU32>(VelocityText.Color));
-			ImPlot::SetupAxes(nullptr, nullptr, axisFlags, axisFlags);
-			ImPlot::SetupAxisLimits(ImAxis_X1, 0, Values.Size(), ImGuiCond_Always);
-			ImPlot::SetupAxisLimits(ImAxis_Y1, 0, Max * 1.5, ImGuiCond_Always);
-			ImPlot::SetNextFillStyle(IMPLOT_AUTO_COL, 0.5f);
-			ImPlot::PlotShaded("Velocity", Values.Get(), Values.Size(), -INFINITY, 1, 0, 0, Values.Offset);
-			ImPlot::PlotLine("Velocity", Values.Get(), Values.Size(), 1, 0, 0, Values.Offset);
-			ImPlot::PopStyleColor();
-			ImPlot::EndPlot();
+			Values.Clear();
+			Averages.Clear();
+			Maxs.Clear();
 		}
-		Plots.End();
+		if (ShowGraph)
+		{
+			Graph.Begin(ImGuiWindowFlags_Graph);
+			if (ImPlot::BeginPlot("##Velocity", Graph.RenderSize))
+			{
+				ImPlot::PushStyleColor(ImPlotCol_Line, static_cast<ImU32>(VelocityText.Color));
+				ImPlot::SetupAxes(nullptr, nullptr, ImPlotAxisFlags_Canvas, ImPlotAxisFlags_Canvas);
+				ImPlot::SetupAxisLimits(ImAxis_X1, 0, Values.Size(), ImGuiCond_Always);
+				ImPlot::SetupAxisLimits(ImAxis_Y1, 0, Max * 1.5, ImGuiCond_Always);
+
+				ImPlot::SetNextFillStyle(IMPLOT_AUTO_COL, 0.5f);
+				ImPlot::PlotShaded("Velocity", Values.Get(), Values.Size(), -INFINITY, 1, 0, 0, Values.Offset);
+				ImPlot::PlotLine("Velocity", Values.Get(), Values.Size(), 1, 0, 0, Values.Offset);
+
+				if (ShowAverage)
+				{
+					ImPlot::PushStyleColor(ImPlotCol_Line, static_cast<ImU32>(AverageText.Color));
+					ImPlot::PlotLine("Average", Averages.Get(), Averages.Size(), 1, 0, 0, Averages.Offset);
+					ImPlot::PopStyleColor();
+				}
+				if (ShowMax)
+				{
+					ImPlot::PushStyleColor(ImPlotCol_Line, static_cast<ImU32>(MaxText.Color));
+					ImPlot::PlotLine("Max", Maxs.Get(), Maxs.Size(), 1, 0, 0, Maxs.Offset);
+					ImPlot::PopStyleColor();
+				}
+				ImPlot::PopStyleColor();
+				ImPlot::EndPlot();
+			}
+			Graph.End();
+		}
 	}
 }

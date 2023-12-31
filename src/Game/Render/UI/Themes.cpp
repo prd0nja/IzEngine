@@ -173,7 +173,7 @@ namespace IW3SR::UI
 		plotStyle.LegendInnerPadding = ImVec2(5, 5);
 		plotStyle.LegendPadding = ImVec2(10, 10);
 		plotStyle.LegendSpacing = ImVec2(5, 0);
-		plotStyle.LineWeight = 1;
+		plotStyle.LineWeight = 2;
 		plotStyle.MajorGridSize = ImVec2(1, 1);
 		plotStyle.MajorTickLen = ImVec2(10, 10);
 		plotStyle.MajorTickSize = ImVec2(1, 1);

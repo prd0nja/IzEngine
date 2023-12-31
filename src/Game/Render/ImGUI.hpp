@@ -20,6 +20,12 @@
 
 #include "Math/Common.hpp"
 
+constexpr ImGuiWindowFlags ImGuiWindowFlags_Graph = ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoBackground;
+
+constexpr ImPlotAxisFlags ImPlotAxisFlags_Canvas = ImPlotAxisFlags_NoTickLabels
+	| ImPlotAxisFlags_NoTickMarks
+	| ImPlotAxisFlags_NoGridLines;
+
 namespace ImGui
 {
 	/// <summary>
