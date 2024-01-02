@@ -145,25 +145,30 @@ namespace ImGui
     {
         if (!GUI::Open || !GUI::DesignMode) return;
 
-        SetNextWindowBgAlpha(0.2f);
         PushStyleColor(ImGuiCol_Border, { 0.2, 0.2, 0.2, 0.2 });
-        Begin(label.c_str(), nullptr, ImGuiWindowFlags_NoTitleBar);
+        SetNextWindowBgAlpha(0.2f);
+        SetNextWindowPos(renderPosition, ImGuiCond_FirstUseEver);
+        SetNextWindowSize(renderSize, ImGuiCond_FirstUseEver);
+        Begin(label.c_str(), nullptr, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse);
 
-        if (IsWindowHovered() && IsMouseDragging(ImGuiMouseButton_Left))
+        ImVec2 framePosition = GetWindowPos();
+        ImVec2 frameSize = GetWindowSize();
+        ImVec2 mouse = GetIO().MousePos;
+        ImVec2 resize = framePosition + frameSize;
+
+        if (IsMouseDragging(ImGuiMouseButton_Left))
         {
-            renderPosition = GetWindowPos();
-            position += vec2(scr_place->scaleRealToVirtual) * vec2(GetMouseDragDelta());
-            ResetMouseDragDelta();
-        }
-        else if (false)
-        {
-            renderSize = GetWindowSize();
-            size = vec2(scr_place->scaleRealToVirtual) * renderSize;
-        }
-        else
-        {
-            SetWindowPos(renderPosition);
-            SetWindowSize(renderSize);
+            if (IsWindowHovered())
+            {
+                renderPosition = framePosition;
+                position += vec2(scr_place->scaleRealToVirtual) * vec2(GetMouseDragDelta());
+                ResetMouseDragDelta();
+            }
+            else if (IsWindowResizing())
+            {
+                renderSize = frameSize;
+                size = vec2(scr_place->scaleRealToVirtual) * renderSize;
+            }
         }
         End();
         PopStyleColor();
@@ -180,5 +185,23 @@ namespace ImGui
     void Markdown(const std::string& markdown)
     {
         Markdown(markdown.c_str(), markdown.size(), GUI::Themes.Markdown);
+    }
+
+    bool IsWindowResizing()
+    {
+        if (!IsMouseDragging(ImGuiMouseButton_Left))
+            return false;
+
+        ImGuiWindow *window = GetCurrentWindow();
+        ImGuiID active = GetActiveID();
+
+        for (int i = 0; i < 4; i++)
+        {
+            if (GetWindowResizeCornerID(window, i) == active)
+                return true;
+            if (GetWindowResizeBorderID(window, i) == active)
+                return true;
+        }
+        return false;
     }
 }

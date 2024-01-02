@@ -50,8 +50,12 @@ namespace IW3SR::UI
 			ImGui::Button(ICON_FA_TERMINAL, "Debug", &debug, buttonSize);
 			ImGui::Tooltip("Debug");
 			ImGui::SameLine();
-			if (debug) ImGui::ShowDebugLogWindow(&debug);
 
+			if (debug)
+			{
+				ImGui::ShowDebugLogWindow(&debug);
+				ImGui::ShowStackToolWindow(&debug);
+			}
 			ImGui::Button(ICON_FA_MEMORY, "Memory", &GUI::Memory.Open, buttonSize);
 			ImGui::Tooltip("Memory");
 			ImGui::SameLine();

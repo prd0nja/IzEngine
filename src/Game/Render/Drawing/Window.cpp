@@ -20,20 +20,26 @@ namespace IW3SR
 
 	void Window::Begin(ImGuiWindowFlags flags)
 	{
-		ImGui::Begin(Name.c_str(), &Open, flags);
-
 		const vec2 space = vec2(scr_place->scaleVirtualToFull);
-		vec2 position = Position * space;
-		vec2 size = Size * space;
+		RenderPosition = Position * space;
+		RenderSize = Size * space;
 
-		ImGui::SetWindowPos(position, ImGuiCond_FirstUseEver);
-		ImGui::SetWindowSize(size, ImGuiCond_FirstUseEver);
+		ImGui::SetNextWindowPos(RenderPosition, ImGuiCond_FirstUseEver);
+		ImGui::SetNextWindowSize(RenderSize, ImGuiCond_FirstUseEver);
 
+		ImGui::Begin(Name.c_str(), &Open, flags);
 		RenderPosition = ImGui::GetWindowPos();
 		RenderSize = ImGui::GetWindowSize();
 
 		Position = RenderPosition / space;
 		Size = RenderSize / space;
+
+		if (!(flags & (ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize)))
+		{
+			ImGui::Movable("#" + Name, Position, Size, RenderPosition, RenderSize);
+			ImGui::SetWindowPos(RenderPosition);
+			ImGui::SetWindowSize(RenderSize);
+		}
 	}
 
 	void Window::End()

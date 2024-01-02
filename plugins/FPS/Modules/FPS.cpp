@@ -27,6 +27,7 @@ namespace IW3SR
 
 		if (ShowGraph)
 		{
+			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, { 0, 0 });
 			Graph.Begin(ImGuiWindowFlags_Graph);
 			if (ImPlot::BeginPlot("##FPS", Graph.RenderSize))
 			{
@@ -42,6 +43,7 @@ namespace IW3SR
 				ImPlot::EndPlot();
 			}
 			Graph.End();
+			ImGui::PopStyleVar();
 		}
 	}
 }

@@ -20,7 +20,10 @@
 
 #include "Math/Common.hpp"
 
-constexpr ImGuiWindowFlags ImGuiWindowFlags_Graph = ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoBackground;
+constexpr ImGuiWindowFlags ImGuiWindowFlags_Graph = ImGuiWindowFlags_NoTitleBar 
+	| ImGuiWindowFlags_NoScrollbar 
+	| ImGuiWindowFlags_NoCollapse 
+	| ImGuiWindowFlags_NoBackground;
 
 constexpr ImPlotAxisFlags ImPlotAxisFlags_Canvas = ImPlotAxisFlags_NoTickLabels
 	| ImPlotAxisFlags_NoTickMarks
@@ -119,6 +122,12 @@ namespace ImGui
 	/// <param name="markdown">The markdown text.</param>
 	/// <returns></returns>
 	API void Markdown(const std::string& markdown);
+
+	/// <summary>
+	/// Is window resizing.
+	/// </summary>
+	/// <returns></returns>
+	API bool IsWindowResizing();
 }
 
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
