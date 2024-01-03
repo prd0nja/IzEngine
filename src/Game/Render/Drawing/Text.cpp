@@ -29,7 +29,7 @@ namespace IW3SR
 
 	void Text::SetFont(const std::string& font)
 	{
-		int fontSize = std::floor(scr_place->scaleVirtualToReal[0] * FontSize * 14.f);
+		int fontSize = std::floor(scr_place->scaleVirtualToFull[0] * FontSize * 10.f);
 		Font = Assets::LoadFont(font, fontSize);
 		FontName = font;
 		

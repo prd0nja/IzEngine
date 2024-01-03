@@ -153,22 +153,28 @@ namespace ImGui
 
         ImVec2 framePosition = GetWindowPos();
         ImVec2 frameSize = GetWindowSize();
-        ImVec2 mouse = GetIO().MousePos;
-        ImVec2 resize = framePosition + frameSize;
 
         if (IsMouseDragging(ImGuiMouseButton_Left))
         {
+            vec2 mouseDelta = GetMouseDragDelta(ImGuiMouseButton_Left);
             if (IsWindowHovered())
             {
                 renderPosition = framePosition;
-                position += vec2(scr_place->scaleRealToVirtual) * vec2(GetMouseDragDelta());
+                position += vec2(scr_place->scaleRealToVirtual) * mouseDelta;
                 ResetMouseDragDelta();
             }
             else if (IsWindowResizing())
             {
+                renderPosition = framePosition;
                 renderSize = frameSize;
-                size = vec2(scr_place->scaleRealToVirtual) * renderSize;
+                size += vec2(scr_place->scaleRealToVirtual) * mouseDelta;
+                ResetMouseDragDelta();
             }
+        }
+        else 
+        {
+            SetWindowPos(renderPosition);
+            SetWindowSize(renderSize);
         }
         End();
         PopStyleColor();
