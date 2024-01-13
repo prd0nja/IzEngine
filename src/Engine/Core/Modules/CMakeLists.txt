@@ -1,12 +1,6 @@
-target_precompile_headers(IW3SR PRIVATE
-	Feature.hpp
-	Module.hpp)
+add_subdirectory(Features)
 
 target_sources(IW3SR PRIVATE
-	Feature.hpp
-	Feature.cpp
-	Features.hpp
-	Features.cpp
 	Module.hpp
 	Module.cpp
 	Modules.hpp

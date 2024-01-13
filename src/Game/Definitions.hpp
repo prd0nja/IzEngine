@@ -20,3 +20,7 @@
 #define FONT_NORMAL     "fonts/normalFont"
 #define FONT_EXTRA_BIG  "fonts/extraBigFont"
 #define FONT_OBJECTIVE  "fonts/objectiveFont"
+
+#define GameCallback(method, ...) \
+	GC->Modules->Callback([&](const auto& entry) { entry->method(__VA_ARGS__); }); \
+	GC->Features->Callback([&](const auto& entry) { entry->method(__VA_ARGS__); });

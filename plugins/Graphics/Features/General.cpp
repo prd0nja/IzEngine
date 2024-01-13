@@ -1,8 +1,8 @@
-#include "Graphics.hpp"
+#include "General.hpp"
 
 namespace IW3SR
 {
-	Graphics::Graphics() : Feature("sr.feature.graphics", "Graphics", "Feature")
+	General::General() : Feature("sr.feature.graphics", "Graphics", "General")
 	{
 		DrawSpecular = true;
 		DrawFog = false;
@@ -27,8 +27,8 @@ namespace IW3SR
 		TweakDarkTint = { 0.7, 0.85, 1 };
 	}
 
-	void Graphics::OnMenu()
-	{	
+	void General::OnMenu()
+	{
 		if (ImGui::CollapsingHeader("General"))
 		{
 			ImGui::Text("Specular");
@@ -63,7 +63,7 @@ namespace IW3SR
 		if (ImGui::CollapsingHeader("Glow"))
 		{
 			ImGui::Toggle("glow", 20, &DrawGlow);
-			ImGui::SameLine(); 
+			ImGui::SameLine();
 			ImGui::Text("Enabled");
 			ImGui::SliderFloat("Radius", &GlowRadius, 0, 32);
 			ImGui::SliderFloat("Bloom desaturation", &GlowBloomDesaturation, 0, 1);
@@ -95,7 +95,7 @@ namespace IW3SR
 			Dvar::Set<float>("r_filmTweakDesaturation", TweakDesaturation);
 			Dvar::Set<float>("r_glowTweakRadius0", GlowRadius);
 			Dvar::Set<float>("r_glowTweakBloomDesaturation", GlowBloomDesaturation);
-			// Dvar::Set<float>("r_glowTweakBloomIntensity", GlowBloomIntensity); // runtime error
+			// Dvar::Set<float>("r_glowTweakBloomIntensity", GlowBloomIntensity);
 			Dvar::Set<float>("r_glowTweakBloomCutoff", GlowBloomCutoff);
 
 			Dvar::Set<vec4>("r_lightTweakSunColor", SunColor);

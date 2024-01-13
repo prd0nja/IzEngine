@@ -1,20 +1,14 @@
 #pragma once
-#include "Engine/Backends/ImGUI.hpp"
-#include "Engine/Backends/ImGUI/Drawing/Window.hpp"
+#include "Engine/Core/Modules.hpp"
 
 namespace IW3SR
 {
 	/// <summary>
 	/// Game feature.
 	/// </summary>
-	class API Feature
+	class API Feature : public Module
 	{
 	public:
-		std::string ID;
-		std::string Name;
-		std::string Group;
-		Window Menu;
-
 		/// <summary>
 		/// Initialize the feature.
 		/// </summary>
@@ -31,21 +25,6 @@ namespace IW3SR
 		/// Release the feature.
 		/// </summary>
 		virtual ~Feature();
-
-		/// <summary>
-		/// Initialize the feature.
-		/// </summary>
-		virtual void Initialize();
-
-		/// <summary>
-		/// Shutdown the feature.
-		/// </summary>
-		virtual void Shutdown();
-
-		/// <summary>
-		/// Menu drawing.
-		/// </summary>
-		virtual void OnMenu();
 
 		NLOHMANN_SERIALIZE_POLY_BASE(Feature, Menu)
 	};

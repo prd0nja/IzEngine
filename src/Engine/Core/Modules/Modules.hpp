@@ -16,7 +16,7 @@ namespace IW3SR
 		/// Initialize the modules.
 		/// </summary>
 		Modules();
-		~Modules();
+		virtual ~Modules();
 
 		/// <summary>
 		/// Load a module.
@@ -44,13 +44,13 @@ namespace IW3SR
 		/// Enable a module.
 		/// </summary>
 		/// <param name="id">The module id.</param>
-		void Enable(const std::string& id);
+		virtual void Enable(const std::string& id);
 
 		/// <summary>
 		/// Disable a module.
 		/// </summary>
 		/// <param name="id">The module id.</param>
-		void Disable(const std::string& id);
+		virtual void Disable(const std::string& id);
 
 		/// <summary>
 		/// Remove a module.
@@ -76,11 +76,11 @@ namespace IW3SR
 		/// <summary>
 		/// Load the modules.
 		/// </summary>
-		void Deserialize();
+		virtual void Deserialize();
 
 		/// <summary>
 		/// Serialize the modules.
 		/// </summary>
-		void Serialize();
+		virtual void Serialize();
 	};
 }

@@ -1,6 +1,4 @@
 #pragma once
-#include <nlohmann/json.hpp>
-
 #ifndef CDECL
 #define CDECL __cdecl
 #endif
@@ -40,6 +38,3 @@
 #ifndef CMAKE_BINARY_DIR
 #define CMAKE_BINARY_DIR ""
 #endif
-
-#define ModuleCallback(method, ...) \
-	GC->Modules->Callback([&](const std::unique_ptr<Module>& entry) { entry->method(__VA_ARGS__); });

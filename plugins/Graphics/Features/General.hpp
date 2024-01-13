@@ -6,7 +6,7 @@ namespace IW3SR
 	/// <summary>
 	/// Modify the game's graphics
 	/// </summary>
-	class Graphics : public Feature
+	class General : public Feature
 	{
 	public:
 		bool DrawSpecular;
@@ -34,15 +34,15 @@ namespace IW3SR
 		/// <summary>
 		/// Initialize the feature.
 		/// </summary>
-		Graphics();
-		virtual ~Graphics() = default;
+		General();
+		virtual ~General() = default;
 
 		/// <summary>
 		/// Menu drawing.
 		/// </summary>
 		void OnMenu() override;
 
-		NLOHMANN_SERIALIZE_POLY(Graphics, Feature, DrawSpecular, DrawFog, DrawDecals, DrawTweaks,
+		NLOHMANN_SERIALIZE_POLY(General, Module, DrawSpecular, DrawFog, DrawDecals, DrawTweaks,
 			DrawGlow, DrawSun, SunIntensity, SpecularColorScale, TweakBrightness, TweakDesaturation,
 			GlowRadius, GlowBloomDesaturation, GlowBloomIntensity, GlowBloomCutoff, SunColor, SunDirection,
 			TweakLightTint, TweakDarkTint)

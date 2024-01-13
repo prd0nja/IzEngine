@@ -1,11 +1,11 @@
 #include "Game/Plugin.hpp"
-#include "Features/Graphics.hpp"
+#include "Features/General.hpp"
 
 PLUGIN void Initialize(DLL* entry)
 {
 	entry->SetInfos("sr.feature.graphics", "Graphics");
 
-	Features::Load<Graphics>();
+	Features::Load<General>();
 }
 
 PLUGIN void GUI()

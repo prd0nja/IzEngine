@@ -1,22 +1,23 @@
 #pragma once
 #include "Feature.hpp"
+#include "Engine/Core/Modules.hpp"
 
 namespace IW3SR
 {
 	/// <summary>
 	/// Game features.
 	/// </summary>
-	class API Features
+	class API Features : public Modules
 	{
 	public:
-		static inline std::map<std::string, std::unique_ptr<Feature>> Entries;
+		static inline std::map<std::string, std::unique_ptr<Module>> Entries;
 		static inline nlohmann::json Serialized;
 
 		/// <summary>
 		/// Initialize the features.
 		/// </summary>
 		Features();
-		~Features();
+		virtual ~Features();
 		
 		/// <summary>
 		/// Load a feature.
@@ -43,13 +44,28 @@ namespace IW3SR
 		static void Remove(const std::string& id);
 
 		/// <summary>
+		/// Dispatch callback.
+		/// </summary>
+		/// <typeparam name="Func">The callback type.</typeparam>
+		/// <param name="callback">The function callback.</param>
+		template <typename Func>
+		void Callback(Func callback)
+		{
+			for (const auto& [_, entry] : Entries)
+			{
+				if (entry->IsEnabled)
+					callback(entry);
+			}
+		}
+
+		/// <summary>
 		/// Load the features.
 		/// </summary>
-		void Deserialize();
+		void Deserialize() override;
 
 		/// <summary>
 		/// Serialize the features.
 		/// </summary>
-		void Serialize();
+		void Serialize() override;
 	};
 }

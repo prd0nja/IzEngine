@@ -38,14 +38,14 @@ namespace IW3SR
 
 	void Render::Draw3D(GfxCmdBufInput* cmd, GfxViewInfo* viewInfo, GfxCmdBufSourceState* src, GfxCmdBufState* buf)
 	{
-		ModuleCallback(OnDraw3D);
+		GameCallback(OnDraw3D);
 		Game::Draw3D::Frame();
 		RB_EndSceneRendering_h(cmd, viewInfo, src, buf);
 	}
 
 	void Render::Draw2D(int localClientNum)
 	{
-		ModuleCallback(OnDraw2D);
+		GameCallback(OnDraw2D);
 		CG_DrawCrosshair_h(localClientNum);
 	}
 
@@ -53,7 +53,7 @@ namespace IW3SR
 	{
 		GUI::Begin();
 		if (Player::CanRender())
-			ModuleCallback(OnFrame);
+			GameCallback(OnFrame);
 		GUI::End();
 	}
 }
