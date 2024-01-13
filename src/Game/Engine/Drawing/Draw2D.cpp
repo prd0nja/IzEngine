@@ -1,7 +1,6 @@
 #include "Draw2D.hpp"
-#include "Game/Engine/Assets.hpp"
 
-namespace IW3SR::Engine
+namespace IW3SR::Game
 {
 	void Draw2D::Rect(const std::string& material, float x, float y, float w, float h, const vec4& color)
 	{

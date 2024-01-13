@@ -1,15 +1,16 @@
 #pragma once
 #include "Game/Definitions.hpp"
-#include "Engine/Backends/ImGUI.hpp"
-#include "Sys/Win32.hpp"
 
-#include "Game/Engine/UI/About.hpp"
-#include "Game/Engine/UI/Binds.hpp"
-#include "Game/Engine/UI/Memory.hpp"
-#include "Game/Engine/UI/Modules.hpp"
-#include "Game/Engine/UI/Settings.hpp"
-#include "Game/Engine/UI/Themes.hpp"
-#include "Game/Engine/UI/Toolbar.hpp"
+#include "Engine/Backends/ImGUI/Drawing/Window.hpp"
+#include "Engine/Backends/ImGUI/Drawing/Plots.hpp"
+
+#include "UI/About.hpp"
+#include "UI/Binds.hpp"
+#include "UI/Memory.hpp"
+#include "UI/Modules.hpp"
+#include "UI/Settings.hpp"
+#include "UI/Themes.hpp"
+#include "UI/Toolbar.hpp"
 
 namespace IW3SR
 {

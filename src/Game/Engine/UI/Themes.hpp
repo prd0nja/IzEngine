@@ -1,5 +1,8 @@
 #pragma once
-#include "Engine/Backends/ImGUI.hpp"
+#include "Game/Engine/GUI.hpp"
+#include "Engine/Backends/ImGUI/Components.hpp"
+
+#include <tuple>
 
 namespace IW3SR::UI
 {

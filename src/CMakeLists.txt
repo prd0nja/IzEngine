@@ -5,9 +5,6 @@ add_library(IW3SR.DLL SHARED)
 
 add_subdirectory(Engine)
 add_subdirectory(Game)
-add_subdirectory(Math)
-add_subdirectory(Sys)
-add_subdirectory(Utils)
 
 target_include_directories(IW3SR PUBLIC .)
 target_sources(IW3SR.DLL PRIVATE main.cpp)

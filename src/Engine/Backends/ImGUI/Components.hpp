@@ -1,7 +1,7 @@
 #pragma once
 #include "Engine/Backends/ImGUI.hpp"
-#include "Utils/CircularBuffer.hpp"
-#include "Math/Common.hpp"
+#include "Engine/Core/Containers/CircularBuffer.hpp"
+#include "Engine/Core/Math.hpp"
 
 #include "Fonts/IconsFontAwesome6.hpp"
 #include "Fonts/IconsFontAwesome6Brands.hpp"

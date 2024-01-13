@@ -16,12 +16,6 @@ namespace IW3SR
 	template <typename T> using gvec3 = glm::vec<3, T, glm::packed_highp>;
 	template <typename T> using gvec4 = glm::vec<4, T, glm::packed_highp>;
 
-	template <typename T> concept IsChar = std::is_same_v<T, char>;
-	template <typename T> concept IsShort = std::is_same_v<T, short>;
-	template <typename T> concept IsInt = std::is_same_v<T, int>;
-	template <typename T> concept IsFloat = std::is_same_v<T, float>;
-	template <typename T> concept IsDouble = std::is_same_v<T, double>;
-
 	using mat3c = Matrix3<char>;
 	using mat3s = Matrix3<short>;
 	using mat3i = Matrix3<int>;

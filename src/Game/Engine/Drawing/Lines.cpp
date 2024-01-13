@@ -1,6 +1,6 @@
 #include "Lines.hpp"
 
-namespace IW3SR::Engine
+namespace IW3SR::Game
 {
 	Lines::Lines(int width, int limit, bool depthTest)
 	{

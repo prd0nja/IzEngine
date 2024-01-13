@@ -1,8 +1,4 @@
-target_precompile_headers(IW3SR PRIVATE
-	Common.hpp)
-
 target_sources(IW3SR PRIVATE
-	Common.hpp
 	GLM.hpp
 	Math.hpp
 	Math.cpp

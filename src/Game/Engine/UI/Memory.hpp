@@ -1,5 +1,5 @@
 #pragma once
-#include "Engine/Backends/ImGUI.hpp"
+#include "Game/Engine/GUI.hpp"
 
 namespace IW3SR::UI
 {

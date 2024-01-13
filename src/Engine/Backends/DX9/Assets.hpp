@@ -1,8 +1,8 @@
 #pragma once
 #include "Engine/Backends/DX9.hpp"
 
-#include "Texture.hpp"
-#include "Font.hpp"
+#include "Resources/Texture.hpp"
+#include "Resources/Font.hpp"
 
 #include <map>
 #include <unordered_map>

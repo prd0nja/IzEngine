@@ -40,7 +40,7 @@ namespace IW3SR
 		ImGui_ImplDX9_Init(dx->device);
 		Themes.Initialize();
 
-		SR->DLLS->SetRenderer();
+		GC->DLLS->SetRenderer();
 	}
 
 	void GUI::Shutdown()

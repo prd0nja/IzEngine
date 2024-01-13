@@ -1,8 +1,10 @@
 #pragma once
 #include "Game/Definitions.hpp"
-#include "Lines.hpp"
+#include "Game/Engine/Assets.hpp"
 
-namespace IW3SR::Engine
+#include "Engine/Core/Math.hpp"
+
+namespace IW3SR::Game
 {
 	/// <summary>
 	/// Draw 3D class.

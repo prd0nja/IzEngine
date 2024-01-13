@@ -1,9 +1,11 @@
 #include "Text.hpp"
 #include "Draw2D.hpp"
 
+#include "Engine/Backends/ImGUI/Components.hpp"
+
 #define RESCALE 0.4f
 
-namespace IW3SR::Engine
+namespace IW3SR::Game
 {
 	Text::Text(const std::string& text, const std::string& font, float x, float y, float size, const vec4& color)
 	{

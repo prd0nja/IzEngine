@@ -1,11 +1,12 @@
 #pragma once
-#include "API.hpp"
-#include "Sys/Memory.hpp"
-#include "Sys/Log.hpp"
+#include "Engine/API.hpp"
 
 #include <Windows.h>
 #include <TlHelp32.h>
 #include <Psapi.h>
+
+#include "Log.hpp"
+#include "Memory.hpp"
 
 #include "Win32/DLL.hpp"
 #include "Win32/DLLS.hpp"

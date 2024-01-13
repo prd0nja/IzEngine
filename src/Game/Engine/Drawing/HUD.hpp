@@ -1,8 +1,8 @@
 #pragma once
 #include "Game/Definitions.hpp"
-#include "Math/Common.hpp"
+#include "Engine/Core/Math.hpp"
 
-namespace IW3SR::Engine
+namespace IW3SR::Game
 {
 	/// <summary>
 	/// HUD element.

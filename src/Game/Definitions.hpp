@@ -1,7 +1,12 @@
 #pragma once
+#include "Engine/API.hpp"
+#include "Engine/Backends/DX9.hpp"
+#include "Engine/Backends/ImGUI.hpp"
+#include "Engine/Sys/Win32.hpp"
 
-namespace IW3SR {};
-using namespace IW3SR;
+#include "Definitions/Structs.hpp"
+#include "Definitions/Functions.hpp"
+#include "Definitions/Declaration.hpp"
 
 #define SCREEN_WIDTH	640
 #define SCREEN_HEIGHT	480
@@ -15,8 +20,3 @@ using namespace IW3SR;
 #define FONT_NORMAL     "fonts/normalFont"
 #define FONT_EXTRA_BIG  "fonts/extraBigFont"
 #define FONT_OBJECTIVE  "fonts/objectiveFont"
-
-#include "API.hpp"
-#include "Definitions/Structs.hpp"
-#include "Definitions/Functions.hpp"
-#include "Definitions/Declaration.hpp"

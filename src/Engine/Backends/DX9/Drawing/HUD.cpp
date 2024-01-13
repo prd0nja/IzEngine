@@ -1,6 +1,9 @@
 #include "HUD.hpp"
 #include "Draw2D.hpp"
-#include "Utils/Utils.hpp"
+
+#include "Engine/Backends/DX9/Assets.hpp"
+#include "Engine/Backends/ImGUI/Components.hpp"
+#include "Engine/Core/Utils/Utils.hpp"
 
 namespace IW3SR
 {

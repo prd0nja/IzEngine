@@ -1,6 +1,6 @@
 #pragma once
 #include "Engine/Backends/DX9.hpp"
-#include "Math/Common.hpp"
+#include "Engine/Core/Math.hpp"
 
 namespace IW3SR
 {

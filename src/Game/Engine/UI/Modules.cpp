@@ -18,7 +18,7 @@ namespace IW3SR::UI
 		const float frameWidth = ImGui::GetWindowContentRegionMax().x - 30;
 		std::set<std::string> groups;
 
-		for (const auto& [_, current] : SR->Modules->Entries)
+		for (const auto& [_, current] : GC->Modules->Entries)
 		{
 			if (std::ranges::find(groups, current->Group) != groups.end())
 				continue;
@@ -26,8 +26,8 @@ namespace IW3SR::UI
 			groups.insert(current->Group);
 			if (!ImGui::CollapsingHeader(current->Group.c_str(), ImGuiTreeNodeFlags_DefaultOpen))
 				continue;
-	
-			for (const auto& [_, entry] : SR->Modules->Entries)
+
+			for (const auto& [_, entry] : GC->Modules->Entries)
 			{
 				if (current->Group != entry->Group)
 					continue;

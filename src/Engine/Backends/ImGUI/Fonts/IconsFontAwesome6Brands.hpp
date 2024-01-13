@@ -2,7 +2,6 @@
 // from https://github.com/FortAwesome/Font-Awesome/raw/6.x/metadata/icons.yml
 // for use with https://github.com/FortAwesome/Font-Awesome/blob/6.x/webfonts/fa-brands-400.ttf
 #pragma once
-
 #define FONT_ICON_FILE_NAME_FAB "fa-brands-400.ttf"
 
 #define ICON_MIN_FAB 0xe007

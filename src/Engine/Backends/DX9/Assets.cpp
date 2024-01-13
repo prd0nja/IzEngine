@@ -4,11 +4,15 @@ namespace IW3SR
 {
 	void Assets::Initialize()
 	{
+		Log::WriteLine("[Render] Initialize");
+
 		LoadFonts();
 	}
 
 	void Assets::Shutdown()
 	{
+		Log::WriteLine("[Render] Shutdown");
+
 		Textures.clear();
 		Fonts.clear();
 		FontNames.clear();

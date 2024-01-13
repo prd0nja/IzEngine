@@ -1,6 +1,6 @@
 #include "Assets.hpp"
 
-namespace IW3SR::Engine
+namespace IW3SR::Game
 {
 	void Assets::Initialize()
 	{

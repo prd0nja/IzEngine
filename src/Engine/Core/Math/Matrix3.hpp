@@ -1,7 +1,5 @@
 #pragma once
-#include "Common.hpp"
-#include "Vector3.hpp"
-#include "Vector4.hpp"
+#include "Engine/Core/Math.hpp"
 
 namespace IW3SR
 {

@@ -1,6 +1,6 @@
 #include "Draw3D.hpp"
 
-namespace IW3SR::Engine
+namespace IW3SR::Game
 {
     void Draw3D::Line(const vec3& start, const vec3& end, const vec4& color)
     {

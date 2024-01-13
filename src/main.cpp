@@ -2,13 +2,13 @@
 
 void Init()
 {
-    SR = new Game();
-    SR->Initialize();
+    GC = new GameClient();
+    GC->Initialize();
 }
 
 void Shutdown()
 {
-    delete SR;
+    delete GC;
 }
 
 ENTRY BOOL STDCALL RIB_Main(HANDLE handle, INT upDown)
@@ -16,9 +16,9 @@ ENTRY BOOL STDCALL RIB_Main(HANDLE handle, INT upDown)
     return TRUE;
 }
 
-BOOL APIENTRY DllMain(HMODULE hModule, DWORD dwReason, LPVOID lpReserved) 
+BOOL APIENTRY DllMain(HMODULE hModule, DWORD dwReason, LPVOID lpReserved)
 {
-    switch (dwReason) 
+    switch (dwReason)
     {
         case DLL_PROCESS_ATTACH:
             Init();
@@ -30,7 +30,7 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD dwReason, LPVOID lpReserved)
         case DLL_PROCESS_DETACH:
             Shutdown();
             break;
-        default: 
+        default:
             break;
     }
     return TRUE;

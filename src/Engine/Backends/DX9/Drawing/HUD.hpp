@@ -1,7 +1,7 @@
 #pragma once
 #include "Engine/Backends/DX9.hpp"
-#include "Engine/Backends/DX9/Assets.hpp"
-#include "Math/Common.hpp"
+#include "Engine/Backends/DX9/Resources/Texture.hpp"
+#include "Engine/Core/Math.hpp"
 
 namespace IW3SR
 {

@@ -21,18 +21,18 @@ namespace IW3SR
 
 	void Player::Allocates()
 	{
-		for (int i = 0; i < 64; i++) 
-			SR->Players[i] = std::make_shared<Player>(i);
+		for (int i = 0; i < 64; i++)
+			GC->Players[i] = std::make_shared<Player>(i);
 	}
 
 	std::array<std::shared_ptr<Player>, 64>& Player::GetAll()
 	{
-		return SR->Players;
+		return GC->Players;
 	}
 
 	std::shared_ptr<Player> Player::Get(int index)
 	{
-		return SR->Players[index];
+		return GC->Players[index];
 	}
 
 	bool Player::CanRender()

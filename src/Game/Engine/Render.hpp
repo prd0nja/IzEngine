@@ -1,9 +1,6 @@
 #pragma once
 #include "Game/Definitions.hpp"
-#include "Game/Engine/Backends/D3D9EX.hpp"
-#include "Math/Common.hpp"
-
-#include <vector>
+#include "Backends/D3D9EX.hpp"
 
 namespace IW3SR
 {

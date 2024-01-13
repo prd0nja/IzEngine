@@ -1,4 +1,5 @@
 #include "Toolbar.hpp"
+#include "Engine/Core/Utils/Utils.hpp"
 
 namespace IW3SR::UI
 {
@@ -28,8 +29,8 @@ namespace IW3SR::UI
 		{
 			if (ImGui::Button(ICON_FA_ROTATE_RIGHT, "Reload", nullptr, buttonSize))
 			{
-				SR->Modules->Serialize();
-				SR->DLLS->Reload();
+				GC->Modules->Serialize();
+				GC->DLLS->Reload();
 			}
 			ImGui::Tooltip("Reload plugins");
 			ImGui::SameLine();

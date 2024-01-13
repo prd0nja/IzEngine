@@ -1,49 +1,6 @@
 #pragma once
 #include <nlohmann/json.hpp>
 
-#ifndef CDECL
-#define CDECL __cdecl
-#endif
-
-#ifndef STDCALL
-#define STDCALL __stdcall
-#endif
-
-#ifndef FASTCALL
-#define FASTCALL __fastcall
-#endif
-
-#define C_EXTERN extern "C"
-#define CPP_EXTERN extern "C++"
-#define ASM C_EXTERN
-
-#ifndef EXPORT
-#define EXPORT __declspec(dllexport)
-#endif
-
-#ifndef IMPORT
-#define IMPORT __declspec(dllimport)
-#endif
-
-#ifndef API
-#define API EXPORT
-#endif
-
-#ifndef PLUGIN
-#define PLUGIN C_EXTERN EXPORT
-#endif
-
-#ifndef ENTRY
-#define ENTRY C_EXTERN EXPORT
-#endif
-
-#ifndef CMAKE_BINARY_DIR
-#define CMAKE_BINARY_DIR ""
-#endif
-
-#define ModuleCallback(method, ...) \
-	SR->Modules->Callback([&](const std::unique_ptr<Module>& entry) { entry->method(__VA_ARGS__); });
-
 #ifdef NLOHMANN_JSON_FROM
 #undef NLOHMANN_JSON_FROM
 #define NLOHMANN_JSON_FROM(v1) \

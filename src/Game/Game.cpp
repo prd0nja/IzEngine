@@ -2,7 +2,7 @@
 
 namespace IW3SR
 {
-	Game::Game()
+	GameClient::GameClient()
 	{
 		Environment::Initialize();
 		CoD4X();
@@ -17,7 +17,7 @@ namespace IW3SR
 		Hook();
 	}
 
-	Game::~Game()
+	GameClient::~GameClient()
 	{
 		Environment::Serialize("GUI", *GUI);
 		Environment::Save();
@@ -32,7 +32,7 @@ namespace IW3SR
 		Unhook();
 	}
 
-	void Game::Initialize()
+	void GameClient::Initialize()
 	{
 		Environment::Load();
 		Environment::Deserialize("GUI", *GUI);
@@ -41,7 +41,7 @@ namespace IW3SR
 		DLLS->Initialize();
 	}
 
-	void Game::CoD4X()
+	void GameClient::CoD4X()
 	{
 		auto cod4x = std::ranges::find_if(Environment::Modules,
 			[](const auto& m) { return m.find("cod4x_") != std::string::npos; });
@@ -63,7 +63,7 @@ namespace IW3SR
 		bg_weaponNames = reinterpret_cast<WeaponDef**>(COD4X + 0x443DDE0);
 	}
 
-	void Game::Hook()
+	void GameClient::Hook()
 	{
 		CreateWindowExA_h.Install();
 		MainWndProc_h.Install();
@@ -77,7 +77,7 @@ namespace IW3SR
 		RB_EndSceneRendering_h.Install();
 	}
 
-	void Game::Unhook()
+	void GameClient::Unhook()
 	{
 		CreateWindowExA_h.Remove();
 		MainWndProc_h.Remove();
@@ -92,4 +92,4 @@ namespace IW3SR
 	}
 }
 
-Game* SR = nullptr;
+GameClient* GC = nullptr;

@@ -1,42 +1,36 @@
 #pragma once
 #include "Definitions.hpp"
 
-#include "Engine/Modules/Modules.hpp"
-#include "Engine/Modules/Features.hpp"
-
 #include "Game/Engine/GUI.hpp"
-#include "Game/Engine/Assets.hpp"
 #include "Game/Engine/Render.hpp"
 #include "Game/Player/Player.hpp"
-#include "Game/Player/PMove.hpp"
 #include "Game/Sys/Console.hpp"
 
-#include "Math/Common.hpp"
-#include "Utils/Utils.hpp"
-#include "Sys/Win32.hpp"
+#include "Engine/Core/Modules.hpp"
+#include "Engine/Core/Math.hpp"
 
 namespace IW3SR
 {
 	/// <summary>
-	/// IW3SR Game client.
+	/// Game client.
 	/// </summary>
-	class Game
+	class GameClient
 	{
 	public:
-		std::unique_ptr<class DLLS> DLLS;
-		std::unique_ptr<class Features> Features;
-		std::unique_ptr<class Modules> Modules;
-		std::unique_ptr<class GUI> GUI;
-		std::unique_ptr<class Render> Render;
-		std::unique_ptr<class Console> Console;
+		std::unique_ptr<DLLS> DLLS;
+		std::unique_ptr<Features> Features;
+		std::unique_ptr<Modules> Modules;
+		std::unique_ptr<GUI> GUI;
+		std::unique_ptr<Render> Render;
+		std::unique_ptr<Console> Console;
 
-		std::array<std::shared_ptr<class Player>, 64> Players;
+		std::array<std::shared_ptr<Player>, 64> Players;
 
 		/// <summary>
 		/// Initialize the game.
 		/// </summary>
-		Game();
-		~Game();
+		GameClient();
+		~GameClient();
 
 		/// <summary>
 		/// Initialize game.
@@ -60,4 +54,4 @@ namespace IW3SR
 	};
 }
 
-extern Game* SR;
+extern GameClient* GC;

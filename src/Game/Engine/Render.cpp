@@ -1,6 +1,9 @@
 #include "Render.hpp"
+#include "Assets.hpp"
 #include "Drawing/Draw2D.hpp"
 #include "Drawing/Draw3D.hpp"
+
+#include "Engine/Backends/DX9/Assets.hpp"
 
 namespace IW3SR
 {
@@ -23,20 +26,20 @@ namespace IW3SR
 	{
 		R_Init_h();
 		Assets::Initialize();
-		Engine::Assets::Initialize();
+		Game::Assets::Initialize();
 	}
 
 	void Render::Shutdown(int window)
 	{
+		Game::Assets::Shutdown();
 		Assets::Shutdown();
-		Engine::Assets::Shutdown();
 		R_Shutdown_h(window);
 	}
 
 	void Render::Draw3D(GfxCmdBufInput* cmd, GfxViewInfo* viewInfo, GfxCmdBufSourceState* src, GfxCmdBufState* buf)
 	{
 		ModuleCallback(OnDraw3D);
-		Engine::Draw3D::Frame();
+		Game::Draw3D::Frame();
 		RB_EndSceneRendering_h(cmd, viewInfo, src, buf);
 	}
 

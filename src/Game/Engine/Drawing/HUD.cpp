@@ -1,7 +1,9 @@
 #include "HUD.hpp"
 #include "Draw2D.hpp"
 
-namespace IW3SR::Engine
+#include "Engine/Backends/ImGUI/Components.hpp"
+
+namespace IW3SR::Game
 {
 	HUD::HUD(const std::string& material, float x, float y, float w, float h, const vec4& color)
 	{

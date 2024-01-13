@@ -1,6 +1,9 @@
 #include "Text.hpp"
 #include "Draw2D.hpp"
-#include "Utils/Utils.hpp"
+
+#include "Engine/Backends/DX9/Assets.hpp"
+#include "Engine/Backends/ImGUI/Components.hpp"
+#include "Engine/Core/Utils/Utils.hpp"
 
 namespace IW3SR
 {
@@ -30,6 +33,8 @@ namespace IW3SR
 
 	void Text::SetFont(const std::string& font)
 	{
+		Log::WriteLine("[Render] SetFont");
+
 		int fontSize = std::floor(scr_place->scaleVirtualToFull[0] * FontSize * 10.f);
 		Font = Assets::LoadFont(font, fontSize);
 		FontName = font;

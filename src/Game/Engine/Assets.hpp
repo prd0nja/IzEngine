@@ -6,7 +6,7 @@
 #include <vector>
 #include <string>
 
-namespace IW3SR::Engine
+namespace IW3SR::Game
 {
 	/// <summary>
 	/// Assets class.
