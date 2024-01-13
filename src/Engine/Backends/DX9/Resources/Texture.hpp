@@ -9,9 +9,8 @@ namespace IW3SR
 	class API Texture
 	{
 	public:
-		std::string ID;
-		ComPtr<IDirect3DTexture9> Base;
-		ComPtr<IDirect3DSurface9> BaseSurface;
+		IDirect3DTexture9* Base;
+		IDirect3DSurface9* BaseSurface;
 
 		/// <summary>
 		/// Initialize a new Texture.

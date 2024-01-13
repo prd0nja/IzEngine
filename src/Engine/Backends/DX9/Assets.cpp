@@ -34,6 +34,9 @@ namespace IW3SR
 
 	std::shared_ptr<Font> Assets::LoadFont(const std::string& name, int height)
 	{
+		if (std::ranges::find(FontNames, name) == FontNames.end())
+			throw std::runtime_error("Font not found.");
+
 		std::string id = std::format("{}_{}", name, height);
 		if (auto cache = Fonts.find(id); cache != Fonts.end())
 			return cache->second;
@@ -42,13 +45,14 @@ namespace IW3SR
 		D3DXCreateFont(dx->device, height, 0, FW_NORMAL, 1, FALSE, DEFAULT_CHARSET,
 			OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE, name.c_str(), &font->Base);
 
-		if (std::ranges::find(FontNames, name) == FontNames.end())
-			FontNames.push_back(name.c_str());
 		return Fonts[id] = font;
 	}
 
 	std::shared_ptr<Font> Assets::LoadFont(const std::filesystem::path& path, int height)
 	{
+		if (!std::filesystem::exists(path))
+			throw std::runtime_error("Path not found.");
+
 		AddFontResource(path.string().c_str());
 
 		std::string name = path.stem().filename().string();
@@ -68,7 +72,7 @@ namespace IW3SR
 	std::shared_ptr<Texture> Assets::LoadTexture(const std::string& filePath)
 	{
 		if (!std::filesystem::exists(filePath))
-			throw std::runtime_error("Couldn't find texture path.");
+			throw std::runtime_error("Path not found.");
 
 		std::shared_ptr<Texture> texture = std::make_shared<Texture>();
 		D3DXCreateTextureFromFile(dx->device, filePath.c_str(), &texture->Base);

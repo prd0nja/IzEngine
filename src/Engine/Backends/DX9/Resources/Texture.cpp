@@ -4,7 +4,7 @@ namespace IW3SR
 {
 	void Texture::Reset()
 	{
-		Base.Reset();
-		BaseSurface.Reset();
+		Base->Release();
+		BaseSurface->Release();
 	}
 }

@@ -9,7 +9,7 @@ namespace IW3SR
 	class API Font
 	{
 	public:
-		ComPtr<ID3DXFont> Base;
+		ID3DXFont* Base;
 
 		/// <summary>
 		/// Initialize a new Font.

@@ -4,6 +4,6 @@ namespace IW3SR
 {
 	void Font::Reset()
 	{
-		Base.Reset();
+		Base->Release();
 	}
 }
