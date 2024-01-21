@@ -13,15 +13,15 @@ namespace IW3SR::Addons
 	{
 		Graph = Plots();
 
-		FPSText = Text("0", "Arial", -30, 0, 1.4, { 1, 1, 1, 1 });
-		FPSText.SetRectAlignment(HORIZONTAL_ALIGN_RIGHT, VERTICAL_ALIGN_TOP);
-		FPSText.SetAlignment(ALIGN_CENTER, ALIGN_BOTTOM);
+		FrameText = Text("0", "Arial", -30, 0, 1.4, { 1, 1, 1, 1 });
+		FrameText.SetRectAlignment(HORIZONTAL_ALIGN_RIGHT, VERTICAL_ALIGN_TOP);
+		FrameText.SetAlignment(ALIGN_CENTER, ALIGN_BOTTOM);
 	}
 
 	void FPS::OnMenu()
 	{
 		ImGui::Checkbox("Display Graph", &ShowGraph);
-		FPSText.Menu("Text", true);
+		FrameText.Menu("Text", true);
 	}
 
 	void FPS::OnRender()
@@ -29,15 +29,15 @@ namespace IW3SR::Addons
 		Value = Dvar::Get<int>("com_maxfps");
 		Values.Add(Value);
 
-		FPSText.Value = std::to_string(Value);
-		FPSText.Render();
+		FrameText.Value = std::to_string(Value);
+		FrameText.Render();
 
 		if (ShowGraph)
 		{
 			Graph.Begin();
 			if (ImPlot::BeginPlot("##FPS", Graph.RenderSize))
 			{
-				ImPlot::PushStyleColor(ImPlotCol_Line, static_cast<ImU32>(FPSText.Color));
+				ImPlot::PushStyleColor(ImPlotCol_Line, static_cast<ImU32>(FrameText.Color));
 				ImPlot::SetupAxes(nullptr, nullptr, ImPlotAxisFlags_Canvas, ImPlotAxisFlags_Canvas);
 				ImPlot::SetupAxisLimits(ImAxis_X1, 0, Values.Size(), ImGuiCond_Always);
 				ImPlot::SetupAxisLimits(ImAxis_Y1, 0, 1000, ImGuiCond_Always);

@@ -11,7 +11,7 @@ namespace IW3SR::Addons
     public:
         int Value;
         CircularBuffer<int, 1000> Values;
-        Text FPSText;
+        Text FrameText;
 
         Plots Graph;
         bool ShowGraph;
@@ -37,6 +37,6 @@ namespace IW3SR::Addons
         /// </summary>
         void OnRender() override;
 
-        NLOHMANN_SERIALIZE_POLY(FPS, Module, FPSText, Graph, ShowGraph)
+        NLOHMANN_SERIALIZE_POLY(FPS, Module, FrameText, Graph, ShowGraph)
     };
 }
