@@ -5,6 +5,7 @@ namespace IW3SR::Addons
 {
 	FPS::FPS() : Module("sr.player.fps", "FPS", "Player")
 	{
+		Value = 0;
 		ShowGraph = false;
 	}
 

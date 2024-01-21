@@ -23,6 +23,6 @@ namespace IW3SR::Engine
 		/// </summary>
 		void Begin(ImGuiWindowFlags flags = 0) override;
 
-		NLOHMANN_SERIALIZE_POLY(Plots, Window, Name, Position, Size, Open)
+		NLOHMANN_SERIALIZE_POLY(Plots, Window, Position, Size)
 	};
 }
