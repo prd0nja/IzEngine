@@ -14,8 +14,9 @@ namespace IW3SR::Addons
 		FPSText.SetRectAlignment(HORIZONTAL_ALIGN_RIGHT, VERTICAL_ALIGN_TOP);
 		FPSText.SetAlignment(ALIGN_CENTER, ALIGN_BOTTOM);
 
-		Notification = NotificationCenter("Im working");
-		Notification.Create("Hi from Dualite");
+		Notification = NotificationCenter("Hi from Dualite");
+		Notification.Push("Hi from Dualite 2");
+		Notification.Push("Hi from Dualite 3");
 	}
 
 	void FPS::OnMenu()
@@ -26,12 +27,13 @@ namespace IW3SR::Addons
 
 	void FPS::OnRender()
 	{
+		Notification.Render();
+
 		Value = Dvar::Get<int>("com_maxfps");
 		Values.Add(Value);
 
 		FPSText.Value = std::to_string(Value);
 		FPSText.Render();
-		Notification.Render();
 
 		if (ShowGraph)
 		{

@@ -7,12 +7,7 @@ namespace IW3SR
 		notifications.push_back({ msg, 5 });
 	}
 
-	NotificationCenter::NotificationCenter(const std::string& msg, int duration)
-	{
-		notifications.push_back({ msg, duration });
-	}
-
-	void NotificationCenter::Create(const std::string& msg, int duration)
+	void NotificationCenter::Push(const std::string& msg, int duration)
 	{
 		notifications.push_back({ msg, duration });
 	}
@@ -22,13 +17,32 @@ namespace IW3SR
 		if (notifications.empty())
 			return;
 
-		ImGui::SetNextWindowPos(ImVec2{ 0, 540 }, ImGuiCond_Always);
-		ImGui::Begin("Notification", nullptr, ImGuiWindowFlags_Notification);
+		ImDrawList* draw = ImGui::GetBackgroundDrawList();
 
+		int windowCount = 0;
+		float nextWindow = 0;
 		for (const auto& notification : notifications)
+		{
+			if (!windowCount)
+				ImGui::SetNextWindowPos({ 0, 300 });
+			else ImGui::SetNextWindowPos({ 0, nextWindow });
+
+			ImGui::SetNextWindowSize({ 300, 50 }, ImGuiCond_Always);
+			ImGui::Begin(("Notification #" + std::to_string(windowCount)).c_str(), nullptr, ImGuiWindowFlags_Notification);
+
+			const ImVec2 pos = ImGui::GetWindowPos();
+			const ImVec2 size = ImGui::GetWindowSize();
+
+			draw->AddRectFilled({ -1, pos.y }, { pos.x + size.x, pos.y + size.y }, IM_COL32(0, 0, 0, 255));
+			draw->AddRectFilled({ pos.x + size.x, pos.y }, { pos.x + size.x + 5, pos.y + size.y }, IM_COL32(140, 20, 252, 255));
+
+			ImGui::SameLine(ImGui::GetContentRegionAvail().x / 2 - ImGui::CalcTextSize(notification.message.c_str()).x);
 			ImGui::Text(std::format("IW3SR: {}", notification.message).c_str());
 
-		ImGui::End();
+			nextWindow = pos.y + size.y + 10;
+			windowCount++;
+			ImGui::End();
+		}
 
 		notifications.erase(std::remove_if(notifications.begin(), notifications.end(),
 			[](const Notification& notification)
@@ -36,7 +50,6 @@ namespace IW3SR
 				const Seconds duration(notification.duration);
 				const auto currentTime = Time::now();
 				const static auto endTime = currentTime + duration;
-		
 				return currentTime > endTime;
 			}), notifications.end());
 	}

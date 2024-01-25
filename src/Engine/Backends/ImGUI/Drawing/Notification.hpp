@@ -8,6 +8,10 @@ namespace IW3SR
 	class API NotificationCenter
 	{
 	private:
+		using MilliSeconds = std::chrono::milliseconds;
+		using Seconds = std::chrono::seconds;
+		using Time = std::chrono::steady_clock;
+
 		struct Notification
 		{
 			std::string message;
@@ -15,23 +19,17 @@ namespace IW3SR
 			//vec4 Color;
 			//vec2 Position;
 		};
-
-		using Seconds = std::chrono::seconds;
-		using Time = std::chrono::steady_clock;
 	public:
 		std::vector<Notification> notifications;
 
-		/// <summary>
-		/// Initialize the notification.
-		/// </summary>
 		NotificationCenter() = default;
 		NotificationCenter(const std::string& msg);
-		NotificationCenter(const std::string& msg, int duration);
+		~NotificationCenter() = default;
 
 		/// <summary>
 		/// Create a notification.
 		/// </summary>
-		void Create(const std::string& msg, int duration = 5);
+		void Push(const std::string& msg, int duration = 5);
 
 		/// <summary>
 		/// Render the notification.
