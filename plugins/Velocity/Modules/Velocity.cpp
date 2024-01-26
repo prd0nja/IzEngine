@@ -4,7 +4,7 @@ namespace IW3SR::Addons
 {
 	Velocity::Velocity() : Module("sr.player.velocity", "Velocity", "Player")
 	{
-		Graph = Window("Graph");
+		Graph = Window("Velocity Graph");
 		ResetKey = KeyListener('R');
 		ShowAverage = false;
 		ShowMax = false;

@@ -27,7 +27,7 @@ namespace IW3SR
 				ImGui::SetNextWindowPos({ 0, 300 });
 			else ImGui::SetNextWindowPos({ 0, nextWindow });
 
-			ImGui::SetNextWindowSize({ 300, 50 }, ImGuiCond_Always);
+			ImGui::SetNextWindowSize({ 300, 50 });
 			ImGui::Begin(("Notification #" + std::to_string(windowCount)).c_str(), nullptr, ImGuiWindowFlags_Notification);
 
 			const ImVec2 pos = ImGui::GetWindowPos();
@@ -36,7 +36,8 @@ namespace IW3SR
 			draw->AddRectFilled({ -1, pos.y }, { pos.x + size.x, pos.y + size.y }, IM_COL32(0, 0, 0, 255));
 			draw->AddRectFilled({ pos.x + size.x, pos.y }, { pos.x + size.x + 5, pos.y + size.y }, IM_COL32(140, 20, 252, 255));
 
-			//ImGui::SameLine(size.x / 2 - ImGui::CalcTextSize(notification.message.c_str()).x);
+			ImGui::SetCursorPosX(ImGui::CalcTextSize(notification.message.c_str()).x / 2);
+			ImGui::SetCursorPosY(ImGui::CalcTextSize(notification.message.c_str()).y / 2);
 			ImGui::Text(std::format("IW3SR: {}", notification.message).c_str());
 
 			nextWindow = pos.y + size.y + 10;
