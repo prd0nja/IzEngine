@@ -232,6 +232,6 @@ namespace ImGui
         }
 
         draw->PathStroke(color, 0, thickness);
-        draw->AddText(pos + ImVec2{ size.x + 20, size.y / 2 - radius }, color, label.c_str());
+        draw->AddText(pos + ImVec2{ size.x + 20, radius }, color, label.c_str());
     }
 }
