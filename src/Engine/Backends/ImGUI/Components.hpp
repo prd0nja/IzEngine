@@ -16,11 +16,11 @@ constexpr ImPlotAxisFlags ImPlotAxisFlags_Canvas = ImPlotAxisFlags_NoTickLabels
 	| ImPlotAxisFlags_NoGridLines;
 
 constexpr ImGuiWindowFlags ImGuiWindowFlags_Notification = ImGuiWindowFlags_NoCollapse 
-    | ImGuiWindowFlags_NoInputs 
-    | ImGuiWindowFlags_NoMove 
-    | ImGuiWindowFlags_NoResize 
-    | ImGuiWindowFlags_NoScrollbar
-    | ImGuiWindowFlags_NoTitleBar;
+ 	| ImGuiWindowFlags_NoInputs 
+ 	| ImGuiWindowFlags_NoMove 
+ 	| ImGuiWindowFlags_NoResize 
+ 	| ImGuiWindowFlags_NoScrollbar
+ 	| ImGuiWindowFlags_NoTitleBar;
 
 namespace ImGui
 {
@@ -123,13 +123,12 @@ namespace ImGui
 	API bool IsWindowResizing();
 
 	/// <summary>
-	/// A spinner meant to be displayed when loading things or when something is idle.
+	/// An indicator meant to be displayed when loading things or when something is idle.
 	/// </summary>
 	/// <param name="label">The label.</param>
 	/// <param name="radius">The radius.</param>
 	/// <param name="thickness">The thickness.</param>
 	/// <param name="color">The color.</param>
-	/// <returns></returns>
 	API void LoadingIndicator(const std::string& label, const ImVec2& pos, float radius, int thickness, const ImU32& color);
 }
 
