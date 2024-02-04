@@ -2,7 +2,7 @@
 
 namespace IW3SR::Game
 {
-	GameClient::GameClient()
+	void GameClient::Start()
 	{
 		Environment::Initialize();
 		Environment::Load();
@@ -12,22 +12,20 @@ namespace IW3SR::Game
 		Patch::Get().Initialize();
 		Console::Get().Initialize();
 
+		Player::Allocates();
+		Plugins::Initialize();
+
 		Hook();
 	}
 
-	GameClient::~GameClient()
+	void GameClient::Shutdown()
 	{
 		Environment::Save();
-		Plugins::Shutdown();
+
 		Console::Get().Release();
+		Plugins::Shutdown();
 
 		Unhook();
-	}
-
-	void GameClient::Start()
-	{
-		Player::Allocates();
-		Plugins::Initialize();
 	}
 
 	void GameClient::CoD4X()
@@ -70,5 +68,3 @@ namespace IW3SR::Game
 		RB_EndSceneRendering_h.Remove();
 	}
 }
-
-GameClient* GC = nullptr;

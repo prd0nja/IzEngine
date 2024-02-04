@@ -12,7 +12,8 @@ namespace IW3SR::Game
 	{
 		R_Init_h();
 
-		Device::Get().Assign(dx->device);
+		Device::Get().Assign(dx->d3d9, dx->device);
+		Device::Get().CreateScreen();
 		Assets::Get().Initialize();
 
 		GUI::Get().Initialize();
@@ -39,6 +40,7 @@ namespace IW3SR::Game
 
 	void Renderer::Draw2D(int localClientNum)
 	{
+		UI::Get().Begin();
 		GameCallback(OnDraw2D);
 		CG_DrawCrosshair_h(localClientNum);
 	}
@@ -47,9 +49,10 @@ namespace IW3SR::Game
 	{
 		if (!UI::Get().Active)
 			return;
-		UI::Get().Begin();
 
+		UI::Get().Begin();
 		GUI::Get().Render();
+
 		if (Player::CanRender())
 			GameCallback(OnRender);
 
