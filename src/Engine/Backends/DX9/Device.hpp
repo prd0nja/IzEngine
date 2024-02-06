@@ -1,6 +1,5 @@
 #pragma once
 #include "Engine/Backends/DX9.hpp"
-#include "Engine/Core/Screen/VirtualScreen.hpp"
 
 namespace IW3SR::Engine
 {
@@ -13,7 +12,6 @@ namespace IW3SR::Engine
 	public:
 		IDirect3D9* D3D = nullptr;
 		IDirect3DDevice9* D3Device = nullptr;
-		VirtualScreen Screen;
 
 		/// <summary>
 		/// Assign a device.

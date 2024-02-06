@@ -1,5 +1,5 @@
 #include "Plots.hpp"
-#include "Engine/Backends/ImGUI/Components.hpp"
+#include "Engine/Backends/ImGUI/UI.hpp"
 
 namespace IW3SR::Engine
 {

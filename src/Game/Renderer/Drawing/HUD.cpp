@@ -2,17 +2,16 @@
 #include "Draw2D.hpp"
 
 #include "Engine/Backends/DX9/Device.hpp"
-#include "Engine/Backends/DX9/Assets.hpp"
 #include "Engine/Backends/ImGUI/UI.hpp"
 
-namespace IW3SR::Engine
+namespace IW3SR::Game
 {
-	HUD::HUD(const std::string& texture, float x, float y, float w, float h, const vec4& color)
+	HUD::HUD(const std::string& material, float x, float y, float w, float h, const vec4& color)
 	{
 		Position = { x, y };
 		Size = { w, h };
 		Color = color;
-		TextureName = texture;
+		MaterialName = material;
 	}
 
 	void HUD::SetRectAlignment(Horizontal horizontal, Vertical vertical)
@@ -27,10 +26,10 @@ namespace IW3SR::Engine
 		AlignY = vertical;
 	}
 
-	void HUD::SetTexture(const std::string& texture)
+	void HUD::SetMaterial(const std::string& material)
 	{
-		Texture = Assets::Get().Textures[texture];
-		TextureName = texture;
+		Material = Material_RegisterHandle(material.c_str(), 3);
+		MaterialName = material;
 	}
 
 	void HUD::ComputeAlignment(float& x, float& y)
@@ -87,16 +86,11 @@ namespace IW3SR::Engine
 		float w = Size.x;
 		float h = Size.y;
 
-		if (!Texture)
-			SetTexture(TextureName);
+		if (!Material)
+			SetMaterial(MaterialName);
 
 		ComputeAlignment(x, y);
 		UI::Get().Screen.Apply(x, y, w, h, HorizontalAlign, VerticalAlign);
-		RECT rect = { static_cast<int>(x), static_cast<int>(y), static_cast<int>(w), static_cast<int>(h) };
-		RenderPosition = { x, y };
-		RenderSize = { w, h };
-
-		ImGui::Movable(ID, Position, Size, RenderPosition, RenderSize);
-		Device::Get().D3Device->StretchRect(Texture->BaseSurface, NULL, NULL, &rect, D3DTEXF_NONE);
+		R_AddCmdDrawStretchPic(Material, x, y, w, h, 0.f, 0.f, 0.f, 0.f, Color);
 	}
 }

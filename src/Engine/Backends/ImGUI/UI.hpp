@@ -1,9 +1,8 @@
 #pragma once
-#include "Engine/Sys/Win32.hpp"
+#include "Engine/Backends/ImGUI/Components.hpp"
+#include "Engine/Core/Screen/VirtualScreen.hpp"
 
 #include "UI/Memory.hpp"
-#include "UI/Modules.hpp"
-#include "UI/Settings.hpp"
 #include "UI/Themes.hpp"
 
 namespace IW3SR::Engine
@@ -18,18 +17,23 @@ namespace IW3SR::Engine
 		bool Active = false;
 		bool Open = false;
 		bool DesignMode = false;
-		bool HasBegin = false;
-		KeyListener OpenKey;
+		VirtualScreen Screen;
 
 		UC::Memory Memory;
-		UC::Modules Modules;
-		UC::Settings Settings;
 		UC::Themes Themes;
 
 		/// <summary>
 		/// Initialize UI.
 		/// </summary>
 		void Initialize();
+
+		/// <summary>
+		/// Create the screen.
+		/// </summary>
+		/// <param name="position">The position.</param>
+		/// <param name="size">The size.</param>
+		/// <param name="display">The display size.</param>
+		void CreateScreen(const vec2& position, const vec2& size, const vec2& display);
 
 		/// <summary>
 		/// Release UI.
@@ -68,9 +72,10 @@ namespace IW3SR::Engine
 		static void Free(void* ptr, void* data);
 
 	private:
+		void* Data = nullptr;
 		ImGuiContext* Context = nullptr;
 		ImPlotContext* PlotContext = nullptr;
-		void* Data = nullptr;
+		bool HasBegin = false;
 
 		/// <summary>
 		/// Initialize the UI.
@@ -78,6 +83,6 @@ namespace IW3SR::Engine
 		UI();
 		virtual ~UI() = default;
 
-		NLOHMANN_SERIALIZE(UI, OpenKey, Memory, Modules, Settings, Themes)
+		NLOHMANN_SERIALIZE(UI, Memory, Themes)
 	};
 }

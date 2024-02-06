@@ -1,7 +1,7 @@
 #pragma once
 #include "Definitions.hpp"
 
-#include "Game/Engine/Renderer.hpp"
+#include "Game/Renderer/Renderer.hpp"
 #include "Game/Player/Player.hpp"
 
 #include "Game/Sys/Console.hpp"

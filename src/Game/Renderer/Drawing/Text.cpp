@@ -1,39 +1,42 @@
-#include "HUD.hpp"
+#include "Text.hpp"
 #include "Draw2D.hpp"
 
 #include "Engine/Backends/DX9/Device.hpp"
-#include "Engine/Backends/DX9/Assets.hpp"
 #include "Engine/Backends/ImGUI/UI.hpp"
 
-namespace IW3SR::Engine
+#define RESCALE 0.4f
+
+namespace IW3SR::Game
 {
-	HUD::HUD(const std::string& texture, float x, float y, float w, float h, const vec4& color)
+	Text::Text(const std::string& text, const std::string& font, float x, float y, float size, const vec4& color)
 	{
+		Value = text;
 		Position = { x, y };
-		Size = { w, h };
 		Color = color;
-		TextureName = texture;
+		FontName = font;
 	}
 
-	void HUD::SetRectAlignment(Horizontal horizontal, Vertical vertical)
+	void Text::SetRectAlignment(Horizontal horizontal, Vertical vertical)
 	{
 		HorizontalAlign = horizontal;
 		VerticalAlign = vertical;
 	}
 
-	void HUD::SetAlignment(Alignment horizontal, Alignment vertical)
+	void Text::SetAlignment(Alignment horizontal, Alignment vertical)
 	{
 		AlignX = horizontal;
 		AlignY = vertical;
 	}
 
-	void HUD::SetTexture(const std::string& texture)
+	void Text::SetFont(const std::string& font)
 	{
-		Texture = Assets::Get().Textures[texture];
-		TextureName = texture;
+		auto& assets = Assets::Get();
+		Font = assets.Fonts[font];
+		FontName = font;
+		FontIndex = std::distance(assets.FontNames.begin(), std::ranges::find(assets.FontNames, FontName));
 	}
 
-	void HUD::ComputeAlignment(float& x, float& y)
+	void Text::ComputeAlignment(float& x, float& y)
 	{
 		if (AlignX == ALIGN_CENTER)
 			x += -(Size.x / 2.f);
@@ -46,7 +49,7 @@ namespace IW3SR::Engine
 			y += Size.y;
 	}
 
-	void HUD::Menu(const std::string& label, bool open)
+	void Text::Menu(const std::string& label, bool open)
 	{
 		if (!ImGui::CollapsingHeader(label.c_str(), open ? ImGuiTreeNodeFlags_DefaultOpen : ImGuiTreeNodeFlags_None))
 			return;
@@ -58,8 +61,12 @@ namespace IW3SR::Engine
 		const std::vector<std::string>& fonts = Assets::Get().FontNames;
 
 		ImGui::DragFloat2("Position", Position);
-		ImGui::DragFloat2("Size", Size);
 		ImGui::ColorEdit4("Color", Color, ImGuiColorEditFlags_Float);
+
+		if (ImGui::InputFloat("Font Size", &FontSize, 0.1))
+			SetFont(FontName);
+		if (ImGui::Combo("Font", &FontIndex, fonts))
+			SetFont(fonts[FontIndex]);
 
 		int horizontal = HorizontalAlign - 1;
 		if (ImGui::Combo("Horizontal Alignment", &horizontal, horizontals))
@@ -80,23 +87,20 @@ namespace IW3SR::Engine
 		ImGui::PopID();
 	}
 
-	void HUD::Render()
+	void Text::Render()
 	{
 		float x = Position.x;
 		float y = Position.y;
-		float w = Size.x;
-		float h = Size.y;
+		float xScale = FontSize * RESCALE;
+		float yScale = FontSize * RESCALE;
 
-		if (!Texture)
-			SetTexture(TextureName);
+		if (!Font)
+			SetFont(FontName);
+
+		Size = { R_TextWidth(Value.c_str(), Value.size(), Font) * xScale, Font->pixelHeight * yScale };
 
 		ComputeAlignment(x, y);
-		UI::Get().Screen.Apply(x, y, w, h, HorizontalAlign, VerticalAlign);
-		RECT rect = { static_cast<int>(x), static_cast<int>(y), static_cast<int>(w), static_cast<int>(h) };
-		RenderPosition = { x, y };
-		RenderSize = { w, h };
-
-		ImGui::Movable(ID, Position, Size, RenderPosition, RenderSize);
-		Device::Get().D3Device->StretchRect(Texture->BaseSurface, NULL, NULL, &rect, D3DTEXF_NONE);
+		UI::Get().Screen.Apply(x, y, xScale, yScale, HorizontalAlign, VerticalAlign);
+		R_AddCmdDrawText(Value.c_str(), 0x7FFFFFFF, Font, x, y, xScale, yScale, 0, 0, Color);
 	}
 }

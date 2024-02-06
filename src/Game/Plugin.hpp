@@ -7,13 +7,15 @@
 #include "Engine/Backends/DX9/Drawing/HUD.hpp"
 #include "Engine/Backends/DX9/Drawing/Text.hpp"
 
-#include "Engine/Backends/ImGUI/Components.hpp"
+#include "Engine/Backends/ImGUI/UI.hpp"
 #include "Engine/Backends/ImGUI/Drawing/Window.hpp"
 #include "Engine/Backends/ImGUI/Drawing/Plots.hpp"
 
-#include "Game/Engine/GUI.hpp"
-#include "Game/Engine/Drawing/Draw3D.hpp"
-#include "Game/Engine/Drawing/Lines.hpp"
+#include "Game/Renderer/GUI.hpp"
+#include "Game/Renderer/Drawing/Draw3D.hpp"
+#include "Game/Renderer/Drawing/Lines.hpp"
+#include "Game/Renderer/Features/Features.hpp"
+#include "Game/Renderer/Modules/Modules.hpp"
 
 #include "Game/Player/Player.hpp"
 #include "Game/Sys/Dvar.hpp"

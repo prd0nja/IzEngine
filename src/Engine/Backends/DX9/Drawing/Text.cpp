@@ -3,7 +3,7 @@
 
 #include "Engine/Backends/DX9/Device.hpp"
 #include "Engine/Backends/DX9/Assets.hpp"
-#include "Engine/Backends/ImGUI/Components.hpp"
+#include "Engine/Backends/ImGUI/UI.hpp"
 
 namespace IW3SR::Engine
 {
@@ -30,7 +30,7 @@ namespace IW3SR::Engine
 	void Text::SetFont(const std::string& font)
 	{
 		auto& assets = Assets::Get();
-		int fontSize = std::floor(scr_place->scaleVirtualToFull[0] * FontSize * 10.f);
+		int fontSize = std::floor(UI::Get().Screen.VirtualToFull.x * FontSize * 10.f);
 		Font = assets.LoadFont(font, fontSize);
 		FontName = font;
 		FontIndex = std::distance(assets.FontNames.begin(), std::ranges::find(assets.FontNames, FontName));
@@ -99,10 +99,10 @@ namespace IW3SR::Engine
 		Font->Base->DrawTextA(NULL, Value.c_str(), -1, &textRect, DT_CALCRECT, 0);
 		RenderSize = { static_cast<float>(textRect.right - textRect.left),
 			static_cast<float>(textRect.bottom - textRect.top) };
-		Size = vec2(scr_place->scaleRealToVirtual) * RenderSize;
+		Size = UI::Get().Screen.RealToVirtual * RenderSize;
 
 		ComputeAlignment(x, y);
-		Device::Get().Screen.Apply(x, y, HorizontalAlign, VerticalAlign);
+		UI::Get().Screen.Apply(x, y, HorizontalAlign, VerticalAlign);
 		RECT rect = { static_cast<int>(x), static_cast<int>(y), 0, 0 };
 		RenderPosition = { x, y };
 

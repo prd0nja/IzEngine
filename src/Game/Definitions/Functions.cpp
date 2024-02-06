@@ -15,7 +15,7 @@ namespace IW3SR::Game
 		Com_PrintMessage_h(0x4FCA50, Console::Write);
 
 	Hook<void(int localClientNum)>
-		CG_DrawCrosshair_h(0x42F6B5, Renderer::Draw2D);
+		CG_DrawCrosshair_h(0x4311A0, Renderer::Draw2D);
 
 	Hook<void(usercmd_s* cmd)>
 		CL_FinishMove_h(0x463A60, PMove::FinishMove);

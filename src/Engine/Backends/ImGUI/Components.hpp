@@ -116,8 +116,6 @@ namespace ImGui
 	API bool IsWindowResizing();
 }
 
-extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
-
 NLOHMANN_SERIALIZE_NON_INTRUSIVE(ImVec2, x, y)
 NLOHMANN_SERIALIZE_NON_INTRUSIVE(ImVec4, x, y, z, w)
 

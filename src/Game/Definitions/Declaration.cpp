@@ -63,8 +63,6 @@ namespace IW3SR::Game
 	WinMouseVars_t* s_wmv = reinterpret_cast<WinMouseVars_t*>(0xCC147C4);
 	PlayerKeyState* player_keys = reinterpret_cast<PlayerKeyState*>(0x8F1DB8);
 	clientUIActive_t* client_ui = reinterpret_cast<clientUIActive_t*>(0xC5F8F4);
-	ScreenPlacement* scr_place = reinterpret_cast<ScreenPlacement*>(0xE34420);
-	ScreenPlacement* scr_placeFull = reinterpret_cast<ScreenPlacement*>(0xE343D8);
 	int* map_nameEnum = reinterpret_cast<int*>(0xCAF2330);
 	int* g_typeEnum = reinterpret_cast<int*>(0xCAF1820);
 	Fonts_t* g_fonts = reinterpret_cast<Fonts_t*>(0xCAF06F8);

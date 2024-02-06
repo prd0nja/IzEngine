@@ -1,0 +1,36 @@
+#pragma once
+#include "Game/Renderer/GUI.hpp"
+
+namespace IW3SR::Game::UC
+{
+	/// <summary>
+	/// Main toolbar.
+	/// </summary>
+	class Toolbar : public Window
+	{
+	public:
+		bool IsReloading = false;
+		bool IsDebug = false;
+
+		/// <summary>
+		/// Initialize the Toolbar.
+		/// </summary>
+		Toolbar();
+		virtual ~Toolbar() = default;
+
+		/// <summary>
+		/// Reload plugins.
+		/// </summary>
+		void Reload();
+
+		/// <summary>
+		/// Compile plugins.
+		/// </summary>
+		void Compile();
+
+		/// <summary>
+		/// Render frame.
+		/// </summary>
+		void Render();
+	};
+}

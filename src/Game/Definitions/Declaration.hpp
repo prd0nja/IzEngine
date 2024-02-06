@@ -66,8 +66,6 @@ namespace IW3SR::Game
 	extern WinMouseVars_t* s_wmv;
 	extern PlayerKeyState* player_keys;
 	extern clientUIActive_t* client_ui;
-	extern ScreenPlacement* scr_place;
-	extern ScreenPlacement* scr_placeFull;
 	extern Fonts_t* g_fonts;
 
 	// GSC

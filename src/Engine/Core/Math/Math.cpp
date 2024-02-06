@@ -239,15 +239,15 @@ namespace IW3SR::Engine
         return angles;
     }
 
-	bool Math::AngleInFov(float angle)
+	bool Math::AngleInFov(float angle, float tanHalfFov)
 	{
-		float const half_fov_x = atanf(cgs->refdef.tanHalfFovX);
+		float const half_fov_x = atanf(tanHalfFov);
 		return angle > -half_fov_x && angle < half_fov_x;
 	}
 
-	float Math::AngleScreenProjection(float angle)
+	float Math::AngleScreenProjection(float angle, float tanHalfFov)
 	{
-		float const half_fov_x = atanf(cgs->refdef.tanHalfFovX);
+		float const half_fov_x = atanf(tanHalfFov);
 
 		if (angle >= half_fov_x)
 			return 0;
@@ -257,7 +257,7 @@ namespace IW3SR::Engine
 		return SCREEN_WIDTH / 2 * (1 - tanf(angle) / tanf(half_fov_x));
 	}
 
-	vec3 Math::AnglesToRange(float start, float end, float yaw)
+	vec3 Math::AnglesToRange(float start, float end, float yaw, float tanHalfFov)
 	{
 		if (fabsf(end - start) > 2 * M_PI)
 			return { 0, SCREEN_WIDTH, false };
@@ -274,6 +274,6 @@ namespace IW3SR::Engine
 			start = end;
 			end = tmp;
 		}
-		return { AngleScreenProjection(start), AngleScreenProjection(end), split };
+		return { AngleScreenProjection(start, tanHalfFov), AngleScreenProjection(end, tanHalfFov), split };
 	}
 }

@@ -159,8 +159,8 @@ namespace ImGui
         {
             if (IsWindowHovered() || IsWindowResizing())
             {
-                position += vec2(scr_place->scaleRealToVirtual) * (framePosition - renderPosition);
-                size += vec2(scr_place->scaleRealToVirtual) * (frameSize - renderSize);
+                position += UI::Get().Screen.RealToVirtual * (framePosition - renderPosition);
+                size += UI::Get().Screen.RealToVirtual * (frameSize - renderSize);
 
                 renderPosition = framePosition;
                 renderSize = frameSize;

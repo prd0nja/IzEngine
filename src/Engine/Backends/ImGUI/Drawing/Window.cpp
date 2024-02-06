@@ -1,5 +1,5 @@
 #include "Window.hpp"
-#include "Engine/Backends/ImGUI/Components.hpp"
+#include "Engine/Backends/ImGUI/UI.hpp"
 
 namespace IW3SR::Engine
 {
@@ -21,7 +21,7 @@ namespace IW3SR::Engine
 
 	void Window::Begin(ImGuiWindowFlags flags)
 	{
-		const vec2 space = vec2(scr_place->scaleVirtualToFull);
+		const vec2 space = UI::Get().Screen.VirtualToFull;
 		RenderPosition = Position * space;
 		RenderSize = Size * space;
 

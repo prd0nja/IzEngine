@@ -1,0 +1,67 @@
+#pragma once
+#include "Game/Definitions.hpp"
+#include "Game/Renderer/Assets.hpp"
+
+#include "Engine/Core/Math.hpp"
+
+namespace IW3SR::Game
+{
+	/// <summary>
+	/// Draw 2D class.
+	/// </summary>
+	class API Draw2D
+	{
+	public:
+		static inline std::vector<std::string> HorizontalAlignment = { "Left", "Center", "Right " };
+		static inline std::vector<std::string> VerticalAlignment = { "Top", "Center", "Bottom" };
+
+		/// <summary>
+		/// Draw a rectangle with the specified color.
+		/// </summary>
+		/// <param name="material">The material.</param>
+		/// <param name="x">X-coordinate.</param>
+		/// <param name="y">Y-coordinate.</param>
+		/// <param name="w">Width of the rectangle.</param>
+		/// <param name="h">Height of the rectangle.</param>
+		/// <param name="color">The rect color.</param>
+		static void Rect(const std::string& material, float x, float y, float w, float h, const vec4& color);
+
+		/// <summary>
+		/// Draw a section of a circle with a specified yaw angle, starting and ending angles, and color.
+		/// </summary>
+		/// <param name="material">The material.</param>
+		/// <param name="start">Starting angle in radians.</param>
+		/// <param name="end">Ending angle in radians.</param>
+		/// <param name="yaw">Yaw angle in radians.</param>
+		/// <param name="y">Y-coordinate of the circle's center.</param>
+		/// <param name="h">Radius of the circle.</param>
+		/// <param name="color">The color.</param>
+		static void AngleYaw(const std::string& material, float start, float end, float yaw,
+			float y, float h, const vec4& color);
+
+		/// <summary>
+		/// Draw a line at a specified yaw angle with a given width, height, and color.
+		/// </summary>
+		/// <param name="material">The material.</param>
+		/// <param name="angle">Angle at which to draw the line in radians.</param>
+		/// <param name="yaw">Yaw angle in radians.</param>
+		/// <param name="y">Y-coordinate of the line's position.</param>
+		/// <param name="w">Width of the line.</param>
+		/// <param name="h">Height of the line.</param>
+		/// <param name="color">The color.</param>
+		static void LineYaw(const std::string& material, float angle, float yaw, float y,
+			float w, float h, const vec4& color);
+
+		/// <summary>
+		/// Draw text.
+		/// </summary>
+		/// <param name="text">The text.</param>
+		/// <param name="font">The font.</param>
+		/// <param name="x">X-coordinate.</param>
+		/// <param name="y">Y-coordinate.</param>
+		/// <param name="size">Font size.</param>
+		/// <param name="color">The color.</param>
+		static void Text(const std::string& text, const std::string& font,
+			float x, float y, float size, const vec4& color);
+	};
+}

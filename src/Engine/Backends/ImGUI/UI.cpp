@@ -5,11 +5,7 @@ namespace IW3SR::Engine
 {
 	UI::UI()
 	{
-		OpenKey = KeyListener(VK_F10);
-
 		Memory = UC::Memory();
-		Modules = UC::Modules();
-		Settings = UC::Settings();
 		Themes = UC::Themes();
 
 		Environment::Deserialize("UI", *this);
@@ -31,6 +27,11 @@ namespace IW3SR::Engine
 		Themes.Initialize();
 	}
 
+	void UI::CreateScreen(const vec2& position, const vec2& size, const vec2& display)
+	{
+		Screen = VirtualScreen(position, size, display);
+	}
+
 	void UI::Release()
 	{
 		Active = false;
@@ -45,23 +46,18 @@ namespace IW3SR::Engine
 
 	void UI::Begin()
 	{
-		if (!Active || HasBegin) return;
+		if (HasBegin) return;
 
 		HasBegin = true;
 		ImGui_ImplDX9_NewFrame();
 		ImGui_ImplWin32_NewFrame();
 		ImGui::NewFrame();
-
-		if (OpenKey.IsPressed())
-			Open = !Open;
-
 		Themes.ComputeRainbow();
 	}
 
 	void UI::End()
 	{
 		HasBegin = false;
-		ImGui::EndFrame();
 		ImGui::Render();
 		ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
 	}

@@ -1,4 +1,5 @@
 #include "Device.hpp"
+#include "Engine/Backends/ImGUI/UI.hpp"
 
 namespace IW3SR::Engine
 {
@@ -19,6 +20,6 @@ namespace IW3SR::Engine
 		const vec2 size(viewport.Width, viewport.Height);
 		const vec2 display(displayMode.Width, displayMode.Height);
 
-		Screen = VirtualScreen(position, size, display);
+		UI::Get().CreateScreen(position, size, display);
 	}
 }

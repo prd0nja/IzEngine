@@ -2,9 +2,11 @@
 // https://github.com/id-Software/Quake-III-Arena/blob/master/code/game/q_shared.h
 // https://github.com/xoxor4d/iw3xo-dev/blob/master/src/utils/vector.hpp
 #include "Engine/API.hpp"
-#include "Game/Definitions.hpp"
 
 #define M_PI	3.14159265358979323846f
+
+#define SCREEN_WIDTH	640
+#define SCREEN_HEIGHT	480
 
 #define	PITCH	0
 #define	YAW		1
@@ -157,15 +159,17 @@ namespace IW3SR::Engine
         /// Checks if an angle is within the field of view (FOV).
         /// </summary>
         /// <param name="angle">Angle to check in radians.</param>
+        /// <param name="tanHalfFov">The fov.</param>
         /// <returns>True if the angle is within the FOV, false otherwise.</returns>
-        static bool AngleInFov(float angle);
+        static bool AngleInFov(float angle, float tanHalfFov);
 
         /// <summary>
         /// Projects an angle onto the screen for rendering.
         /// </summary>
         /// <param name="angle">Angle to project in radians.</param>
+        /// <param name="tanHalfFov">The fov.</param>
         /// <returns>Screen projection of the angle.</returns>
-        static float AngleScreenProjection(float angle);
+        static float AngleScreenProjection(float angle, float tanHalfFov);
 
         /// <summary>
         /// Converts a range specified by start and end angles to a range structure based on yaw.
@@ -173,6 +177,7 @@ namespace IW3SR::Engine
         /// <param name="start">Starting angle in radians.</param>
         /// <param name="end">Ending angle in radians.</param>
         /// <param name="yaw">Yaw angle in radians.</param>
-        static vec3 AnglesToRange(float start, float end, float yaw);
+        /// <param name="tanHalfFov">The fov.</param>
+        static vec3 AnglesToRange(float start, float end, float yaw, float tanHalfFov);
     };
 }

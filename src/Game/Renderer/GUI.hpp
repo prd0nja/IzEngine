@@ -1,0 +1,53 @@
+#pragma once
+#include "Game/Definitions.hpp"
+#include "Engine/Backends/ImGUI/UI.hpp"
+
+#include "UI/About.hpp"
+#include "UI/Binds.hpp"
+#include "UI/Modules.hpp"
+#include "UI/Settings.hpp"
+#include "UI/Toolbar.hpp"
+
+namespace IW3SR::Game
+{
+	/// <summary>
+	/// GUI class.
+	/// </summary>
+	class API GUI : public IInitializable
+	{
+		CLASS_SINGLETON(GUI)
+	public:
+		Engine::UI& UI;
+		KeyListener OpenKey;
+
+		UC::About About;
+		UC::Binds Binds;
+		UC::Modules Modules;
+		UC::Settings Settings;
+		UC::Toolbar Toolbar;
+
+		/// <summary>
+		/// Initialize GUI.
+		/// </summary>
+		void Initialize();
+
+		/// <summary>
+		/// Release GUI.
+		/// </summary>
+		void Release();
+
+		/// <summary>
+		/// Render frame.
+		/// </summary>
+		void Render();
+
+	private:
+		/// <summary>
+		/// Initialize the GUI.
+		/// </summary>
+		GUI();
+		virtual ~GUI() = default;
+
+		NLOHMANN_SERIALIZE(GUI, OpenKey, About, Binds, Modules, Settings, Toolbar)
+	};
+}
