@@ -1,34 +1,30 @@
 #include "Notification.hpp"
 
-namespace IW3SR
+namespace IW3SR::Engine
 {
-	NotificationCenter::NotificationCenter(const std::string& msg)
-	{
-		notifications.push_back({ msg, 5 });
-	}
-
 	void NotificationCenter::Push(const std::string& msg, int duration)
 	{
-		notifications.push_back({ msg, duration });
+		Notifications.push_back({ msg, duration });
 	}
 
 	void NotificationCenter::Render()
 	{
-		if (notifications.empty())
+		if (Notifications.empty())
 			return;
 
 		ImDrawList* draw = ImGui::GetBackgroundDrawList();
+		int count = 0;
+		float next = 0;
 
-		int windowCount = 0;
-		float nextWindow = 0;
-		for (const auto& notification : notifications)
+		for (const auto& notification : Notifications)
 		{
-			if (!windowCount)
+			if (!count)
 				ImGui::SetNextWindowPos({ 0, 300 });
-			else ImGui::SetNextWindowPos({ 0, nextWindow });
+			else
+				ImGui::SetNextWindowPos({ 0, next });
 
 			ImGui::SetNextWindowSize({ 300, 50 });
-			ImGui::Begin(("Notification #" + std::to_string(windowCount)).c_str(), nullptr, ImGuiWindowFlags_Notification);
+			ImGui::Begin(std::format("Notification # {}", count).c_str(), nullptr, ImGuiWindowFlags_Notification);
 
 			const ImVec2 pos = ImGui::GetWindowPos();
 			const ImVec2 size = ImGui::GetWindowSize();
@@ -40,18 +36,17 @@ namespace IW3SR
 			ImGui::SetCursorPosY(ImGui::CalcTextSize(notification.message.c_str()).y / 2);
 			ImGui::Text(std::format("IW3SR: {}", notification.message).c_str());
 
-			nextWindow = pos.y + size.y + 10;
-			windowCount++;
+			next = pos.y + size.y + 10;
+			count++;
 			ImGui::End();
 		}
-
-		notifications.erase(std::remove_if(notifications.begin(), notifications.end(),
+		Notifications.erase(std::remove_if(Notifications.begin(), Notifications.end(),
 			[](const Notification& notification)
 			{
 				const Seconds duration(notification.duration);
 				const auto currentTime = Time::now();
 				const static auto endTime = currentTime + duration;
 				return currentTime > endTime;
-			}), notifications.end());
+			}), Notifications.end());
 	}
 }

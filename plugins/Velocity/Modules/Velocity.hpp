@@ -20,8 +20,8 @@ namespace IW3SR::Addons
 		Text VelocityText;
 		Text AverageText;
 		Text MaxText;
-
 		Plots Graph;
+
 		KeyListener ResetKey;
 		bool ShowMax;
 		bool ShowAverage;

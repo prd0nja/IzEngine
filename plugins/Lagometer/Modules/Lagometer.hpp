@@ -4,7 +4,7 @@
 namespace IW3SR::Addons
 {
 	/// <summary>
-	/// Lagometer plot.
+	/// Draw lagometer.
 	/// </summary>
 	class Lagometer : public Module
 	{
@@ -13,12 +13,13 @@ namespace IW3SR::Addons
 		vec4 PacketColor;
 		int Ping;
 		int Packet;
-		bool ShowPing;
-		bool ShowPacket;
+
 		CircularBuffer<int, 1000> PingBuffer;
 		CircularBuffer<int, 1000> PacketBuffer;
+		Plots Graph;
 
-		Window Graph;
+		bool ShowPing;
+		bool ShowPacket;
 		bool ShowGraph;
 
 		/// <summary>
@@ -37,6 +38,6 @@ namespace IW3SR::Addons
 		/// </summary>
 		void OnRender() override;
 
-		NLOHMANN_SERIALIZE_POLY(Lagometer, Module, PingColor, PacketColor, Ping, Packet, Graph, ShowGraph);
+		NLOHMANN_SERIALIZE_POLY(Lagometer, Module, PingColor, PacketColor, Graph, ShowGraph);
 	};
 }

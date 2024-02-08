@@ -15,10 +15,10 @@ constexpr ImPlotAxisFlags ImPlotAxisFlags_Canvas = ImPlotAxisFlags_NoTickLabels
 	| ImPlotAxisFlags_NoTickMarks
 	| ImPlotAxisFlags_NoGridLines;
 
-constexpr ImGuiWindowFlags ImGuiWindowFlags_Notification = ImGuiWindowFlags_NoCollapse 
- 	| ImGuiWindowFlags_NoInputs 
- 	| ImGuiWindowFlags_NoMove 
- 	| ImGuiWindowFlags_NoResize 
+constexpr ImGuiWindowFlags ImGuiWindowFlags_Notification = ImGuiWindowFlags_NoCollapse
+ 	| ImGuiWindowFlags_NoInputs
+ 	| ImGuiWindowFlags_NoMove
+ 	| ImGuiWindowFlags_NoResize
  	| ImGuiWindowFlags_NoScrollbar
  	| ImGuiWindowFlags_NoTitleBar;
 
@@ -118,19 +118,21 @@ namespace ImGui
 	API void Markdown(const std::string& markdown);
 
 	/// <summary>
-	/// Is window resizing.
-	/// </summary>
-	/// <returns></returns>
-	API bool IsWindowResizing();
-
-	/// <summary>
 	/// An indicator meant to be displayed when loading things or when something is idle.
 	/// </summary>
 	/// <param name="label">The label.</param>
 	/// <param name="radius">The radius.</param>
 	/// <param name="thickness">The thickness.</param>
 	/// <param name="color">The color.</param>
-	API void LoadingIndicator(const std::string& label, const ImVec2& pos, float radius, int thickness, const ImU32& color);
+	/// <param name="state">The visible state.</param>
+	API void LoadingIndicator(const std::string& label, const ImVec2& pos, float radius, int thickness, 
+		const ImU32& color, bool state);
+
+	/// <summary>
+	/// Is window resizing.
+	/// </summary>
+	/// <returns></returns>
+	API bool IsWindowResizing();
 }
 
 NLOHMANN_SERIALIZE_NON_INTRUSIVE(ImVec2, x, y)

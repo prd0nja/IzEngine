@@ -11,8 +11,8 @@ namespace IW3SR::Addons
     public:
         int Value;
         CircularBuffer<int, 1000> Values;
-        Text FrameText;
 
+        Text FrameText;
         Plots Graph;
         bool ShowGraph;
 

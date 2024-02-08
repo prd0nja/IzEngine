@@ -1,6 +1,8 @@
 #pragma once
 #include "Engine/API.hpp"
 
+#define IMGUI_DEFINE_MATH_OPERATORS
+
 #include <imgui.h>
 #include <imgui_internal.h>
 #include <imgui_stdlib.h>
