@@ -32,8 +32,8 @@ namespace IW3SR::Engine
 			draw->AddRectFilled({ -1, pos.y }, { pos.x + size.x, pos.y + size.y }, IM_COL32(0, 0, 0, 255));
 			draw->AddRectFilled({ pos.x + size.x, pos.y }, { pos.x + size.x + 5, pos.y + size.y }, IM_COL32(140, 20, 252, 255));
 
-			ImGui::SetCursorPosX(ImGui::CalcTextSize(notification.message.c_str()).x / 2);
-			ImGui::SetCursorPosY(ImGui::CalcTextSize(notification.message.c_str()).y / 2);
+			ImGui::SetCursorPosX(size.x / 2 - ImGui::CalcTextSize(std::format("IW3SR: {}", notification.message).c_str()).x / 2);
+			ImGui::SetCursorPosY(size.y / 2 - ImGui::CalcTextSize(std::format("IW3SR: {}", notification.message).c_str()).y / 2);
 			ImGui::Text(std::format("IW3SR: {}", notification.message).c_str());
 
 			next = pos.y + size.y + 10;
