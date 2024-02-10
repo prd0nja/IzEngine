@@ -5,25 +5,31 @@ namespace IW3SR::Engine
 {
 	UI::UI()
 	{
+		ImGui::SetAllocatorFunctions(&Allocator, &Free, &Data);
+		Context = ImGui::CreateContext();
+		PlotContext = ImPlot::CreateContext();
+
+		ImGui::SetCurrentContext(Context);
+		ImPlot::SetImGuiContext(Context);
+		ImPlot::SetCurrentContext(PlotContext);
+
 		Memory = UC::Memory();
 		Themes = UC::Themes();
+	}
 
-		Environment::Deserialize("UI", *this);
+	UI::~UI()
+	{
+		ImGui::DestroyContext(Context);
+		ImPlot::DestroyContext(PlotContext);
 	}
 
 	void UI::Initialize()
 	{
-		Active = true;
+		Environment::Deserialize("UI", *this);
 
-		ImGui::SetAllocatorFunctions(&Allocator, &Free, &Data);
-		Context = ImGui::CreateContext();
-		PlotContext = ImPlot::CreateContext();
+		Active = true;
 		ImGui_ImplWin32_Init(Sys::Get().MainWindow);
 		ImGui_ImplDX9_Init(Device::Get().D3Device);
-
-		InitializeContext();
-		Plugins::SetRenderer();
-
 		Themes.Initialize();
 	}
 
@@ -36,11 +42,8 @@ namespace IW3SR::Engine
 	void UI::Release()
 	{
 		Active = false;
-
 		ImGui_ImplDX9_Shutdown();
 		ImGui_ImplWin32_Shutdown();
-		ImGui::DestroyContext(Context);
-		ImPlot::DestroyContext(PlotContext);
 
 		Environment::Serialize("UI", *this);
 	}
@@ -53,7 +56,6 @@ namespace IW3SR::Engine
 		ImGui_ImplDX9_NewFrame();
 		ImGui_ImplWin32_NewFrame();
 		ImGui::NewFrame();
-		Themes.ComputeRainbow();
 	}
 
 	void UI::End()

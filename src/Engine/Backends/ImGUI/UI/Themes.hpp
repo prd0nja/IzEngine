@@ -31,21 +31,26 @@ namespace IW3SR::Engine::UC
 		void Initialize();
 
 		/// <summary>
+		/// Render frame.
+		/// </summary>
+		void Render();
+
+	private:
+		/// <summary>
 		/// Default theme.
 		/// </summary>
 		void Default();
+
+		/// <summary>
+		/// Apply theme.
+		/// </summary>
+		void Apply();
 
 		/// <summary>
 		/// Compute rainbow color.
 		/// </summary>
 		void ComputeRainbow();
 
-		/// <summary>
-		/// Render frame.
-		/// </summary>
-		void Render();
-
-	private:
 		/// <summary>
 		/// Markdown link callback.
 		/// </summary>

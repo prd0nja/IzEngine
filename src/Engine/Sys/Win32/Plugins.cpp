@@ -14,12 +14,6 @@ namespace IW3SR::Engine
 		}
 	}
 
-	void Plugins::SetRenderer()
-	{
-		for (const auto& [_, plugin] : Modules)
-			plugin->SetRenderer();
-	}
-
 	void Plugins::Shutdown()
 	{
 		Modules.clear();

@@ -9,9 +9,6 @@ namespace IW3SR::Engine
 	class API Plots : public Window
 	{
 	public:
-		vec2 Position = { 0, 380 };
-		vec2 Size = { 160, 100 };
-
 		/// <summary>
 		/// Initialize the plots.
 		/// </summary>
@@ -22,7 +19,5 @@ namespace IW3SR::Engine
 		/// Begin drawing.
 		/// </summary>
 		void Begin(ImGuiWindowFlags flags = 0) override;
-
-		NLOHMANN_SERIALIZE_POLY(Plots, Window, Position, Size)
 	};
 }

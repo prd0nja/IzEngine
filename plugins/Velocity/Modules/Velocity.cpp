@@ -29,9 +29,9 @@ namespace IW3SR::Addons
 
 	void Velocity::OnMenu()
 	{
-		ImGui::Checkbox("Average Velocity", &ShowAverage);
+		ImGui::Checkbox("Average", &ShowAverage);
 		ImGui::SameLine();
-		ImGui::Checkbox("Max Velocity", &ShowMax);
+		ImGui::Checkbox("Max", &ShowMax);
 
 		if (ShowMax)
 		{
@@ -41,8 +41,8 @@ namespace IW3SR::Addons
 		ImGui::Checkbox("Display Graph", &ShowGraph);
 
 		VelocityText.Menu("Velocity");
-		AverageText.Menu("Average Velocity");
-		MaxText.Menu("Max Velocity");
+		AverageText.Menu("Average");
+		MaxText.Menu("Max");
 	}
 
 	void Velocity::OnRender()

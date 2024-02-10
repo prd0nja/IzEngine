@@ -18,8 +18,9 @@ namespace IW3SR::Engine
 		if (!CallbackInitialize)
 			throw std::runtime_error("Plugin is missing Initialize function.");
 
-		SetRenderer();
 		CallbackInitialize(this);
+		if (CallbackRenderer)
+			CallbackRenderer();
 	}
 
 	Plugin::~Plugin()
@@ -29,12 +30,6 @@ namespace IW3SR::Engine
 
 		FreeLibrary(Instance);
 		Instance = nullptr;
-	}
-
-	void Plugin::SetRenderer()
-	{
-		if (CallbackRenderer)
-			CallbackRenderer();
 	}
 
 	void Plugin::SetInfos(const std::string& id, const std::string& name)

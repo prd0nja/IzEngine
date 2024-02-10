@@ -83,7 +83,7 @@ namespace IW3SR::Engine
 		/// Initialize the UI.
 		/// </summary>
 		UI();
-		virtual ~UI() = default;
+		virtual ~UI();
 
 		NLOHMANN_SERIALIZE(UI, Scale, Memory, Themes)
 	};

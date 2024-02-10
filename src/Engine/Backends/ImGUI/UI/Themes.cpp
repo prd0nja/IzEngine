@@ -13,10 +13,8 @@ namespace IW3SR::Engine::UC
 		ImGuiIO& io = ImGui::GetIO();
 		io.IniFilename = nullptr;
 
-		ImGuiStyle& style = ImGui::GetStyle();
-		style = Style;
-		ImPlotStyle& plotStyle = ImPlot::GetStyle();
-		plotStyle = PlotStyle;
+		ImGui::GetStyle() = Style;
+		ImPlot::GetStyle() = PlotStyle;
 
 		const float fontSize = 12.f * UI::Get().Size;
 		const float iconSize = 8.f * UI::Get().Size;
@@ -57,10 +55,8 @@ namespace IW3SR::Engine::UC
 
 	void Themes::Default()
 	{
-		ImGuiStyle& style = Style;
-		ImVec4* colors = style.Colors;
-		ImPlotStyle& plotStyle = PlotStyle;
-		ImVec4* plotColors = plotStyle.Colors;
+		ImVec4* colors = Style.Colors;
+		ImVec4* plotColors = PlotStyle.Colors;
 
 		colors[ImGuiCol_Text] = ImVec4(1.00f, 1.00f, 1.00f, 1.00f);
 		colors[ImGuiCol_TextDisabled] = ImVec4(0.52f, 0.54f, 0.59f, 0.80f);
@@ -138,62 +134,73 @@ namespace IW3SR::Engine::UC
 		plotColors[ImPlotCol_Selection] = IMPLOT_AUTO_COL;
 		plotColors[ImPlotCol_Crosshairs] = IMPLOT_AUTO_COL;
 
-		style.WindowMenuButtonPosition = ImGuiDir_None;
-		style.WindowPadding = ImVec2(10, 10);
-		style.FramePadding = ImVec2(8, 8);
-		style.CellPadding = ImVec2(6, 6);
-		style.ItemSpacing = ImVec2(6, 6);
-		style.ItemInnerSpacing = ImVec2(6, 6);
-		style.TouchExtraPadding = ImVec2(0, 0);
-		style.IndentSpacing = 25;
-		style.ScrollbarSize = 16;
-		style.GrabMinSize = 12;
-		style.WindowBorderSize = 0;
-		style.ChildBorderSize = 0;
-		style.PopupBorderSize = 0;
-		style.FrameBorderSize = 0;
-		style.TabBorderSize = 0;
-		style.SeparatorTextBorderSize = 1;
-		style.WindowRounding = 0;
-		style.ChildRounding = 0;
-		style.FrameRounding = 0;
-		style.PopupRounding = 0;
-		style.ScrollbarRounding = 12;
-		style.GrabRounding = 0;
-		style.LogSliderDeadzone = 4;
-		style.TabRounding = 0;
+		Style.WindowMenuButtonPosition = ImGuiDir_None;
+		Style.WindowPadding = ImVec2(10, 10);
+		Style.FramePadding = ImVec2(8, 8);
+		Style.CellPadding = ImVec2(6, 6);
+		Style.ItemSpacing = ImVec2(6, 6);
+		Style.ItemInnerSpacing = ImVec2(6, 6);
+		Style.TouchExtraPadding = ImVec2(0, 0);
+		Style.IndentSpacing = 25;
+		Style.ScrollbarSize = 16;
+		Style.GrabMinSize = 12;
+		Style.WindowBorderSize = 0;
+		Style.ChildBorderSize = 0;
+		Style.PopupBorderSize = 0;
+		Style.FrameBorderSize = 0;
+		Style.TabBorderSize = 0;
+		Style.SeparatorTextBorderSize = 1;
+		Style.WindowRounding = 0;
+		Style.ChildRounding = 0;
+		Style.FrameRounding = 0;
+		Style.PopupRounding = 0;
+		Style.ScrollbarRounding = 12;
+		Style.GrabRounding = 0;
+		Style.LogSliderDeadzone = 4;
+		Style.TabRounding = 0;
 
-		plotStyle.AnnotationPadding = ImVec2(2, 2);
-		plotStyle.Colormap = 0;
-		plotStyle.DigitalBitGap = 4;
-		plotStyle.DigitalBitHeight = 8;
-		plotStyle.ErrorBarSize = 5;
-		plotStyle.ErrorBarWeight = 1.5;
-		plotStyle.FillAlpha = 1;
-		plotStyle.FitPadding = ImVec2(0, 0);
-		plotStyle.LabelPadding = ImVec2(5, 5);
-		plotStyle.LegendInnerPadding = ImVec2(5, 5);
-		plotStyle.LegendPadding = ImVec2(10, 10);
-		plotStyle.LegendSpacing = ImVec2(5, 0);
-		plotStyle.LineWeight = 2;
-		plotStyle.MajorGridSize = ImVec2(1, 1);
-		plotStyle.MajorTickLen = ImVec2(10, 10);
-		plotStyle.MajorTickSize = ImVec2(1, 1);
-		plotStyle.Marker = -1;
-		plotStyle.MarkerSize = 4;
-		plotStyle.MarkerWeight = 1;
-		plotStyle.MinorAlpha = 0;
-		plotStyle.MinorGridSize = ImVec2(1, 1);
-		plotStyle.MinorTickLen = ImVec2(18, 10);
-		plotStyle.MinorTickSize = ImVec2(1, 1);
-		plotStyle.MousePosPadding = ImVec2(18, 10);
-		plotStyle.PlotBorderSize = 0;
-		plotStyle.PlotDefaultSize = ImVec2(400, 250);
-		plotStyle.PlotMinSize = ImVec2(200, 150);
-		plotStyle.PlotPadding = ImVec2(0, 0);
-		plotStyle.Use24HourClock = false;
-		plotStyle.UseISO8601 = false;
-		plotStyle.UseLocalTime = false;
+		PlotStyle.AnnotationPadding = ImVec2(2, 2);
+		PlotStyle.Colormap = 0;
+		PlotStyle.DigitalBitGap = 4;
+		PlotStyle.DigitalBitHeight = 8;
+		PlotStyle.ErrorBarSize = 5;
+		PlotStyle.ErrorBarWeight = 1.5;
+		PlotStyle.FillAlpha = 1;
+		PlotStyle.FitPadding = ImVec2(0, 0);
+		PlotStyle.LabelPadding = ImVec2(5, 5);
+		PlotStyle.LegendInnerPadding = ImVec2(5, 5);
+		PlotStyle.LegendPadding = ImVec2(10, 10);
+		PlotStyle.LegendSpacing = ImVec2(5, 0);
+		PlotStyle.LineWeight = 2;
+		PlotStyle.MajorGridSize = ImVec2(1, 1);
+		PlotStyle.MajorTickLen = ImVec2(10, 10);
+		PlotStyle.MajorTickSize = ImVec2(1, 1);
+		PlotStyle.Marker = -1;
+		PlotStyle.MarkerSize = 4;
+		PlotStyle.MarkerWeight = 1;
+		PlotStyle.MinorAlpha = 0;
+		PlotStyle.MinorGridSize = ImVec2(1, 1);
+		PlotStyle.MinorTickLen = ImVec2(18, 10);
+		PlotStyle.MinorTickSize = ImVec2(1, 1);
+		PlotStyle.MousePosPadding = ImVec2(18, 10);
+		PlotStyle.PlotBorderSize = 0;
+		PlotStyle.PlotDefaultSize = ImVec2(400, 250);
+		PlotStyle.PlotMinSize = ImVec2(200, 150);
+		PlotStyle.PlotPadding = ImVec2(0, 0);
+		PlotStyle.Use24HourClock = false;
+		PlotStyle.UseISO8601 = false;
+		PlotStyle.UseLocalTime = false;
+
+		Apply();
+	}
+
+	void Themes::Apply()
+	{
+		if (!ImGui::GetCurrentContext())
+			return;
+
+		ImGui::GetStyle() = Style;
+		ImPlot::GetStyle() = PlotStyle;
 	}
 
 	void Themes::ComputeRainbow()
@@ -250,6 +257,8 @@ namespace IW3SR::Engine::UC
 
 	void Themes::Render()
 	{
+		ComputeRainbow();
+
 		if (!Open) return;
 
 		Style = ImGui::GetStyle();

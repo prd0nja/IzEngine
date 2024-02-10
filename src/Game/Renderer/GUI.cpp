@@ -14,12 +14,11 @@ namespace IW3SR::Game
 		Modules = UC::Modules();
 		Settings = UC::Settings();
 		Toolbar = UC::Toolbar();
-
-		Environment::Deserialize("GUI", *this);
 	}
 
 	void GUI::Initialize()
 	{
+		Environment::Deserialize("GUI", *this);
 		UI.Initialize();
 	}
 

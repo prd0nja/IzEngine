@@ -18,11 +18,6 @@ namespace IW3SR::Engine
 		static void Initialize();
 
 		/// <summary>
-		/// Set the plugins renderer.
-		/// </summary>
-		static void SetRenderer();
-
-		/// <summary>
 		/// Shutdown the plugins.
 		/// </summary>
 		static void Shutdown();

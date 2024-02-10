@@ -24,13 +24,14 @@ namespace IW3SR::Game::UC
 		void Reload();
 
 		/// <summary>
-		/// Compile plugins.
-		/// </summary>
-		void Compile();
-
-		/// <summary>
 		/// Render frame.
 		/// </summary>
 		void Render();
+
+	private:
+		/// <summary>
+		/// Compile plugins.
+		/// </summary>
+		void Compile();
 	};
 }

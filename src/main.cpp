@@ -2,7 +2,6 @@
 
 void Init()
 {
-    Sleep(2000);
     GameClient::Get().Start();
 }
 
