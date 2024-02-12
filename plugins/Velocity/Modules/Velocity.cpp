@@ -8,7 +8,7 @@ namespace IW3SR::Addons
 		ShowAverage = false;
 		ShowMax = false;
 		ShowGround = false;
-		ShowGroundTime = false;
+		ShowGroundTime = true;
 		ShowGraph = true;
 	}
 
@@ -35,8 +35,10 @@ namespace IW3SR::Addons
 
 	void Velocity::Compute()
 	{
+		static int prevVelocity;
+		static bool prevOnGround = true;
+
 		bool onGround = PMove::OnGround();
-		static bool prevOnGround = onGround;
 		bool landed = onGround && !prevOnGround;
 
 		Value = vec2(pmove->ps->velocity).Length();
@@ -44,7 +46,7 @@ namespace IW3SR::Addons
 
 		if (landed)
 		{
-			Averages.Add(Value);
+			Averages.Add(prevVelocity);
 			Average = std::accumulate(Averages.Data.begin(), Averages.Data.end(), 0) / Averages.Offset;
 			GroundAverages.Add(GroundTime);
 			GroundAverage = std::accumulate(GroundAverages.Data.begin(), GroundAverages.Data.end(), 0) / GroundAverages.Offset;
@@ -62,6 +64,7 @@ namespace IW3SR::Addons
 		Ground = Ground < 1000 ? Ground : 1000;
 		BufferGrounds.Add(Ground);
 
+		prevVelocity = Value;
 		prevOnGround = onGround;
 	}
 
@@ -110,11 +113,13 @@ namespace IW3SR::Addons
 
 		if (ResetKey.IsPressed())
 		{
+			Average = 0;
 			Max = 0;
-			BufferMaxs.Clear();
-
 			GroundAverage = 0;
 			GroundTime = 0;
+
+			BufferAverages.Clear();
+			BufferMaxs.Clear();
 			BufferGrounds.Clear();
 		}
 		if (ShowGraph)
