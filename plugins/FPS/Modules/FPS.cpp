@@ -22,6 +22,7 @@ namespace IW3SR::Addons
 	{
 		ImGui::Checkbox("Display Graph", &ShowGraph);
 		FrameText.Menu("Text", true);
+		Graph.Menu("Graph");
 	}
 
 	void FPS::OnRender()

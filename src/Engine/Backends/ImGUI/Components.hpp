@@ -103,13 +103,13 @@ namespace ImGui
 	/// <summary>
 	/// Movable frame.
 	/// </summary>
-	/// <param name="label">The label.</param>
+	/// <param name="id">The ID.</param>
 	/// <param name="position">The position.</param>
 	/// <param name="size">The size.</param>
 	/// <param name="renderPosition">The render position.</param>
 	/// <param name="renderSize">The render size.</param>
 	/// <returns></returns>
-	API void Movable(const std::string& label, vec2& position, vec2& size, vec2& renderPosition, vec2& renderSize);
+	API void Movable(const std::string& id, vec2& position, vec2& size, vec2& renderPosition, vec2& renderSize);
 
 	/// <summary>
 	/// Rainbow rect.

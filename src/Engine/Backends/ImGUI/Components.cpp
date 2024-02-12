@@ -154,7 +154,7 @@ namespace ImGui
         PopID();
     }
 
-    void Movable(const std::string& label, vec2& position, vec2& size, vec2& renderPosition, vec2& renderSize)
+    void Movable(const std::string& id, vec2& position, vec2& size, vec2& renderPosition, vec2& renderSize)
     {
         if (!UI::Get().Open || !UI::Get().DesignMode) return;
 
@@ -162,7 +162,7 @@ namespace ImGui
         SetNextWindowBgAlpha(0.2f);
         SetNextWindowPos(renderPosition, ImGuiCond_FirstUseEver);
         SetNextWindowSize(renderSize, ImGuiCond_FirstUseEver);
-        Begin(label.c_str(), nullptr, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse);
+        Begin(id.c_str(), nullptr, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse);
 
         vec2 framePosition = GetWindowPos();
         vec2 frameSize = GetWindowSize();

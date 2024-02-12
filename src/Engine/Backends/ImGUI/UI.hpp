@@ -52,6 +52,18 @@ namespace IW3SR::Engine
 		void End();
 
 		/// <summary>
+		/// Get delta time.
+		/// </summary>
+		/// <returns></returns>
+		inline float DeltaTime();
+
+		/// <summary>
+		/// Get delta time in milliseconds.
+		/// </summary>
+		/// <returns></returns>
+		inline int DeltaTimeMS();
+
+		/// <summary>
 		/// Initialize context.
 		/// </summary>
 		/// <remarks>Share context with DLLs.</remarks>

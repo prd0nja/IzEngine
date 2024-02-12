@@ -65,6 +65,16 @@ namespace IW3SR::Engine
 		ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
 	}
 
+	float UI::DeltaTime()
+	{
+		return ImGui::GetIO().DeltaTime;
+	}
+
+	int UI::DeltaTimeMS()
+	{
+		return ImGui::GetIO().DeltaTime * 1000;
+	}
+
 	void UI::InitializeContext()
 	{
 		auto& UI = UI::Get();

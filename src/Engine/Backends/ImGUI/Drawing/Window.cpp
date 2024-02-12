@@ -37,7 +37,7 @@ namespace IW3SR::Engine
 		Size = RenderSize / space;
 
 		if (!(flags & (ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize)))
-			ImGui::Movable("#" + Name, Position, Size, RenderPosition, RenderSize);
+			ImGui::Movable("#" + ID, Position, Size, RenderPosition, RenderSize);
 
 		ImGui::SetWindowPos(RenderPosition);
 		ImGui::SetWindowSize(RenderSize);
@@ -48,7 +48,7 @@ namespace IW3SR::Engine
 		if (!ImGui::CollapsingHeader(label.c_str(), open))
 			return;
 
-		ImGui::PushID(ID.c_str());
+		ImGui::PushID(label.c_str());
 
 		ImGui::DragFloat2("Position", Position);
 		ImGui::DragFloat2("Size", Size);

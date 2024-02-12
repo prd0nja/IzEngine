@@ -11,7 +11,7 @@ namespace IW3SR::Engine
 	void Plots::Begin(ImGuiWindowFlags flags)
 	{
 		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, { 0, 0 });
-		Window::Begin(ImGuiWindowFlags_Graph);
+		Window::Begin(flags | ImGuiWindowFlags_Graph);
 		ImGui::PopStyleVar();
 	}
 }

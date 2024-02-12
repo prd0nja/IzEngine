@@ -14,16 +14,15 @@ namespace IW3SR::Addons
 
 	void Lagometer::OnMenu()
 	{
-		ImGui::Checkbox("Show graph", &ShowGraph);
+		ImGui::Checkbox("Display Graph", &ShowGraph);
 		if (ShowGraph)
 		{
 			ImGui::NewLine();
-			ImGui::SameLine(35);
-			ImGui::Checkbox("Show ping", &ShowPing);
+			ImGui::Checkbox("Ping", &ShowPing);
 			ImGui::NewLine();
-			ImGui::SameLine(35);
-			ImGui::Checkbox("Show packets", &ShowPacket);
+			ImGui::Checkbox("Packets", &ShowPacket);
 		}
+		Graph.Menu("Graph");
 	}
 
 	void Lagometer::OnRender()

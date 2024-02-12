@@ -54,7 +54,7 @@ namespace IW3SR::Engine
 		if (!ImGui::CollapsingHeader(label, open))
 			return;
 
-		ImGui::PushID(ID.c_str());
+		ImGui::PushID(label.c_str());
 
 		const std::vector<std::string>& horizontals = Draw2D::HorizontalAlignment;
 		const std::vector<std::string>& verticals = Draw2D::VerticalAlignment;

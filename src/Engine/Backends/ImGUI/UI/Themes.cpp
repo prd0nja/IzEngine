@@ -212,7 +212,7 @@ namespace IW3SR::Engine::UC
 			ImColor::HSV(fmod(offset, 1.0f), 1.0f, 1.0f),
 			ImColor::HSV(fmod(offset + 0.33f, 1.0f), 1.0f, 1.0f)
 		);
-		offset += speed * ImGui::GetIO().DeltaTime;
+		offset += speed * UI::Get().DeltaTime();
 	}
 
 	void Themes::MarkdownLink(ImGui::MarkdownLinkCallbackData data)
