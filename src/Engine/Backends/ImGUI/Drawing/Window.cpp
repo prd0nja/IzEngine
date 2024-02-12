@@ -36,7 +36,7 @@ namespace IW3SR::Engine
 		Position = RenderPosition / space;
 		Size = RenderSize / space;
 
-		if (!(flags & (ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize)))
+		if (!(flags & ImGuiWindowFlags_NoMove))
 			ImGui::Movable("#" + ID, Position, Size, RenderPosition, RenderSize);
 
 		ImGui::SetWindowPos(RenderPosition);

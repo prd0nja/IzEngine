@@ -7,6 +7,7 @@
 #include "Fonts/IconsFontAwesome6Brands.hpp"
 
 constexpr ImGuiWindowFlags ImGuiWindowFlags_Graph = ImGuiWindowFlags_NoTitleBar
+	| ImGuiWindowFlags_NoResize
 	| ImGuiWindowFlags_NoScrollbar
 	| ImGuiWindowFlags_NoCollapse
 	| ImGuiWindowFlags_NoBackground;
