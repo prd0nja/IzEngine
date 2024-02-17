@@ -12,7 +12,11 @@ namespace IW3SR::Engine
 	void Plots::Begin(ImGuiWindowFlags flags)
 	{
 		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, { 0, 0 });
+
 		Window::Begin(flags | ImGuiWindowFlags_Graph);
+		if (!(flags & ImGuiWindowFlags_NoMove))
+			ImGui::Movable("#" + ID, Position, Size, RenderPosition, RenderSize);
+
 		ImGui::PopStyleVar();
 	}
 }

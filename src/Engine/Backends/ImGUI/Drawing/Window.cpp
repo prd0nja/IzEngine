@@ -36,28 +36,28 @@ namespace IW3SR::Engine
 		RenderPosition = { x, y };
 		RenderSize = { w, h };
 
-		ImGui::SetNextWindowPos(RenderPosition, ImGuiCond_FirstUseEver);
-		ImGui::SetNextWindowSize(RenderSize, ImGuiCond_FirstUseEver);
-
 		ImGui::PushID(ID.c_str());
 		ImGui::Begin(Name.c_str(), &Open, flags | ImGuiWindowFlags_NoCollapse);
-		RenderPosition = ImGui::GetWindowPos();
-		RenderSize = ImGui::GetWindowSize();
 
-		x = RenderPosition.x;
-		y = RenderPosition.y;
-		w = RenderSize.x;
-		h = RenderSize.y;
+		if (ImGui::IsWindowChanged())
+		{
+			vec2 framePosition = ImGui::GetWindowPos();
+			vec2 frameSize = ImGui::GetWindowSize();
 
-		UI::Get().Screen.Reverse(x, y, w, h, HorizontalAlign, VerticalAlign);
-		Position = { x, y };
-		Size = { w, h };
+			x = framePosition.x;
+			y = framePosition.y;
+			w = frameSize.x;
+			h = frameSize.y;
 
-		if (!(flags & ImGuiWindowFlags_NoMove))
-			ImGui::Movable("#" + ID, Position, Size, RenderPosition, RenderSize);
-
-		ImGui::SetWindowPos(RenderPosition);
-		ImGui::SetWindowSize(RenderSize);
+			UI::Get().Screen.Reverse(x, y, w, h, HorizontalAlign, VerticalAlign);
+			Position = { x, y };
+			Size = { w, h };
+		}
+		else
+		{
+			ImGui::SetWindowPos({ x, y });
+			ImGui::SetWindowSize({ w, h });
+		}
 	}
 
 	void Window::Menu(const std::string& label, bool open)
@@ -69,6 +69,7 @@ namespace IW3SR::Engine
 
 		ImGui::DragFloat2("Position", Position);
 		ImGui::DragFloat2("Size", Size);
+		ImGui::ComboAlignRect(&HorizontalAlign, &VerticalAlign);
 
 		ImGui::PopID();
 	}

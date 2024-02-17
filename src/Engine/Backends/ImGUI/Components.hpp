@@ -23,6 +23,9 @@ constexpr ImGuiWindowFlags ImGuiWindowFlags_Notification = ImGuiWindowFlags_NoCo
  	| ImGuiWindowFlags_NoScrollbar
  	| ImGuiWindowFlags_NoTitleBar;
 
+constexpr std::array<const char*, 3> Horizontals = { "Left", "Center", "Right" };
+constexpr std::array<const char*, 3> Verticals = { "Top", "Center", "Bottom" };
+
 namespace ImGui
 {
 	/// <summary>
@@ -75,6 +78,22 @@ namespace ImGui
 	/// <returns></returns>
 	API bool Combo(const std::string& label, int* item, const std::vector<std::string>& items,
 		int maxHeightInItems = -1);
+
+	/// <summary>
+	/// Alignments combo.
+	/// </summary>
+	/// <param name="x">The x alignment.</param>
+	/// <param name="y">The y alignment.</param>
+	/// <returns></returns>
+	API bool ComboAlign(Alignment* x, Alignment* y);
+
+	/// <summary>
+	/// Rect alignments combo.
+	/// </summary>
+	/// <param name="horizontal">The horizontal alignment.</param>
+	/// <param name="vertical">The vertical alignment.</param>
+	/// <returns></returns>
+	API bool ComboAlignRect(Horizontal* horizontal, Vertical* vertical);
 
 	/// <summary>
 	/// Collapsing header.
@@ -143,6 +162,12 @@ namespace ImGui
 	/// </summary>
 	/// <returns></returns>
 	API bool IsWindowResizing();
+
+	/// <summary>
+	/// Is window position or scale changed.
+	/// </summary>
+	/// <returns></returns>
+	API bool IsWindowChanged();
 }
 
 NLOHMANN_SERIALIZE_NON_INTRUSIVE(ImVec2, x, y)

@@ -86,12 +86,48 @@ namespace ImGui
         return Combo(label.c_str(), item, list.data(), list.size(), maxHeightInItems);
     }
 
+    bool ComboAlign(Alignment* x, Alignment* y)
+    {
+        bool state = false;
+        int index = *x / 4;
+        if (Combo("Align X", &index, Horizontals.data(), Horizontals.size()))
+        {
+            *x = static_cast<Alignment>(index * 4);
+            state = true;
+        }
+        index = *y;
+        if (Combo("Align Y", &index, Verticals.data(), Verticals.size()))
+        {
+            *y = static_cast<Alignment>(index);
+            state = true;
+        }
+        return state;
+    }
+
+    bool ComboAlignRect(Horizontal* horizontal, Vertical* vertical)
+    {
+        bool state = false;
+        int index = *horizontal - 1;
+        if (Combo("Horizontal", &index, Horizontals.data(), Horizontals.size()))
+        {
+            *horizontal = static_cast<Horizontal>(index + 1);
+            state = true;
+        }
+        index = *vertical - 1;
+        if (Combo("Vertical", &index, Verticals.data(), Verticals.size()))
+        {
+            *vertical = static_cast<Vertical>(index + 1);
+            state = true;
+        }
+        return state;
+    }
+
     bool CollapsingHeader(const std::string& label, ImGuiTreeNodeFlags flags, bool open)
     {
         flags |= open ? ImGuiTreeNodeFlags_DefaultOpen : ImGuiTreeNodeFlags_None;
         return CollapsingHeader(label.c_str(), flags);
     }
-
+   
     void Tooltip(const std::string& text)
     {
         if (!IsItemHovered())
@@ -166,19 +202,14 @@ namespace ImGui
 
         vec2 framePosition = GetWindowPos();
         vec2 frameSize = GetWindowSize();
-        vec2 dragDelta = GetMouseDragDelta();
 
-        if (IsMouseDragging(ImGuiMouseButton_Left) && dragDelta)
+        if (IsWindowChanged())
         {
-            if (IsWindowHovered() || IsWindowResizing())
-            {
-                position += UI::Get().Screen.RealToVirtual * (framePosition - renderPosition);
-                size += UI::Get().Screen.RealToVirtual * (frameSize - renderSize);
+            position += UI::Get().Screen.RealToVirtual * (framePosition - renderPosition);
+            size += UI::Get().Screen.RealToVirtual * (frameSize - renderSize);
 
-                renderPosition = framePosition;
-                renderSize = frameSize;
-                ResetMouseDragDelta();
-            }
+            renderPosition = framePosition;
+            renderSize = frameSize;
         }
         else
         {
@@ -207,7 +238,7 @@ namespace ImGui
     {
         if (!state) return;
 
-        ImDrawList* draw = ImGui::GetBackgroundDrawList();
+        ImDrawList* draw = GetBackgroundDrawList();
         ImGuiContext& g = *GImGui;
 
         const ImGuiStyle& style = g.Style;
@@ -230,9 +261,6 @@ namespace ImGui
 
     bool IsWindowResizing()
     {
-        if (!IsMouseDragging(ImGuiMouseButton_Left))
-            return false;
-
         ImGuiWindow *window = GetCurrentWindow();
         ImGuiID active = GetActiveID();
 
@@ -242,6 +270,16 @@ namespace ImGui
                 return true;
             if (GetWindowResizeBorderID(window, i) == active)
                 return true;
+        }
+        return false;
+    }
+
+    bool IsWindowChanged()
+    {
+        if (vec2(GetMouseDragDelta()) && (IsWindowHovered() || IsWindowResizing()))
+        {
+            ResetMouseDragDelta();
+            return true;
         }
         return false;
     }

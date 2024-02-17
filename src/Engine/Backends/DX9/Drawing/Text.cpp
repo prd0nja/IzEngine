@@ -56,33 +56,18 @@ namespace IW3SR::Engine
 
 		ImGui::PushID(label.c_str());
 
-		const std::vector<std::string>& horizontals = Draw2D::HorizontalAlignment;
-		const std::vector<std::string>& verticals = Draw2D::VerticalAlignment;
-		const std::vector<std::string>& fonts = Assets::Get().FontNames;
-
 		ImGui::DragFloat2("Position", Position);
 		ImGui::ColorEdit4("Color", Color, ImGuiColorEditFlags_Float);
 
 		if (ImGui::InputFloat("Font Size", &FontSize, 0.1))
 			SetFont(FontName);
+
+		const auto& fonts = Assets::Get().FontNames;
 		if (ImGui::Combo("Font", &FontIndex, fonts))
 			SetFont(fonts[FontIndex]);
 
-		int horizontal = HorizontalAlign - 1;
-		if (ImGui::Combo("Horizontal Alignment", &horizontal, horizontals))
-			HorizontalAlign = static_cast<Horizontal>(horizontal + 1);
-
-		int vertical = VerticalAlign - 1;
-		if (ImGui::Combo("Vertical Alignment", &vertical, verticals))
-			VerticalAlign = static_cast<Vertical>(vertical + 1);
-
-		int alignX = AlignX / 4;
-		if (ImGui::Combo("Align X", &alignX, horizontals))
-			AlignX = static_cast<Alignment>(alignX * 4);
-
-		int alignY = AlignY;
-		if (ImGui::Combo("Align Y", &alignY, verticals))
-			AlignY = static_cast<Alignment>(alignY);
+		ImGui::ComboAlign(&AlignX, &AlignY);
+		ImGui::ComboAlignRect(&HorizontalAlign, &VerticalAlign);
 
 		ImGui::PopID();
 	}
