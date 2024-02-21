@@ -20,8 +20,8 @@ namespace IW3SR::Game
 	Hook<void(int localClientNum)>
 		CG_DrawCrosshair_h(0x4311A0, Renderer::Draw2D);
 
-	Hook<void(bool grabAngles)>
-		CG_InterpolatePlayerState_h(0x446FB0, Player::Interpolate);
+	Hook<void(int localClientNum)>
+		CG_PredictPlayerState_Internal_h(0x447260, Player::Predict);
 
 	Hook<void(usercmd_s* cmd)>
 		CL_FinishMove_h(0x463A60, PMove::FinishMove);

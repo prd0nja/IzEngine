@@ -56,10 +56,10 @@ namespace IW3SR::Game
 		static void Allocates();
 
 		/// <summary>
-		/// Interpolate player states.
+		/// Predict player state.
 		/// </summary>
-		/// <param name="grabAngles">Grab angles.</param>
-		static void Interpolate(bool grabAngles);
+		/// <param name="localClientNum">Local client num.</param>
+		static void Predict(int localClientNum);
 
 		/// <summary>
 		/// Get all players.

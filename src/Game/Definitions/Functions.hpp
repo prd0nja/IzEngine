@@ -42,8 +42,8 @@ namespace IW3SR::Game
 	extern Hook<void(int channel, const char* msg, int type)>
 		Com_PrintMessage_h;
 
-	extern Hook<void(bool grabAngles)>
-		CG_InterpolatePlayerState_h;
+	extern Hook<void(int localClientNum)>
+		CG_PredictPlayerState_Internal_h;
 
 	extern Hook<void(int localClientNum)>
 		CG_DrawCrosshair_h;
@@ -65,6 +65,8 @@ namespace IW3SR::Game
 
 	extern Hook<void(GfxCmdBufInput* cmd, GfxViewInfo* viewInfo, GfxCmdBufSourceState* src, GfxCmdBufState* buf)>
 		RB_EndSceneRendering_h;
+
+	ASM void BG_EvaluateTrajectory(const trajectory_t* tr, int atTime, float* out);
 
 	ASM void CG_TracePoint(pmove_t* pm, trace_t* trace, const float* start,
 		const float* mins, const float* maxs, const float* end, int passEntityNum, int contentMask);

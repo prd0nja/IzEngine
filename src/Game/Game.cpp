@@ -44,7 +44,7 @@ namespace IW3SR::Game
 
 		Com_PrintMessage_h.Install();
 		CG_DrawCrosshair_h.Install();
-		CG_InterpolatePlayerState_h.Install();
+		CG_PredictPlayerState_Internal_h.Install();
 		CL_FinishMove_h.Install();
 		PM_WalkMove_h.Install();
 		PM_AirMove_h.Install();
@@ -61,7 +61,7 @@ namespace IW3SR::Game
 
 		Com_PrintMessage_h.Remove();
 		CG_DrawCrosshair_h.Remove();
-		CG_InterpolatePlayerState_h.Remove();
+		CG_PredictPlayerState_Internal_h.Remove();
 		CL_FinishMove_h.Remove();
 		PM_WalkMove_h.Remove();
 		PM_AirMove_h.Remove();

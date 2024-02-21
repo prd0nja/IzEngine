@@ -35,9 +35,27 @@ namespace IW3SR::Game
 			Players[i] = std::make_shared<Player>(i);
 	}
 
-	void Player::Interpolate(bool grabAngles)
+	void Player::Predict(int localClientNum)
 	{
-		CG_InterpolatePlayerState_h(grabAngles);
+		CG_PredictPlayerState_Internal_h(localClientNum);
+
+		const centity_s* cent = &cg_entities[cgs->predictedPlayerState.groundEntityNum];
+		const entityType_t eType = cent->nextState.eType;
+		const float fromTime = cgs->snap->serverTime;
+		const float toTime = cgs->time;
+
+		if (eType == ET_SCRIPTMOVER || eType == ET_PLANE)
+		{
+			vec3 angles, oldAngles;
+			BG_EvaluateTrajectory(&cent->currentState.apos, fromTime, oldAngles);
+			BG_EvaluateTrajectory(&cent->currentState.apos, toTime, angles);
+
+			vec3 deltaAngles = angles - oldAngles;
+			cgs->predictedPlayerState.viewangles[0] += deltaAngles.x;
+			cgs->predictedPlayerState.viewangles[1] += deltaAngles.y;
+			cgs->predictedPlayerState.viewangles[2] += deltaAngles.z;
+			cgs->predictedPlayerState.delta_angles[1] += deltaAngles.y;
+		}
 	}
 
 	std::array<std::shared_ptr<Player>, 64>& Player::GetAll()
