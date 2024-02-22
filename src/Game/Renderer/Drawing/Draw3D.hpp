@@ -1,6 +1,7 @@
 #pragma once
 #include "Game/Definitions.hpp"
 #include "Game/Renderer/Assets.hpp"
+#include "Lines.hpp"
 
 #include "Engine/Core/Math.hpp"
 
@@ -12,11 +13,7 @@ namespace IW3SR::Game
 	class API Draw3D
 	{
 	public:
-		static inline std::array<GfxPointVertex, 2735> LinesVerts{ };
-		static inline int LinesVertex = 0;
-		static inline int LinesMaxVertex = 2000;
-		static inline int LinesWidth = 2;
-		static inline int LinesDepthTest = true;
+		static inline Lines BufferLines = Lines(1, 2000, true);
 
 		// <summary>
 		/// Draw a box.

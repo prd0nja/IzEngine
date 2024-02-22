@@ -87,5 +87,10 @@ namespace IW3SR::Game
 
 	private:
 		static inline std::array<std::shared_ptr<Player>, 64> Players;
+
+		/// <summary>
+		/// Interpolate view angles for mover.
+		/// </summary>
+		static void InterpolateViewForMover();
 	};
 }

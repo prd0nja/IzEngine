@@ -36,34 +36,6 @@ namespace IW3SR::Engine
         static void WriteBytes(uintptr_t address, const std::string& bytes);
 
         /// <summary>
-        /// Assign values from reinterpret cast.
-        /// </summary>
-        /// <typeparam name="R">The reinterpret cast type.</typeparam>
-        /// <typeparam name="T">The first type to set.</typeparam>
-        /// <typeparam name="U">The second type to set.</typeparam>
-        /// <param name="dst">The destination.</param>
-        /// <param name="src">The source.</param>
-        template <typename R, typename T, typename U>
-        static inline void Assign(T& dst, U& src)
-        {
-            *reinterpret_cast<R*>(&dst) = *reinterpret_cast<R*>(&src);
-        }
-
-        /// <summary>
-        /// Assign array from reinterpret cast.
-        /// </summary>
-        /// <typeparam name="R">The reinterpret cast type.</typeparam>
-        /// <typeparam name="T">The first type to set.</typeparam>
-        /// <typeparam name="U">The second type to set.</typeparam>
-        /// <param name="dst">The destination.</param>
-        /// <param name="src">The source.</param>
-        template <int size, typename R, typename T, typename U>
-        static inline void AssignArray(T& dst, U& src)
-        {
-            std::copy_n(static_cast<R*>(src), size, dst);
-        }
-
-        /// <summary>
         /// Set value.
         /// </summary>
         /// <typeparam name="T">The type to set.</typeparam>
