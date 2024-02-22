@@ -4390,6 +4390,29 @@ namespace IW3SR::Game
 		unsigned short colorsIndex[8];
 	};
 
+	struct __declspec(align(4)) GfxModelSurfaceInfo
+	{
+		DObjAnimMat* baseMat;
+		char boneIndex;
+		char boneCount;
+		unsigned short gfxEntIndex;
+		unsigned short lightingHandle;
+	};
+
+	union $178D1D161B34F636C03EBC0CA3007D75
+	{
+		GfxPackedVertex* skinnedVert;
+		int oldSkinnedCachedOffset;
+	};
+
+	struct GfxModelSkinnedSurface
+	{
+		int skinnedCachedOffset;
+		XSurface* xsurf;
+		GfxModelSurfaceInfo info;
+		$178D1D161B34F636C03EBC0CA3007D75 ___u3;
+	};
+
 	struct GfxBackEndPrimitiveData
 	{
 		int hasSunDirChanged;
