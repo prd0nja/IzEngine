@@ -24,6 +24,11 @@ namespace IW3SR::Addons
 		ShowPing = true;
 	}
 
+	void Lagometer::Initialize()
+	{
+		Dvar::Set("cg_drawLagometer", 0);
+	}
+
 	void Lagometer::OnMenu()
 	{
 		ImGui::Checkbox("Snapshot", &ShowSnap);

@@ -33,6 +33,11 @@ namespace IW3SR::Addons
 		virtual ~Lagometer() = default;
 
 		/// <summary>
+		/// Initialize lagometer.
+		/// </summary>
+		void Initialize() override;
+
+		/// <summary>
 		/// Menu drawing.
 		/// </summary>
 		void OnMenu() override;
