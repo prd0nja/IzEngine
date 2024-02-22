@@ -20,34 +20,47 @@ namespace IW3SR::Game
         PM_AirMove_h(pm, pml);
     }
 
-	void PMove::SetYaw(usercmd_s* cmd, float* angles, const vec3& target)
+	void PMove::SetYaw(usercmd_s* cmd, const float* angles, const vec3& target)
     {
-        float cmdAngle = SHORT2ANGLE(cmd->angles[1]);
+        float angle = SHORT2ANGLE(cmd->angles[1]);
 
-        float delta = Math::AngleDelta(angles[1], cmdAngle);
-        float realDelta = Math::AngleDelta(delta, angles[1]);
-        float final = Math::AngleDelta(angles[1], target.y);
+        float input = Math::AngleDelta(angles[1], angle);
+        float to = Math::AngleDelta(angles[1], target[1]);
+        float delta = input - to;
 
-        clients->viewangles[1] += realDelta - final;
-        cmd->angles[1] += ANGLE2SHORT(realDelta - final);
+        clients->viewangles[1] += delta;
+        cmd->angles[1] += ANGLE2SHORT(delta);
     }
 
-    void PMove::SetPitch(usercmd_s* cmd, float* angles, const vec3& target)
+    void PMove::SetPitch(usercmd_s* cmd, const float* angles, const vec3& target)
     {
-        float cmdAngle = SHORT2ANGLE(cmd->angles[0]);
+        float angle = SHORT2ANGLE(cmd->angles[0]);
 
-        float delta = Math::AngleDelta(angles[0], cmdAngle);
-        float realDelta = Math::AngleDelta(delta, angles[0]);
-        float final = Math::AngleDelta(angles[0], target.x);
+        float input = Math::AngleDelta(angles[0], angle);
+        float to = Math::AngleDelta(angles[0], target[0]);
+        float delta = input - to;
 
-        clients->viewangles[0] += realDelta - final;
-        cmd->angles[0] += ANGLE2SHORT(realDelta - final);
+        clients->viewangles[0] += delta;
+        cmd->angles[0] += ANGLE2SHORT(delta);
     }
 
-    void PMove::SetAngles(usercmd_s* cmd, float* angles, const vec3& target)
+    void PMove::SetRoll(usercmd_s* cmd, const float* angles, const vec3& target)
     {
-        SetPitch(cmd, angles, target);
+        float angle = SHORT2ANGLE(cmd->angles[2]);
+
+        float input = Math::AngleDelta(angles[2], angle);
+        float to = Math::AngleDelta(angles[2], target[2]);
+        float delta = input - to;
+
+        clients->viewangles[2] += delta;
+        cmd->angles[2] += ANGLE2SHORT(delta);
+    }
+
+    void PMove::SetAngles(usercmd_s* cmd, const float* angles, const vec3& target)
+    {
         SetYaw(cmd, angles, target);
+        SetPitch(cmd, angles, target);
+        SetRoll(cmd, angles, target);
     }
 
     bool PMove::OnGround()
