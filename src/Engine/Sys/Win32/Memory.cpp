@@ -21,6 +21,8 @@ namespace IW3SR::Engine
 
     void Memory::WriteBytes(uintptr_t address, const std::string& bytes)
     {
+        if (!address) return;
+
         DWORD oldProtect;
         LPVOID lpAddress = reinterpret_cast<LPVOID>(address);
         int size = bytes.size();
