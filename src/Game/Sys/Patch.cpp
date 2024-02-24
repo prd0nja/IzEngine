@@ -18,8 +18,6 @@ namespace IW3SR::Game
 
 	void Patch::Renderer()
 	{
-		Sleep(2000);
-
 		// Disable <developer 1> check for debug rendering
 		Memory::NOP(0x6496D8, 3);
 
