@@ -1,10 +1,9 @@
 #include "Functions.hpp"
-using namespace asmjit;
 
 namespace IW3SR::Game
 {
 	Function<void(const trajectory_t* tr, int atTime, float* out)>
-		BG_EvaluateTrajectory = ASM_LOAD_FUNCTION(BG_EvaluateTrajectory);
+		BG_EvaluateTrajectory = ASM_LOAD(BG_EvaluateTrajectory);
 
 	Function<int(const char* name)>
 		BG_FindWeaponIndexByName = 0x416610;
@@ -17,7 +16,7 @@ namespace IW3SR::Game
 		Cmd_ExecuteSingleCommand = 0x4F9AB0;
 
 	Function<dvar_s* (const char* name)>
-		Dvar_FindVar = ASM_LOAD_FUNCTION(Dvar_FindVar);
+		Dvar_FindVar = ASM_LOAD(Dvar_FindVar);
 
 	Function<Material* (const char* material, int size)>
 		Material_RegisterHandle = 0x5F2A80;
@@ -27,11 +26,11 @@ namespace IW3SR::Game
 
 	Function<void(const char* text, int maxChars, Font_s* font, float x, float y,
 		float xScale, float yScale, float rotation, int style, float* color)>
-		R_AddCmdDrawText = ASM_LOAD_FUNCTION(R_AddCmdDrawText);
+		R_AddCmdDrawText = ASM_LOAD(R_AddCmdDrawText);
 
 	Function<void(Material* material, float x, float y, float w, float h,
 		float null1, float null2, float null3, float null4, float* color)>
-		R_AddCmdDrawStretchPic = ASM_LOAD_FUNCTION(R_AddCmdDrawStretchPic);
+		R_AddCmdDrawStretchPic = ASM_LOAD(R_AddCmdDrawStretchPic);
 
 	Function<void FASTCALL(const float* colorFloat, char* colorBytes)>
 		R_ConvertColorToBytes = 0x493530;
@@ -40,13 +39,15 @@ namespace IW3SR::Game
 		R_RegisterFont = 0x5F1EC0;
 
 	Function<int(const char* text, int maxChars, Font_s* font)>
-		R_TextWidth = ASM_LOAD_FUNCTION(R_TextWidth);
+		R_TextWidth = ASM_LOAD(R_TextWidth);
 
 	Function<void(int count, int width, GfxPointVertex* verts, bool depthTest)>
 		RB_DrawLines3D = 0x613040;
 }
 namespace IW3SR::Game
 {
+	using namespace asmjit;
+
 	ASM_FUNCTION(BG_EvaluateTrajectory)
 	{
 		a.push(x86::ebp);

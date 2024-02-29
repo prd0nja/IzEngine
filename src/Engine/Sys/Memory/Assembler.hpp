@@ -12,16 +12,10 @@ namespace arch = asmjit::x64;
 namespace IW3SR::Engine
 {
 #define ASM_FUNCTION(function) \
-	void ASM_F_##function(asmjit::CodeHolder& code, arch::Assembler& a)
+	void ASM_##function(asmjit::CodeHolder& code, arch::Assembler& a)
 
-#define ASM_LOAD_FUNCTION(function) \
-	Assembler::Get().NewCode(ASM_F_##function)
-
-#define ASM_HOOK(hook) \
-	void ASM_H_##hook(asmjit::CodeHolder& code, arch::Assembler& a)
-
-#define ASM_LOAD_HOOK(hook) \
-	Assembler::Get().NewCode(ASM_H_##hook)
+#define ASM_LOAD(function) \
+	Assembler::Get().NewCode(ASM_##function)
 
 	/// <summary>
 	/// Just-in-time assembler.

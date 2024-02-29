@@ -39,10 +39,17 @@ namespace IW3SR::Engine
         /// </summary>
         /// <param name="target">The target address.</param>
         /// <param name="callback">The callback function.</param>
-        Hook(uint64_t target, T callback)
+        Hook(uint64_t target, T callback) : Hook(target, reinterpret_cast<uint64_t>(callback)) { }
+
+        /// <summary>
+        /// Initialize a new Hook instance.
+        /// </summary>
+        /// <param name="target">The target address.</param>
+        /// <param name="callback">The callback address.</param>
+        Hook(uint64_t target, uint64_t callback)
         {
             Address = target;
-            Callback = reinterpret_cast<uint64_t>(callback);
+            Callback = callback;
         }
 
         /// <summary>
