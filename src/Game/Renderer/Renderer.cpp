@@ -52,7 +52,9 @@ namespace IW3SR::Game
 
 	void Renderer::Commands(void* cmds)
 	{
-		R_RenderAllLeftovers_h(cmds);
+		// HLSL gameTime constants
+		if (client_ui->connectionState != CA_ACTIVE)
+			R_SetGameTime(gfx_cmdBufSourceState, UI::Get().Time());
 	}
 
 	void Renderer::Render()
@@ -60,7 +62,7 @@ namespace IW3SR::Game
 		UI::Get().Begin();
 		GUI::Get().Render();
 
-		if (cgs->predictedPlayerState.groundEntityNum)
+		if (client_ui->connectionState == CA_ACTIVE)
 			GameCallback(OnRender);
 
 		UI::Get().End();

@@ -26,8 +26,8 @@ namespace IW3SR::Game
 	GfxViewParms* viewParms = Signature(0xD540220);
 	clipMap_t* cm = Signature(0x14098C0);
 	ComWorld* com = Signature(0x1435CB8);
-	int* com_frameTime = Signature(0x1476EFC);
-	float* com_timescaleValue = Signature(0x1435D68);
+	int& com_frameTime = Signature(0x1476EFC);
+	float& com_timescaleValue = Signature(0x1435D68);
 	int* g_entities = Signature(0x12885C4);
 	int* g_clients = Signature(0x13255A8);
 	pmove_t* pmove = Signature(0x8C9C90);

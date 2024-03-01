@@ -35,7 +35,7 @@ namespace IW3SR::Game
 	extern Hook<void()>
 		R_Init_h;
 
-	extern Hook<void FASTCALL(void* cmds)>
+	extern Hook<void(void* cmds)>
 		R_RenderAllLeftovers_h;
 
 	extern Hook<void(int window)>
@@ -43,4 +43,8 @@ namespace IW3SR::Game
 
 	extern Hook<void(GfxCmdBufInput* cmd, GfxViewInfo* viewInfo, GfxCmdBufSourceState* src, GfxCmdBufState* buf)>
 		RB_EndSceneRendering_h;
+}
+namespace IW3SR::Game
+{
+	ASM_FUNCTION(R_RenderAllLeftovers_h);
 }

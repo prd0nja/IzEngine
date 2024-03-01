@@ -52,6 +52,12 @@ namespace IW3SR::Engine
 		void End();
 
 		/// <summary>
+		/// Get time.
+		/// </summary>
+		/// <returns></returns>
+		inline double Time();
+
+		/// <summary>
 		/// Get delta time.
 		/// </summary>
 		/// <returns></returns>

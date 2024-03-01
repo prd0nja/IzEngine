@@ -23,18 +23,13 @@ namespace IW3SR::Game
 		~Patch() = default;
 
 		/// <summary>
-		/// Game patch.
+		/// Patch definitions.
 		/// </summary>
-		void Game();
+		void Definitions();
 
 		/// <summary>
 		/// Renderer patch.
 		/// </summary>
 		void Renderer();
-
-		/// <summary>
-		/// System patch.
-		/// </summary>
-		void System();
 	};
 }

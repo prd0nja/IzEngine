@@ -27,8 +27,8 @@ namespace IW3SR::Game
 	extern GfxViewParms* viewParms;
 	extern clipMap_t* cm;
 	extern ComWorld* com;
-	extern int* com_frameTime;
-	extern float* com_timescaleValue;
+	extern int& com_frameTime;
+	extern float& com_timescaleValue;
 	API extern int* g_entities;
 	API extern int* g_clients;
 	API extern pmove_t* pmove;

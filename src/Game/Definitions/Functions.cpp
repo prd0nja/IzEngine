@@ -38,6 +38,9 @@ namespace IW3SR::Game
 	Function<Font_s* (const char* font, int size)>
 		R_RegisterFont = 0x5F1EC0;
 
+	Function<void(GfxCmdBufSourceState* source, float gameTime)>
+		R_SetGameTime = ASM_LOAD(R_SetGameTime);
+
 	Function<int(const char* text, int maxChars, Font_s* font)>
 		R_TextWidth = ASM_LOAD(R_TextWidth);
 
@@ -56,7 +59,7 @@ namespace IW3SR::Game
 
 		a.mov(x86::ecx, x86::dword_ptr(x86::ebp, 0x10));	// out
 		a.mov(x86::eax, x86::dword_ptr(x86::ebp, 0x0C));	// atTime
-		a.push(x86::dword_ptr(x86::ebp, 0x08));				// tr
+		a.push(x86::dword_ptr(x86::ebp, 8));				// tr
 		a.call(0x40BD70);
 		a.add(x86::esp, 4);
 
@@ -71,7 +74,7 @@ namespace IW3SR::Game
 		a.mov(x86::ebp, x86::esp);
 		a.pushad();
 
-		a.mov(x86::edi, x86::dword_ptr(x86::ebp, 0x8));		// name
+		a.mov(x86::edi, x86::dword_ptr(x86::ebp, 8));		// name
 		a.call(0x56B5D0);
 		a.mov(x86::dword_ptr(x86::esp, 0x1C), x86::eax);
 
@@ -119,9 +122,25 @@ namespace IW3SR::Game
 		a.push(x86::dword_ptr(x86::ebp, 0x14));				// w
 		a.push(x86::dword_ptr(x86::ebp, 0x10));				// y
 		a.push(x86::dword_ptr(x86::ebp, 0x0C));				// x
-		a.mov(x86::eax, x86::dword_ptr(x86::ebp, 0x08));	// material
+		a.mov(x86::eax, x86::dword_ptr(x86::ebp, 8));		// material
 		a.call(0x5F65F0);
 		a.add(x86::esp, 0x24);
+
+		a.popad();
+		a.pop(x86::ebp);
+		a.ret();
+	}
+
+	ASM_FUNCTION(R_SetGameTime)
+	{
+		a.push(x86::ebp);
+		a.mov(x86::ebp, x86::esp);
+		a.pushad();
+
+		a.push(x86::dword_ptr(x86::ebp, 0x0C));				// gameTime
+		a.mov(x86::esi, x86::dword_ptr(x86::ebp, 8));		// source
+		a.call(0x6490E0);
+		a.add(x86::esp, 4);
 
 		a.popad();
 		a.pop(x86::ebp);
@@ -136,10 +155,10 @@ namespace IW3SR::Game
 
 		a.push(x86::dword_ptr(x86::ebp, 0x10));				// font
 		a.push(x86::dword_ptr(x86::ebp, 0x0C));				// maxChars
-		a.mov(x86::eax, x86::dword_ptr(x86::ebp, 0x08));	// text
+		a.mov(x86::eax, x86::dword_ptr(x86::ebp, 8));		// text
 		a.call(0x5F1EE0);
 		a.mov(x86::dword_ptr(x86::esp, 0x24), x86::eax);
-		a.add(x86::esp, 0x08);
+		a.add(x86::esp, 8);
 
 		a.popad();
 		a.pop(x86::ebp);

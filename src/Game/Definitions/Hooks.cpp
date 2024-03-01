@@ -35,12 +35,32 @@ namespace IW3SR::Game
 	Hook<void()>
 		R_Init_h(0x5F4EE0, Renderer::Initialize);
 
-	Hook<void FASTCALL(void* cmds)>
-		R_RenderAllLeftovers_h(0x615570, Renderer::Commands);
+	Hook<void(void* cmds)>
+		R_RenderAllLeftovers_h(0x6156EC, ASM_LOAD(R_RenderAllLeftovers_h));
 
 	Hook<void(int window)>
 		R_Shutdown_h(0x5F4F90, Renderer::Shutdown);
 
 	Hook<void(GfxCmdBufInput* cmd, GfxViewInfo* viewInfo, GfxCmdBufSourceState* src, GfxCmdBufState* buf)>
 		RB_EndSceneRendering_h(0x6496EC, Renderer::Draw3D);
+}
+namespace IW3SR::Game
+{
+	using namespace asmjit;
+
+	ASM_FUNCTION(R_RenderAllLeftovers_h)
+	{
+		a.push(x86::ebp);
+		a.mov(x86::ebp, x86::esp);
+		a.pushad();
+
+		a.push(x86::eax);				// cmds
+		a.call(Renderer::Commands);
+		a.add(x86::esp, 4);
+
+		a.popad();
+		a.pop(x86::ebp);
+		a.call(x86::dword_ptr(uintptr_t(&R_RenderAllLeftovers_h.Trampoline)));
+		a.ret();
+	}
 }

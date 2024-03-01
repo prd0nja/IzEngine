@@ -39,6 +39,9 @@ namespace IW3SR::Game
 	extern Function<Font_s*(const char* font, int size)>
 		R_RegisterFont;
 
+	extern Function<void(GfxCmdBufSourceState* source, float gameTime)>
+		R_SetGameTime;
+
 	extern Function<int(const char* text, int maxChars, Font_s* font)>
 		R_TextWidth;
 
@@ -51,5 +54,6 @@ namespace IW3SR::Game
 	ASM_FUNCTION(Dvar_FindVar);
 	ASM_FUNCTION(R_AddCmdDrawText);
 	ASM_FUNCTION(R_AddCmdDrawStretchPic);
+	ASM_FUNCTION(R_SetGameTime);
 	ASM_FUNCTION(R_TextWidth);
 }

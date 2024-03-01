@@ -43,7 +43,7 @@ namespace IW3SR::Game
 		/// Render commands.
 		/// </summary>
 		/// <param name="cmds">The commands.</param>
-		static void FASTCALL Commands(void* cmds);
+		static void Commands(void* cmds);
 
 		/// <summary>
 		/// Render frame.
