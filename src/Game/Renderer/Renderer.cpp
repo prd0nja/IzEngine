@@ -52,7 +52,7 @@ namespace IW3SR::Game
 
 	void Renderer::Commands(void* cmds)
 	{
-		// HLSL gameTime constants
+		// HLSL offline gameTime constants
 		if (client_ui->connectionState != CA_ACTIVE)
 			R_SetGameTime(gfx_cmdBufSourceState, UI::Get().Time());
 	}
