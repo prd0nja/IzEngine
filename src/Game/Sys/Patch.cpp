@@ -8,12 +8,13 @@ namespace IW3SR::Game
 	{
 		Definitions();
 		Renderer();
+		System();
 	}
 
 	void Patch::Definitions()
 	{
 		// Variables
-		COD4X bg_weaponNames = Signature(COD4X_HANDLE, 0x443DDE0);
+		COD4X bg_weaponNames = Signature(COD4X_HANDLE).Offset(0x443DDE0);
 
 		// Hooks
 		COD4X MainWndProc_h < Signature(COD4X_BIN, "55 89 E5 53 81 EC 84 00 00 00 C7 04 24 02");
@@ -28,5 +29,15 @@ namespace IW3SR::Game
 		// Increase fps cap for menus and loadscreen
 		Memory::NOP(0x5001A8, 2);
 		COD4X Memory::NOP(Signature(COD4X_BIN, "72 ?? 83 ?? 00 F9 C5 00 07"), 2);
+	}
+
+	void Patch::System()
+	{
+		// Increase hunkTotal
+		Memory::Set(0x563A21 + 8, 0xF0);
+
+		// Increase gmem
+		Memory::Set(0x4FF23B + 4, 0x20);
+		Memory::Set(0x4FF26B + 9, 0x20);
 	}
 }

@@ -31,5 +31,10 @@ namespace IW3SR::Game
 		/// Renderer patch.
 		/// </summary>
 		void Renderer();
+
+		/// <summary>
+		/// System patch.
+		/// </summary>
+		void System();
 	};
 }
