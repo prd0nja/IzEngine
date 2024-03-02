@@ -51,6 +51,7 @@ namespace IW3SR::Game
 		R_Init_h.Install();
 		R_Shutdown_h.Install();
 		RB_EndSceneRendering_h.Install();
+		Cmd_ExecuteSingleCommand_h.Install();
 	}
 
 	void GameClient::Unhook()
@@ -68,5 +69,6 @@ namespace IW3SR::Game
 		R_Init_h.Remove();
 		R_Shutdown_h.Remove();
 		RB_EndSceneRendering_h.Remove();
+		Cmd_ExecuteSingleCommand_h.Remove();
 	}
 }

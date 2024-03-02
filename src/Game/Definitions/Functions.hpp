@@ -51,6 +51,9 @@ namespace IW3SR::Game
 	extern Hook<void(usercmd_s* cmd)>
 		CL_FinishMove_h;
 
+	extern Hook<void(int localClientNum, int controllerIndex, char* command)>
+		Cmd_ExecuteSingleCommand_h;
+
 	extern Hook<void(pmove_t* pm, pml_t* pml)>
 		PM_WalkMove_h;
 

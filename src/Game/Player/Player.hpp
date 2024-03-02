@@ -62,6 +62,14 @@ namespace IW3SR::Game
 		static void Predict(int localClientNum);
 
 		/// <summary>
+		/// Execute single command.
+		/// </summary>
+		/// <param name="localClientNum">The local client number.</param>
+		/// <param name="controllerIndex">The controller index.</param>
+		/// <param name="command">The command.</param>
+		static void ExecuteSingleCommand(int localClientNum, int controllerIndex, char* command);
+
+		/// <summary>
 		/// Get all players.
 		/// </summary>
 		/// <returns></returns>

@@ -26,6 +26,9 @@ namespace IW3SR::Game
 	Hook<void(usercmd_s* cmd)>
 		CL_FinishMove_h(0x463A60, PMove::FinishMove);
 
+	Hook<void(int localClientNum, int controllerIndex, char* command)>
+		Cmd_ExecuteSingleCommand_h(0x4F9AB0, Player::ExecuteSingleCommand);
+
 	Hook<void(pmove_t* pm, pml_t* pml)>
 		PM_WalkMove_h(0x40F7A0, PMove::WalkMove);
 

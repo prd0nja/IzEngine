@@ -17,6 +17,11 @@ namespace IW3SR::Engine
         return degrees * M_PI / 180.0f;
     }
 
+    float Math::AngleNormalize90(float angle)
+    {
+        return fmodf(angle + 180 + 90, 180) - 90;
+    }
+
 	float Math::AngleNormalize180(float angle)
     {
         angle = AngleNormalize360(angle);
@@ -144,6 +149,22 @@ namespace IW3SR::Engine
             -1 * sr * sp * sy + -1 * cr * cy,
             -1 * sr * cp
         };
+    }
+
+    float Math::VectorNormalize(vec3& v)
+    {
+        float length, ilength;
+
+        length = v.Length();
+
+        if (length) {
+            ilength = 1 / length;
+            v[0] *= ilength;
+            v[1] *= ilength;
+            v[2] *= ilength;
+        }
+
+        return length;
     }
 
     vec3 Math::VectorToAngles(const vec3& v)

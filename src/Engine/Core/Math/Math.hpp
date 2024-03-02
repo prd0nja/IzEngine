@@ -81,6 +81,13 @@ namespace IW3SR::Engine
         /// <returns>Radians value.</returns>
         static float DegToRad(float degrees);
 
+        /// <summary>
+        /// Normalizes an angle to the range of 0 to 90 degrees.
+        /// </summary>
+        /// <param name="angle">Angle in degrees.</param>
+        /// <returns></returns>
+        static float AngleNormalize90(float angle);
+
 		/// <summary>
         /// Normalizes an angle to the range of -180 to 180 degrees.
         /// </summary>
@@ -139,6 +146,13 @@ namespace IW3SR::Engine
         /// <param name="angles">Euler angles in radians.</param>
         /// <returns>Right vector.</returns>
         static vec3 AnglesToRight(const vec3& angles);
+
+        /// <summary>
+        /// Normalize a vector.
+        /// </summary>
+        /// <param name="v">The vector.</param>
+        /// <returns></returns>
+        static float VectorNormalize(vec3& v);
 
         /// <summary>
         /// Converts a 3D vector to Euler angles (pitch, yaw, and roll) in radians.

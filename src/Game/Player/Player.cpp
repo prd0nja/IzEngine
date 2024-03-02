@@ -68,6 +68,14 @@ namespace IW3SR::Game
 		}
 	}
 
+	void Player::ExecuteSingleCommand(int localClientNum, int controllerIndex, char* command)
+	{
+		if (std::string(command) == "openscriptmenu cj load")
+			ModulesCallback(OnLoadPosition);
+
+		Cmd_ExecuteSingleCommand_h(localClientNum, controllerIndex, command);
+	}
+
 	std::array<std::shared_ptr<Player>, 64>& Player::GetAll()
 	{
 		return Players;
