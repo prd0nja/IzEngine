@@ -385,6 +385,8 @@ namespace IW3SR::Game
 		bool(__cdecl* domainFunc)(dvar_s*, DvarValue);
 		dvar_s* hashNext;
 	};
+	
+	using DB_XAssetSizeHandler_t = int(*)();
 
 	enum DB_FILE_EXISTS_PATH
 	{

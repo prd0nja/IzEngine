@@ -96,14 +96,15 @@ namespace IW3SR::Game
 	// Database
 	HANDLE db_handle = Signature(0x14E89A4);
 	unsigned short* db_hashTable = Signature(0xE62A80);
-	XAssetHeader* db_xassetPool = Signature(0x7265E0);
+	XAssetHeader* db_xassetPool = Signature(0x488F03).Offset(2).DeRef();
+	DB_XAssetSizeHandler_t* db_xassetSizeHandlers = Signature(0x726A10);
+	unsigned int* g_poolSize = Signature(0x488F0D).Offset(2).DeRef();
 	const char** zone_code_post_gfx_mp = Signature(0xCC9D128);
 	const char** zone_localized_code_post_gfx_mp = Signature(0xCC9D134);
 	const char** zone_ui_mp = Signature(0xCC9D12C);
 	const char** zone_common_mp = Signature(0xCC9D130);
 	const char** zone_localized_common_mp = Signature(0xCC9D138);
 	const char** zone_mod = Signature(0xCC9D13C);
-	unsigned int* g_poolSize = Signature(0x7263A0);
 
 	// Filesystem
 	const char* fs_game = Signature(0xCB19898);
