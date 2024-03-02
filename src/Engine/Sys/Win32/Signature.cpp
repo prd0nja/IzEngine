@@ -3,34 +3,42 @@
 namespace IW3SR::Engine
 {
     Signature::Signature(uintptr_t address) : Address(address) { }
-    Signature::Signature(uintptr_t base, uintptr_t address) : Address(base + address) { }
     Signature::Signature(HMODULE hModule) : Address(reinterpret_cast<uintptr_t>(hModule)) { }
     Signature::Signature(FARPROC function) : Address(reinterpret_cast<uintptr_t>(function)) { }
     Signature::Signature(const std::string& pattern) : Signature("", pattern) { }
 
     Signature::Signature(const std::string& moduleName, const std::string& pattern)
     {
-        Address = Scan(moduleName, pattern);
+        Module = moduleName;
+        Pattern = pattern;
+        Address = Scan();
     }
 
-    uintptr_t Signature::Scan(const std::string& pattern)
+    Signature& Signature::Offset(uintptr_t offset)
     {
-        return Scan("", pattern);
+        Address += offset;
+        return *this;
     }
 
-    uintptr_t Signature::Scan(const std::string& moduleName, const std::string& pattern)
+    Signature& Signature::DeRef()
     {
-        std::vector<uintptr_t> addresses = ScanAll(moduleName, pattern, true);
+        Address = *reinterpret_cast<uintptr_t*>(Address);
+        return *this;
+    }
+
+    uintptr_t Signature::Scan()
+    {
+        std::vector<uintptr_t> addresses = ScanAll(true);
         return addresses.size() ? addresses.back() : 0;
     }
 
-    std::vector<uintptr_t> Signature::ScanAll(const std::string& moduleName, const std::string& pattern, bool first)
+    std::vector<uintptr_t> Signature::ScanAll(bool first)
     {
         std::vector<uintptr_t> addresses;
-        HMODULE hModule = GetModuleHandle(moduleName.c_str());
+        HMODULE hModule = GetModuleHandle(Module.c_str());
         if (!hModule) return addresses;
 
-        std::string bytes = Memory::HexToBytes(pattern);
+        std::string bytes = Memory::HexToBytes(Pattern);
         int size = bytes.size();
 
         MODULEINFO moduleInfo;
