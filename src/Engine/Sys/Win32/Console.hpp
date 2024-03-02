@@ -11,6 +11,8 @@ namespace IW3SR::Engine
 		CLASS_SINGLETON(Console)
 	public:
 		HWND Handle = nullptr;
+		HANDLE OutputHandle = nullptr;
+		DWORD Mode = 0;
 
 		/// <summary>
 		/// Initialize the console.

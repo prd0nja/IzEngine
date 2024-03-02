@@ -8,12 +8,12 @@ namespace IW3SR::Game
 	IDirect3D9* D3D9::Direct3DCreate9(UINT sdk)
 	{
 		IDirect3D9Ex* d3d9ex_device = nullptr;
-		Log::WriteLine("Getting Direct3D 9 EX interface...");
+		Log::WriteLine(Channel::Engine, "Getting Direct3D 9 EX interface...");
 
 		if (SUCCEEDED(::Direct3DCreate9Ex(sdk, &d3d9ex_device)))
 			return new D3D9EX(d3d9ex_device);
 
-		Log::WriteLine("Direct3D 9 EX failed to initialize. Defaulting to Direct3D 9.");
+		Log::WriteLine(Channel::Engine, "Direct3D 9 EX failed to initialize. Defaulting to Direct3D 9.");
 		return new D3D9(Direct3DCreate9_h(sdk));
 	}
 

@@ -14,7 +14,7 @@ namespace IW3SR::Game
 	Hook<LRESULT CALLBACK(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)>
 		MainWndProc_h(0x57BB20, Sys::MainWndProc);
 
-	Hook<void(int channel, const char* msg, int type)>
+	Hook<void(ConChannel channel, const char* msg, int type)>
 		Com_PrintMessage_h(0x4FCA50, Console::Write);
 
 	Hook<void(int localClientNum)>

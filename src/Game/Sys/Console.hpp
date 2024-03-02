@@ -3,6 +3,19 @@
 
 namespace IW3SR::Game
 {
+	constexpr std::array<ConColor, 10> Q3Colors = {
+		ConColor::Black,
+		ConColor::Red,
+		ConColor::Green,
+		ConColor::Yellow,
+		ConColor::Blue,
+		ConColor::Cyan,
+		ConColor::Magenta,
+		ConColor::Default,
+		ConColor::DarkWhite,
+		ConColor::DarkYellow
+	};
+
 	/// <summary>
 	/// Console class.
 	/// </summary>
@@ -28,7 +41,7 @@ namespace IW3SR::Game
 		/// <param name="channel">The channel.</param>
 		/// <param name="msg">The message.</param>
 		/// <param name="type">The messsage type.</param>
-		static void Write(int channel, const char* msg, int type);
+		static void Write(ConChannel channel, const char* msg, int type);
 
 	private:
 		/// <summary>
@@ -36,5 +49,12 @@ namespace IW3SR::Game
 		/// </summary>
 		Console();
 		~Console() = default;
+
+		/// <summary>
+		/// Converts Q3 colors to ANSI.
+		/// </summary>
+		/// <param name="msg">The message.</param>
+		/// <returns></returns>
+		static std::string Q3(const std::string& msg);
 	};
 }

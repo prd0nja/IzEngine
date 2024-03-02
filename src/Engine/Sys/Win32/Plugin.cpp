@@ -10,7 +10,7 @@ namespace IW3SR::Engine
 
 		if (!Instance)
 		{
-			Log::WriteLine(Channel::Error, "Loading plugin {}", filePath);
+			Log::WriteLine(Channel::Error, "Invalid plugin {}", filePath);
 			return;
 		}
 		CallbackInitialize < Signature(GetProcAddress(Instance, "Initialize"));
