@@ -6,15 +6,11 @@
 #include "Fonts/IconsFontAwesome6.hpp"
 #include "Fonts/IconsFontAwesome6Brands.hpp"
 
-constexpr ImGuiWindowFlags ImGuiWindowFlags_Graph = ImGuiWindowFlags_NoTitleBar
+constexpr ImGuiWindowFlags ImGuiWindowFlags_Widget = ImGuiWindowFlags_NoTitleBar
 	| ImGuiWindowFlags_NoResize
 	| ImGuiWindowFlags_NoScrollbar
 	| ImGuiWindowFlags_NoCollapse
 	| ImGuiWindowFlags_NoBackground;
-
-constexpr ImPlotAxisFlags ImPlotAxisFlags_Canvas = ImPlotAxisFlags_NoTickLabels
-	| ImPlotAxisFlags_NoTickMarks
-	| ImPlotAxisFlags_NoGridLines;
 
 constexpr ImGuiWindowFlags ImGuiWindowFlags_Notification = ImGuiWindowFlags_NoCollapse
  	| ImGuiWindowFlags_NoInputs
@@ -22,6 +18,10 @@ constexpr ImGuiWindowFlags ImGuiWindowFlags_Notification = ImGuiWindowFlags_NoCo
  	| ImGuiWindowFlags_NoResize
  	| ImGuiWindowFlags_NoScrollbar
  	| ImGuiWindowFlags_NoTitleBar;
+
+constexpr ImPlotAxisFlags ImPlotAxisFlags_Canvas = ImPlotAxisFlags_NoTickLabels
+	| ImPlotAxisFlags_NoTickMarks
+	| ImPlotAxisFlags_NoGridLines;
 
 constexpr std::array<const char*, 3> Horizontals = { "Left", "Center", "Right" };
 constexpr std::array<const char*, 3> Verticals = { "Top", "Center", "Bottom" };
@@ -99,10 +99,10 @@ namespace ImGui
 	/// Collapsing header.
 	/// </summary>
 	/// <param name="label">The label.</param>
-	/// <param name="flags">The tree node flags.</param>
 	/// <param name="open">Is default open.</param>
+	/// <param name="flags">The tree node flags.</param>
 	/// <returns></returns>
-	API bool CollapsingHeader(const std::string& label, ImGuiTreeNodeFlags flags = 0, bool open = false);
+	API bool CollapsingHeader(const std::string& label, bool open = false, ImGuiTreeNodeFlags flags = 0);
 
 	/// <summary>
 	/// Creates a tooltip.
@@ -147,15 +147,12 @@ namespace ImGui
 	API void Markdown(const std::string& markdown);
 
 	/// <summary>
-	/// An indicator meant to be displayed when loading things or when something is idle.
+	/// Loading indicator.
 	/// </summary>
 	/// <param name="label">The label.</param>
-	/// <param name="radius">The radius.</param>
-	/// <param name="thickness">The thickness.</param>
 	/// <param name="color">The color.</param>
 	/// <param name="state">The visible state.</param>
-	API void LoadingIndicator(const std::string& label, const ImVec2& pos, float radius, int thickness, 
-		const ImU32& color, bool state);
+	API void LoadingIndicator(const std::string& label, const ImVec2& pos, const ImU32& color, bool state);
 
 	/// <summary>
 	/// Is window resizing.

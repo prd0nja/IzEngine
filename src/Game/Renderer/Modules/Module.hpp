@@ -51,30 +51,6 @@ namespace IW3SR::Game
 		virtual void OnMenu();
 
 		/// <summary>
-		/// Draw 3D.
-		/// </summary>
-		virtual void OnDraw3D();
-
-		/// <summary>
-		/// Draw 3D.
-		/// </summary>
-		/// <param name="cmd">Render command.</param>
-		/// <param name="viewInfo">View information for the graphics.</param>
-		/// <param name="src">Source state for the graphics command buffer.</param>
-		/// <param name="buf">Graphics command buffer state.</param>
-		virtual void OnDraw3D(GfxCmdBufInput* cmd, GfxViewInfo* viewInfo, GfxCmdBufSourceState* src, GfxCmdBufState* buf);
-
-		/// <summary>
-		/// Draw 2D.
-		/// </summary>
-		virtual void OnDraw2D();
-
-		/// <summary>
-		/// Render frame.
-		/// </summary>
-		virtual void OnRender();
-
-		/// <summary>
 		/// Finish moving.
 		/// </summary>
 		/// <param name="cmd">The user command.</param>
@@ -98,6 +74,30 @@ namespace IW3SR::Game
 		/// On load position.
 		/// </summary>
 		virtual void OnLoadPosition();
+
+		/// <summary>
+		/// Draw 3D.
+		/// </summary>
+		virtual void OnDraw3D();
+
+		/// <summary>
+		/// Draw 3D.
+		/// </summary>
+		/// <param name="cmd">Render command.</param>
+		/// <param name="viewInfo">View information for the graphics.</param>
+		/// <param name="src">Source state for the graphics command buffer.</param>
+		/// <param name="buf">Graphics command buffer state.</param>
+		virtual void OnDraw3D(GfxCmdBufInput* cmd, GfxViewInfo* viewInfo, GfxCmdBufSourceState* src, GfxCmdBufState* buf);
+
+		/// <summary>
+		/// Draw 2D.
+		/// </summary>
+		virtual void OnDraw2D();
+
+		/// <summary>
+		/// Render frame.
+		/// </summary>
+		virtual void OnRender();
 
 		NLOHMANN_SERIALIZE_POLY_BASE(Module, IsEnabled, Menu)
 	};

@@ -4,7 +4,8 @@ namespace IW3SR::Addons
 {
 	Velocity::Velocity() : Module("sr.player.velocity", "Velocity", "Player")
 	{
-		ResetKey = KeyListener('R');
+		KeyReset = KeyListener('R');
+
 		ShowVelocity = true;
 		ShowAverage = false;
 		ShowMax = false;
@@ -77,7 +78,7 @@ namespace IW3SR::Addons
 		if (ShowMax)
 		{
 			ImGui::SameLine();
-			ImGui::Keybind("Reset", &ResetKey.Key);
+			ImGui::Keybind("Reset", &KeyReset.Key);
 		}
 		ImGui::Checkbox("Ground", &ShowGround);
 
@@ -113,7 +114,7 @@ namespace IW3SR::Addons
 		if (ShowGround)
 			GroundText.Render();
 
-		if (ResetKey.IsPressed())
+		if (KeyReset.IsPressed())
 		{
 			Average = 0;
 			Max = 0;

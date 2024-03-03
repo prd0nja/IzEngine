@@ -122,7 +122,7 @@ namespace ImGui
         return state;
     }
 
-    bool CollapsingHeader(const std::string& label, ImGuiTreeNodeFlags flags, bool open)
+    bool CollapsingHeader(const std::string& label, bool open, ImGuiTreeNodeFlags flags)
     {
         flags |= open ? ImGuiTreeNodeFlags_DefaultOpen : ImGuiTreeNodeFlags_None;
         return CollapsingHeader(label.c_str(), flags);
@@ -233,30 +233,35 @@ namespace ImGui
         Markdown(markdown.c_str(), markdown.size(), UI::Get().Themes.Markdown);
     }
 
-	void LoadingIndicator(const std::string& label, const ImVec2& pos, float radius, int thickness, 
-        const ImU32& color, bool state)
+	void LoadingIndicator(const std::string& label, const ImVec2& pos, const ImU32& color, bool state)
     {
         if (!state) return;
 
         ImDrawList* draw = GetBackgroundDrawList();
-        ImGuiContext& g = *GImGui;
-
+        const ImGuiContext& g = *GImGui;
         const ImGuiStyle& style = g.Style;
-        const ImVec2 size = { radius * 2, (radius + style.FramePadding.y) * 2 };
-        const ImVec2 centre = { pos.x + radius, pos.y + radius + style.FramePadding.y };
 
-        const float segmentCount = 30;
-        const float start = abs(ImSin(g.Time * 1.8f) * (segmentCount - 5));
-        const float aMin = IM_PI * 2.0f * start / segmentCount;
-        const float aMax = IM_PI * 2.0f * (segmentCount - 3) / segmentCount;
+        float fontSize = g.FontSize;
+        float height = fontSize + style.FramePadding.y;
+        float width = height + style.FramePadding.x * 3.f;
+        float radius = height / 2.f;
+        float thickness = 5;
 
-        for (int i = 0; i < segmentCount; i++)
+        const ImVec2 size = CalcItemSize(vec2::Zero, width, height);
+        const ImVec2 position = UI::Get().Screen.VirtualToFull * pos;
+
+        const float segments = 15;
+        const float start = abs(sinf(g.Time * 1.8f) * (segments - 5));
+        const float aMin = IM_PI * 2.0f * start / segments;
+        const float aMax = IM_PI * 2.0f * (segments - 3) / segments;
+
+        for (int i = 0; i < segments; i++)
         {
-            const float a = aMin + (i / segmentCount) * (aMax - aMin);
-            draw->PathLineTo({ centre.x + ImCos(a + g.Time * 8) * radius, centre.y + ImSin(a + g.Time * 8) * radius });
+            const float a = aMin + (i / segments) * (aMax - aMin);
+            draw->PathLineTo({ position.x + cosf(a + g.Time * 8) * radius, position.y + sinf(a + g.Time * 8) * radius });
         }
         draw->PathStroke(color, 0, thickness);
-        draw->AddText(pos + ImVec2{ size.x + 20, radius - 5 }, color, label.c_str());
+        draw->AddText(position + ImVec2{ size.x, -radius }, color, label.c_str());
     }
 
     bool IsWindowResizing()

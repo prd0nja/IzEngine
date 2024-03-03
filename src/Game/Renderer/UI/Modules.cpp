@@ -24,7 +24,7 @@ namespace IW3SR::Game::UC
 				continue;
 
 			groups.insert(current->Group);
-			if (!ImGui::CollapsingHeader(current->Group.c_str(), ImGuiTreeNodeFlags_DefaultOpen))
+			if (!ImGui::CollapsingHeader(current->Group, true))
 				continue;
 
 			for (const auto& [_, entry] : modules.Entries)

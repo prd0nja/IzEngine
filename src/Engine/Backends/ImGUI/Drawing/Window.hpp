@@ -12,10 +12,11 @@ namespace IW3SR::Engine
 	public:
 		std::string Name;
 		vec2 Position = { 20, 20 };
-		vec2 Size = { 200, 140 };
+		vec2 Size = { 250, 140 };
 		vec2 RenderPosition;
 		vec2 RenderSize;
 		bool Open = false;
+		bool Designer = false;
 
 		Horizontal HorizontalAlign = HORIZONTAL_LEFT;
 		Vertical VerticalAlign = VERTICAL_TOP;
@@ -33,18 +34,24 @@ namespace IW3SR::Engine
 		Window(std::string name);
 
 		/// <summary>
+		/// Set designer edition.
+		/// </summary>
+		/// <param name="state">The state.</param>
+		void SetDesigner(bool state);
+
+		/// <summary>
 		/// Set the window position and size.
 		/// </summary>
 		/// <param name="position">The position.</param>
 		/// <param name="size">The size.</param>
-		virtual void SetRect(const vec2& position, const vec2& size);
+		void SetRect(const vec2& position, const vec2& size);
 
 		/// <summary>
 		/// Set the rect alignment.
 		/// </summary>
 		/// <param name="horizontal">Horizontal aligment.</param>
 		/// <param name="vertical">Vertical alignment.</param>
-		virtual void SetRectAlignment(Horizontal horizontal, Vertical vertical);
+		void SetRectAlignment(Horizontal horizontal, Vertical vertical);
 
 		/// <summary>
 		/// Set the window position and size.
@@ -53,7 +60,7 @@ namespace IW3SR::Engine
 		/// <param name="y">Y value.</param>
 		/// <param name="w">The width.</param>
 		/// <param name="h">The height.</param>
-		virtual void SetRect(float x, float y, float w, float h);
+		void SetRect(float x, float y, float w, float h);
 
 		/// <summary>
 		/// Begin drawing.

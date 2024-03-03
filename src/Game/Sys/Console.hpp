@@ -12,8 +12,8 @@ namespace IW3SR::Game
 		ConColor::Cyan,
 		ConColor::Magenta,
 		ConColor::Default,
-		ConColor::DarkWhite,
-		ConColor::DarkYellow
+		ConColor::Default,
+		ConColor::Default
 	};
 
 	/// <summary>

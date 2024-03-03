@@ -18,7 +18,7 @@ namespace IW3SR::Game
 		CLASS_SINGLETON(GUI)
 	public:
 		Engine::UI& UI;
-		KeyListener OpenKey;
+		KeyListener KeyOpen;
 
 		UC::About About;
 		UC::Binds Binds;
@@ -48,6 +48,6 @@ namespace IW3SR::Game
 		GUI();
 		virtual ~GUI() = default;
 
-		NLOHMANN_SERIALIZE(GUI, OpenKey, About, Binds, Modules, Settings, Toolbar)
+		NLOHMANN_SERIALIZE(GUI, KeyOpen, About, Binds, Modules, Settings, Toolbar)
 	};
 }

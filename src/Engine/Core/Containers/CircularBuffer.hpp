@@ -20,7 +20,7 @@ namespace IW3SR::Engine
 		/// Initialize a new CircularBuffer.
 		/// </summary>
 		CircularBuffer() = default;
-		virtual ~CircularBuffer() = default;
+		~CircularBuffer() = default;
 
 		/// <summary>
 		/// Add an element.

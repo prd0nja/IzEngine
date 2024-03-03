@@ -8,6 +8,11 @@ namespace IW3SR::Engine
 		Name = name;
 	}
 
+	void Window::SetDesigner(bool state)
+	{
+		Designer = state;
+	}
+
 	void Window::SetRect(const vec2& position, const vec2& size)
 	{
 		SetRect(position.x, position.y, size.x, size.y);
@@ -58,11 +63,13 @@ namespace IW3SR::Engine
 			ImGui::SetWindowPos({ x, y });
 			ImGui::SetWindowSize({ w, h });
 		}
+		if (Designer)
+			ImGui::Movable("#" + ID, Position, Size, RenderPosition, RenderSize);
 	}
 
 	void Window::Menu(const std::string& label, bool open)
 	{
-		if (!ImGui::CollapsingHeader(label.c_str(), open))
+		if (!ImGui::CollapsingHeader(label, open))
 			return;
 
 		ImGui::PushID(label.c_str());

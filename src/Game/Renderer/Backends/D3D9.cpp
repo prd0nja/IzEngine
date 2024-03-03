@@ -1,5 +1,4 @@
 #include "D3D9.hpp"
-#include "Game/Game.hpp"
 
 namespace IW3SR::Game
 {

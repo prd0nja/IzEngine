@@ -14,11 +14,12 @@ namespace IW3SR::Addons
 		Graph.SetRect(-55, -140, 48, 48);
 		Graph.SetRectAlignment(HORIZONTAL_RIGHT, VERTICAL_BOTTOM);
 
-		SnapColor = { 0, 0, 1, 1 };
-		SnapDelayColor = { 1, 1, 0, 1 };
-		SnapFlagColor = { 0, 1, 0, 1 };
-		SnapFlagDropColor = { 1, 1, 0, 1 };
-		PingColor = { 1, 0, 0, 1 };
+		ColorSnap = { 0, 0, 1, 1 };
+		ColorSnapDelay = { 1, 1, 0, 1 };
+		ColorSnapFlag = { 0, 1, 0, 1 };
+		ColorSnapFlagDrop = { 1, 1, 0, 1 };
+		ColorPing = { 1, 0, 0, 1 };
+
 		ShowSnap = true;
 		ShowSnapFlag = true;
 		ShowPing = true;
@@ -75,23 +76,23 @@ namespace IW3SR::Addons
 
 			if (ShowSnap)
 			{
-				ImPlot::SetNextFillStyle(SnapColor);
+				ImPlot::SetNextFillStyle(ColorSnap);
 				ImPlot::PlotShaded("Snap", Snaps.Get(), Snaps.Size(), snapRange, 1, 0, 0, Snaps.Offset);
 
-				ImPlot::SetNextFillStyle(SnapDelayColor);
+				ImPlot::SetNextFillStyle(ColorSnapDelay);
 				ImPlot::PlotShaded("SnapDelay", SnapsDelay.Get(), SnapsDelay.Size(), snapRange, 1, 0, 0, SnapsDelay.Offset);
 			}
 			if (ShowPing)
 			{
-				ImPlot::SetNextFillStyle(PingColor);
+				ImPlot::SetNextFillStyle(ColorPing);
 				ImPlot::PlotShaded("Ping", Pings.Get(), Pings.Size(), -pingRange, 1, 0, 0, Pings.Offset);
 			}
 			if (ShowSnapFlag)
 			{
-				ImPlot::SetNextFillStyle(SnapFlagColor);
+				ImPlot::SetNextFillStyle(ColorSnapFlag);
 				ImPlot::PlotShaded("SnapFlag", SnapsFlags.Get(), SnapsFlags.Size(), -pingRange, 1, 0, 0, SnapsFlags.Offset);
 
-				ImPlot::SetNextFillStyle(SnapFlagDropColor);
+				ImPlot::SetNextFillStyle(ColorSnapFlagDrop);
 				ImPlot::PlotShaded("SnapFlagDrop", SnapsFlagsDrop.Get(), SnapsFlagsDrop.Size(), -pingRange, 1, 0, 0, SnapsFlagsDrop.Offset);
 			}
 			ImPlot::EndPlot();

@@ -17,8 +17,8 @@ namespace IW3SR::Game
 
 	void Feature::Initialize() { }
 	void Feature::Release() { }
-
 	void Feature::OnMenu() { }
+
 	void Feature::OnDraw3D() { }
 	void Feature::OnDraw3D(GfxCmdBufInput* cmd, GfxViewInfo* viewInfo, GfxCmdBufSourceState* src, GfxCmdBufState* buf) { }
 	void Feature::OnDraw2D() { }

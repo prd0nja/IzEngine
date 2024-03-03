@@ -7,7 +7,7 @@ namespace IW3SR::Game
 {
 	GUI::GUI() : UI(UI::Get())
 	{
-		OpenKey = KeyListener(VK_F10);
+		KeyOpen = KeyListener(VK_F10);
 
 		About = UC::About();
 		Binds = UC::Binds();
@@ -30,7 +30,7 @@ namespace IW3SR::Game
 
 	void GUI::Render()
 	{
-		if (OpenKey.IsPressed())
+		if (KeyOpen.IsPressed())
 			UI.Open = !UI.Open;
 
 		if (!UI.Open) 

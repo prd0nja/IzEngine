@@ -10,7 +10,7 @@ namespace IW3SR::Game::UC
 
 		Begin();
 		if (ImGui::CollapsingHeader("General", ImGuiTreeNodeFlags_DefaultOpen))
-			ImGui::Keybind("Menu", &GUI::Get().OpenKey.Key);
+			ImGui::Keybind("Menu", &GUI::Get().KeyOpen.Key);
 		End();
 	}
 }
