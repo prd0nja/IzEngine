@@ -4,7 +4,7 @@
 namespace IW3SR::Game
 {
 	constexpr std::array<ConColor, 10> Q3Colors = {
-		ConColor::Black,
+		ConColor::Default,
 		ConColor::Red,
 		ConColor::Green,
 		ConColor::Yellow,
