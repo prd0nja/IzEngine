@@ -2,7 +2,7 @@
 
 namespace IW3SR::Game
 {
-	void GameClient::Start()
+	void Application::Start()
 	{
 		Environment::Initialize();
 		Environment::Load();
@@ -12,19 +12,21 @@ namespace IW3SR::Game
 		Patch::Get().Initialize();
 		Console::Get().Initialize();
 		Player::Allocates();
+		Plugins::Initialize();
 
 		Hook();
 	}
 
-	void GameClient::Shutdown()
+	void Application::Shutdown()
 	{
 		Environment::Save();
 		Console::Get().Release();
+		Plugins::Shutdown();
 
 		Unhook();
 	}
 
-	void GameClient::CoD4X()
+	void Application::CoD4X()
 	{
 		const auto cod4x = std::ranges::find_if(Environment::Modules,
 			[](const auto& m) { return m.find("cod4x_") != std::string::npos; });
@@ -36,7 +38,7 @@ namespace IW3SR::Game
 		COD4X_HANDLE = Signature(GetModuleHandle(COD4X_BIN.c_str()));
 	}
 
-	void GameClient::Hook()
+	void Application::Hook()
 	{
 		CreateWindowExA_h.Install();
 		Direct3DCreate9_h.Install();
@@ -55,7 +57,7 @@ namespace IW3SR::Game
 		RB_EndSceneRendering_h.Install();
 	}
 
-	void GameClient::Unhook()
+	void Application::Unhook()
 	{
 		CreateWindowExA_h.Remove();
 		Direct3DCreate9_h.Remove();

@@ -75,7 +75,7 @@ namespace IW3SR::Game
 		/// Remove a module.
 		/// </summary>
 		/// <param name="id">The module id.</param>
-		static void Remove(const std::string& id);
+		void Remove(const std::string& id);
 
 		/// <summary>
 		/// Dispatch callback.

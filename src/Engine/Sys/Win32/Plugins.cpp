@@ -18,6 +18,12 @@ namespace IW3SR::Engine
 		}
 	}
 
+	void Plugins::Renderer()
+	{
+		for (const auto& [name, mod] : Modules)
+			mod->Renderer();
+	}
+
 	void Plugins::Shutdown()
 	{
 		Modules.clear();

@@ -11,42 +11,42 @@
 namespace IW3SR::Game
 {
 	/// <summary>
-	/// Game client.
+	/// Application game client.
 	/// </summary>
-	class GameClient
+	class Application
 	{
-		CLASS_SINGLETON(GameClient)
+		CLASS_SINGLETON(Application)
 	public:
 		/// <summary>
-		/// Start the game.
+		/// Start the application.
 		/// </summary>
 		void Start();
 
 		/// <summary>
-		/// Shutdown the game.
+		/// Shutdown the application.
 		/// </summary>
 		void Shutdown();
 
 		/// <summary>
-		/// CoD4X patch.
+		/// CoD4X client modifications.
 		/// </summary>
 		void CoD4X();
 
 		/// <summary>
-		/// Hook game.
+		/// Hook application.
 		/// </summary>
 		void Hook();
 
 		/// <summary>
-		/// Unhook game.
+		/// Unhook application.
 		/// </summary>
 		void Unhook();
 
 	private:
 		/// <summary>
-		/// Initialize the game.
+		/// Initialize the application.
 		/// </summary>
-		GameClient() = default;
-		~GameClient() = default;
+		Application() = default;
+		~Application() = default;
 	};
 }

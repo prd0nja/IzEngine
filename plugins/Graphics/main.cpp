@@ -4,11 +4,11 @@
 PLUGIN void Initialize(Plugin* plugin)
 {
 	plugin->SetInfos("sr.graphics", "Graphics");
-
-	Settings::Load<General>();
 }
 
 PLUGIN void Renderer()
 {
 	UI::InitializeContext();
+
+	Settings::Load<General>();
 }

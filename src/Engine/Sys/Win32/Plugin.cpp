@@ -21,8 +21,6 @@ namespace IW3SR::Engine
 
 		if (CallbackInitialize)
 			CallbackInitialize(this);
-		if (CallbackRenderer)
-			CallbackRenderer();
 	}
 
 	Plugin::~Plugin()
@@ -32,6 +30,12 @@ namespace IW3SR::Engine
 
 		FreeLibrary(Instance);
 		Instance = nullptr;
+	}
+
+	void Plugin::Renderer()
+	{
+		if (CallbackRenderer)
+			CallbackRenderer();
 	}
 
 	void Plugin::SetInfos(const std::string& id, const std::string& name)

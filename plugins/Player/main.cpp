@@ -7,13 +7,13 @@
 PLUGIN void Initialize(Plugin* plugin)
 {
 	plugin->SetInfos("sr.player", "Player");
-
-	Modules::Load<FPS>();
-	Modules::Load<Lagometer>();
-	Modules::Load<Velocity>();
 }
 
 PLUGIN void Renderer()
 {
 	UI::InitializeContext();
+
+	Modules::Load<FPS>();
+	Modules::Load<Lagometer>();
+	Modules::Load<Velocity>();
 }

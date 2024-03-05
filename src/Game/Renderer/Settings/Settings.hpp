@@ -60,7 +60,7 @@ namespace IW3SR::Game
 		/// Remove a setting.
 		/// </summary>
 		/// <param name="id">The setting id.</param>
-		static void Remove(const std::string& id);
+		void Remove(const std::string& id);
 
 		/// <summary>
 		/// Dispatch callback.

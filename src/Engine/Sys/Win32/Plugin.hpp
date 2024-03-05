@@ -36,6 +36,11 @@ namespace IW3SR::Engine
 		~Plugin();
 
 		/// <summary>
+		/// On renderer initialize.
+		/// </summary>
+		void Renderer();
+
+		/// <summary>
 		/// Set plugin infos.
 		/// </summary>
 		/// <param name="id">The ID.</param>

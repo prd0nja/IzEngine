@@ -2,12 +2,12 @@
 
 void Init()
 {
-    GameClient::Get().Start();
+    Application::Get().Start();
 }
 
 void Shutdown()
 {
-    GameClient::Get().Shutdown();
+    Application::Get().Shutdown();
 }
 
 ENTRY BOOL STDCALL RIB_Main(HANDLE handle, INT upDown)

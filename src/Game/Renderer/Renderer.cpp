@@ -15,20 +15,19 @@ namespace IW3SR::Game
 
 		Device::Get().Assign(dx->d3d9, dx->device);
 		Device::Get().CreateScreen();
+
 		Assets::Get().Initialize();
 		GUI::Get().Initialize();
-
-		Plugins::Initialize();
 		Modules::Get().Initialize();
 		Settings::Get().Initialize();
+
+		Plugins::Renderer();
 	}
 
 	void Renderer::Shutdown(int window)
 	{
 		Settings::Get().Release();
 		Modules::Get().Release();
-		Plugins::Shutdown();
-
 		GUI::Get().Release();
 		Assets::Get().Release();
 
