@@ -45,11 +45,6 @@ namespace IW3SR::Addons
 		virtual ~Velocity() = default;
 
 		/// <summary>
-		/// Initialize the module.
-		/// </summary>
-		void Initialize() override;
-
-		/// <summary>
 		/// Compute values.
 		/// </summary>
 		void Compute();

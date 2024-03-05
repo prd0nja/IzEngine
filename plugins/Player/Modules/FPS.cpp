@@ -4,17 +4,14 @@ namespace IW3SR::Addons
 {
 	FPS::FPS() : Module("sr.player.fps", "FPS", "Player")
 	{
-		Value = 0;
-		ShowGraph = false;
-	}
-
-	void FPS::Initialize()
-	{
 		Graph = Plots();
 
 		FrameText = Text("0", FONT_SPACERANGER, -30, 0, 1.4, { 1, 1, 1, 1 });
 		FrameText.SetRectAlignment(HORIZONTAL_RIGHT, VERTICAL_TOP);
 		FrameText.SetAlignment(ALIGN_CENTER, ALIGN_BOTTOM);
+
+		Value = 0;
+		ShowGraph = false;
 	}
 
 	void FPS::OnMenu()

@@ -23,11 +23,6 @@ namespace IW3SR::Addons
         virtual ~FPS() = default;
 
         /// <summary>
-        /// Initialize the module.
-        /// </summary>
-        void Initialize() override;
-
-        /// <summary>
         /// Menu drawing.
         /// </summary>
         void OnMenu() override;

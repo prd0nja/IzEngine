@@ -4,18 +4,6 @@ namespace IW3SR::Addons
 {
 	Velocity::Velocity() : Module("sr.player.velocity", "Velocity", "Player")
 	{
-		KeyReset = KeyListener('R');
-
-		ShowVelocity = true;
-		ShowAverage = false;
-		ShowMax = false;
-		ShowGround = false;
-		ShowGroundTime = true;
-		ShowGraph = false;
-	}
-
-	void Velocity::Initialize()
-	{
 		Graph = Plots();
 
 		VelocityText = Text("0", FONT_SPACERANGER, 0, 2, 1.4, { 0, 1, 1, 1 });
@@ -33,6 +21,15 @@ namespace IW3SR::Addons
 		GroundText = Text("0", FONT_SPACERANGER, -50, 2, 1.4, { 0, 1, 0, 1 });
 		GroundText.SetRectAlignment(HORIZONTAL_CENTER, VERTICAL_TOP);
 		GroundText.SetAlignment(ALIGN_CENTER, ALIGN_BOTTOM);
+
+		ShowVelocity = true;
+		ShowAverage = false;
+		ShowMax = false;
+		ShowGround = false;
+		ShowGroundTime = true;
+		ShowGraph = false;
+
+		KeyReset = KeyListener('R');
 	}
 
 	void Velocity::Compute()
