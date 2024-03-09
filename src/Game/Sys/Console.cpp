@@ -2,17 +2,15 @@
 
 namespace IW3SR::Game
 {
-	Console::Console() : Con(Engine::Console::Get()) { }
-
 	void Console::Initialize()
 	{
-		Con.Initialize();
-		Con.SetTile("IW3SR");
+		Engine::Console::Initialize();
+		Engine::Console::SetTile("IW3SR");
 	}
 
 	void Console::Release()
 	{
-		Con.Release();
+		Engine::Console::Release();
 	}
 
 	void Console::Write(ConChannel channel, const char* msg, int type)

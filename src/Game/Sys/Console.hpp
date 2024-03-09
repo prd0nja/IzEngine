@@ -21,19 +21,16 @@ namespace IW3SR::Game
 	/// </summary>
 	class Console
 	{
-		CLASS_SINGLETON(Console)
 	public:
-		Engine::Console& Con;
-
 		/// <summary>
 		/// Initialize the console.
 		/// </summary>
-		void Initialize();
+		static void Initialize();
 
 		/// <summary>
 		/// Release the console.
 		/// </summary>
-		void Release();
+		static void Release();
 
 		/// <summary>
 		/// Write to the console.
@@ -52,12 +49,6 @@ namespace IW3SR::Game
 		static void ExecuteSingleCommand(int localClientNum, int controllerIndex, char* command);
 
 	private:
-		/// <summary>
-		/// Initialize the console.
-		/// </summary>
-		Console();
-		~Console() = default;
-
 		/// <summary>
 		/// Converts Q3 colors to ANSI.
 		/// </summary>

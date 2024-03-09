@@ -8,33 +8,26 @@ namespace IW3SR::Game
 	/// </summary>
 	class Patch
 	{
-		CLASS_SINGLETON(Patch)
 	public:
 		/// <summary>
 		/// Initialize patch.
 		/// </summary>
-		void Initialize();
+		static void Initialize();
 
 	private:
 		/// <summary>
-		/// Initialize patch.
-		/// </summary>
-		Patch() = default;
-		~Patch() = default;
-
-		/// <summary>
 		/// Patch definitions.
 		/// </summary>
-		void Definitions();
+		static void Definitions();
 
 		/// <summary>
 		/// Renderer patch.
 		/// </summary>
-		void Renderer();
+		static void Renderer();
 
 		/// <summary>
 		/// System patch.
 		/// </summary>
-		void System();
+		static void System();
 	};
 }

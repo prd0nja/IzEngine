@@ -27,6 +27,11 @@ namespace IW3SR::Game
 		~Player() = default;
 
 		/// <summary>
+		/// Initialize all players.
+		/// </summary>
+		static void Initialize();
+
+		/// <summary>
 		/// Is player self.
 		/// </summary>
 		/// <returns></returns>
@@ -49,11 +54,6 @@ namespace IW3SR::Game
 		/// </summary>
 		/// <returns></returns>
 		bool InAir();
-
-		/// <summary>
-		/// Allocates all players.
-		/// </summary>
-		static void Allocates();
 
 		/// <summary>
 		/// Predict player state.

@@ -15,25 +15,24 @@ namespace IW3SR::Engine
 	void ASM_##function(asmjit::CodeHolder& code, arch::Assembler& a)
 
 #define ASM_LOAD(function) \
-	Assembler::Get().NewCode(ASM_##function)
+	Assembler::NewCode(ASM_##function)
 
 	/// <summary>
 	/// Just-in-time assembler.
 	/// </summary>
 	class Assembler
 	{
-		CLASS_SINGLETON(Assembler)
 	protected:
 		using F = Function<void(asmjit::CodeHolder& code, arch::Assembler& a)>;
 	public:
-		asmjit::JitRuntime Runtime;
+		static inline asmjit::JitRuntime Runtime;
 
 		/// <summary>
 		/// Create a new code.
 		/// </summary>
 		/// <param name="function">The function callback with assembly instructions.</param>
 		/// <returns>The compiled function address.</returns>
-		uintptr_t NewCode(F function)
+		static uintptr_t NewCode(F function)
 		{
 			asmjit::CodeHolder code;
 			code.init(Runtime.environment(), Runtime.cpuFeatures());
@@ -46,12 +45,5 @@ namespace IW3SR::Engine
 			if (error) throw std::runtime_error("AsmJit compile error.");
 			return address;
 		}
-
-	private:
-		/// <summary>
-		/// Initialize JIT assembler.
-		/// </summary>
-		Assembler() = default;
-		~Assembler() = default;
 	};
 }

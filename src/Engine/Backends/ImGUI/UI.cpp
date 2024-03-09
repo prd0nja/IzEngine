@@ -28,7 +28,7 @@ namespace IW3SR::Engine
 		Environment::Deserialize("UI", *this);
 
 		Active = true;
-		ImGui_ImplWin32_Init(Sys::Get().MainWindow);
+		ImGui_ImplWin32_Init(Sys::MainWindow);
 		ImGui_ImplDX9_Init(Device::Get().D3Device);
 		Themes.Initialize();
 	}

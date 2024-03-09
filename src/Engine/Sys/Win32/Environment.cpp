@@ -43,14 +43,14 @@ namespace IW3SR::Engine
 
 	void Environment::Save()
 	{
-		std::ofstream file(Environment::IW3SRDirectory / "settings.json");
+		std::ofstream file(Environment::IW3SRDirectory / "application.json");
 		file << Settings.dump(4);
 		file.close();
 	}
 
 	void Environment::Load()
 	{
-		std::ifstream file(Environment::IW3SRDirectory / "settings.json");
+		std::ifstream file(Environment::IW3SRDirectory / "application.json");
 		if (file.peek() != std::ifstream::traits_type::eof())
 			Settings = nlohmann::json::parse(file);
 	}

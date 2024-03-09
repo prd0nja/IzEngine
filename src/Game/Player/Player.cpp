@@ -8,6 +8,12 @@ namespace IW3SR::Game
 		info = &cgs->bgs.clientinfo[index];
 	}
 
+	void Player::Initialize()
+	{
+		for (int i = 0; i < Players.size(); i++)
+			Players[i] = std::make_shared<Player>(i);
+	}
+
 	bool Player::IsSelf()
 	{
 		return c->nextState.clientNum == cgs->clientNum;
@@ -26,12 +32,6 @@ namespace IW3SR::Game
 	bool Player::InAir()
 	{
 		return c->nextState.groundEntityNum == 1023;
-	}
-
-	void Player::Allocates()
-	{
-		for (int i = 0; i < Players.size(); i++)
-			Players[i] = std::make_shared<Player>(i);
 	}
 
 	void Player::Predict(int localClientNum)

@@ -8,33 +8,25 @@ namespace IW3SR::Engine
 	/// </summary>
 	class Console
 	{
-		CLASS_SINGLETON(Console)
 	public:
-		HWND Handle = nullptr;
-		HANDLE OutputHandle = nullptr;
-		DWORD Mode = 0;
+		static inline HWND Handle = nullptr;
+		static inline HANDLE OutputHandle = nullptr;
+		static inline DWORD Mode = 0;
 
 		/// <summary>
 		/// Initialize the console.
 		/// </summary>
-		void Initialize();
+		static void Initialize();
 
 		/// <summary>
 		/// Release the console.
 		/// </summary>
-		void Release();
+		static void Release();
 
 		/// <summary>
 		/// Set the console title.
 		/// </summary>
 		/// <param name="title">The title.</param>
-		void SetTile(const std::string& title);
-
-	private:
-		/// <summary>
-		/// Initialize the console.
-		/// </summary>
-		Console() = default;
-		~Console() = default;
+		static void SetTile(const std::string& title);
 	};
 }

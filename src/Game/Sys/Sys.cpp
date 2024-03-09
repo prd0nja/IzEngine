@@ -2,8 +2,6 @@
 
 namespace IW3SR::Game
 {
-	Sys::Sys() : System(Engine::Sys::Get()) { }
-
 	HWND Sys::CreateMainWindow(DWORD dwExStyle, LPCSTR lpClassName, LPCSTR lpWindowName,
 		DWORD dwStyle, int X, int Y, int nWidth, int nHeight, HWND hWndParent, HMENU hMenu,
 		HINSTANCE hInstance, LPVOID lpParam)
@@ -15,7 +13,7 @@ namespace IW3SR::Game
 		if (windowName != "Call of Duty 4" && windowName != "Call of Duty 4 X")
 			return hwnd;
 
-		return Get().System.MainWindow = hwnd;
+		return Engine::Sys::MainWindow = hwnd;
 	}
 
 	LRESULT Sys::MainWndProc(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)

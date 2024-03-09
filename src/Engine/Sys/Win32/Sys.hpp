@@ -8,15 +8,7 @@ namespace IW3SR::Engine
 	/// </summary>
 	class Sys
 	{
-		CLASS_SINGLETON(Sys)
 	public:
-		HWND MainWindow = nullptr;
-
-	private:
-		/// <summary>
-		/// Initialize system.
-		/// </summary>
-		Sys() = default;
-		~Sys() = default;
+		static inline HWND MainWindow = nullptr;
 	};
 }

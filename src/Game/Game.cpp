@@ -9,9 +9,9 @@ namespace IW3SR::Game
 
 		CoD4X();
 
-		Patch::Get().Initialize();
-		Console::Get().Initialize();
-		Player::Allocates();
+		Patch::Initialize();
+		Console::Initialize();
+		Player::Initialize();
 		Plugins::Initialize();
 
 		Hook();
@@ -20,7 +20,7 @@ namespace IW3SR::Game
 	void Application::Shutdown()
 	{
 		Environment::Save();
-		Console::Get().Release();
+		Console::Release();
 		Plugins::Shutdown();
 
 		Unhook();

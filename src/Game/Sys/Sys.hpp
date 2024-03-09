@@ -8,10 +8,7 @@ namespace IW3SR::Game
 	/// </summary>
 	class Sys
 	{
-		CLASS_SINGLETON(Sys)
 	public:
-		Engine::Sys& System;
-
 		/// <summary>
 		/// Creates the main window.
 		/// </summary>
@@ -41,12 +38,5 @@ namespace IW3SR::Game
 		/// <param name="lParam">Additional message-specific information.</param>
 		/// <returns>The result of processing the message.</returns>
 		static LRESULT CALLBACK MainWndProc(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam);
-
-	private:
-		/// <summary>
-		/// Initialize system.
-		/// </summary>
-		Sys();
-		~Sys() = default;
 	};
 }
