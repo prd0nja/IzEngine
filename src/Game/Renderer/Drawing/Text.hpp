@@ -83,7 +83,7 @@ namespace IW3SR::Game
 		/// <param name="y">Y position.</param>
 		void ComputeAlignment(float& x, float& y);
 
-		NLOHMANN_SERIALIZE_POLY_BASE(Text, Value, Position, Color,
+		SERIALIZE_POLY_BASE(Text, Value, Position, Color,
 			HorizontalAlign, VerticalAlign, AlignX, AlignY, FontName, FontSize)
 	};
 }

@@ -80,6 +80,6 @@ namespace IW3SR::Engine
 		/// </summary>
 		virtual void End();
 
-		NLOHMANN_SERIALIZE_POLY_BASE(Window, Position, Size, Open, HorizontalAlign, VerticalAlign)
+		SERIALIZE_POLY_BASE(Window, Position, Size, Open, HorizontalAlign, VerticalAlign)
 	};
 }

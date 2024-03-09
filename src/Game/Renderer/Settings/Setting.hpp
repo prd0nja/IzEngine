@@ -73,6 +73,6 @@ namespace IW3SR::Game
 		/// </summary>
 		virtual void OnRender();
 
-		NLOHMANN_SERIALIZE_POLY_BASE(Setting, Menu)
+		SERIALIZE_POLY_BASE(Setting, Menu)
 	};
 }

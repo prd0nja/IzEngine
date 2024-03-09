@@ -15,13 +15,13 @@
 	ISerializable::To(nlohmann_json_j[#v1], nlohmann_json_t.v1);
 #endif
 
-#define NLOHMANN_SERIALIZE(Type, ...) \
+#define SERIALIZE(Type, ...) \
 	NLOHMANN_DEFINE_TYPE_INTRUSIVE(Type, __VA_ARGS__)
 
-#define NLOHMANN_SERIALIZE_NON_INTRUSIVE(Type, ...) \
+#define SERIALIZE_NON_INTRUSIVE(Type, ...) \
 	NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(Type, __VA_ARGS__)
 
-#define NLOHMANN_SERIALIZE_DERIVED(Type, DerivedType, ...) \
+#define SERIALIZE_DERIVED(Type, DerivedType, ...) \
     friend void to_json(nlohmann::json& nlohmann_json_j, const Type& nlohmann_json_t) \
 	{ \
 		nlohmann::to_json(nlohmann_json_j, static_cast<const DerivedType &>(nlohmann_json_t)); \
@@ -33,7 +33,7 @@
 		NLOHMANN_JSON_EXPAND(NLOHMANN_JSON_PASTE(NLOHMANN_JSON_FROM, __VA_ARGS__)) \
 	}
 
-#define NLOHMANN_SERIALIZE_DERIVED_EMPTY(Type, DerivedType) \
+#define SERIALIZE_DERIVED_EMPTY(Type, DerivedType) \
     friend void to_json(nlohmann::json& nlohmann_json_j, const Type& nlohmann_json_t) \
 	{ \
 		nlohmann::to_json(nlohmann_json_j, static_cast<const DerivedType &>(nlohmann_json_t)); \
@@ -43,7 +43,7 @@
 		nlohmann::from_json(nlohmann_json_j, static_cast<DerivedType&>(nlohmann_json_t)); \
 	}
 
-#define NLOHMANN_SERIALIZE_POLY_BASE(Type, ...) \
+#define SERIALIZE_POLY_BASE(Type, ...) \
 public: \
 	virtual void Serialize(nlohmann::json& nlohmann_json_j) const \
 	{ \
@@ -56,7 +56,7 @@ public: \
 		NLOHMANN_JSON_EXPAND(NLOHMANN_JSON_PASTE(NLOHMANN_JSON_FROM, __VA_ARGS__)) \
 	}
 
-#define NLOHMANN_SERIALIZE_POLY(Type, DerivedType, ...) \
+#define SERIALIZE_POLY(Type, DerivedType, ...) \
 public: \
 	virtual void Serialize(nlohmann::json& nlohmann_json_j) const override \
 	{ \

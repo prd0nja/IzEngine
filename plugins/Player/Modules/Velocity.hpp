@@ -59,7 +59,7 @@ namespace IW3SR::Addons
 		/// </summary>
 		void OnRender() override;
 
-		NLOHMANN_SERIALIZE_POLY(Velocity, Module, VelocityText, AverageText, MaxText, GroundText, Graph,
+		SERIALIZE_POLY(Velocity, Module, VelocityText, AverageText, MaxText, GroundText, Graph,
 			KeyReset, ShowVelocity, ShowAverage, ShowMax, ShowGround, ShowGraph)
 	};
 }

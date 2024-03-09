@@ -167,10 +167,10 @@ namespace ImGui
 	API bool IsWindowChanged();
 }
 
-NLOHMANN_SERIALIZE_NON_INTRUSIVE(ImVec2, x, y)
-NLOHMANN_SERIALIZE_NON_INTRUSIVE(ImVec4, x, y, z, w)
+SERIALIZE_NON_INTRUSIVE(ImVec2, x, y)
+SERIALIZE_NON_INTRUSIVE(ImVec4, x, y, z, w)
 
-NLOHMANN_SERIALIZE_NON_INTRUSIVE(ImGuiStyle, Alpha, DisabledAlpha, WindowPadding, WindowRounding,
+SERIALIZE_NON_INTRUSIVE(ImGuiStyle, Alpha, DisabledAlpha, WindowPadding, WindowRounding,
 	WindowBorderSize, WindowMinSize, WindowTitleAlign, WindowMenuButtonPosition, ChildRounding,
 	ChildBorderSize, PopupRounding, PopupBorderSize, FramePadding, FrameRounding, FrameBorderSize,
 	ItemSpacing, ItemInnerSpacing, CellPadding, TouchExtraPadding, IndentSpacing, ColumnsMinSpacing,
@@ -181,7 +181,7 @@ NLOHMANN_SERIALIZE_NON_INTRUSIVE(ImGuiStyle, Alpha, DisabledAlpha, WindowPadding
 	CurveTessellationTol, CircleTessellationMaxError, Colors, HoverStationaryDelay, HoverDelayShort,
 	HoverDelayNormal, HoverFlagsForTooltipMouse, HoverFlagsForTooltipNav)
 
-NLOHMANN_SERIALIZE_NON_INTRUSIVE(ImPlotStyle, LineWeight, Marker, MarkerSize, MarkerWeight, FillAlpha,
+SERIALIZE_NON_INTRUSIVE(ImPlotStyle, LineWeight, Marker, MarkerSize, MarkerWeight, FillAlpha,
 	ErrorBarSize, ErrorBarWeight, DigitalBitHeight, DigitalBitGap, PlotBorderSize, MinorAlpha, MajorTickLen,
 	MinorTickLen, MajorTickSize, MinorTickSize, MajorGridSize, MinorGridSize, PlotPadding, LabelPadding,
 	LegendPadding, LegendInnerPadding, LegendSpacing, MousePosPadding, AnnotationPadding, FitPadding,

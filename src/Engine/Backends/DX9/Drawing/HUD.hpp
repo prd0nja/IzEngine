@@ -83,7 +83,7 @@ namespace IW3SR::Engine
 		/// <param name="y">Y position.</param>
 		void ComputeAlignment(float& x, float& y);
 
-		NLOHMANN_SERIALIZE_POLY_BASE(HUD, Position, Size, Color,
+		SERIALIZE_POLY_BASE(HUD, Position, Size, Color,
 			HorizontalAlign, VerticalAlign, AlignX, AlignY, TextureName)
 	};
 }

@@ -208,7 +208,7 @@ namespace IW3SR::Engine
             return !operator bool();
         }
 
-        NLOHMANN_SERIALIZE(vec4, x, y, z, w)
+        SERIALIZE(vec4, x, y, z, w)
     };
 
     vec4f vec4f::Zero = (0, 0, 0, 0);

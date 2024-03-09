@@ -71,6 +71,6 @@ namespace IW3SR::Engine::UC
 		/// <param name="start">Is the start of the token.</param>
 		static void MarkdownFormat(const ImGui::MarkdownFormatInfo& info, bool start);
 
-		NLOHMANN_SERIALIZE_POLY(Themes, Window, Style, PlotStyle)
+		SERIALIZE_POLY(Themes, Window, Style, PlotStyle)
 	};
 }

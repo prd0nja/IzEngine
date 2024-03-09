@@ -103,6 +103,6 @@ namespace IW3SR::Engine
 		UI();
 		virtual ~UI();
 
-		NLOHMANN_SERIALIZE(UI, Scale, Memory, Themes)
+		SERIALIZE(UI, Scale, Memory, Themes)
 	};
 }

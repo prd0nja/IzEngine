@@ -47,7 +47,7 @@ namespace IW3SR::Addons
 		/// </summary>
 		void OnRender() override;
 
-		NLOHMANN_SERIALIZE_POLY(Lagometer, Module, ColorSnap, ColorSnapDelay, ColorSnapFlag, ColorSnapFlagDrop,
+		SERIALIZE_POLY(Lagometer, Module, ColorSnap, ColorSnapDelay, ColorSnapFlag, ColorSnapFlagDrop,
 			ColorPing, ShowSnap, ShowSnapFlag, ShowPing, Graph)
 	};
 }

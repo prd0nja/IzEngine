@@ -86,6 +86,6 @@ namespace IW3SR::Engine
 		/// </summary>
 		static void Reset();
 
-		NLOHMANN_SERIALIZE(KeyListener, Key)
+		SERIALIZE(KeyListener, Key)
 	};
 }

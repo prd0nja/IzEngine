@@ -48,6 +48,6 @@ namespace IW3SR::Game
 		GUI();
 		virtual ~GUI() = default;
 
-		NLOHMANN_SERIALIZE(GUI, KeyOpen, About, Binds, Modules, Settings, Toolbar)
+		SERIALIZE(GUI, KeyOpen, About, Binds, Modules, Settings, Toolbar)
 	};
 }

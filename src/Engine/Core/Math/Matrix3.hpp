@@ -223,7 +223,7 @@ namespace IW3SR::Engine
             return !operator bool();
         }
 
-        NLOHMANN_SERIALIZE(mat3, value)
+        SERIALIZE(mat3, value)
     };
 
     mat3f mat3f::Zero = (0, 0, 0, 0, 0, 0, 0, 0, 0);

@@ -42,7 +42,7 @@ namespace IW3SR::Addons
 		/// </summary>
 		void OnMenu() override;
 
-		NLOHMANN_SERIALIZE_POLY(General, Setting, DrawSpecular, DrawFog, DrawDecals, DrawTweaks,
+		SERIALIZE_POLY(General, Setting, DrawSpecular, DrawFog, DrawDecals, DrawTweaks,
 			DrawGlow, DrawSun, SunIntensity, SpecularColorScale, TweakBrightness, TweakDesaturation,
 			GlowRadius, GlowBloomDesaturation, GlowBloomIntensity, GlowBloomCutoff, SunColor, SunDirection,
 			TweakLightTint, TweakDarkTint)

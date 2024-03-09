@@ -32,6 +32,6 @@ namespace IW3SR::Addons
         /// </summary>
         void OnRender() override;
 
-        NLOHMANN_SERIALIZE_POLY(FPS, Module, FrameText, Graph, ShowGraph)
+        SERIALIZE_POLY(FPS, Module, FrameText, Graph, ShowGraph)
     };
 }
