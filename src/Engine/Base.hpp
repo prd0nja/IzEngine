@@ -3,7 +3,7 @@
 #include "Core/Base/Ref.hpp"
 #include "Core/Base/UUID.hpp"
 #include "Core/Base/Serializer.hpp"
-#include "Sys/Log.hpp"
+#include "Core/Base/Log.hpp"
 
 namespace IW3SR { };
 using namespace IW3SR;

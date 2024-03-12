@@ -1,8 +1,8 @@
 add_library(IW3SR.Engine OBJECT)
 
-add_subdirectory(Renderer)
 add_subdirectory(Core)
-add_subdirectory(Sys)
+add_subdirectory(Platforms)
+add_subdirectory(Renderer)
 
 target_precompile_headers(IW3SR.Engine PRIVATE Base.hpp)
 target_sources(IW3SR.Engine PRIVATE Base.hpp)
