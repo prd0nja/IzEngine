@@ -4,5 +4,5 @@ target_sources(IW3SR.Game PRIVATE
 	Dvar.hpp
 	Patch.hpp
 	Patch.cpp
-	Sys.hpp
-	Sys.cpp)
+	System.hpp
+	System.cpp)

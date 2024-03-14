@@ -1,8 +1,8 @@
-#include "Sys.hpp"
+#include "System.hpp"
 
 namespace IW3SR::Game
 {
-	HWND Sys::CreateMainWindow(DWORD dwExStyle, LPCSTR lpClassName, LPCSTR lpWindowName,
+	HWND System::CreateMainWindow(DWORD dwExStyle, LPCSTR lpClassName, LPCSTR lpWindowName,
 		DWORD dwStyle, int X, int Y, int nWidth, int nHeight, HWND hWndParent, HMENU hMenu,
 		HINSTANCE hInstance, LPVOID lpParam)
 	{
@@ -13,10 +13,10 @@ namespace IW3SR::Game
 		if (windowName != "Call of Duty 4" && windowName != "Call of Duty 4 X")
 			return hwnd;
 
-		return Engine::Sys::MainWindow = hwnd;
+		return reinterpret_cast<HWND>(Engine::System::MainWindow = hwnd);
 	}
 
-	LRESULT Sys::MainWndProc(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
+	LRESULT System::MainWndProc(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
 	{
 		auto& UI = UI::Get();
 		KeyListener::Process(Msg, wParam, lParam);

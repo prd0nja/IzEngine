@@ -1,5 +1,5 @@
 #pragma once
-#include "Windows/Base.hpp"
+#include <string>
 
 namespace IW3SR::Engine
 {
@@ -9,9 +9,9 @@ namespace IW3SR::Engine
 	class Console
 	{
 	public:
-		static inline HWND Handle = nullptr;
-		static inline HANDLE OutputHandle = nullptr;
-		static inline DWORD Mode = 0;
+		static inline void* Handle = nullptr;
+		static inline void* OutputHandle = nullptr;
+		static inline int Mode = 0;
 
 		/// <summary>
 		/// Initialize the console.

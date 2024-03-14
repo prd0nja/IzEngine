@@ -9,7 +9,7 @@
 
 #include "Game/Player/Player.hpp"
 #include "Game/World/World.hpp"
-#include "Game/Sys/Dvar.hpp"
+#include "Game/System/Dvar.hpp"
 
 namespace IW3SR::Addons {};
 using namespace IW3SR::Addons;

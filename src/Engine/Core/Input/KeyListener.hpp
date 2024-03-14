@@ -1,5 +1,5 @@
 #pragma once
-#include "Windows/Base.hpp"
+#include "Engine/Base.hpp"
 
 namespace IW3SR::Engine
 {
@@ -75,10 +75,10 @@ namespace IW3SR::Engine
 		/// <summary>
 		/// Process keys.
 		/// </summary>
-		/// <param name="Msg">The message code.</param>
+		/// <param name="msg">The message code.</param>
 		/// <param name="wParam">Additional message-specific information.</param>
 		/// <param name="lParam">Additional message-specific information.</param>
-		static void Process(UINT Msg, WPARAM wParam, LPARAM lParam);
+		static void Process(int msg, int wParam, int lParam);
 
 		/// <summary>
 		/// Reset keys.

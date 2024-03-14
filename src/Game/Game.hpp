@@ -5,9 +5,9 @@
 #include "Game/Renderer/Backends/D3D9.hpp"
 #include "Game/Player/Player.hpp"
 
-#include "Game/Sys/Console.hpp"
-#include "Game/Sys/Patch.hpp"
-#include "Game/Sys/Sys.hpp"
+#include "Game/System/Console.hpp"
+#include "Game/System/Patch.hpp"
+#include "Game/System/System.hpp"
 
 namespace IW3SR::Game
 {

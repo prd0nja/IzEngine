@@ -1,5 +1,5 @@
 #include "Memory.hpp"
-#include "Windows/Memory.hpp"
+#include "Core/Memory/Memory.hpp"
 
 namespace IW3SR::Engine::UC
 {

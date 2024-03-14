@@ -1,4 +1,5 @@
-#include "Console.hpp"
+#include "Windows/Base.hpp"
+#include "Core/Console/Console.hpp"
 
 namespace IW3SR::Engine
 {
@@ -7,7 +8,7 @@ namespace IW3SR::Engine
 		AllocConsole();
 		Handle = GetConsoleWindow();
 		OutputHandle = GetStdHandle(STD_OUTPUT_HANDLE);
-		GetConsoleMode(OutputHandle, &Mode);
+		GetConsoleMode(OutputHandle, reinterpret_cast<LPDWORD>(&Mode));
 
 		freopen_s(reinterpret_cast<FILE**>(stdin), "CONIN$", "r", stdin);
 		freopen_s(reinterpret_cast<FILE**>(stdout), "CONOUT$", "w", stdout);

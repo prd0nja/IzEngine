@@ -1,4 +1,5 @@
-#include "KeyListener.hpp"
+#include "Windows/Base.hpp"
+#include "Core/Input/KeyListener.hpp"
 
 namespace IW3SR::Engine
 {
@@ -37,9 +38,9 @@ namespace IW3SR::Engine
 		return KeyListener(vk).IsPressed();
 	}
 
-	void KeyListener::Process(UINT Msg, WPARAM wParam, LPARAM lParam)
+	void KeyListener::Process(int msg, int wParam, int lParam)
 	{
-		switch (Msg)
+		switch (msg)
 		{
 		case WM_KEYDOWN:
 		case WM_SYSKEYDOWN:

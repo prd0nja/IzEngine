@@ -1,9 +1,8 @@
 #include "Themes.hpp"
 
 #include "ImGUI/UI.hpp"
-#include "Windows/Environment.hpp"
-
-#include <shellapi.h>
+#include "Core/System/Environment.hpp"
+#include "Core/System/System.hpp"
 
 namespace IW3SR::Engine::UC
 {
@@ -223,8 +222,7 @@ namespace IW3SR::Engine::UC
 	void Themes::MarkdownLink(ImGui::MarkdownLinkCallbackData data)
 	{
 		std::string url(data.link, data.linkLength);
-		if (!data.isImage)
-			ShellExecute(nullptr, "open", url.c_str(), nullptr, nullptr, SW_SHOWNORMAL);
+		if (!data.isImage) System::Shell(url);
 	}
 
 	ImGui::MarkdownImageData Themes::MarkdownImage(ImGui::MarkdownLinkCallbackData data)

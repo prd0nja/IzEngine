@@ -1,5 +1,5 @@
-#include "Signature.hpp"
-#include "Memory.hpp"
+#include "Core/Memory/Signature.hpp"
+#include "Core/Memory/Memory.hpp"
 
 #include <Psapi.h>
 

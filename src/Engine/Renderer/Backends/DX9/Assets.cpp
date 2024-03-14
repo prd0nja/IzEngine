@@ -1,7 +1,7 @@
 #include "Assets.hpp"
 
 #include "DX9/Device.hpp"
-#include "Windows/Environment.hpp"
+#include "Core/System/Environment.hpp"
 
 namespace IW3SR::Engine
 {

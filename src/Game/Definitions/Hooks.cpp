@@ -6,13 +6,13 @@ namespace IW3SR::Game
 	Hook<HWND STDCALL(DWORD dwExStyle, LPCSTR lpClassName, LPCSTR lpWindowName,
 		DWORD dwStyle, int X, int Y, int nWidth, int nHeight, HWND hWndParent, HMENU hMenu,
 		HINSTANCE hInstance, LPVOID lpParam)>
-		CreateWindowExA_h(CreateWindowExA, Sys::CreateMainWindow);
+		CreateWindowExA_h(CreateWindowExA, System::CreateMainWindow);
 
 	Hook<IDirect3D9* STDCALL(UINT sdk)>
 		Direct3DCreate9_h(Direct3DCreate9, D3D9::Direct3DCreate9);
 
 	Hook<LRESULT CALLBACK(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)>
-		MainWndProc_h(0x57BB20, Sys::MainWndProc);
+		MainWndProc_h(0x57BB20, System::MainWndProc);
 
 	Hook<void(int localClientNum, int controllerIndex, char* command)>
 		Cmd_ExecuteSingleCommand_h(0x4F9AB0, Console::ExecuteSingleCommand);

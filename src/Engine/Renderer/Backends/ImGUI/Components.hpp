@@ -3,6 +3,7 @@
 
 #include "Core/Math.hpp"
 #include "Core/Containers/CircularBuffer.hpp"
+#include "Core/Input/KeyListener.hpp"
 
 #include "Fonts/IconsFontAwesome6.hpp"
 #include "Fonts/IconsFontAwesome6Brands.hpp"
