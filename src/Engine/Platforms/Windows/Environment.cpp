@@ -21,7 +21,7 @@ namespace IW3SR::Engine
 	void Environment::Build()
 	{
 		TCHAR buffer[MAX_PATH];
-		GetModuleFileName(NULL, buffer, MAX_PATH);
+		GetModuleFileName(nullptr, buffer, MAX_PATH);
 		BaseDirectory = std::filesystem::path(buffer).parent_path();
 	}
 

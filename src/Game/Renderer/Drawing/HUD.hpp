@@ -1,16 +1,18 @@
 #pragma once
-#include "Game/Definitions.hpp"
+#include "Game/Base.hpp"
 
 namespace IW3SR::Game
 {
 	/// <summary>
 	/// HUD element.
 	/// </summary>
-	class API HUD : public IObject
+	class API GHUD : public IObject
 	{
 	public:
 		vec2 Position;
 		vec2 Size;
+		vec2 RenderPosition;
+		vec2 RenderSize;
 		vec4 Color = vec4::One;
 
 		Horizontal HorizontalAlign = HORIZONTAL_LEFT;
@@ -21,13 +23,13 @@ namespace IW3SR::Game
 		std::string MaterialName;
 
 		/// <summary>
-		/// Initialize the HUD.
+		/// Create a HUD.
 		/// </summary>
-		HUD() = default;
-		virtual ~HUD() = default;
+		GHUD() = default;
+		virtual ~GHUD() = default;
 
 		/// <summary>
-		/// Initialize the HUD.
+		/// Create a HUD.
 		/// </summary>
 		/// <param name="material">The material.</param>
 		/// <param name="x">X position.</param>
@@ -35,7 +37,7 @@ namespace IW3SR::Game
 		/// <param name="w">The width.</param>
 		/// <param name="h">The height.</param>
 		/// <param name="color">The color.</param>
-		HUD(const std::string& material, float x, float y, float w, float h, const vec4& color);
+		GHUD(const std::string& material, float x, float y, float w, float h, const vec4& color);
 
 		/// <summary>
 		/// Set the rect alignment.
@@ -73,13 +75,12 @@ namespace IW3SR::Game
 		Material* Material = nullptr;
 
 		/// <summary>
-		/// Compute the element alignment.
+		/// Compute the alignment.
 		/// </summary>
-		/// <param name="x">X position.</param>
-		/// <param name="y">Y position.</param>
-		void ComputeAlignment(float& x, float& y);
+		/// <param name="position">The position.</param>
+		void ComputeAlignment(vec2& position);
 
-		SERIALIZE_POLY_BASE(HUD, Position, Size, Color,
+		SERIALIZE_POLY_BASE(GHUD, Position, Size, Color,
 			HorizontalAlign, VerticalAlign, AlignX, AlignY, MaterialName)
 	};
 }

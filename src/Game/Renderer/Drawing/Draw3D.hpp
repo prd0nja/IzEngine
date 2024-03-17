@@ -1,5 +1,5 @@
 #pragma once
-#include "Game/Definitions.hpp"
+#include "Game/Base.hpp"
 #include "Lines.hpp"
 
 namespace IW3SR::Game
@@ -7,7 +7,7 @@ namespace IW3SR::Game
 	/// <summary>
 	/// Draw 3D class.
 	/// </summary>
-	class API Draw3D
+	class API GDraw3D
 	{
 	public:
 		static inline Lines BufferLines = Lines(1, 2000, true);

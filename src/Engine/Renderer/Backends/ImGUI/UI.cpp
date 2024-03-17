@@ -8,6 +8,8 @@ namespace IW3SR::Engine
 {
 	UI::UI()
 	{
+		KeyOpen = KeyListener(VK_F10);
+
 		ImGui::SetAllocatorFunctions(&Allocator, &Free, &Data);
 		Context = ImGui::CreateContext();
 		PlotContext = ImPlot::CreateContext();
@@ -31,8 +33,6 @@ namespace IW3SR::Engine
 		Environment::Deserialize("UI", *this);
 
 		Active = true;
-		ImGui_ImplWin32_Init(System::MainWindow);
-		ImGui_ImplDX9_Init(Device::Get().D3Device);
 		Themes.Initialize();
 	}
 
@@ -45,27 +45,23 @@ namespace IW3SR::Engine
 	void UI::Release()
 	{
 		Active = false;
-		ImGui_ImplDX9_Shutdown();
-		ImGui_ImplWin32_Shutdown();
-
 		Environment::Serialize("UI", *this);
 	}
 
 	void UI::Begin()
 	{
-		if (HasBegin) return;
-
-		HasBegin = true;
-		ImGui_ImplDX9_NewFrame();
-		ImGui_ImplWin32_NewFrame();
 		ImGui::NewFrame();
+
+		if (KeyOpen.IsPressed()) Open = !Open;
+		if (!Open) return;
+
+		Memory.Render();
+		Themes.Render();
 	}
 
 	void UI::End()
 	{
-		HasBegin = false;
 		ImGui::Render();
-		ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
 	}
 
 	double UI::Time()
@@ -86,6 +82,7 @@ namespace IW3SR::Engine
 	void UI::InitializeContext()
 	{
 		auto& UI = UI::Get();
+
 		ImGui::SetAllocatorFunctions(UI::Allocator, UI::Free, UI.Data);
 		ImGui::SetCurrentContext(UI.Context);
 		ImPlot::SetImGuiContext(UI.Context);

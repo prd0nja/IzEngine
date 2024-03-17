@@ -19,6 +19,7 @@ namespace IW3SR::Engine
 		bool DesignMode = false;
 		VirtualScreen Screen;
 		float Size = 1.0f;
+		KeyListener KeyOpen;
 
 		UC::Memory Memory;
 		UC::Themes Themes;
@@ -94,7 +95,6 @@ namespace IW3SR::Engine
 		void* Data = nullptr;
 		ImGuiContext* Context = nullptr;
 		ImPlotContext* PlotContext = nullptr;
-		bool HasBegin = false;
 		float Scale = 1.0f;
 
 		/// <summary>
@@ -103,6 +103,6 @@ namespace IW3SR::Engine
 		UI();
 		virtual ~UI();
 
-		SERIALIZE(UI, Scale, Memory, Themes)
+		SERIALIZE(UI, KeyOpen, Scale, Memory, Themes)
 	};
 }

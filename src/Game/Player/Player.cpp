@@ -4,7 +4,7 @@ namespace IW3SR::Game
 {
 	Player::Player(int index)
 	{
-		c = &cg_entities[index];
+		ent = &cg_entities[index];
 		info = &cgs->bgs.clientinfo[index];
 	}
 
@@ -16,22 +16,22 @@ namespace IW3SR::Game
 
 	bool Player::IsSelf()
 	{
-		return c->nextState.clientNum == cgs->clientNum;
+		return ent->nextState.clientNum == cgs->clientNum;
 	}
 
 	bool Player::IsAlive()
 	{
-		return c->isAlive;
+		return ent->isAlive;
 	}
 
 	bool Player::OnGround()
 	{
-		return c->nextState.groundEntityNum != 1023;
+		return ent->nextState.groundEntityNum != 1023;
 	}
 
 	bool Player::InAir()
 	{
-		return c->nextState.groundEntityNum == 1023;
+		return ent->nextState.groundEntityNum == 1023;
 	}
 
 	void Player::Predict(int localClientNum)
@@ -84,6 +84,6 @@ namespace IW3SR::Game
 
 	Player::operator bool() const
 	{
-		return c;
+		return ent;
 	}
 }

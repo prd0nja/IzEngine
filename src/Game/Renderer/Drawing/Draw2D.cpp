@@ -1,30 +1,37 @@
 #include "Draw2D.hpp"
-#include "Game/Renderer/Assets.hpp"
 
 namespace IW3SR::Game
 {
-	void Draw2D::Rect(const std::string& material, float x, float y, float w, float h, const vec4& color)
+	void GDraw2D::Text(const std::string& text, Font_s* font, const vec2& position, float scale, const vec4& color)
 	{
-		UI::Get().Screen.Apply(x, y, w, h, HORIZONTAL_LEFT, VERTICAL_TOP);
-		Material* handle = Material_RegisterHandle(material.c_str(), 3);
-		R_AddCmdDrawStretchPic(handle, x, y, w, h, 0.f, 0.f, 0.f, 0.f, color);
+		R_AddCmdDrawText(text.c_str(), 0x7FFFFFFF, font, position.x, position.y, scale, scale, 0, 0, color);
 	}
 
-	void Draw2D::AngleYaw(const std::string& material, float start, float end, float yaw,
-		float y, float h, const vec4& color)
+	vec2 GDraw2D::TextSize(const std::string& text, Font_s* font)
+	{
+		float w = static_cast<float>(R_TextWidth(text.c_str(), text.size(), font));
+		float h = static_cast<float>(font->pixelHeight);
+		return { w, h };
+	}
+
+	void GDraw2D::Rect(Material* material, const vec2& position, const vec2& size, const vec4& color)
+	{
+		R_AddCmdDrawStretchPic(material, position.x, position.y, size.x, size.y, 0.f, 0.f, 0.f, 0.f, color);
+	}
+
+	void GDraw2D::AngleYaw(Material* material, float start, float end, float yaw, float y, float h, const vec4& color)
 	{
 		const vec3 range = Math::AnglesToRange(start, end, yaw, cgs->refdef.tanHalfFovX);
 		if (!range.z)
 		{
-			Rect(material, range.x, y, range.y - range.x, h, color);
+			Rect(material, { range.x, y }, { range.y - range.x, h }, color);
 			return;
 		}
-		Rect(material, 0, y, range.x, h, color);
-		Rect(material, range.y, y, SCREEN_WIDTH - range.y, h, color);
+		Rect(material, { 0, y }, { range.x, h }, color);
+		Rect(material, { range.y, y }, { SCREEN_WIDTH - range.y, h }, color);
 	}
 
-	void Draw2D::LineYaw(const std::string& material, float angle, float yaw,
-		float y, float w, float h, const vec4& color)
+	void GDraw2D::LineYaw(Material* material, float angle, float yaw, float y, const vec2& size, const vec4& color)
 	{
 		angle = Math::AngleNormalizePI(angle - yaw);
 
@@ -32,14 +39,6 @@ namespace IW3SR::Game
 			return;
 
 		const float x = Math::AngleScreenProjection(angle, cgs->refdef.tanHalfFovX);
-		Rect(material, x - w / 2, y, w, h, color);
-	}
-
-	void Draw2D::Text(const std::string& text, const std::string& font,
-		float x, float y, float size, const vec4& color)
-	{
-		Font_s* f = Assets::Get().Fonts[font];
-		UI::Get().Screen.Apply(x, y, HORIZONTAL_LEFT, VERTICAL_TOP);
-		R_AddCmdDrawText(text.c_str(), 0x7FFFFFFF, f, x, y, size, size, 0, 0, color);
+		Rect(material, { x - size.x / 2, y }, size, color);
 	}
 }

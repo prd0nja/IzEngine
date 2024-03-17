@@ -9,12 +9,12 @@ add_subdirectory(System)
 add_subdirectory(World)
 
 target_precompile_headers(IW3SR.Game PRIVATE
-	Definitions.hpp
+	Base.hpp
 	Game.hpp
 	Plugin.hpp)
 
 target_sources(IW3SR.Game PRIVATE
-	Definitions.hpp
+	Base.hpp
 	Game.hpp
 	Game.cpp
 	Plugin.hpp)

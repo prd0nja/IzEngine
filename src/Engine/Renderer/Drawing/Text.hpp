@@ -1,19 +1,21 @@
 #pragma once
-#include "DX9/Base.hpp"
-#include "DX9/Resources/Texture.hpp"
-
+#include "Core/Common.hpp"
 #include "Core/Math.hpp"
+
+#include "Renderer/Resources/Font.hpp"
 
 namespace IW3SR::Engine
 {
 	/// <summary>
-	/// HUD element.
+	/// Text element.
 	/// </summary>
-	class API HUD : public IObject
+	class API Text : public IObject
 	{
 	public:
+		std::string Value;
 		vec2 Position;
 		vec2 Size;
+		vec2 Scale = vec2::One;
 		vec2 RenderPosition;
 		vec2 RenderSize;
 		vec4 Color = vec4::One;
@@ -23,24 +25,27 @@ namespace IW3SR::Engine
 		Alignment AlignX = ALIGN_LEFT;
 		Alignment AlignY = ALIGN_TOP;
 
-		std::string TextureName;
+		std::string FontName;
+		float FontRescale = 13.33f;
+		float FontSize = 1.4;
+		int FontIndex = 0;
 
 		/// <summary>
-		/// Initialize the HUD.
+		/// Create a text.
 		/// </summary>
-		HUD() = default;
-		virtual ~HUD() = default;
+		Text() = default;
+		virtual ~Text() = default;
 
 		/// <summary>
-		/// Initialize the HUD.
+		/// Create a text.
 		/// </summary>
-		/// <param name="texture">The texture path.</param>
-		/// <param name="x">X position.</param>
-		/// <param name="y">Y position.</param>
-		/// <param name="w">The width.</param>
-		/// <param name="h">The height.</param>
+		/// <param name="text">The text.</param>
+		/// <param name="font">The font.</param>
+		/// <param name="x">X value.</param>
+		/// <param name="y">Y value.</param>
+		/// <param name="size">Font size.</param>
 		/// <param name="color">The color.</param>
-		HUD(const std::string& texture, float x, float y, float w, float h, const vec4& color);
+		Text(const std::string& text, const std::string& font, float x, float y, float size, const vec4& color);
 
 		/// <summary>
 		/// Set the rect alignment.
@@ -57,10 +62,9 @@ namespace IW3SR::Engine
 		void SetAlignment(Alignment horizontal, Alignment vertical);
 
 		/// <summary>
-		/// Set the texture.
+		/// Set/update font.
 		/// </summary>
-		/// <param name="texture">The texture path.</param>
-		void SetTexture(const std::string& texture);
+		void SetFont(const std::string& font);
 
 		/// <summary>
 		/// Render menu.
@@ -70,21 +74,20 @@ namespace IW3SR::Engine
 		void Menu(const std::string& label, bool open = false);
 
 		/// <summary>
-		/// Render HUD.
+		/// Render text.
 		/// </summary>
 		void Render();
 
 	private:
-		Ref<Texture> Texture = nullptr;
+		Ref<Font> Font = nullptr;
 
 		/// <summary>
-		/// Compute the element alignment.
+		/// Compute the alignment.
 		/// </summary>
-		/// <param name="x">X position.</param>
-		/// <param name="y">Y position.</param>
-		void ComputeAlignment(float& x, float& y);
+		/// <param name="position">The position.</param>
+		void ComputeAlignment(vec2& position);
 
-		SERIALIZE_POLY_BASE(HUD, Position, Size, Color,
-			HorizontalAlign, VerticalAlign, AlignX, AlignY, TextureName)
+		SERIALIZE_POLY_BASE(Text, Value, Position, Color,
+			HorizontalAlign, VerticalAlign, AlignX, AlignY, FontName, FontSize)
 	};
 }

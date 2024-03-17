@@ -1,9 +1,9 @@
 #include "Text.hpp"
-#include "Game/Renderer/Assets.hpp"
+#include "Draw2D.hpp"
 
 namespace IW3SR::Game
 {
-	Text::Text(const std::string& text, const std::string& font, float x, float y, float size, const vec4& color)
+	GText::GText(const std::string& text, const std::string& font, float x, float y, float size, const vec4& color)
 	{
 		Value = text;
 		Position = { x, y };
@@ -11,40 +11,39 @@ namespace IW3SR::Game
 		FontName = font;
 	}
 
-	void Text::SetRectAlignment(Horizontal horizontal, Vertical vertical)
+	void GText::SetRectAlignment(Horizontal horizontal, Vertical vertical)
 	{
 		HorizontalAlign = horizontal;
 		VerticalAlign = vertical;
 	}
 
-	void Text::SetAlignment(Alignment horizontal, Alignment vertical)
+	void GText::SetAlignment(Alignment horizontal, Alignment vertical)
 	{
 		AlignX = horizontal;
 		AlignY = vertical;
 	}
 
-	void Text::SetFont(const std::string& font)
+	void GText::SetFont(const std::string& font)
 	{
-		auto& assets = Assets::Get();
-		Font = assets.LoadFont(font);
+		Font = R_RegisterFont(font.c_str(), font.size());
 		FontName = font;
-		FontIndex = std::distance(assets.FontNames.begin(), std::ranges::find(assets.FontNames, FontName));
+		FontIndex = std::distance(GDraw2D::FontNames.begin(), std::ranges::find(GDraw2D::FontNames, FontName));
 	}
 
-	void Text::ComputeAlignment(float& x, float& y)
+	void GText::ComputeAlignment(vec2& position)
 	{
 		if (AlignX & ALIGN_CENTER)
-			x += -(Size.x / 2.f);
+			position.x += -(Size.x / 2.f);
 		else if (AlignX & ALIGN_RIGHT)
-			x += -Size.x;
+			position.x += -Size.x;
 
 		if (AlignY & ALIGN_MIDDLE)
-			y += Size.y / 2.f;
+			position.y += Size.y / 2.f;
 		else if (AlignY & ALIGN_BOTTOM)
-			y += Size.y;
+			position.y += Size.y;
 	}
 
-	void Text::Menu(const std::string& label, bool open)
+	void GText::Menu(const std::string& label, bool open)
 	{
 		if (!ImGui::CollapsingHeader(label, open))
 			return;
@@ -57,7 +56,7 @@ namespace IW3SR::Game
 		if (ImGui::InputFloat("Font Size", &FontSize, 0.1))
 			SetFont(FontName);
 
-		const auto& fonts = Assets::Get().FontNames;
+		const auto& fonts = GDraw2D::FontNames;
 		if (ImGui::Combo("Font", &FontIndex, fonts))
 			SetFont(fonts[FontIndex]);
 
@@ -67,20 +66,21 @@ namespace IW3SR::Game
 		ImGui::PopID();
 	}
 
-	void Text::Render()
+	void GText::Render()
 	{
-		float x = Position.x;
-		float y = Position.y;
-		float xScale = FontSize * FontRescale;
-		float yScale = FontSize * FontRescale;
-
 		if (!Font)
 			SetFont(FontName);
 
-		Size = { R_TextWidth(Value.c_str(), Value.size(), Font) * xScale, Font->pixelHeight * yScale };
+		RenderSize = GDraw2D::TextSize(Value, Font) * FontSize;
+		Size = UI::Get().Screen.RealToVirtual * RenderSize;
 
-		ComputeAlignment(x, y);
-		UI::Get().Screen.Apply(x, y, xScale, yScale, HorizontalAlign, VerticalAlign);
-		R_AddCmdDrawText(Value.c_str(), 0x7FFFFFFF, Font, x, y, xScale, yScale, 0, 0, Color);
+		vec2 position = Position;
+		vec2 size = Size;
+
+		ComputeAlignment(position);
+		UI::Get().Screen.Apply(position, HorizontalAlign, VerticalAlign);
+		RenderPosition = position;
+
+		GDraw2D::Text(Value, Font, RenderPosition, FontSize, Color);
 	}
 }

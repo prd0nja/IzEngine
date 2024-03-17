@@ -1,5 +1,5 @@
 #pragma once
-#include "Game/Definitions.hpp"
+#include "Game/Base.hpp"
 #include "PMove.hpp"
 
 namespace IW3SR::Game
@@ -10,25 +10,20 @@ namespace IW3SR::Game
 	class API Player
 	{
 	public:
-		centity_s* c;
+		centity_s* ent;
 		clientInfo_t* info;
 
 		/// <summary>
 		/// Initialize the player.
 		/// </summary>
 		Player() = default;
+		~Player() = default;
 
 		/// <summary>
 		/// Initialize the player.
 		/// </summary>
 		/// <param name="index">The player index.</param>
 		Player(int index);
-		~Player() = default;
-
-		/// <summary>
-		/// Initialize all players.
-		/// </summary>
-		static void Initialize();
 
 		/// <summary>
 		/// Is player self.
@@ -53,6 +48,11 @@ namespace IW3SR::Game
 		/// </summary>
 		/// <returns></returns>
 		bool InAir();
+
+		/// <summary>
+		/// Initialize all players.
+		/// </summary>
+		static void Initialize();
 
 		/// <summary>
 		/// Predict player state.

@@ -21,7 +21,7 @@ namespace IW3SR::Game
 		Com_PrintMessage_h(0x4FCA50, Console::Write);
 
 	Hook<void(int localClientNum)>
-		CG_DrawCrosshair_h(0x4311A0, Renderer::Draw2D);
+		CG_DrawCrosshair_h(0x4311A0, GRenderer::Draw2D);
 
 	Hook<void(int localClientNum)>
 		CG_PredictPlayerState_Internal_h(0x447260, Player::Predict);
@@ -36,16 +36,16 @@ namespace IW3SR::Game
 		PM_AirMove_h(0x40F680, PMove::AirMove);
 
 	Hook<void()>
-		R_Init_h(0x5F4EE0, Renderer::Initialize);
+		R_Init_h(0x5F4EE0, GRenderer::Initialize);
 
 	Hook<void(void* cmds)>
 		R_RenderAllLeftovers_h(0x6156EC, ASM_LOAD(R_RenderAllLeftovers_h));
 
 	Hook<void(int window)>
-		R_Shutdown_h(0x5F4F90, Renderer::Shutdown);
+		R_Shutdown_h(0x5F4F90, GRenderer::Shutdown);
 
 	Hook<void(GfxCmdBufInput* cmd, GfxViewInfo* viewInfo, GfxCmdBufSourceState* src, GfxCmdBufState* buf)>
-		RB_EndSceneRendering_h(0x6496EC, Renderer::Draw3D);
+		RB_EndSceneRendering_h(0x6496EC, GRenderer::Draw3D);
 }
 namespace IW3SR::Game
 {
@@ -58,7 +58,7 @@ namespace IW3SR::Game
 		a.pushad();
 
 		a.push(x86::eax);				// cmds
-		a.call(Renderer::Commands);
+		a.call(GRenderer::Commands);
 		a.add(x86::esp, 4);
 
 		a.popad();

@@ -13,7 +13,7 @@ namespace IW3SR::Game::UC
 A Call of Duty 4 Modification.
 
 [https://github.com/Iswenzz/IW3SR](https://github.com/Iswenzz/IW3SR)
-IW3SR (c) 2023-2024)";
+IW3SR (ent) 2023-2024)";
 
 		Begin();
 		ImGui::PushFont(UI::Get().Themes.H1);

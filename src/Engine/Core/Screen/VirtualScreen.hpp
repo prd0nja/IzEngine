@@ -50,41 +50,35 @@ namespace IW3SR::Engine
         /// <summary>
         /// Virtual to real screen.
         /// </summary>
-        /// <param name="x">X value.</param>
-        /// <param name="y">Y value.</param>
+        /// <param name="position">The position.</param>
         /// <param name="horizontal">Horizontal aligment.</param>
         /// <param name="vertical">Vertical aligment.</param>
-        void Apply(float& x, float& y, Horizontal horizontal, Vertical vertical);
+        void Apply(vec2& position, Horizontal horizontal, Vertical vertical);
 
         /// <summary>
         /// Virtual to real screen.
         /// </summary>
-        /// <param name="x">X value.</param>
-        /// <param name="y">Y value.</param>
-        /// <param name="w">The witdth.</param>
-        /// <param name="h">The height.</param>
+        /// <param name="position">The position.</param>
+        /// <param name="size">The size.</param>
         /// <param name="horizontal">Horizontal aligment.</param>
         /// <param name="vertical">Vertical aligment.</param>
-        void Apply(float& x, float& y, float& w, float& h, Horizontal horizontal, Vertical vertical);
+        void Apply(vec2& position, vec2& size, Horizontal horizontal, Vertical vertical);
 
         /// <summary>
         /// Real to virtual screen.
         /// </summary>
-        /// <param name="x">X value.</param>
-        /// <param name="y">Y value.</param>
+        /// <param name="position">The position.</param>
         /// <param name="horizontal">Horizontal aligment.</param>
         /// <param name="vertical">Vertical aligment.</param>
-        void Reverse(float& x, float& y, Horizontal horizontal, Vertical vertical);
+        void Reverse(vec2& position, Horizontal horizontal, Vertical vertical);
 
         /// <summary>
         /// Real to virtual screen.
         /// </summary>
-        /// <param name="x">X value.</param>
-        /// <param name="y">Y value.</param>
-        /// <param name="w">The witdth.</param>
-        /// <param name="h">The height.</param>
+        /// <param name="position">The position.</param>
+        /// <param name="size">The size.</param>
         /// <param name="horizontal">Horizontal aligment.</param>
         /// <param name="vertical">Vertical aligment.</param>
-        void Reverse(float& x, float& y, float& w, float& h, Horizontal horizontal, Vertical vertical);
+        void Reverse(vec2& position, vec2& size, Horizontal horizontal, Vertical vertical);
 	};
 }

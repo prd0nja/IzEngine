@@ -3,7 +3,7 @@
 
 namespace IW3SR::Engine
 {
-	void Device::Assign(IDirect3D9* d3d, IDirect3DDevice9* device)
+	void Device::Initialize(IDirect3D9* d3d, IDirect3DDevice9* device)
 	{
 		D3D = d3d;
 		D3Device = device;

@@ -1,17 +1,19 @@
 #pragma once
-#include "Game/Definitions.hpp"
+#include "Game/Base.hpp"
 
 namespace IW3SR::Game
 {
 	/// <summary>
 	/// Text element.
 	/// </summary>
-	class API Text : public IObject
+	class API GText : public IObject
 	{
 	public:
 		std::string Value;
 		vec2 Position;
 		vec2 Size;
+		vec2 RenderPosition;
+		vec2 RenderSize;
 		vec4 Color = vec4::One;
 
 		Horizontal HorizontalAlign = HORIZONTAL_LEFT;
@@ -25,13 +27,13 @@ namespace IW3SR::Game
 		int FontIndex = 0;
 
 		/// <summary>
-		/// Initialize the Text.
+		/// Create a text.
 		/// </summary>
-		Text() = default;
-		virtual ~Text() = default;
+		GText() = default;
+		virtual ~GText() = default;
 
 		/// <summary>
-		/// Initialize the Text.
+		/// Create a text.
 		/// </summary>
 		/// <param name="text">The text.</param>
 		/// <param name="font">The font.</param>
@@ -39,7 +41,7 @@ namespace IW3SR::Game
 		/// <param name="y">Y value.</param>
 		/// <param name="size">Font size.</param>
 		/// <param name="color">The color.</param>
-		Text(const std::string& text, const std::string& font, float x, float y, float size, const vec4& color);
+		GText(const std::string& text, const std::string& font, float x, float y, float size, const vec4& color);
 
 		/// <summary>
 		/// Set the rect alignment.
@@ -76,13 +78,12 @@ namespace IW3SR::Game
 		Font_s* Font = nullptr;
 
 		/// <summary>
-		/// Compute the text alignment.
+		/// Compute the alignment.
 		/// </summary>
-		/// <param name="x">X position.</param>
-		/// <param name="y">Y position.</param>
-		void ComputeAlignment(float& x, float& y);
+		/// <param name="position">The position.</param>
+		void ComputeAlignment(vec2& position);
 
-		SERIALIZE_POLY_BASE(Text, Value, Position, Color,
+		SERIALIZE_POLY_BASE(GText, Value, Position, Color,
 			HorizontalAlign, VerticalAlign, AlignX, AlignY, FontName, FontSize)
 	};
 }

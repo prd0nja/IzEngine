@@ -43,14 +43,18 @@ namespace IW3SR::Engine
         };
     }
 
-    void VirtualScreen::Apply(float& x, float& y, Horizontal horizontal, Vertical vertical)
+    void VirtualScreen::Apply(vec2& position, Horizontal horizontal, Vertical vertical)
     {
-        float zero = 0;
-        Apply(x, y, zero, zero, horizontal, vertical);
+        Apply(position, vec2::Zero, horizontal, vertical);
     }
 
-    void VirtualScreen::Apply(float& x, float& y, float& w, float& h, Horizontal horizontal, Vertical vertical)
+    void VirtualScreen::Apply(vec2& position, vec2& size, Horizontal horizontal, Vertical vertical)
     {
+        float& x = position.x;
+        float& y = position.y;
+        float& w = size.x;
+        float& h = size.y;
+
         switch (horizontal)
         {
         case HORIZONTAL_SUBLEFT:
@@ -107,14 +111,18 @@ namespace IW3SR::Engine
         }
     }
 
-    void VirtualScreen::Reverse(float& x, float& y, Horizontal horizontal, Vertical vertical)
+    void VirtualScreen::Reverse(vec2& position, Horizontal horizontal, Vertical vertical)
     {
-        float zero = 0;
-        Reverse(x, y, zero, zero, horizontal, vertical);
+        Reverse(position, vec2::Zero, horizontal, vertical);
     }
 
-    void VirtualScreen::Reverse(float& x, float& y, float& w, float& h, Horizontal horizontal, Vertical vertical)
+    void VirtualScreen::Reverse(vec2& position, vec2& size, Horizontal horizontal, Vertical vertical)
     {
+        float& x = position.x;
+        float& y = position.y;
+        float& w = size.x;
+        float& h = size.y;
+
         switch (horizontal)
         {
         case HORIZONTAL_SUBLEFT:

@@ -1,14 +1,13 @@
 #pragma once
-#include "Game/Definitions.hpp"
+#include "Game/Base.hpp"
 
 namespace IW3SR::Game
 {
 	/// <summary>
 	/// Renderer class.
 	/// </summary>
-	class Renderer
+	class GRenderer
 	{
-		CLASS_SINGLETON(Renderer)
 	public:
 		/// <summary>
 		/// Initialize the renderer.
@@ -46,13 +45,6 @@ namespace IW3SR::Game
 		/// <summary>
 		/// Render frame.
 		/// </summary>
-		void Render();
-
-	private:
-		/// <summary>
-		/// Initialize the renderer.
-		/// </summary>
-		Renderer() = default;
-		~Renderer() = default;
+		static void Render();
 	};
 }

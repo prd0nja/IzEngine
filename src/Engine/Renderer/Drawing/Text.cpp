@@ -1,8 +1,7 @@
 #include "Text.hpp"
+#include "Draw2D.hpp"
 
 #include "ImGUI/UI.hpp"
-#include "DX9/Device.hpp"
-#include "DX9/Assets.hpp"
 
 namespace IW3SR::Engine
 {
@@ -28,24 +27,24 @@ namespace IW3SR::Engine
 
 	void Text::SetFont(const std::string& font)
 	{
-		auto& assets = Assets::Get();
 		int fontSize = std::floor(UI::Get().Size * FontSize * FontRescale);
-		Font = assets.LoadFont(font, fontSize);
+
+		Font = Font::Create(font, fontSize);
 		FontName = font;
-		FontIndex = std::distance(assets.FontNames.begin(), std::ranges::find(assets.FontNames, FontName));
+		FontIndex = std::distance(Fonts::Names.begin(), std::ranges::find(Fonts::Names, FontName));
 	}
 
-	void Text::ComputeAlignment(float& x, float& y)
+	void Text::ComputeAlignment(vec2& position)
 	{
 		if (AlignX & ALIGN_CENTER)
-			x += -(Size.x / 2.f);
+			position.x += -(Size.x / 2.f);
 		else if (AlignX & ALIGN_RIGHT)
-			x += -Size.x;
+			position.x += -Size.x;
 
 		if (AlignY & ALIGN_MIDDLE)
-			y += Size.y / 2.f;
+			position.y += Size.y / 2.f;
 		else if (AlignY & ALIGN_BOTTOM)
-			y += Size.y;
+			position.y += Size.y;
 	}
 
 	void Text::Menu(const std::string& label, bool open)
@@ -61,7 +60,7 @@ namespace IW3SR::Engine
 		if (ImGui::InputFloat("Font Size", &FontSize, 0.1))
 			SetFont(FontName);
 
-		const auto& fonts = Assets::Get().FontNames;
+		const auto& fonts = Fonts::Names;
 		if (ImGui::Combo("Font", &FontIndex, fonts))
 			SetFont(fonts[FontIndex]);
 
@@ -73,24 +72,20 @@ namespace IW3SR::Engine
 
 	void Text::Render()
 	{
-		float x = Position.x;
-		float y = Position.y;
-
-		if (!Font)
+		if (!Font) 
 			SetFont(FontName);
 
-		RECT textRect = { 0 };
-		Font->Base->DrawTextA(NULL, Value.c_str(), -1, &textRect, DT_CALCRECT, 0);
-		RenderSize = { static_cast<float>(textRect.right - textRect.left),
-			static_cast<float>(textRect.bottom - textRect.top) };
+		RenderSize = Draw2D::TextSize(Value, Font);
 		Size = UI::Get().Screen.RealToVirtual * RenderSize;
 
-		ComputeAlignment(x, y);
-		UI::Get().Screen.Apply(x, y, HorizontalAlign, VerticalAlign);
-		RECT rect = { static_cast<int>(x), static_cast<int>(y), 0, 0 };
-		RenderPosition = { x, y };
+		vec2 position = Position;
+		vec2 size = Size;
+
+		ComputeAlignment(position);
+		UI::Get().Screen.Apply(position, HorizontalAlign, VerticalAlign);
+		RenderPosition = position;
 
 		ImGui::Movable(ID, Position, Size, RenderPosition, RenderSize);
-		Font->Base->DrawTextA(NULL, Value.c_str(), -1, &rect, DT_NOCLIP, Color.BGRA());
+		Draw2D::Text(Value, Font, RenderPosition, RenderSize, Color);
 	}
 }

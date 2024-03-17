@@ -1,5 +1,4 @@
 #include "Renderer.hpp"
-#include "Assets.hpp"
 #include "GUI.hpp"
 
 #include "Backends/D3D9EX.hpp"
@@ -10,33 +9,30 @@
 
 namespace IW3SR::Game
 {
-	void Renderer::Initialize()
+	void GRenderer::Initialize()
 	{
 		R_Init_h();
 
-		Device::Get().Assign(dx->d3d9, dx->device);
-		Device::Get().CreateScreen();
+		Device::Initialize(dx->d3d9, dx->device);
+		Device::CreateScreen();
+		Renderer::Initialize();
 
-		Assets::Get().Initialize();
 		GUI::Get().Initialize();
 		Modules::Get().Initialize();
 		Settings::Get().Initialize();
-
-		EventPluginRenderer event;
-		Plugins::Dispatch(event);
 	}
 
-	void Renderer::Shutdown(int window)
+	void GRenderer::Shutdown(int window)
 	{
 		Settings::Get().Release();
 		Modules::Get().Release();
 		GUI::Get().Release();
-		Assets::Get().Release();
 
+		Renderer::Shutdown();
 		R_Shutdown_h(window);
 	}
 
-	void Renderer::Draw2D(int localClientNum)
+	void GRenderer::Draw2D(int localClientNum)
 	{
 		CG_DrawCrosshair_h(localClientNum);
 
@@ -44,25 +40,25 @@ namespace IW3SR::Game
 		Application::Get().Dispatch(event);
 	}
 
-	void Renderer::Draw3D(GfxCmdBufInput* cmd, GfxViewInfo* viewInfo, GfxCmdBufSourceState* src, GfxCmdBufState* buf)
+	void GRenderer::Draw3D(GfxCmdBufInput* cmd, GfxViewInfo* viewInfo, GfxCmdBufSourceState* src, GfxCmdBufState* buf)
 	{
 		RB_EndSceneRendering_h(cmd, viewInfo, src, buf);
-		Draw3D::Render();
+		GDraw3D::Render();
 
 		EventRenderer3D event;
 		Application::Get().Dispatch(event);
 	}
 
-	void Renderer::Commands(void* cmds)
+	void GRenderer::Commands(void* cmds)
 	{
 		// HLSL offline gameTime constants
 		if (client_ui->connectionState != CA_ACTIVE)
 			R_SetGameTime(gfx_cmdBufSourceState, UI::Get().Time());
 	}
 
-	void Renderer::Render()
+	void GRenderer::Render()
 	{
-		UI::Get().Begin();
+		Renderer::Begin();
 		GUI::Get().Render();
 
 		if (client_ui->connectionState == CA_ACTIVE)
@@ -70,8 +66,6 @@ namespace IW3SR::Game
 			EventRendererRender event;
 			Application::Get().Dispatch(event);
 		}
-
-		UI::Get().End();
-		KeyListener::Reset();
+		Renderer::End();
 	}
 }

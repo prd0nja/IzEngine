@@ -1,15 +1,13 @@
 #pragma once
-#include "Definitions.hpp"
+#include "Renderer/GUI.hpp"
+#include "Renderer/Drawing/Draw2D.hpp"
+#include "Renderer/Drawing/Draw3D.hpp"
+#include "Renderer/Drawing/HUD.hpp"
+#include "Renderer/Drawing/Text.hpp"
+#include "Renderer/Drawing/Lines.hpp"
+#include "Renderer/Settings/Settings.hpp"
+#include "Renderer/Modules/Modules.hpp"
 
-#include "Game/Renderer/GUI.hpp"
-#include "Game/Renderer/Drawing/Draw3D.hpp"
-#include "Game/Renderer/Drawing/Lines.hpp"
-#include "Game/Renderer/Settings/Settings.hpp"
-#include "Game/Renderer/Modules/Modules.hpp"
-
-#include "Game/Player/Player.hpp"
-#include "Game/World/World.hpp"
-#include "Game/System/Dvar.hpp"
-
-namespace IW3SR::Addons {};
-using namespace IW3SR::Addons;
+#include "Player/Player.hpp"
+#include "World/World.hpp"
+#include "System/Dvar.hpp"

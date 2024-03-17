@@ -1,5 +1,5 @@
 #pragma once
-#include "Game/Definitions.hpp"
+#include "Game/Base.hpp"
 
 #include "UI/About.hpp"
 #include "UI/Binds.hpp"
@@ -17,7 +17,6 @@ namespace IW3SR::Game
 		CLASS_SINGLETON(GUI)
 	public:
 		Engine::UI& UI;
-		KeyListener KeyOpen;
 
 		UC::About About;
 		UC::Binds Binds;
@@ -47,6 +46,6 @@ namespace IW3SR::Game
 		GUI();
 		virtual ~GUI() = default;
 
-		SERIALIZE(GUI, KeyOpen, About, Binds, Modules, Settings, Toolbar)
+		SERIALIZE(GUI, About, Binds, Modules, Settings, Toolbar)
 	};
 }

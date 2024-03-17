@@ -4,8 +4,6 @@ namespace IW3SR::Game
 {
 	GUI::GUI() : UI(UI::Get())
 	{
-		KeyOpen = KeyListener(VK_F10);
-
 		About = UC::About();
 		Binds = UC::Binds();
 		Modules = UC::Modules();
@@ -16,20 +14,15 @@ namespace IW3SR::Game
 	void GUI::Initialize()
 	{
 		Environment::Deserialize("GUI", *this);
-		UI.Initialize();
 	}
 
 	void GUI::Release()
 	{
-		UI.Release();
 		Environment::Serialize("GUI", *this);
 	}
 
 	void GUI::Render()
 	{
-		if (KeyOpen.IsPressed())
-			UI.Open = !UI.Open;
-
 		if (!UI.Open)
 			return;
 
@@ -38,8 +31,5 @@ namespace IW3SR::Game
 		Modules.Render();
 		Settings.Render();
 		About.Render();
-
-		UI.Memory.Render();
-		UI.Themes.Render();
 	}
 }

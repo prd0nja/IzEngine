@@ -32,35 +32,28 @@ namespace IW3SR::Engine
 
 	void Window::Begin(ImGuiWindowFlags flags)
 	{
-		float x = Position.x;
-		float y = Position.y;
-		float w = Size.x;
-		float h = Size.y;
+		vec2 position = Position;
+		vec2 size = Size;
 
-		UI::Get().Screen.Apply(x, y, w, h, HorizontalAlign, VerticalAlign);
-		RenderPosition = { x, y };
-		RenderSize = { w, h };
+		UI::Get().Screen.Apply(position, size, HorizontalAlign, VerticalAlign);
+		RenderPosition = position;
+		RenderSize = size;
 
 		ImGui::Begin(Name.c_str(), &Open, flags | ImGuiWindowFlags_NoCollapse);
 
 		if (ImGui::IsWindowChanged())
 		{
-			vec2 framePosition = ImGui::GetWindowPos();
-			vec2 frameSize = ImGui::GetWindowSize();
+			position = ImGui::GetWindowPos();
+			size = ImGui::GetWindowSize();
 
-			x = framePosition.x;
-			y = framePosition.y;
-			w = frameSize.x;
-			h = frameSize.y;
-
-			UI::Get().Screen.Reverse(x, y, w, h, HorizontalAlign, VerticalAlign);
-			Position = { x, y };
-			Size = { w, h };
+			UI::Get().Screen.Reverse(position, size, HorizontalAlign, VerticalAlign);
+			Position = position;
+			Size = size;
 		}
 		else
 		{
-			ImGui::SetWindowPos({ x, y });
-			ImGui::SetWindowSize({ w, h });
+			ImGui::SetWindowPos(position);
+			ImGui::SetWindowSize(size);
 		}
 		if (Designer)
 			ImGui::Movable(ID, Position, Size, RenderPosition, RenderSize);

@@ -1,8 +1,7 @@
 #include "HUD.hpp"
+#include "Draw2D.hpp"
 
 #include "ImGUI/UI.hpp"
-#include "DX9/Device.hpp"
-#include "DX9/Assets.hpp"
 
 namespace IW3SR::Engine
 {
@@ -28,21 +27,21 @@ namespace IW3SR::Engine
 
 	void HUD::SetTexture(const std::string& texture)
 	{
-		Texture = Assets::Get().Textures[texture];
+		Texture = Textures::List[texture];
 		TextureName = texture;
 	}
 
-	void HUD::ComputeAlignment(float& x, float& y)
+	void HUD::ComputeAlignment(vec2& position)
 	{
 		if (AlignX & ALIGN_CENTER)
-			x += -(Size.x / 2.f);
+			position.x += -(Size.x / 2.f);
 		else if (AlignX & ALIGN_RIGHT)
-			x += -Size.x;
+			position.x += -Size.x;
 
 		if (AlignY & ALIGN_MIDDLE)
-			y += Size.y / 2.f;
+			position.y += Size.y / 2.f;
 		else if (AlignY & ALIGN_BOTTOM)
-			y += Size.y;
+			position.y += Size.y;
 	}
 
 	void HUD::Menu(const std::string& label, bool open)
@@ -64,21 +63,17 @@ namespace IW3SR::Engine
 
 	void HUD::Render()
 	{
-		float x = Position.x;
-		float y = Position.y;
-		float w = Size.x;
-		float h = Size.y;
-
 		if (!Texture)
 			SetTexture(TextureName);
 
-		ComputeAlignment(x, y);
-		UI::Get().Screen.Apply(x, y, w, h, HorizontalAlign, VerticalAlign);
-		RECT rect = { static_cast<int>(x), static_cast<int>(y), static_cast<int>(w), static_cast<int>(h) };
-		RenderPosition = { x, y };
-		RenderSize = { w, h };
+		vec2 position = Position;
+		vec2 size = Size;
 
-		ImGui::Movable(ID, Position, Size, RenderPosition, RenderSize);
-		Device::Get().D3Device->StretchRect(Texture->BaseSurface, NULL, NULL, &rect, D3DTEXF_NONE);
+		ComputeAlignment(position);
+		UI::Get().Screen.Apply(position, size, HorizontalAlign, VerticalAlign);
+		RenderPosition = position;
+		RenderSize = size;
+
+		Draw2D::Rect(Texture, RenderPosition, RenderSize);
 	}
 }

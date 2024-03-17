@@ -1,9 +1,9 @@
 #include "HUD.hpp"
-#include "Game/Renderer/Assets.hpp"
+#include "Draw2D.hpp"
 
 namespace IW3SR::Game
 {
-	HUD::HUD(const std::string& material, float x, float y, float w, float h, const vec4& color)
+	GHUD::GHUD(const std::string& material, float x, float y, float w, float h, const vec4& color)
 	{
 		Position = { x, y };
 		Size = { w, h };
@@ -11,38 +11,38 @@ namespace IW3SR::Game
 		MaterialName = material;
 	}
 
-	void HUD::SetRectAlignment(Horizontal horizontal, Vertical vertical)
+	void GHUD::SetRectAlignment(Horizontal horizontal, Vertical vertical)
 	{
 		HorizontalAlign = horizontal;
 		VerticalAlign = vertical;
 	}
 
-	void HUD::SetAlignment(Alignment horizontal, Alignment vertical)
+	void GHUD::SetAlignment(Alignment horizontal, Alignment vertical)
 	{
 		AlignX = horizontal;
 		AlignY = vertical;
 	}
 
-	void HUD::SetMaterial(const std::string& material)
+	void GHUD::SetMaterial(const std::string& material)
 	{
 		Material = Material_RegisterHandle(material.c_str(), 3);
 		MaterialName = material;
 	}
 
-	void HUD::ComputeAlignment(float& x, float& y)
+	void GHUD::ComputeAlignment(vec2& position)
 	{
 		if (AlignX & ALIGN_CENTER)
-			x += -(Size.x / 2.f);
+			position.x += -(Size.x / 2.f);
 		else if (AlignX & ALIGN_RIGHT)
-			x += -Size.x;
+			position.x += -Size.x;
 
 		if (AlignY & ALIGN_MIDDLE)
-			y += Size.y / 2.f;
+			position.y += Size.y / 2.f;
 		else if (AlignY & ALIGN_BOTTOM)
-			y += Size.y;
+			position.y += Size.y;
 	}
 
-	void HUD::Menu(const std::string& label, bool open)
+	void GHUD::Menu(const std::string& label, bool open)
 	{
 		if (!ImGui::CollapsingHeader(label, open))
 			return;
@@ -59,18 +59,20 @@ namespace IW3SR::Game
 		ImGui::PopID();
 	}
 
-	void HUD::Render()
+	void GHUD::Render()
 	{
-		float x = Position.x;
-		float y = Position.y;
-		float w = Size.x;
-		float h = Size.y;
-
 		if (!Material)
 			SetMaterial(MaterialName);
 
-		ComputeAlignment(x, y);
-		UI::Get().Screen.Apply(x, y, w, h, HorizontalAlign, VerticalAlign);
-		R_AddCmdDrawStretchPic(Material, x, y, w, h, 0.f, 0.f, 0.f, 0.f, Color);
+		vec2 position = Position;
+		vec2 size = Size;
+
+		ComputeAlignment(position);
+		UI::Get().Screen.Apply(position, size, HorizontalAlign, VerticalAlign);
+		RenderPosition = position;
+		RenderSize = size;
+
+		ImGui::Movable(ID, Position, Size, RenderPosition, RenderSize);
+		GDraw2D::Rect(Material, RenderPosition, RenderSize, Color);
 	}
 }

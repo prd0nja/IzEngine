@@ -377,7 +377,7 @@ namespace IW3SR::Game
 	HRESULT D3D9Device::EndScene()
 	{
 		if (UI::Get().Active)
-			Renderer::Get().Render();
+			GRenderer::Render();
 		return pIDirect3DDevice9->EndScene();
 	}
 

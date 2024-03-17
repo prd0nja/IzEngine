@@ -5,8 +5,6 @@ add_subdirectory(Modules)
 add_subdirectory(UI)
 
 target_sources(IW3SR.Game PRIVATE
-	Assets.hpp
-	Assets.cpp
 	GUI.hpp
 	GUI.cpp
 	Renderer.hpp
