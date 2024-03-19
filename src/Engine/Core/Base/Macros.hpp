@@ -1,7 +1,15 @@
 #pragma once
+#ifndef C_EXTERN
 #define C_EXTERN extern "C"
+#endif
+
+#ifndef CPP_EXTERN
 #define CPP_EXTERN extern "C++"
+#endif
+
+#ifndef ASM
 #define ASM C_EXTERN
+#endif
 
 #ifndef CDECL
 #define CDECL __cdecl
@@ -13,6 +21,10 @@
 
 #ifndef FASTCALL
 #define FASTCALL __fastcall
+#endif
+
+#ifndef NOASAN
+#define NOASAN __declspec(no_sanitize_address)
 #endif
 
 #ifndef EXPORT
