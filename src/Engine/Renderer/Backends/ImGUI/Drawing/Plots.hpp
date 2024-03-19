@@ -1,12 +1,12 @@
 #pragma once
-#include "ImGUI/Drawing/Window.hpp"
+#include "ImGUI/Drawing/Widget.hpp"
 
 namespace IW3SR::Engine
 {
 	/// <summary>
 	/// Plots drawing.
 	/// </summary>
-	class API Plots : public Window
+	class API Plots : public Widget
 	{
 	public:
 		/// <summary>
@@ -14,11 +14,5 @@ namespace IW3SR::Engine
 		/// </summary>
 		Plots();
 		virtual ~Plots() = default;
-
-		/// <summary>
-		/// Begin drawing.
-		/// </summary>
-		/// <param name="flags">Window flags.</param>
-		void Begin(ImGuiWindowFlags flags = 0) override;
 	};
 }

@@ -4,4 +4,5 @@
 
 #include "Drawing/Notification.hpp"
 #include "Drawing/Plots.hpp"
+#include "Drawing/Widget.hpp"
 #include "Drawing/Window.hpp"
