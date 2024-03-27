@@ -5,6 +5,6 @@ echo [+] Build
 rmdir build /s /q
 mkdir build
 cd build
-cmake .. -A Win32 -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE=.vcpkg/windows.cmake
+cmake .. --preset windows
 cmake --build . --config Release
 cmake --install . --config Release
