@@ -1,14 +1,6 @@
 Checks: >
-  -*,
-  bugprone-*,
-  google-*,
-  -google-readability-namespace-comments,
-  misc-*,
-  -misc-non-private-member-variables-in-classes,
-  modernize-*,
-  -modernize-use-trailing-return-type,
-  performance-*,
-  portability-*,
-  readability-*
+  -*
+  clang-analyzer-*
 
 WarningsAsErrors: "*"
+FormatStyle: file

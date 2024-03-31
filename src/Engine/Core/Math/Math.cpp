@@ -35,7 +35,7 @@ namespace IW3SR::Engine
 		return (360.0f / 65536) * (static_cast<int>(angle * (65536 / 360.0f)) & 65535);
 	}
 
-	float Math::AngleNormalizePI(const float angle)
+	float Math::AngleNormalizePI(float angle)
 	{
 		const float tAngle = fmod(angle + M_PI, 2 * M_PI);
 		return tAngle < 0 ? tAngle + M_PI : tAngle - M_PI;
@@ -191,7 +191,6 @@ namespace IW3SR::Engine
 				angles[PITCH] = M_PI * 0.5f;
 				angles[YAW] = up[0] ? atan2(up[1], up[0]) : 0.0f;
 			}
-
 			angles[ROLL] = 0.0f;
 		}
 		else
@@ -201,8 +200,10 @@ namespace IW3SR::Engine
 
 			if (up[0])
 			{
-				const float cp = cos(angles[PITCH]), sp = sin(angles[PITCH]);
-				const float cy = cos(angles[YAW]), sy = sin(angles[YAW]);
+				const float cp = cos(angles[PITCH]);
+				const float sp = sin(angles[PITCH]);
+				const float cy = cos(angles[YAW]);
+				const float sy = sin(angles[YAW]);
 
 				const vec3 tleft = { -sy, cy, 0.0f };
 				const vec3 tup = { (sp * cy), (sp * sy), (cp) };
@@ -241,14 +242,14 @@ namespace IW3SR::Engine
 		if (angle <= -half_fov_x)
 			return SCREEN_WIDTH;
 
-		return SCREEN_WIDTH / 2 * (1 - tan(angle) / tan(half_fov_x));
+		return (SCREEN_WIDTH / 2.f) * (1.f - tan(angle) / tan(half_fov_x));
 	}
 
 	vec3 Math::AnglesToRange(float start, float end, float yaw, float tanHalfFov)
 	{
-		if (abs(end - start) > 2 * M_PI)
-			return { 0, SCREEN_WIDTH, false };
-		float split = end > start;
+		if (abs(end - start) > 2.f * M_PI)
+			return { 0, SCREEN_WIDTH, 0 };
+		bool split = end > start;
 
 		start = AngleNormalizePI(start - yaw);
 		end = AngleNormalizePI(end - yaw);
@@ -261,6 +262,7 @@ namespace IW3SR::Engine
 			start = end;
 			end = tmp;
 		}
-		return { AngleScreenProjection(start, tanHalfFov), AngleScreenProjection(end, tanHalfFov), split };
+		return { AngleScreenProjection(start, tanHalfFov), AngleScreenProjection(end, tanHalfFov),
+			static_cast<float>(split) };
 	}
 }

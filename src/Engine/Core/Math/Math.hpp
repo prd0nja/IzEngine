@@ -111,7 +111,7 @@ namespace IW3SR::Engine
 		/// </summary>
 		/// <param name="angle">Angle in radians.</param>
 		/// <returns>Normalized angle in radians.</returns>
-		static float AngleNormalizePI(const float angle);
+		static float AngleNormalizePI(float angle);
 
 		/// <summary>
 		/// Gets the delta angle of 2 angles.

@@ -44,7 +44,7 @@ namespace IW3SR::Engine
 			return addresses;
 
 		std::string bytes = Memory::HexToBytes(Pattern);
-		int size = bytes.size();
+		const int size = bytes.size();
 
 		MODULEINFO moduleInfo;
 		GetModuleInformation(GetCurrentProcess(), hModule, &moduleInfo, sizeof(moduleInfo));

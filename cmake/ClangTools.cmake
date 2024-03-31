@@ -1,3 +1,5 @@
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 add_custom_target(clang-tidy
 	COMMAND find . -type f \( -name '*.cpp' -o -name '*.hpp' \) -not -path './build/*' -exec clang-tidy --config-file=.clang-tidy {} +
 	WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
