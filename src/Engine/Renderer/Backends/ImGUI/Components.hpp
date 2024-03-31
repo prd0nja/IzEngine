@@ -1,29 +1,21 @@
 #pragma once
 #include "ImGUI/Base.hpp"
 
-#include "Core/Math.hpp"
 #include "Core/Containers/CircularBuffer.hpp"
 #include "Core/Input/KeyListener.hpp"
+#include "Core/Math.hpp"
 
 #include "Fonts/IconsFontAwesome6.hpp"
 #include "Fonts/IconsFontAwesome6Brands.hpp"
 
-constexpr ImGuiWindowFlags ImGuiWindowFlags_Widget = ImGuiWindowFlags_NoTitleBar
-	| ImGuiWindowFlags_NoResize
-	| ImGuiWindowFlags_NoScrollbar
-	| ImGuiWindowFlags_NoCollapse
-	| ImGuiWindowFlags_NoBackground;
+constexpr ImGuiWindowFlags ImGuiWindowFlags_Widget = ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize
+	| ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoBackground;
 
-constexpr ImGuiWindowFlags ImGuiWindowFlags_Notification = ImGuiWindowFlags_NoCollapse
- 	| ImGuiWindowFlags_NoInputs
- 	| ImGuiWindowFlags_NoMove
- 	| ImGuiWindowFlags_NoResize
- 	| ImGuiWindowFlags_NoScrollbar
- 	| ImGuiWindowFlags_NoTitleBar;
+constexpr ImGuiWindowFlags ImGuiWindowFlags_Notification = ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoInputs
+	| ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoTitleBar;
 
-constexpr ImPlotAxisFlags ImPlotAxisFlags_Canvas = ImPlotAxisFlags_NoTickLabels
-	| ImPlotAxisFlags_NoTickMarks
-	| ImPlotAxisFlags_NoGridLines;
+constexpr ImPlotAxisFlags ImPlotAxisFlags_Canvas =
+	ImPlotAxisFlags_NoTickLabels | ImPlotAxisFlags_NoTickMarks | ImPlotAxisFlags_NoGridLines;
 
 constexpr std::array<const char*, 3> Horizontals = { "Left", "Center", "Right" };
 constexpr std::array<const char*, 3> Verticals = { "Top", "Center", "Bottom" };
@@ -54,8 +46,7 @@ namespace ImGui
 	/// <param name="v">Toggle state.</param>
 	/// <param name="size">The button size.</param>
 	/// <returns></returns>
-	API bool Button(const std::string& label, const std::string& id, bool* v,
-		const ImVec2& size = ImVec2(0, 0));
+	API bool Button(const std::string& label, const std::string& id, bool* v, const ImVec2& size = ImVec2(0, 0));
 
 	/// <summary>
 	/// Create a toggle button.
@@ -65,8 +56,7 @@ namespace ImGui
 	/// <param name="v">Toggle state.</param>
 	/// <param name="size">The button size.</param>
 	/// <returns></returns>
-	API bool ButtonToggle(const std::string& label, const std::string& id, bool* v,
-		const ImVec2& size = ImVec2(0, 0));
+	API bool ButtonToggle(const std::string& label, const std::string& id, bool* v, const ImVec2& size = ImVec2(0, 0));
 
 	/// <summary>
 	/// Toggle button.
@@ -179,19 +169,18 @@ namespace ImGui
 SERIALIZE_NON_INTRUSIVE(ImVec2, x, y)
 SERIALIZE_NON_INTRUSIVE(ImVec4, x, y, z, w)
 
-SERIALIZE_NON_INTRUSIVE(ImGuiStyle, Alpha, DisabledAlpha, WindowPadding, WindowRounding,
-	WindowBorderSize, WindowMinSize, WindowTitleAlign, WindowMenuButtonPosition, ChildRounding,
-	ChildBorderSize, PopupRounding, PopupBorderSize, FramePadding, FrameRounding, FrameBorderSize,
-	ItemSpacing, ItemInnerSpacing, CellPadding, TouchExtraPadding, IndentSpacing, ColumnsMinSpacing,
-	ScrollbarSize, ScrollbarRounding, GrabMinSize, GrabRounding, LogSliderDeadzone, TabRounding,
-	TabBorderSize, TabMinWidthForCloseButton, ColorButtonPosition, ButtonTextAlign, SelectableTextAlign,
-	SeparatorTextBorderSize, SeparatorTextAlign, SeparatorTextPadding, DisplayWindowPadding,
+SERIALIZE_NON_INTRUSIVE(ImGuiStyle, Alpha, DisabledAlpha, WindowPadding, WindowRounding, WindowBorderSize,
+	WindowMinSize, WindowTitleAlign, WindowMenuButtonPosition, ChildRounding, ChildBorderSize, PopupRounding,
+	PopupBorderSize, FramePadding, FrameRounding, FrameBorderSize, ItemSpacing, ItemInnerSpacing, CellPadding,
+	TouchExtraPadding, IndentSpacing, ColumnsMinSpacing, ScrollbarSize, ScrollbarRounding, GrabMinSize, GrabRounding,
+	LogSliderDeadzone, TabRounding, TabBorderSize, TabMinWidthForCloseButton, ColorButtonPosition, ButtonTextAlign,
+	SelectableTextAlign, SeparatorTextBorderSize, SeparatorTextAlign, SeparatorTextPadding, DisplayWindowPadding,
 	DisplaySafeAreaPadding, MouseCursorScale, AntiAliasedLines, AntiAliasedLinesUseTex, AntiAliasedFill,
-	CurveTessellationTol, CircleTessellationMaxError, Colors, HoverStationaryDelay, HoverDelayShort,
-	HoverDelayNormal, HoverFlagsForTooltipMouse, HoverFlagsForTooltipNav)
+	CurveTessellationTol, CircleTessellationMaxError, Colors, HoverStationaryDelay, HoverDelayShort, HoverDelayNormal,
+	HoverFlagsForTooltipMouse, HoverFlagsForTooltipNav)
 
-SERIALIZE_NON_INTRUSIVE(ImPlotStyle, LineWeight, Marker, MarkerSize, MarkerWeight, FillAlpha,
-	ErrorBarSize, ErrorBarWeight, DigitalBitHeight, DigitalBitGap, PlotBorderSize, MinorAlpha, MajorTickLen,
-	MinorTickLen, MajorTickSize, MinorTickSize, MajorGridSize, MinorGridSize, PlotPadding, LabelPadding,
-	LegendPadding, LegendInnerPadding, LegendSpacing, MousePosPadding, AnnotationPadding, FitPadding,
-	PlotDefaultSize, PlotMinSize, Colors, Colormap, UseLocalTime, UseISO8601, Use24HourClock)
+SERIALIZE_NON_INTRUSIVE(ImPlotStyle, LineWeight, Marker, MarkerSize, MarkerWeight, FillAlpha, ErrorBarSize,
+	ErrorBarWeight, DigitalBitHeight, DigitalBitGap, PlotBorderSize, MinorAlpha, MajorTickLen, MinorTickLen,
+	MajorTickSize, MinorTickSize, MajorGridSize, MinorGridSize, PlotPadding, LabelPadding, LegendPadding,
+	LegendInnerPadding, LegendSpacing, MousePosPadding, AnnotationPadding, FitPadding, PlotDefaultSize, PlotMinSize,
+	Colors, Colormap, UseLocalTime, UseISO8601, Use24HourClock)

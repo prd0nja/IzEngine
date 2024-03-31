@@ -22,7 +22,8 @@ namespace IW3SR::Game
 	ULONG D3D9EX::Release()
 	{
 		ULONG count = pIDirect3D9Ex->Release();
-		if (!count) delete this;
+		if (!count)
+			delete this;
 		return count;
 	}
 
@@ -62,8 +63,8 @@ namespace IW3SR::Game
 		return pIDirect3D9Ex->CheckDeviceType(iAdapter, DevType, DisplayFormat, BackBufferFormat, bWindowed);
 	}
 
-	HRESULT D3D9EX::CheckDeviceFormat(UINT Adapter, D3DDEVTYPE DeviceType, D3DFORMAT AdapterFormat,
-		DWORD Usage, D3DRESOURCETYPE RType, D3DFORMAT CheckFormat)
+	HRESULT D3D9EX::CheckDeviceFormat(UINT Adapter, D3DDEVTYPE DeviceType, D3DFORMAT AdapterFormat, DWORD Usage,
+		D3DRESOURCETYPE RType, D3DFORMAT CheckFormat)
 	{
 		return pIDirect3D9Ex->CheckDeviceFormat(Adapter, DeviceType, AdapterFormat, Usage, RType, CheckFormat);
 	}
@@ -71,15 +72,15 @@ namespace IW3SR::Game
 	HRESULT D3D9EX::CheckDeviceMultiSampleType(UINT Adapter, D3DDEVTYPE DeviceType, D3DFORMAT SurfaceFormat,
 		BOOL Windowed, D3DMULTISAMPLE_TYPE MultiSampleType, DWORD* pQualityLevels)
 	{
-		return pIDirect3D9Ex->CheckDeviceMultiSampleType(Adapter, DeviceType, SurfaceFormat,
-			Windowed, MultiSampleType, pQualityLevels);
+		return pIDirect3D9Ex->CheckDeviceMultiSampleType(Adapter, DeviceType, SurfaceFormat, Windowed, MultiSampleType,
+			pQualityLevels);
 	}
 
 	HRESULT D3D9EX::CheckDepthStencilMatch(UINT Adapter, D3DDEVTYPE DeviceType, D3DFORMAT AdapterFormat,
 		D3DFORMAT RenderTargetFormat, D3DFORMAT DepthStencilFormat)
 	{
-		return pIDirect3D9Ex->CheckDepthStencilMatch(Adapter, DeviceType, AdapterFormat,
-			RenderTargetFormat, DepthStencilFormat);
+		return pIDirect3D9Ex->CheckDepthStencilMatch(Adapter, DeviceType, AdapterFormat, RenderTargetFormat,
+			DepthStencilFormat);
 	}
 
 	HRESULT D3D9EX::CheckDeviceFormatConversion(UINT Adapter, D3DDEVTYPE DeviceType, D3DFORMAT SourceFormat,
@@ -98,12 +99,11 @@ namespace IW3SR::Game
 		return pIDirect3D9Ex->GetAdapterMonitor(Adapter);
 	}
 
-	HRESULT D3D9EX::CreateDevice(UINT Adapter, D3DDEVTYPE DeviceType, HWND hFocusWindow,
-		DWORD BehaviorFlags, D3DPRESENT_PARAMETERS* pPresentationParameters,
-		IDirect3DDevice9** ppReturnedDeviceInterface)
+	HRESULT D3D9EX::CreateDevice(UINT Adapter, D3DDEVTYPE DeviceType, HWND hFocusWindow, DWORD BehaviorFlags,
+		D3DPRESENT_PARAMETERS* pPresentationParameters, IDirect3DDevice9** ppReturnedDeviceInterface)
 	{
-		HRESULT hres = pIDirect3D9Ex->CreateDevice(Adapter, DeviceType, hFocusWindow,
-			BehaviorFlags, pPresentationParameters, ppReturnedDeviceInterface);
+		HRESULT hres = pIDirect3D9Ex->CreateDevice(Adapter, DeviceType, hFocusWindow, BehaviorFlags,
+			pPresentationParameters, ppReturnedDeviceInterface);
 
 		*ppReturnedDeviceInterface = new D3D9Device(*ppReturnedDeviceInterface);
 		return hres;
@@ -125,12 +125,12 @@ namespace IW3SR::Game
 		return (pIDirect3D9Ex->GetAdapterDisplayModeEx(Adapter, pMode, pRotation));
 	}
 
-	HRESULT D3D9EX::CreateDeviceEx(UINT Adapter, D3DDEVTYPE DeviceType, HWND hFocusWindow,
-		DWORD BehaviorFlags, D3DPRESENT_PARAMETERS* pPresentationParameters,
-		D3DDISPLAYMODEEX* pFullscreenDisplayMode, IDirect3DDevice9Ex** ppReturnedDeviceInterface)
+	HRESULT D3D9EX::CreateDeviceEx(UINT Adapter, D3DDEVTYPE DeviceType, HWND hFocusWindow, DWORD BehaviorFlags,
+		D3DPRESENT_PARAMETERS* pPresentationParameters, D3DDISPLAYMODEEX* pFullscreenDisplayMode,
+		IDirect3DDevice9Ex** ppReturnedDeviceInterface)
 	{
-		return (pIDirect3D9Ex->CreateDeviceEx(Adapter, DeviceType, hFocusWindow, BehaviorFlags,
-			pPresentationParameters, pFullscreenDisplayMode, ppReturnedDeviceInterface));
+		return (pIDirect3D9Ex->CreateDeviceEx(Adapter, DeviceType, hFocusWindow, BehaviorFlags, pPresentationParameters,
+			pFullscreenDisplayMode, ppReturnedDeviceInterface));
 	}
 
 	HRESULT D3D9EX::GetAdapterLUID(UINT Adapter, LUID* pLUID)

@@ -134,14 +134,16 @@ namespace IW3SR::Addons
 				{
 					ImPlot::SetNextFillStyle(IMPLOT_AUTO_COL, 0.5f);
 					ImPlot::PushStyleColor(ImPlotCol_Line, VelocityText.Color.RGBA());
-					ImPlot::PlotShaded("Velocity", BufferValues.Get(), BufferValues.Size(), -INFINITY, 1, 0, 0, BufferValues.Offset);
+					ImPlot::PlotShaded("Velocity", BufferValues.Get(), BufferValues.Size(), -INFINITY, 1, 0, 0,
+						BufferValues.Offset);
 					ImPlot::PlotLine("Velocity", BufferValues.Get(), BufferValues.Size(), 1, 0, 0, BufferValues.Offset);
 					ImPlot::PopStyleColor();
 				}
 				if (ShowAverage)
 				{
 					ImPlot::PushStyleColor(ImPlotCol_Line, AverageText.Color.RGBA());
-					ImPlot::PlotLine("Average", BufferAverages.Get(), BufferAverages.Size(), 1, 0, 0, BufferAverages.Offset);
+					ImPlot::PlotLine("Average", BufferAverages.Get(), BufferAverages.Size(), 1, 0, 0,
+						BufferAverages.Offset);
 					ImPlot::PopStyleColor();
 				}
 				if (ShowMax)
@@ -153,7 +155,8 @@ namespace IW3SR::Addons
 				if (ShowGround)
 				{
 					ImPlot::PushStyleColor(ImPlotCol_Line, GroundText.Color.RGBA());
-					ImPlot::PlotLine("Ground", BufferGrounds.Get(), BufferGrounds.Size(), 1, 0, 0, BufferGrounds.Offset);
+					ImPlot::PlotLine("Ground", BufferGrounds.Get(), BufferGrounds.Size(), 1, 0, 0,
+						BufferGrounds.Offset);
 					ImPlot::PopStyleColor();
 				}
 				ImPlot::EndPlot();

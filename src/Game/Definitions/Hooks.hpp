@@ -1,7 +1,8 @@
 #pragma once
-#include "Core/Memory/Hook.hpp"
 #include "Core/Memory/Assembler.hpp"
+#include "Core/Memory/Hook.hpp"
 
+// clang-format off
 namespace IW3SR::Game
 {
 	extern Hook<HWND STDCALL(DWORD dwExStyle, LPCSTR lpClassName, LPCSTR lpWindowName,
@@ -48,6 +49,7 @@ namespace IW3SR::Game
 	extern Hook<void(GfxCmdBufInput* cmd, GfxViewInfo* viewInfo, GfxCmdBufSourceState* src, GfxCmdBufState* buf)>
 		RB_EndSceneRendering_h;
 }
+// clang-format on
 namespace IW3SR::Game
 {
 	ASM_FUNCTION(R_RenderAllLeftovers_h);

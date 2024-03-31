@@ -1,7 +1,7 @@
 #include "Windows/Base.hpp"
 
-#include "Core/System/Plugin.hpp"
 #include "Core/Memory/Signature.hpp"
+#include "Core/System/Plugin.hpp"
 
 namespace IW3SR::Engine
 {

@@ -1,9 +1,9 @@
 #pragma once
 #include "Core/Common.hpp"
 
-#define TEXTURE_NULL	"null"
-#define TEXTURE_WHITE	"white"
-#define TEXTURE_BLACK	"black"
+#define TEXTURE_NULL "null"
+#define TEXTURE_WHITE "white"
+#define TEXTURE_BLACK "black"
 
 namespace IW3SR::Engine
 {

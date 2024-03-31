@@ -1,6 +1,6 @@
 #pragma once
-#include "Engine/Base.hpp"
 #include "Core/Base/Serializer.hpp"
+#include "Engine/Base.hpp"
 
 namespace IW3SR::Engine
 {
@@ -14,13 +14,13 @@ namespace IW3SR::Engine
 		/// Serialize to json.
 		/// </summary>
 		/// <param name="json">The json object.</param>
-		virtual void Serialize(nlohmann::json& json) { };
+		virtual void Serialize(nlohmann::json& json) {};
 
 		/// <summary>
 		/// Deserialize to json.
 		/// </summary>
 		/// <param name="json">The json object.</param>
-		virtual void Deserialize(const nlohmann::json& json) { };
+		virtual void Deserialize(const nlohmann::json& json) {};
 
 		/// <summary>
 		/// Assign value from json.

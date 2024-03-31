@@ -16,7 +16,8 @@ namespace IW3SR::Engine
 		HRESULT hr = D3DXCreateTextureFromFile(Device::D3Device, path.string().c_str(),
 			reinterpret_cast<LPDIRECT3DTEXTURE9*>(&texture->Data));
 
-		if (hr != S_OK) return Default();
+		if (hr != S_OK)
+			return Default();
 		return Textures::List[id] = texture;
 	}
 
@@ -33,10 +34,7 @@ namespace IW3SR::Engine
 			reinterpret_cast<ID3DXFont*>(Surface)->Release();
 	}
 
-	void Textures::Initialize()
-	{
-		
-	}
+	void Textures::Initialize() { }
 
 	void Textures::Release()
 	{

@@ -20,7 +20,9 @@ namespace IW3SR::Game
 
 	void Module::OnEvent(Event& event)
 	{
-		if (!IsEnabled) return;
+		if (!IsEnabled)
+			return;
+
 		EventDispatcher dispatcher(event);
 
 		dispatcher.Dispatch<EventRenderer3D>(EVENT_BIND(OnDraw3D));

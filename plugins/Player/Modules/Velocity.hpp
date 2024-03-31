@@ -59,7 +59,7 @@ namespace IW3SR::Addons
 		/// </summary>
 		void OnRender() override;
 
-		SERIALIZE_POLY(Velocity, Module, VelocityText, AverageText, MaxText, GroundText, Graph,
-			KeyReset, ShowVelocity, ShowAverage, ShowMax, ShowGround, ShowGraph)
+		SERIALIZE_POLY(Velocity, Module, VelocityText, AverageText, MaxText, GroundText, Graph, KeyReset, ShowVelocity,
+			ShowAverage, ShowMax, ShowGround, ShowGraph)
 	};
 }

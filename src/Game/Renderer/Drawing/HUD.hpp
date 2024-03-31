@@ -80,7 +80,6 @@ namespace IW3SR::Game
 		/// <param name="position">The position.</param>
 		void ComputeAlignment(vec2& position);
 
-		SERIALIZE_POLY_BASE(GHUD, Position, Size, Color,
-			HorizontalAlign, VerticalAlign, AlignX, AlignY, MaterialName)
+		SERIALIZE_POLY_BASE(GHUD, Position, Size, Color, HorizontalAlign, VerticalAlign, AlignX, AlignY, MaterialName)
 	};
 }

@@ -1,8 +1,8 @@
-#include "Windows/Base.hpp"
 #include "Core/System/Environment.hpp"
+#include "Windows/Base.hpp"
 
-#include <fstream>
 #include <TlHelp32.h>
+#include <fstream>
 
 namespace IW3SR::Engine
 {
@@ -39,8 +39,7 @@ namespace IW3SR::Engine
 			do
 			{
 				Modules.push_back(moduleEntry.szModule);
-			}
-			while (Module32Next(hSnapshot, &moduleEntry));
+			} while (Module32Next(hSnapshot, &moduleEntry));
 		}
 		CloseHandle(hSnapshot);
 	}

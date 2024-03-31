@@ -13,8 +13,8 @@ namespace IW3SR::Game::UC
 		ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, { 0, 0 });
 		SetRect(0, 0, 640, 14);
 
-		Begin(ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize |
-			ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoMove);
+		Begin(ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar
+			| ImGuiWindowFlags_NoMove);
 
 		auto& GUI = GUI::Get();
 		const vec2& position = RenderPosition;
@@ -70,7 +70,8 @@ namespace IW3SR::Game::UC
 
 	void Toolbar::Reload()
 	{
-		if (IsReloading) return;
+		if (IsReloading)
+			return;
 		IsReloading = true;
 
 		Game::Modules::Get().Release();

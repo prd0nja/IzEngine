@@ -42,9 +42,8 @@ namespace IW3SR::Addons
 		/// </summary>
 		void OnMenu() override;
 
-		SERIALIZE_POLY(General, Setting, DrawSpecular, DrawFog, DrawDecals, DrawTweaks,
-			DrawGlow, DrawSun, SunIntensity, SpecularColorScale, TweakBrightness, TweakDesaturation,
-			GlowRadius, GlowBloomDesaturation, GlowBloomIntensity, GlowBloomCutoff, SunColor, SunDirection,
-			TweakLightTint, TweakDarkTint)
+		SERIALIZE_POLY(General, Setting, DrawSpecular, DrawFog, DrawDecals, DrawTweaks, DrawGlow, DrawSun, SunIntensity,
+			SpecularColorScale, TweakBrightness, TweakDesaturation, GlowRadius, GlowBloomDesaturation,
+			GlowBloomIntensity, GlowBloomCutoff, SunColor, SunDirection, TweakLightTint, TweakDarkTint)
 	};
 }

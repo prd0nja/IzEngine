@@ -11,6 +11,7 @@ namespace IW3SR::Engine
 	class Function
 	{
 		using R = typename std::function<T>::result_type;
+
 	public:
 		uintptr_t Address = 0;
 		std::function<T> Func = nullptr;
@@ -50,7 +51,7 @@ namespace IW3SR::Engine
 		/// </summary>
 		/// <param name="address">The target address.</param>
 		/// <returns></returns>
-		void operator <(uintptr_t address)
+		void operator<(uintptr_t address)
 		{
 			Address = address;
 			Func = std::function<T>(reinterpret_cast<T*>(address));
@@ -62,8 +63,8 @@ namespace IW3SR::Engine
 		/// <typeparam name="...Args">The function args.</typeparam>
 		/// <param name="...args">The function args.</param>
 		/// <returns></returns>
-		template <typename ...Args>
-		R operator()(Args&& ...args)
+		template <typename... Args>
+		R operator()(Args&&... args)
 		{
 			return Func(args...);
 		}

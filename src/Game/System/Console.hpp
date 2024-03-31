@@ -3,6 +3,7 @@
 
 namespace IW3SR::Game
 {
+	// clang-format off
 	constexpr std::array<ConColor, 10> Q3Colors = {
 		ConColor::Default,
 		ConColor::Red,
@@ -15,6 +16,7 @@ namespace IW3SR::Game
 		ConColor::Default,
 		ConColor::Default
 	};
+	// clang-format on
 
 	/// <summary>
 	/// Console class.

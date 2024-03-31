@@ -83,7 +83,6 @@ namespace IW3SR::Engine
 		/// <param name="position">The position.</param>
 		void ComputeAlignment(vec2& position);
 
-		SERIALIZE_POLY_BASE(HUD, Position, Size, Color,
-			HorizontalAlign, VerticalAlign, AlignX, AlignY, TextureName)
+		SERIALIZE_POLY_BASE(HUD, Position, Size, Color, HorizontalAlign, VerticalAlign, AlignX, AlignY, TextureName)
 	};
 }

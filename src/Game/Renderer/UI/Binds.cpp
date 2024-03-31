@@ -6,7 +6,8 @@ namespace IW3SR::Game::UC
 
 	void Binds::Render()
 	{
-		if (!Open) return;
+		if (!Open)
+			return;
 
 		Begin();
 		if (ImGui::CollapsingHeader("General", ImGuiTreeNodeFlags_DefaultOpen))

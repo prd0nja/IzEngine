@@ -87,7 +87,7 @@ namespace IW3SR::Engine
 		/// <param name="position">The position.</param>
 		void ComputeAlignment(vec2& position);
 
-		SERIALIZE_POLY_BASE(Text, Value, Position, Color,
-			HorizontalAlign, VerticalAlign, AlignX, AlignY, FontName, FontSize)
+		SERIALIZE_POLY_BASE(Text, Value, Position, Color, HorizontalAlign, VerticalAlign, AlignX, AlignY, FontName,
+			FontSize)
 	};
 }

@@ -33,8 +33,7 @@ namespace IW3SR::Game
 		/// <param name="viewInfo">View information for the graphics.</param>
 		/// <param name="src">Source state for the graphics command buffer.</param>
 		/// <param name="buf">Graphics command buffer state.</param>
-		static void Draw3D(GfxCmdBufInput* cmd, GfxViewInfo* viewInfo,
-			GfxCmdBufSourceState* src, GfxCmdBufState* buf);
+		static void Draw3D(GfxCmdBufInput* cmd, GfxViewInfo* viewInfo, GfxCmdBufSourceState* src, GfxCmdBufState* buf);
 
 		/// <summary>
 		/// Render commands.

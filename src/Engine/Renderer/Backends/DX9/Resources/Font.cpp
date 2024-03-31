@@ -1,7 +1,7 @@
 #include "Renderer/Resources/Font.hpp"
 
-#include "DX9/Device.hpp"
 #include "Core/System/Environment.hpp"
+#include "DX9/Device.hpp"
 
 namespace IW3SR::Engine
 {
@@ -12,11 +12,12 @@ namespace IW3SR::Engine
 			return cache->second;
 
 		Ref<Font> font = CreateRef<Font>();
-		HRESULT hr = D3DXCreateFont(Device::D3Device, height, 0, FW_NORMAL, 1, FALSE, DEFAULT_CHARSET,
-			OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE, name.c_str(),
-			reinterpret_cast<LPD3DXFONT*>(&font->Data));
+		HRESULT hr =
+			D3DXCreateFont(Device::D3Device, height, 0, FW_NORMAL, 1, FALSE, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS,
+				DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE, name.c_str(), reinterpret_cast<LPD3DXFONT*>(&font->Data));
 
-		if (hr != S_OK) return Default();
+		if (hr != S_OK)
+			return Default();
 		return Fonts::List[id] = font;
 	}
 
@@ -33,9 +34,9 @@ namespace IW3SR::Engine
 		Ref<Font> font = CreateRef<Font>();
 		AddFontResource(path.string().c_str());
 
-		HRESULT hr = D3DXCreateFont(Device::D3Device, height, 0, FW_NORMAL, 1, FALSE, DEFAULT_CHARSET,
-			OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE, name.c_str(),
-			reinterpret_cast<LPD3DXFONT*>(&font->Data));
+		HRESULT hr =
+			D3DXCreateFont(Device::D3Device, height, 0, FW_NORMAL, 1, FALSE, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS,
+				DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE, name.c_str(), reinterpret_cast<LPD3DXFONT*>(&font->Data));
 
 		if (hr != S_OK)
 			return Default();

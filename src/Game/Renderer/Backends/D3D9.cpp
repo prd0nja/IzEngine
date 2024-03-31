@@ -35,7 +35,8 @@ namespace IW3SR::Game
 	ULONG D3D9::Release()
 	{
 		ULONG count = pIDirect3D9->Release();
-		if (!count) delete this;
+		if (!count)
+			delete this;
 		return count;
 	}
 
@@ -75,8 +76,8 @@ namespace IW3SR::Game
 		return pIDirect3D9->CheckDeviceType(iAdapter, DevType, DisplayFormat, BackBufferFormat, bWindowed);
 	}
 
-	HRESULT D3D9::CheckDeviceFormat(UINT Adapter, D3DDEVTYPE DeviceType, D3DFORMAT AdapterFormat,
-		DWORD Usage, D3DRESOURCETYPE RType, D3DFORMAT CheckFormat)
+	HRESULT D3D9::CheckDeviceFormat(UINT Adapter, D3DDEVTYPE DeviceType, D3DFORMAT AdapterFormat, DWORD Usage,
+		D3DRESOURCETYPE RType, D3DFORMAT CheckFormat)
 	{
 		return pIDirect3D9->CheckDeviceFormat(Adapter, DeviceType, AdapterFormat, Usage, RType, CheckFormat);
 	}
@@ -84,15 +85,15 @@ namespace IW3SR::Game
 	HRESULT D3D9::CheckDeviceMultiSampleType(UINT Adapter, D3DDEVTYPE DeviceType, D3DFORMAT SurfaceFormat,
 		BOOL Windowed, D3DMULTISAMPLE_TYPE MultiSampleType, DWORD* pQualityLevels)
 	{
-		return pIDirect3D9->CheckDeviceMultiSampleType(Adapter, DeviceType, SurfaceFormat, Windowed,
-			MultiSampleType, pQualityLevels);
+		return pIDirect3D9->CheckDeviceMultiSampleType(Adapter, DeviceType, SurfaceFormat, Windowed, MultiSampleType,
+			pQualityLevels);
 	}
 
 	HRESULT D3D9::CheckDepthStencilMatch(UINT Adapter, D3DDEVTYPE DeviceType, D3DFORMAT AdapterFormat,
 		D3DFORMAT RenderTargetFormat, D3DFORMAT DepthStencilFormat)
 	{
-		return pIDirect3D9->CheckDepthStencilMatch(Adapter, DeviceType, AdapterFormat,
-			RenderTargetFormat, DepthStencilFormat);
+		return pIDirect3D9->CheckDepthStencilMatch(Adapter, DeviceType, AdapterFormat, RenderTargetFormat,
+			DepthStencilFormat);
 	}
 
 	HRESULT D3D9::CheckDeviceFormatConversion(UINT Adapter, D3DDEVTYPE DeviceType, D3DFORMAT SourceFormat,
@@ -111,12 +112,11 @@ namespace IW3SR::Game
 		return pIDirect3D9->GetAdapterMonitor(Adapter);
 	}
 
-	HRESULT D3D9::CreateDevice(UINT Adapter, D3DDEVTYPE DeviceType, HWND hFocusWindow,
-		DWORD BehaviorFlags, D3DPRESENT_PARAMETERS* pPresentationParameters,
-		IDirect3DDevice9** ppReturnedDeviceInterface)
+	HRESULT D3D9::CreateDevice(UINT Adapter, D3DDEVTYPE DeviceType, HWND hFocusWindow, DWORD BehaviorFlags,
+		D3DPRESENT_PARAMETERS* pPresentationParameters, IDirect3DDevice9** ppReturnedDeviceInterface)
 	{
-		HRESULT hres = pIDirect3D9->CreateDevice(Adapter, DeviceType, hFocusWindow,
-			BehaviorFlags, pPresentationParameters, ppReturnedDeviceInterface);
+		HRESULT hres = pIDirect3D9->CreateDevice(Adapter, DeviceType, hFocusWindow, BehaviorFlags,
+			pPresentationParameters, ppReturnedDeviceInterface);
 
 		*ppReturnedDeviceInterface = new D3D9Device(*ppReturnedDeviceInterface);
 		return hres;
@@ -129,7 +129,8 @@ namespace IW3SR::Game
 		*ppvObj = nullptr;
 
 		HRESULT hRes = pIDirect3DDevice9->QueryInterface(riid, ppvObj);
-		if (hRes == NOERROR) *ppvObj = this;
+		if (hRes == NOERROR)
+			*ppvObj = this;
 		return hRes;
 	}
 
@@ -141,7 +142,8 @@ namespace IW3SR::Game
 	ULONG D3D9Device::Release()
 	{
 		ULONG count = pIDirect3DDevice9->Release();
-		if (!count) delete this;
+		if (!count)
+			delete this;
 		return count;
 	}
 
@@ -251,10 +253,14 @@ namespace IW3SR::Game
 		return pIDirect3DDevice9->GetGammaRamp(iSwapChain, pRamp);
 	}
 
-	HRESULT D3D9Device::CreateTexture(UINT Width, UINT Height, UINT Levels, DWORD Usage,
-		D3DFORMAT Format, D3DPOOL Pool, IDirect3DTexture9** ppTexture, HANDLE* pSharedHandle)
+	HRESULT D3D9Device::CreateTexture(UINT Width, UINT Height, UINT Levels, DWORD Usage, D3DFORMAT Format, D3DPOOL Pool,
+		IDirect3DTexture9** ppTexture, HANDLE* pSharedHandle)
 	{
-		if (Pool == D3DPOOL_MANAGED) { Pool = D3DPOOL_DEFAULT; Usage |= D3DUSAGE_DYNAMIC; }
+		if (Pool == D3DPOOL_MANAGED)
+		{
+			Pool = D3DPOOL_DEFAULT;
+			Usage |= D3DUSAGE_DYNAMIC;
+		}
 
 		return pIDirect3DDevice9->CreateTexture(Width, Height, Levels, Usage, Format, Pool, ppTexture, pSharedHandle);
 	}
@@ -262,51 +268,66 @@ namespace IW3SR::Game
 	HRESULT D3D9Device::CreateVolumeTexture(UINT Width, UINT Height, UINT Depth, UINT Levels, DWORD Usage,
 		D3DFORMAT Format, D3DPOOL Pool, IDirect3DVolumeTexture9** ppVolumeTexture, HANDLE* pSharedHandle)
 	{
-		if (Pool == D3DPOOL_MANAGED) { Pool = D3DPOOL_DEFAULT; Usage |= D3DUSAGE_DYNAMIC; }
+		if (Pool == D3DPOOL_MANAGED)
+		{
+			Pool = D3DPOOL_DEFAULT;
+			Usage |= D3DUSAGE_DYNAMIC;
+		}
 
-		return pIDirect3DDevice9->CreateVolumeTexture(Width, Height, Depth, Levels, Usage,
-			Format, Pool, ppVolumeTexture, pSharedHandle);
+		return pIDirect3DDevice9->CreateVolumeTexture(Width, Height, Depth, Levels, Usage, Format, Pool,
+			ppVolumeTexture, pSharedHandle);
 	}
 
-	HRESULT D3D9Device::CreateCubeTexture(UINT EdgeLength, UINT Levels, DWORD Usage, D3DFORMAT Format,
-		D3DPOOL Pool, IDirect3DCubeTexture9** ppCubeTexture, HANDLE* pSharedHandle)
+	HRESULT D3D9Device::CreateCubeTexture(UINT EdgeLength, UINT Levels, DWORD Usage, D3DFORMAT Format, D3DPOOL Pool,
+		IDirect3DCubeTexture9** ppCubeTexture, HANDLE* pSharedHandle)
 	{
-		if (Pool == D3DPOOL_MANAGED) { Pool = D3DPOOL_DEFAULT; Usage |= D3DUSAGE_DYNAMIC; }
+		if (Pool == D3DPOOL_MANAGED)
+		{
+			Pool = D3DPOOL_DEFAULT;
+			Usage |= D3DUSAGE_DYNAMIC;
+		}
 
-		return pIDirect3DDevice9->CreateCubeTexture(EdgeLength, Levels, Usage, Format,
-			Pool, ppCubeTexture, pSharedHandle);
+		return pIDirect3DDevice9->CreateCubeTexture(EdgeLength, Levels, Usage, Format, Pool, ppCubeTexture,
+			pSharedHandle);
 	}
 
 	HRESULT D3D9Device::CreateVertexBuffer(UINT Length, DWORD Usage, DWORD FVF, D3DPOOL Pool,
 		IDirect3DVertexBuffer9** ppVertexBuffer, HANDLE* pSharedHandle)
 	{
-		if (Pool == D3DPOOL_MANAGED) { Pool = D3DPOOL_DEFAULT; Usage |= D3DUSAGE_DYNAMIC; }
+		if (Pool == D3DPOOL_MANAGED)
+		{
+			Pool = D3DPOOL_DEFAULT;
+			Usage |= D3DUSAGE_DYNAMIC;
+		}
 
 		return pIDirect3DDevice9->CreateVertexBuffer(Length, Usage, FVF, Pool, ppVertexBuffer, pSharedHandle);
 	}
 
-	HRESULT D3D9Device::CreateIndexBuffer(UINT Length, DWORD Usage, D3DFORMAT Format,
-		D3DPOOL Pool, IDirect3DIndexBuffer9** ppIndexBuffer, HANDLE* pSharedHandle)
+	HRESULT D3D9Device::CreateIndexBuffer(UINT Length, DWORD Usage, D3DFORMAT Format, D3DPOOL Pool,
+		IDirect3DIndexBuffer9** ppIndexBuffer, HANDLE* pSharedHandle)
 	{
-		if (Pool == D3DPOOL_MANAGED) { Pool = D3DPOOL_DEFAULT; Usage |= D3DUSAGE_DYNAMIC; }
+		if (Pool == D3DPOOL_MANAGED)
+		{
+			Pool = D3DPOOL_DEFAULT;
+			Usage |= D3DUSAGE_DYNAMIC;
+		}
 
 		return pIDirect3DDevice9->CreateIndexBuffer(Length, Usage, Format, Pool, ppIndexBuffer, pSharedHandle);
 	}
 
-	HRESULT D3D9Device::CreateRenderTarget(UINT Width, UINT Height, D3DFORMAT Format,
-		D3DMULTISAMPLE_TYPE MultiSample, DWORD MultisampleQuality, BOOL Lockable,
-		IDirect3DSurface9** ppSurface, HANDLE* pSharedHandle)
+	HRESULT D3D9Device::CreateRenderTarget(UINT Width, UINT Height, D3DFORMAT Format, D3DMULTISAMPLE_TYPE MultiSample,
+		DWORD MultisampleQuality, BOOL Lockable, IDirect3DSurface9** ppSurface, HANDLE* pSharedHandle)
 	{
-		return pIDirect3DDevice9->CreateRenderTarget(Width, Height, Format, MultiSample,
-			MultisampleQuality, Lockable, ppSurface, pSharedHandle);
+		return pIDirect3DDevice9->CreateRenderTarget(Width, Height, Format, MultiSample, MultisampleQuality, Lockable,
+			ppSurface, pSharedHandle);
 	}
 
 	HRESULT D3D9Device::CreateDepthStencilSurface(UINT Width, UINT Height, D3DFORMAT Format,
-		D3DMULTISAMPLE_TYPE MultiSample, DWORD MultisampleQuality, BOOL Discard,
-		IDirect3DSurface9** ppSurface, HANDLE* pSharedHandle)
+		D3DMULTISAMPLE_TYPE MultiSample, DWORD MultisampleQuality, BOOL Discard, IDirect3DSurface9** ppSurface,
+		HANDLE* pSharedHandle)
 	{
-		return pIDirect3DDevice9->CreateDepthStencilSurface(Width, Height, Format,
-			MultiSample, MultisampleQuality, Discard, ppSurface, pSharedHandle);
+		return pIDirect3DDevice9->CreateDepthStencilSurface(Width, Height, Format, MultiSample, MultisampleQuality,
+			Discard, ppSurface, pSharedHandle);
 	}
 
 	HRESULT D3D9Device::UpdateSurface(IDirect3DSurface9* pSourceSurface, CONST RECT* pSourceRect,
@@ -341,10 +362,13 @@ namespace IW3SR::Game
 		return pIDirect3DDevice9->ColorFill(pSurface, pRect, color);
 	}
 
-	HRESULT D3D9Device::CreateOffscreenPlainSurface(UINT Width, UINT Height, D3DFORMAT Format,
-		D3DPOOL Pool, IDirect3DSurface9** ppSurface, HANDLE* pSharedHandle)
+	HRESULT D3D9Device::CreateOffscreenPlainSurface(UINT Width, UINT Height, D3DFORMAT Format, D3DPOOL Pool,
+		IDirect3DSurface9** ppSurface, HANDLE* pSharedHandle)
 	{
-		if (Pool == D3DPOOL_MANAGED) { Pool = D3DPOOL_DEFAULT; }
+		if (Pool == D3DPOOL_MANAGED)
+		{
+			Pool = D3DPOOL_DEFAULT;
+		}
 
 		return pIDirect3DDevice9->CreateOffscreenPlainSurface(Width, Height, Format, Pool, ppSurface, pSharedHandle);
 	}
@@ -576,33 +600,33 @@ namespace IW3SR::Game
 		return pIDirect3DDevice9->DrawPrimitive(PrimitiveType, StartVertex, PrimitiveCount);
 	}
 
-	HRESULT D3D9Device::DrawIndexedPrimitive(D3DPRIMITIVETYPE PrimitiveType, INT BaseVertexIndex,
-		UINT MinVertexIndex, UINT NumVertices, UINT startIndex, UINT primCount)
+	HRESULT D3D9Device::DrawIndexedPrimitive(D3DPRIMITIVETYPE PrimitiveType, INT BaseVertexIndex, UINT MinVertexIndex,
+		UINT NumVertices, UINT startIndex, UINT primCount)
 	{
-		return pIDirect3DDevice9->DrawIndexedPrimitive(PrimitiveType, BaseVertexIndex,
-			MinVertexIndex, NumVertices, startIndex, primCount);
+		return pIDirect3DDevice9->DrawIndexedPrimitive(PrimitiveType, BaseVertexIndex, MinVertexIndex, NumVertices,
+			startIndex, primCount);
 	}
 
 	HRESULT D3D9Device::DrawPrimitiveUP(D3DPRIMITIVETYPE PrimitiveType, UINT PrimitiveCount,
 		CONST void* pVertexStreamZeroData, UINT VertexStreamZeroStride)
 	{
-		return pIDirect3DDevice9->DrawPrimitiveUP(PrimitiveType, PrimitiveCount,
-			pVertexStreamZeroData, VertexStreamZeroStride);
+		return pIDirect3DDevice9->DrawPrimitiveUP(PrimitiveType, PrimitiveCount, pVertexStreamZeroData,
+			VertexStreamZeroStride);
 	}
 
-	HRESULT D3D9Device::DrawIndexedPrimitiveUP(D3DPRIMITIVETYPE PrimitiveType, UINT MinVertexIndex,
-		UINT NumVertices, UINT PrimitiveCount, CONST void* pIndexData, D3DFORMAT IndexDataFormat,
-		CONST void* pVertexStreamZeroData, UINT VertexStreamZeroStride)
+	HRESULT D3D9Device::DrawIndexedPrimitiveUP(D3DPRIMITIVETYPE PrimitiveType, UINT MinVertexIndex, UINT NumVertices,
+		UINT PrimitiveCount, CONST void* pIndexData, D3DFORMAT IndexDataFormat, CONST void* pVertexStreamZeroData,
+		UINT VertexStreamZeroStride)
 	{
-		return pIDirect3DDevice9->DrawIndexedPrimitiveUP(PrimitiveType, MinVertexIndex,
-			NumVertices, PrimitiveCount, pIndexData, IndexDataFormat, pVertexStreamZeroData, VertexStreamZeroStride);
+		return pIDirect3DDevice9->DrawIndexedPrimitiveUP(PrimitiveType, MinVertexIndex, NumVertices, PrimitiveCount,
+			pIndexData, IndexDataFormat, pVertexStreamZeroData, VertexStreamZeroStride);
 	}
 
 	HRESULT D3D9Device::ProcessVertices(UINT SrcStartIndex, UINT DestIndex, UINT VertexCount,
 		IDirect3DVertexBuffer9* pDestBuffer, IDirect3DVertexDeclaration9* pVertexDecl, DWORD Flags)
 	{
-		return pIDirect3DDevice9->ProcessVertices(SrcStartIndex, DestIndex, VertexCount,
-			pDestBuffer, pVertexDecl, Flags);
+		return pIDirect3DDevice9->ProcessVertices(SrcStartIndex, DestIndex, VertexCount, pDestBuffer, pVertexDecl,
+			Flags);
 	}
 
 	HRESULT D3D9Device::CreateVertexDeclaration(CONST D3DVERTEXELEMENT9* pVertexElements,
@@ -666,7 +690,7 @@ namespace IW3SR::Game
 		return pIDirect3DDevice9->GetVertexShaderConstantI(StartRegister, pConstantData, Vector4iCount);
 	}
 
-	HRESULT D3D9Device::SetVertexShaderConstantB(UINT StartRegister, CONST BOOL* pConstantData, UINT  BoolCount)
+	HRESULT D3D9Device::SetVertexShaderConstantB(UINT StartRegister, CONST BOOL* pConstantData, UINT BoolCount)
 	{
 		return pIDirect3DDevice9->SetVertexShaderConstantB(StartRegister, pConstantData, BoolCount);
 	}
@@ -676,14 +700,14 @@ namespace IW3SR::Game
 		return pIDirect3DDevice9->GetVertexShaderConstantB(StartRegister, pConstantData, BoolCount);
 	}
 
-	HRESULT D3D9Device::SetStreamSource(UINT StreamNumber, IDirect3DVertexBuffer9* pStreamData,
-		UINT OffsetInBytes, UINT Stride)
+	HRESULT D3D9Device::SetStreamSource(UINT StreamNumber, IDirect3DVertexBuffer9* pStreamData, UINT OffsetInBytes,
+		UINT Stride)
 	{
 		return pIDirect3DDevice9->SetStreamSource(StreamNumber, pStreamData, OffsetInBytes, Stride);
 	}
 
-	HRESULT D3D9Device::GetStreamSource(UINT StreamNumber, IDirect3DVertexBuffer9** ppStreamData,
-		UINT* OffsetInBytes, UINT* pStride)
+	HRESULT D3D9Device::GetStreamSource(UINT StreamNumber, IDirect3DVertexBuffer9** ppStreamData, UINT* OffsetInBytes,
+		UINT* pStride)
 	{
 		return pIDirect3DDevice9->GetStreamSource(StreamNumber, ppStreamData, OffsetInBytes, pStride);
 	}
@@ -745,7 +769,7 @@ namespace IW3SR::Game
 		return pIDirect3DDevice9->GetPixelShaderConstantI(StartRegister, pConstantData, Vector4iCount);
 	}
 
-	HRESULT D3D9Device::SetPixelShaderConstantB(UINT StartRegister, CONST BOOL* pConstantData, UINT  BoolCount)
+	HRESULT D3D9Device::SetPixelShaderConstantB(UINT StartRegister, CONST BOOL* pConstantData, UINT BoolCount)
 	{
 		return pIDirect3DDevice9->SetPixelShaderConstantB(StartRegister, pConstantData, BoolCount);
 	}

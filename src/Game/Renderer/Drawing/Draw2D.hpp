@@ -9,16 +9,8 @@ namespace IW3SR::Game
 	class API GDraw2D
 	{
 	public:
-		static inline std::vector<std::string> FontNames = {
-			FONT_OBJECTIVE,
-			FONT_NORMAL,
-			FONT_CONSOLE,
-			FONT_SMALL,
-			FONT_SMALL_DEV,
-			FONT_BIG,
-			FONT_BIG_DEV,
-			FONT_BOLD
-		};
+		static inline std::vector<std::string> FontNames = { FONT_OBJECTIVE, FONT_NORMAL, FONT_CONSOLE, FONT_SMALL,
+			FONT_SMALL_DEV, FONT_BIG, FONT_BIG_DEV, FONT_BOLD };
 
 		/// <summary>
 		/// Draw text.
@@ -57,7 +49,8 @@ namespace IW3SR::Game
 		/// <param name="y">Y-coordinate of the circle's center.</param>
 		/// <param name="h">Radius of the circle.</param>
 		/// <param name="color">The color.</param>
-		static void AngleYaw(Material* material, float start, float end, float yaw, float y, float h, const vec4& color);
+		static void AngleYaw(Material* material, float start, float end, float yaw, float y, float h,
+			const vec4& color);
 
 		/// <summary>
 		/// Draw a line at a specified yaw angle with a given width, height, and color.

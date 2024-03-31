@@ -1,8 +1,8 @@
 #pragma once
 #include "Core/Math.hpp"
 
-#include "Renderer/Resources/Texture.hpp"
 #include "Renderer/Resources/Font.hpp"
+#include "Renderer/Resources/Texture.hpp"
 
 namespace IW3SR::Engine
 {
@@ -20,8 +20,8 @@ namespace IW3SR::Engine
 		/// <param name="position">The position.</param>
 		/// <param name="size">The size.</param>
 		/// <param name="color">The color.</param>
-		static void Text(const std::string& text, const Ref<Font>& font,
-			const vec2& position, const vec2& size, const vec4& color);
+		static void Text(const std::string& text, const Ref<Font>& font, const vec2& position, const vec2& size,
+			const vec4& color);
 
 		/// <summary>
 		/// Get the text size.

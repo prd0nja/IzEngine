@@ -11,7 +11,8 @@ namespace IW3SR::Game::UC
 
 	void Settings::Render()
 	{
-		if (!Open) return;
+		if (!Open)
+			return;
 
 		Begin();
 		auto& settings = Game::Settings::Get();

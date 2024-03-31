@@ -1,8 +1,8 @@
 #include "Themes.hpp"
 
-#include "ImGUI/UI.hpp"
 #include "Core/System/Environment.hpp"
 #include "Core/System/System.hpp"
+#include "ImGUI/UI.hpp"
 
 namespace IW3SR::Engine::UC
 {
@@ -212,17 +212,16 @@ namespace IW3SR::Engine::UC
 		const float speed = 0.15f;
 		static float offset = 0;
 
-		Rainbow = std::make_tuple(
-			ImColor::HSV(fmod(offset, 1.0f), 1.0f, 1.0f),
-			ImColor::HSV(fmod(offset + 0.33f, 1.0f), 1.0f, 1.0f)
-		);
+		Rainbow = std::make_tuple(ImColor::HSV(fmod(offset, 1.0f), 1.0f, 1.0f),
+			ImColor::HSV(fmod(offset + 0.33f, 1.0f), 1.0f, 1.0f));
 		offset += speed * UI::Get().DeltaTime();
 	}
 
 	void Themes::MarkdownLink(ImGui::MarkdownLinkCallbackData data)
 	{
 		std::string url(data.link, data.linkLength);
-		if (!data.isImage) System::Shell(url);
+		if (!data.isImage)
+			System::Shell(url);
 	}
 
 	ImGui::MarkdownImageData Themes::MarkdownImage(ImGui::MarkdownLinkCallbackData data)
@@ -251,9 +250,8 @@ namespace IW3SR::Engine::UC
 		switch (info.type)
 		{
 		case ImGui::MarkdownFormatType::LINK:
-			start
-				? ImGui::PushStyleColor(ImGuiCol_Text, ImGui::GetStyle().Colors[ImGuiCol_ButtonActive])
-				: ImGui::PopStyleColor();
+			start ? ImGui::PushStyleColor(ImGuiCol_Text, ImGui::GetStyle().Colors[ImGuiCol_ButtonActive])
+				  : ImGui::PopStyleColor();
 			break;
 		}
 	}
@@ -262,7 +260,8 @@ namespace IW3SR::Engine::UC
 	{
 		ComputeRainbow();
 
-		if (!Open) return;
+		if (!Open)
+			return;
 
 		Style = ImGui::GetStyle();
 		PlotStyle = ImPlot::GetStyle();

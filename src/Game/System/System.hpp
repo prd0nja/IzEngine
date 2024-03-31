@@ -25,9 +25,8 @@ namespace IW3SR::Game
 		/// <param name="hInstance">The instance handle.</param>
 		/// <param name="lpParam">A pointer to user-defined data.</param>
 		/// <returns>The handle to the created main window.</returns>
-		static HWND STDCALL CreateMainWindow(DWORD dwExStyle, LPCSTR lpClassName, LPCSTR lpWindowName,
-			DWORD dwStyle, int X, int Y, int nWidth, int nHeight, HWND hWndParent, HMENU hMenu,
-			HINSTANCE hInstance, LPVOID lpParam);
+		static HWND STDCALL CreateMainWindow(DWORD dwExStyle, LPCSTR lpClassName, LPCSTR lpWindowName, DWORD dwStyle,
+			int X, int Y, int nWidth, int nHeight, HWND hWndParent, HMENU hMenu, HINSTANCE hInstance, LPVOID lpParam);
 
 		/// <summary>
 		/// Window procedure for the main window.

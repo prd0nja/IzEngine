@@ -2,12 +2,11 @@
 
 namespace IW3SR::Game
 {
-	HWND System::CreateMainWindow(DWORD dwExStyle, LPCSTR lpClassName, LPCSTR lpWindowName,
-		DWORD dwStyle, int X, int Y, int nWidth, int nHeight, HWND hWndParent, HMENU hMenu,
-		HINSTANCE hInstance, LPVOID lpParam)
+	HWND System::CreateMainWindow(DWORD dwExStyle, LPCSTR lpClassName, LPCSTR lpWindowName, DWORD dwStyle, int X, int Y,
+		int nWidth, int nHeight, HWND hWndParent, HMENU hMenu, HINSTANCE hInstance, LPVOID lpParam)
 	{
-		HWND hwnd = CreateWindowExA_h(dwExStyle, lpClassName, lpWindowName, dwStyle, X, Y,
-			nWidth, nHeight, hWndParent, hMenu, hInstance, lpParam);
+		HWND hwnd = CreateWindowExA_h(dwExStyle, lpClassName, lpWindowName, dwStyle, X, Y, nWidth, nHeight, hWndParent,
+			hMenu, hInstance, lpParam);
 
 		std::string windowName = std::string{ lpWindowName };
 		if (windowName != "Call of Duty 4" && windowName != "Call of Duty 4 X")

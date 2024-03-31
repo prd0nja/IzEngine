@@ -1,7 +1,7 @@
 #include "Renderer/Common.hpp"
 
-#include "Core/System/System.hpp"
 #include "Core/System/Plugins.hpp"
+#include "Core/System/System.hpp"
 #include "Device.hpp"
 
 namespace IW3SR::Engine

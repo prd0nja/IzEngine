@@ -1,7 +1,8 @@
 #pragma once
-#include "Core/Memory/Function.hpp"
 #include "Core/Memory/Assembler.hpp"
+#include "Core/Memory/Function.hpp"
 
+// clang-format off
 namespace IW3SR::Game
 {
 	API extern Function<void(const trajectory_t* tr, int atTime, float* out)>
@@ -49,6 +50,7 @@ namespace IW3SR::Game
 	extern Function<void(int count, int width, GfxPointVertex* verts, bool depthTest)>
 		RB_DrawLines3D;
 }
+// clang-format on
 namespace IW3SR::Game
 {
 	ASM_FUNCTION(BG_EvaluateTrajectory);

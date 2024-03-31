@@ -1,64 +1,64 @@
 #pragma once
 #ifndef C_EXTERN
-#define C_EXTERN extern "C"
+	#define C_EXTERN extern "C"
 #endif
 
 #ifndef CPP_EXTERN
-#define CPP_EXTERN extern "C++"
+	#define CPP_EXTERN extern "C++"
 #endif
 
 #ifndef ASM
-#define ASM C_EXTERN
+	#define ASM C_EXTERN
 #endif
 
 #ifndef CDECL
-#define CDECL __cdecl
+	#define CDECL __cdecl
 #endif
 
 #ifndef STDCALL
-#define STDCALL __stdcall
+	#define STDCALL __stdcall
 #endif
 
 #ifndef FASTCALL
-#define FASTCALL __fastcall
+	#define FASTCALL __fastcall
 #endif
 
 #ifndef NOASAN
-#define NOASAN __declspec(no_sanitize_address)
+	#define NOASAN __declspec(no_sanitize_address)
 #endif
 
 #ifndef EXPORT
-#define EXPORT __declspec(dllexport)
+	#define EXPORT __declspec(dllexport)
 #endif
 
 #ifndef IMPORT
-#define IMPORT __declspec(dllimport)
+	#define IMPORT __declspec(dllimport)
 #endif
 
 #ifndef API
-#define API EXPORT
+	#define API EXPORT
 #endif
 
 #ifndef PLUGIN
-#define PLUGIN C_EXTERN EXPORT
+	#define PLUGIN C_EXTERN EXPORT
 #endif
 
 #ifndef ENTRY
-#define ENTRY C_EXTERN EXPORT
+	#define ENTRY C_EXTERN EXPORT
 #endif
 
 #ifndef CMAKE_BINARY_DIR
-#define CMAKE_BINARY_DIR ""
+	#define CMAKE_BINARY_DIR ""
 #endif
 
 #define CLASS_DISALLOW_COPY_AND_ASSIGN(type) \
-	type(const type&) = delete; \
+	type(const type&) = delete;              \
 	void operator=(const type&) = delete;
 
 #define CLASS_SINGLETON(type) \
-public: \
+public:                       \
 	static inline type& Get() \
-	{ \
+	{                         \
 		static type instance; \
-		return instance; \
+		return instance;      \
 	}

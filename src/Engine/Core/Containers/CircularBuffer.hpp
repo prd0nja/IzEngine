@@ -14,7 +14,7 @@ namespace IW3SR::Engine
 	struct CircularBuffer
 	{
 		size_t Offset = 0;
-		std::array<T, MaxSize> Data{ };
+		std::array<T, MaxSize> Data{};
 
 		/// <summary>
 		/// Initialize a new CircularBuffer.

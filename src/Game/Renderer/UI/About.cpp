@@ -6,7 +6,8 @@ namespace IW3SR::Game::UC
 
 	void About::Render()
 	{
-		if (!Open) return;
+		if (!Open)
+			return;
 
 		constexpr auto IW3SR = "IW3SR";
 		constexpr auto markdown = R"(

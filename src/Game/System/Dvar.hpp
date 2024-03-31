@@ -18,7 +18,8 @@ namespace IW3SR::Game
 		static T Get(const std::string& name)
 		{
 			dvar_s* dvar = Dvar_FindVar(name.c_str());
-			if (!dvar) throw std::runtime_error("Dvar not found");
+			if (!dvar)
+				throw std::runtime_error("Dvar not found");
 			return *reinterpret_cast<T*>(&dvar->current);
 		}
 
@@ -32,7 +33,8 @@ namespace IW3SR::Game
 		static void Set(const std::string& name, T value)
 		{
 			dvar_s* dvar = Dvar_FindVar(name.c_str());
-			if (!dvar) throw std::runtime_error("Dvar not found");
+			if (!dvar)
+				throw std::runtime_error("Dvar not found");
 
 			*reinterpret_cast<T*>(&dvar->current) = value;
 			*reinterpret_cast<T*>(&dvar->latched) = value;
@@ -48,7 +50,8 @@ namespace IW3SR::Game
 		static void SetLatched(const std::string& name, T value)
 		{
 			dvar_s* dvar = Dvar_FindVar(name.c_str());
-			if (!dvar) throw std::runtime_error("Dvar not found");
+			if (!dvar)
+				throw std::runtime_error("Dvar not found");
 
 			*reinterpret_cast<T*>(&dvar->latched) = value;
 		}

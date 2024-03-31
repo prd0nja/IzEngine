@@ -47,7 +47,7 @@ namespace IW3SR::Addons
 		/// </summary>
 		void OnRender() override;
 
-		SERIALIZE_POLY(Lagometer, Module, ColorSnap, ColorSnapDelay, ColorSnapFlag, ColorSnapFlagDrop,
-			ColorPing, ShowSnap, ShowSnapFlag, ShowPing, Graph)
+		SERIALIZE_POLY(Lagometer, Module, ColorSnap, ColorSnapDelay, ColorSnapFlag, ColorSnapFlagDrop, ColorPing,
+			ShowSnap, ShowSnapFlag, ShowPing, Graph)
 	};
 }

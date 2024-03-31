@@ -2,16 +2,19 @@
 #include <concepts>
 #include <string_view>
 
-#define EVENT_BIND(function) [this](auto&&... args) \
-	{ this->function(std::forward<decltype(args)>(args)...); }
+#define EVENT_BIND(function) [this](auto&&... args) { this->function(std::forward<decltype(args)>(args)...); }
+#define EVENT_BIND_VOID(function) [this]() { this->function(); }
 
-#define EVENT_BIND_VOID(function) [this]() \
-	{ this->function(); }
-
-#define EVENT_CLASS(type) \
-	public: \
-	virtual std::string_view GetEventType() const override { return GetStaticType(); } \
-	static std::string_view GetStaticType() { return type; }
+#define EVENT_CLASS(type)                                  \
+public:                                                    \
+	virtual std::string_view GetEventType() const override \
+	{                                                      \
+		return GetStaticType();                            \
+	}                                                      \
+	static std::string_view GetStaticType()                \
+	{                                                      \
+		return type;                                       \
+	}
 
 namespace IW3SR::Engine
 {
@@ -37,8 +40,7 @@ namespace IW3SR::Engine
 	/// Callable with event.
 	/// </summary>
 	template <typename C, typename E>
-	concept WithEvent = requires(C callback, E& event) 
-	{
+	concept WithEvent = requires(C callback, E& event) {
 		{ callback(event) } -> std::same_as<void>;
 	};
 

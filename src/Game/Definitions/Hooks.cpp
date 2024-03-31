@@ -1,6 +1,8 @@
 #include "Hooks.hpp"
+
 #include "Game/Game.hpp"
 
+// clang-format off
 namespace IW3SR::Game
 {
 	Hook<HWND STDCALL(DWORD dwExStyle, LPCSTR lpClassName, LPCSTR lpWindowName,
@@ -47,6 +49,7 @@ namespace IW3SR::Game
 	Hook<void(GfxCmdBufInput* cmd, GfxViewInfo* viewInfo, GfxCmdBufSourceState* src, GfxCmdBufState* buf)>
 		RB_EndSceneRendering_h(0x6496EC, GRenderer::Draw3D);
 }
+// clang-format on
 namespace IW3SR::Game
 {
 	using namespace asmjit;
@@ -57,7 +60,7 @@ namespace IW3SR::Game
 		a.mov(x86::ebp, x86::esp);
 		a.pushad();
 
-		a.push(x86::eax);				// cmds
+		a.push(x86::eax); // cmds
 		a.call(GRenderer::Commands);
 		a.add(x86::esp, 4);
 

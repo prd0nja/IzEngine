@@ -27,7 +27,8 @@ namespace IW3SR::Engine
 			const ImVec2& size = window.RenderSize;
 
 			draw->AddRectFilled({ -1, pos.y }, { pos.x + size.x, pos.y + size.y }, IM_COL32(0, 0, 0, 255));
-			draw->AddRectFilled({ pos.x + size.x, pos.y }, { pos.x + size.x + 5, pos.y + size.y }, IM_COL32(140, 20, 252, 255));
+			draw->AddRectFilled({ pos.x + size.x, pos.y }, { pos.x + size.x + 5, pos.y + size.y },
+				IM_COL32(140, 20, 252, 255));
 
 			const std::string message = std::format("IW3SR: {}", notification.message);
 			ImGui::SetCursorPos(size / 2 - ImGui::CalcTextSize(message.c_str()) / 2);
@@ -37,12 +38,13 @@ namespace IW3SR::Engine
 			next = pos.y + size.y + 10;
 			count++;
 		}
-		Notifications.erase(std::remove_if(Notifications.begin(), Notifications.end(), [](const Notification& notification)
+		auto remove = [](const Notification& notification)
 		{
 			const Seconds duration(notification.duration);
 			const auto currentTime = Time::now();
 			const static auto endTime = currentTime + duration;
 			return currentTime > endTime;
-		}), Notifications.end());
+		};
+		Notifications.erase(std::remove_if(Notifications.begin(), Notifications.end(), remove), Notifications.end());
 	}
 }

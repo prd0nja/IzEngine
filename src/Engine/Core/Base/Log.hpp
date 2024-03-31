@@ -1,8 +1,10 @@
 #pragma once
 #include <format>
-#include <string>
 #include <iostream>
+#include <string>
 #include <unordered_map>
+
+#include "Macros.hpp"
 
 namespace IW3SR::Engine
 {
@@ -112,6 +114,7 @@ namespace IW3SR::Engine
 			ConColor color;
 		};
 
+		// clang-format off
 		/// <summary>
 		/// Channels.
 		/// </summary>
@@ -127,6 +130,7 @@ namespace IW3SR::Engine
 			{ Channel::Game, { "Game", ConColor::Cyan } },
 			{ Channel::Audio, { "Audio", ConColor::Magenta } }
 		};
+		// clang-format on
 
 		/// <summary>
 		/// Format channel name.

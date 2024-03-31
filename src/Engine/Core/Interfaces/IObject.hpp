@@ -28,7 +28,7 @@ namespace IW3SR::Engine
 		/// Create a new object.
 		/// </summary>
 		/// <param name="id">The object ID.</param>
-		IObject(const UUID& id) : ID(id) { };
+		IObject(const UUID& id) : ID(id){};
 
 		/// <summary>
 		/// Release the object.

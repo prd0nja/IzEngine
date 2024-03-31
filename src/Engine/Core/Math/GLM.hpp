@@ -9,15 +9,23 @@
 
 namespace IW3SR::Engine
 {
-	template <typename T> class Matrix3;
-	template <typename T> class Vector2;
-	template <typename T> class Vector3;
-	template <typename T> class Vector4;
+	template <typename T>
+	class Matrix3;
+	template <typename T>
+	class Vector2;
+	template <typename T>
+	class Vector3;
+	template <typename T>
+	class Vector4;
 
-	template <typename T> using gmat3 = glm::mat<3, 3, T, glm::packed_highp>;
-	template <typename T> using gvec2 = glm::vec<2, T, glm::packed_highp>;
-	template <typename T> using gvec3 = glm::vec<3, T, glm::packed_highp>;
-	template <typename T> using gvec4 = glm::vec<4, T, glm::packed_highp>;
+	template <typename T>
+	using gmat3 = glm::mat<3, 3, T, glm::packed_highp>;
+	template <typename T>
+	using gvec2 = glm::vec<2, T, glm::packed_highp>;
+	template <typename T>
+	using gvec3 = glm::vec<3, T, glm::packed_highp>;
+	template <typename T>
+	using gvec4 = glm::vec<4, T, glm::packed_highp>;
 
 	using mat3c = Matrix3<char>;
 	using mat3s = Matrix3<short>;

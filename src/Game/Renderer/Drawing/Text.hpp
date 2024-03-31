@@ -83,7 +83,7 @@ namespace IW3SR::Game
 		/// <param name="position">The position.</param>
 		void ComputeAlignment(vec2& position);
 
-		SERIALIZE_POLY_BASE(GText, Value, Position, Color,
-			HorizontalAlign, VerticalAlign, AlignX, AlignY, FontName, FontSize)
+		SERIALIZE_POLY_BASE(GText, Value, Position, Color, HorizontalAlign, VerticalAlign, AlignX, AlignY, FontName,
+			FontSize)
 	};
 }

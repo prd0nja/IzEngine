@@ -61,7 +61,7 @@ namespace IW3SR::Game
 	{
 		if (Vertex < 2)
 			return;
-		
+
 		RB_DrawLines3D(Vertex / 2, Width, Verts.data(), DepthTest);
 		Vertex = 0;
 	}

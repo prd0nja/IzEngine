@@ -1,8 +1,8 @@
 #include "UI.hpp"
 
-#include "DX9/Device.hpp"
 #include "Core/System/Environment.hpp"
 #include "Core/System/System.hpp"
+#include "DX9/Device.hpp"
 
 namespace IW3SR::Engine
 {
@@ -52,8 +52,10 @@ namespace IW3SR::Engine
 	{
 		ImGui::NewFrame();
 
-		if (KeyOpen.IsPressed()) Open = !Open;
-		if (!Open) return;
+		if (KeyOpen.IsPressed())
+			Open = !Open;
+		if (!Open)
+			return;
 
 		Memory.Render();
 		Themes.Render();

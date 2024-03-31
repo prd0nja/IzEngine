@@ -11,7 +11,8 @@ namespace IW3SR::Game::UC
 
 	void Modules::Render()
 	{
-		if (!Open) return;
+		if (!Open)
+			return;
 
 		Begin();
 		auto& modules = Game::Modules::Get();

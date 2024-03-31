@@ -80,7 +80,8 @@ namespace IW3SR::Addons
 				ImPlot::PlotShaded("Snap", Snaps.Get(), Snaps.Size(), snapRange, 1, 0, 0, Snaps.Offset);
 
 				ImPlot::SetNextFillStyle(ColorSnapDelay);
-				ImPlot::PlotShaded("SnapDelay", SnapsDelay.Get(), SnapsDelay.Size(), snapRange, 1, 0, 0, SnapsDelay.Offset);
+				ImPlot::PlotShaded("SnapDelay", SnapsDelay.Get(), SnapsDelay.Size(), snapRange, 1, 0, 0,
+					SnapsDelay.Offset);
 			}
 			if (ShowPing)
 			{
@@ -90,10 +91,12 @@ namespace IW3SR::Addons
 			if (ShowSnapFlag)
 			{
 				ImPlot::SetNextFillStyle(ColorSnapFlag);
-				ImPlot::PlotShaded("SnapFlag", SnapsFlags.Get(), SnapsFlags.Size(), -pingRange, 1, 0, 0, SnapsFlags.Offset);
+				ImPlot::PlotShaded("SnapFlag", SnapsFlags.Get(), SnapsFlags.Size(), -pingRange, 1, 0, 0,
+					SnapsFlags.Offset);
 
 				ImPlot::SetNextFillStyle(ColorSnapFlagDrop);
-				ImPlot::PlotShaded("SnapFlagDrop", SnapsFlagsDrop.Get(), SnapsFlagsDrop.Size(), -pingRange, 1, 0, 0, SnapsFlagsDrop.Offset);
+				ImPlot::PlotShaded("SnapFlagDrop", SnapsFlagsDrop.Get(), SnapsFlagsDrop.Size(), -pingRange, 1, 0, 0,
+					SnapsFlagsDrop.Offset);
 			}
 			ImPlot::EndPlot();
 		}

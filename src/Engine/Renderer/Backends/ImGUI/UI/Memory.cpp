@@ -27,7 +27,9 @@ namespace IW3SR::Engine::UC
 
 	void Memory::Render()
 	{
-		if (!Open) return;
+		if (!Open)
+			return;
+
 		int speed = Editor.Cols * 5;
 		int scroll = ImGui::GetIO().MouseWheel;
 		int direction = scroll ? scroll > 0 ? 1 : -1 : 0;

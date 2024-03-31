@@ -1,5 +1,6 @@
 #include "Functions.hpp"
 
+// clang-format off
 namespace IW3SR::Game
 {
 	Function<void(const trajectory_t* tr, int atTime, float* out)>
@@ -47,6 +48,7 @@ namespace IW3SR::Game
 	Function<void(int count, int width, GfxPointVertex* verts, bool depthTest)>
 		RB_DrawLines3D = 0x613040;
 }
+// clang-format on
 namespace IW3SR::Game
 {
 	using namespace asmjit;
@@ -57,9 +59,9 @@ namespace IW3SR::Game
 		a.mov(x86::ebp, x86::esp);
 		a.pushad();
 
-		a.mov(x86::ecx, x86::dword_ptr(x86::ebp, 0x10));	// out
-		a.mov(x86::eax, x86::dword_ptr(x86::ebp, 0x0C));	// atTime
-		a.push(x86::dword_ptr(x86::ebp, 8));				// tr
+		a.mov(x86::ecx, x86::dword_ptr(x86::ebp, 0x10)); // out
+		a.mov(x86::eax, x86::dword_ptr(x86::ebp, 0x0C)); // atTime
+		a.push(x86::dword_ptr(x86::ebp, 8));			 // tr
 		a.call(0x40BD70);
 		a.add(x86::esp, 4);
 
@@ -74,7 +76,7 @@ namespace IW3SR::Game
 		a.mov(x86::ebp, x86::esp);
 		a.pushad();
 
-		a.mov(x86::edi, x86::dword_ptr(x86::ebp, 8));		// name
+		a.mov(x86::edi, x86::dword_ptr(x86::ebp, 8)); // name
 		a.call(0x56B5D0);
 		a.mov(x86::dword_ptr(x86::esp, 0x1C), x86::eax);
 
@@ -89,16 +91,16 @@ namespace IW3SR::Game
 		a.mov(x86::ebp, x86::esp);
 		a.pushad();
 
-		a.mov(x86::ecx, x86::dword_ptr(x86::ebp, 0x2C));	// color
-		a.push(x86::dword_ptr(x86::ebp, 0x28));				// style
-		a.push(x86::dword_ptr(x86::ebp, 0x24));				// rotation
-		a.push(x86::dword_ptr(x86::ebp, 0x20));				// yScale
-		a.push(x86::dword_ptr(x86::ebp, 0x1C));				// xScale
-		a.push(x86::dword_ptr(x86::ebp, 0x18));				// y
-		a.push(x86::dword_ptr(x86::ebp, 0x14));				// x
-		a.push(x86::dword_ptr(x86::ebp, 0x10));				// font
-		a.push(x86::dword_ptr(x86::ebp, 0x0C));				// maxChars
-		a.push(x86::dword_ptr(x86::ebp, 0x08));				// text
+		a.mov(x86::ecx, x86::dword_ptr(x86::ebp, 0x2C)); // color
+		a.push(x86::dword_ptr(x86::ebp, 0x28));			 // style
+		a.push(x86::dword_ptr(x86::ebp, 0x24));			 // rotation
+		a.push(x86::dword_ptr(x86::ebp, 0x20));			 // yScale
+		a.push(x86::dword_ptr(x86::ebp, 0x1C));			 // xScale
+		a.push(x86::dword_ptr(x86::ebp, 0x18));			 // y
+		a.push(x86::dword_ptr(x86::ebp, 0x14));			 // x
+		a.push(x86::dword_ptr(x86::ebp, 0x10));			 // font
+		a.push(x86::dword_ptr(x86::ebp, 0x0C));			 // maxChars
+		a.push(x86::dword_ptr(x86::ebp, 0x08));			 // text
 		a.call(0x5F6B00);
 		a.add(x86::esp, 0x24);
 
@@ -113,16 +115,16 @@ namespace IW3SR::Game
 		a.mov(x86::ebp, x86::esp);
 		a.pushad();
 
-		a.push(x86::dword_ptr(x86::ebp, 0x2C));				// color
-		a.push(x86::dword_ptr(x86::ebp, 0x28));				// null4
-		a.push(x86::dword_ptr(x86::ebp, 0x24));				// null3
-		a.push(x86::dword_ptr(x86::ebp, 0x20));				// null2
-		a.push(x86::dword_ptr(x86::ebp, 0x1C));				// null1
-		a.push(x86::dword_ptr(x86::ebp, 0x18));				// h
-		a.push(x86::dword_ptr(x86::ebp, 0x14));				// w
-		a.push(x86::dword_ptr(x86::ebp, 0x10));				// y
-		a.push(x86::dword_ptr(x86::ebp, 0x0C));				// x
-		a.mov(x86::eax, x86::dword_ptr(x86::ebp, 8));		// material
+		a.push(x86::dword_ptr(x86::ebp, 0x2C));		  // color
+		a.push(x86::dword_ptr(x86::ebp, 0x28));		  // null4
+		a.push(x86::dword_ptr(x86::ebp, 0x24));		  // null3
+		a.push(x86::dword_ptr(x86::ebp, 0x20));		  // null2
+		a.push(x86::dword_ptr(x86::ebp, 0x1C));		  // null1
+		a.push(x86::dword_ptr(x86::ebp, 0x18));		  // h
+		a.push(x86::dword_ptr(x86::ebp, 0x14));		  // w
+		a.push(x86::dword_ptr(x86::ebp, 0x10));		  // y
+		a.push(x86::dword_ptr(x86::ebp, 0x0C));		  // x
+		a.mov(x86::eax, x86::dword_ptr(x86::ebp, 8)); // material
 		a.call(0x5F65F0);
 		a.add(x86::esp, 0x24);
 
@@ -137,8 +139,8 @@ namespace IW3SR::Game
 		a.mov(x86::ebp, x86::esp);
 		a.pushad();
 
-		a.push(x86::dword_ptr(x86::ebp, 0x0C));				// gameTime
-		a.mov(x86::esi, x86::dword_ptr(x86::ebp, 8));		// source
+		a.push(x86::dword_ptr(x86::ebp, 0x0C));		  // gameTime
+		a.mov(x86::esi, x86::dword_ptr(x86::ebp, 8)); // source
 		a.call(0x6490E0);
 		a.add(x86::esp, 4);
 
@@ -153,9 +155,9 @@ namespace IW3SR::Game
 		a.mov(x86::ebp, x86::esp);
 		a.pushad();
 
-		a.push(x86::dword_ptr(x86::ebp, 0x10));				// font
-		a.push(x86::dword_ptr(x86::ebp, 0x0C));				// maxChars
-		a.mov(x86::eax, x86::dword_ptr(x86::ebp, 8));		// text
+		a.push(x86::dword_ptr(x86::ebp, 0x10));		  // font
+		a.push(x86::dword_ptr(x86::ebp, 0x0C));		  // maxChars
+		a.mov(x86::eax, x86::dword_ptr(x86::ebp, 8)); // text
 		a.call(0x5F1EE0);
 		a.mov(x86::dword_ptr(x86::esp, 0x24), x86::eax);
 		a.add(x86::esp, 8);

@@ -1,8 +1,8 @@
 #pragma once
 #include "Core/Common.hpp"
 
-#define FONT_OPENSANS 		"OpenSans-Regular"
-#define FONT_SPACERANGER	"Space Ranger"
+#define FONT_OPENSANS "OpenSans-Regular"
+#define FONT_SPACERANGER "Space Ranger"
 
 namespace IW3SR::Engine
 {

@@ -1,6 +1,6 @@
 #pragma once
-#include "Function.hpp"
 #include <asmjit/asmjit.h>
+#include "Function.hpp"
 
 #ifndef ASMJIT_NO_X86
 namespace arch = asmjit::x86;
@@ -8,14 +8,11 @@ namespace arch = asmjit::x86;
 namespace arch = asmjit::x64;
 #endif
 
+#define ASM_FUNCTION(function) void ASM_##function(asmjit::CodeHolder& code, arch::Assembler& a)
+#define ASM_LOAD(function) Assembler::NewCode(ASM_##function)
+
 namespace IW3SR::Engine
 {
-#define ASM_FUNCTION(function) \
-	void ASM_##function(asmjit::CodeHolder& code, arch::Assembler& a)
-
-#define ASM_LOAD(function) \
-	Assembler::NewCode(ASM_##function)
-
 	/// <summary>
 	/// Just-in-time assembler.
 	/// </summary>
@@ -23,6 +20,7 @@ namespace IW3SR::Engine
 	{
 	protected:
 		using F = Function<void(asmjit::CodeHolder& code, arch::Assembler& a)>;
+
 	public:
 		static inline asmjit::JitRuntime Runtime;
 
@@ -41,7 +39,8 @@ namespace IW3SR::Engine
 
 			int address = 0;
 			auto error = Runtime.add(&address, &code);
-			if (error) throw std::runtime_error("AsmJit compile error.");
+			if (error)
+				throw std::runtime_error("AsmJit compile error.");
 			return address;
 		}
 	};

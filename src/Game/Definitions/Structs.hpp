@@ -2,7 +2,7 @@
 #include "DX9/Base.hpp"
 
 #pragma warning(push)
-#pragma warning(disable: 4359)
+#pragma warning(disable : 4359)
 
 namespace IW3SR::Game
 {
@@ -12,13 +12,13 @@ namespace IW3SR::Game
 	typedef vec_t vec4_t[4];
 
 	typedef unsigned short ScriptString;
-	typedef void(*xfunction_t)();
+	typedef void (*xfunction_t)();
 
 	typedef struct scr_function_s
 	{
 		struct scr_function_s* next;
 		char* name;
-		xfunction_t	function;
+		xfunction_t function;
 		bool developer;
 	} scr_function_t;
 
@@ -404,16 +404,16 @@ namespace IW3SR::Game
 	{
 		NONE = 0x0,
 		SAVED = 0x1,
-		USERINFO = 0x2,				// Sent to server on connect or change
-		SERVERINFO = 0x4,			// Sent in response to front end requests
+		USERINFO = 0x2,	  // Sent to server on connect or change
+		SERVERINFO = 0x4, // Sent in response to front end requests
 		REPLICATED = 0x8,
 		WRITEPROTECTED = 0x10,
 		LATCHED = 0x20,
 		READONLY = 0x40,
 		CHEATPROTECTED = 0x80,
 		TEMP = 0x100,
-		NORESTART = 0x400,			// Do not clear when a cvar_restart is issued
-		USERCREATED = 0x4000,		// Created by a set command
+		NORESTART = 0x400,	  // Do not clear when a cvar_restart is issued
+		USERCREATED = 0x4000, // Created by a set command
 	};
 
 	struct dvar_s
@@ -431,7 +431,7 @@ namespace IW3SR::Game
 		dvar_s* hashNext;
 	};
 
-	using DB_XAssetSizeHandler_t = int(*)();
+	using DB_XAssetSizeHandler_t = int (*)();
 
 	enum DB_FILE_EXISTS_PATH
 	{
@@ -539,7 +539,6 @@ namespace IW3SR::Game
 	{
 		float v[3];
 	};
-
 
 	enum OffhandSecondaryClass
 	{
@@ -1644,8 +1643,8 @@ namespace IW3SR::Game
 
 	union XAnimDynamicFrames
 	{
-		char(*_1)[3];
-		unsigned short(*_2)[3];
+		char (*_1)[3];
+		unsigned short (*_2)[3];
 	};
 
 	union XAnimDynamicIndices
@@ -1678,7 +1677,7 @@ namespace IW3SR::Game
 
 	struct XAnimDeltaPartQuatDataFrames
 	{
-		short(*frames)[2];
+		short (*frames)[2];
 		XAnimDynamicIndices indices;
 	};
 
@@ -1862,7 +1861,7 @@ namespace IW3SR::Game
 		char isAncestor;
 		char recursionDepth;
 		char hullPointCount;
-		float(*hullPoints)[2];
+		float (*hullPoints)[2];
 		GfxPortal* queuedParent;
 	};
 
@@ -1880,7 +1879,7 @@ namespace IW3SR::Game
 		GfxPortalWritable writable;
 		DpvsPlane plane;
 		GfxCell* cell;
-		float(*vertices)[3];
+		float (*vertices)[3];
 		char vertexCount;
 		float hullAxis[2][3];
 	};
@@ -2691,7 +2690,7 @@ namespace IW3SR::Game
 		unsigned int numLeafSurfaces;
 		unsigned int* leafsurfaces;
 		unsigned int vertCount;
-		float(*verts)[3];
+		float (*verts)[3];
 		int triCount;
 		unsigned short* triIndices;
 		char* triEdgeIsWalkable;
@@ -2714,9 +2713,9 @@ namespace IW3SR::Game
 		cmodel_t box_model;
 		unsigned short dynEntCount[2];
 		DynEntityDef* dynEntDefList[2];
-		void* dynEntPoseList[2];	// DynEntityPose
-		void* dynEntClientList[2];	// DynEntityClient
-		void* dynEntCollList[2];	// DynEntityColl
+		void* dynEntPoseList[2];   // DynEntityPose
+		void* dynEntClientList[2]; // DynEntityClient
+		void* dynEntCollList[2];   // DynEntityColl
 		unsigned int checksum;
 	};
 
@@ -3139,7 +3138,6 @@ namespace IW3SR::Game
 		char* data;
 		unsigned int size;
 	};
-
 
 	struct XZoneMemory
 	{
@@ -3928,8 +3926,8 @@ namespace IW3SR::Game
 		float fightDist;
 		float maxDist;
 		const char* accuracyGraphName[2];
-		float(*accuracyGraphKnots[2])[2];
-		float(*originalAccuracyGraphKnots[2])[2];
+		float (*accuracyGraphKnots[2])[2];
+		float (*originalAccuracyGraphKnots[2])[2];
 		int accuracyGraphKnotCount[2];
 		int originalAccuracyGraphKnotCount[2];
 		int iPositionReloadTransTime;
@@ -4643,7 +4641,6 @@ namespace IW3SR::Game
 		float radius;
 	};
 
-
 	struct GfxSunShadowBoundingPoly
 	{
 		float snapDelta[2];
@@ -4760,7 +4757,7 @@ namespace IW3SR::Game
 
 	struct DebugGlobals
 	{
-		float(*verts)[3];
+		float (*verts)[3];
 		int vertCount;
 		int vertLimit;
 		GfxDebugPoly* polys;
@@ -4796,7 +4793,7 @@ namespace IW3SR::Game
 		char surfsBuffer[131072];
 		FxCodeMeshData codeMeshes[2048];
 		unsigned int primDrawSurfsBuf[65536];
-		GfxViewParms viewParms[28];	// GfxViewParms either has pad or zFar
+		GfxViewParms viewParms[28]; // GfxViewParms either has pad or zFar
 		char primaryLightTechType[13][256];
 		float codeMeshArgs[256][4];
 		GfxParticleCloud clouds[256];
@@ -5758,16 +5755,16 @@ namespace IW3SR::Game
 		unsigned short torsoAnim;
 		unsigned short legsAnim;
 		unsigned short turningAnim;
-		snd_alias_list_t* (__cdecl* soundAlias)(const char*);
+		snd_alias_list_t*(__cdecl* soundAlias)(const char*);
 		int(__cdecl* playSoundAlias)(int, snd_alias_list_t*);
 	};
 
 	struct $0867E0FC4F8157A276DAB76B1612E229
 	{
 		scr_animtree_t tree;
-		int torso;		// scr_anim_s
-		int legs;		// scr_anim_s
-		int turning;	// scr_anim_s
+		int torso;	 // scr_anim_s
+		int legs;	 // scr_anim_s
+		int turning; // scr_anim_s
 	};
 
 	struct lerpFrame_t
@@ -5839,12 +5836,12 @@ namespace IW3SR::Game
 		int latestSnapshotTime;
 		int frametime;
 		int anim_user;
-		XModel* (__cdecl* GetXModel)(const char*);
+		XModel*(__cdecl* GetXModel)(const char*);
 		void* CreateDObj;
 		unsigned short AttachWeapon;
 		void* DObj;
 		void(__cdecl* SafeDObjFree)(int, int);
-		void* (__cdecl* AllocXAnim)(int);
+		void*(__cdecl* AllocXAnim)(int);
 		clientInfo_t clientinfo[64];
 	};
 
