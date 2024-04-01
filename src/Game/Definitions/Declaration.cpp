@@ -1,4 +1,5 @@
 #include "Declaration.hpp"
+#include "Core/Memory/Signature.hpp"
 
 namespace IW3SR::Game
 {
@@ -9,8 +10,8 @@ namespace IW3SR::Game
 
 	// Handles
 	uintptr_t COD4X_HANDLE = 0;
-	uintptr_t IW3MP_HANDLE = Signature(GetModuleHandle(IW3MP_BIN.c_str()));
-	uintptr_t IW3XO_HANDLE = Signature(GetModuleHandle(IW3XO_BIN.c_str()));
+	uintptr_t IW3MP_HANDLE = uintptr_t(GetModuleHandle(IW3MP_BIN.c_str()));
+	uintptr_t IW3XO_HANDLE = uintptr_t(GetModuleHandle(IW3XO_BIN.c_str()));
 
 	// Game
 	CmdArgs* cmd_args = Signature(0x1410B40);

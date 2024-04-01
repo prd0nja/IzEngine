@@ -1,4 +1,6 @@
 #pragma once
+#include "Structs.hpp"
+
 #include "Core/Memory/Assembler.hpp"
 #include "Core/Memory/Function.hpp"
 

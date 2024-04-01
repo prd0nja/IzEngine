@@ -1,4 +1,5 @@
 #pragma once
+#include "Core/Communication/Event.hpp"
 
 namespace IW3SR::Game
 {

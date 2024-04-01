@@ -2,7 +2,6 @@
 #include "ImGUI/Base.hpp"
 
 #include "Core/Containers/CircularBuffer.hpp"
-#include "Core/Input/KeyListener.hpp"
 #include "Core/Math.hpp"
 
 #include "Fonts/IconsFontAwesome6.hpp"

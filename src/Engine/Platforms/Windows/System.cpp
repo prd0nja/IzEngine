@@ -1,7 +1,7 @@
-#include "Core/System/System.hpp"
 #include "Windows/Base.hpp"
 
 #include <shellapi.h>
+#include "Core/System/System.hpp"
 
 namespace IW3SR::Engine
 {

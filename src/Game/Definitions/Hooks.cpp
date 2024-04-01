@@ -1,5 +1,4 @@
 #include "Hooks.hpp"
-
 #include "Game/Game.hpp"
 
 // clang-format off

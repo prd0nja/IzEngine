@@ -1,5 +1,7 @@
 #pragma once
 #include <asmjit/asmjit.h>
+#include <stdexcept>
+
 #include "Function.hpp"
 
 #ifndef ASMJIT_NO_X86

@@ -1,7 +1,7 @@
-#include "Renderer/Resources/Font.hpp"
+#include "DX9/Device.hpp"
 
 #include "Core/System/Environment.hpp"
-#include "DX9/Device.hpp"
+#include "Renderer/Resources/Font.hpp"
 
 namespace IW3SR::Engine
 {

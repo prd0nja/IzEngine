@@ -1,5 +1,6 @@
-#include "Core/System/Environment.hpp"
 #include "Windows/Base.hpp"
+
+#include "Core/System/Environment.hpp"
 
 #include <TlHelp32.h>
 #include <fstream>

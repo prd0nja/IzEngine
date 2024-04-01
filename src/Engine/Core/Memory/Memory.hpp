@@ -62,7 +62,7 @@ namespace IW3SR::Engine
 		/// </summary>
 		/// <param name="address">The target address.</param>
 		/// <param name="size">The bytes size.</param>
-		static inline void NOP(uintptr_t address, int size);
+		static void NOP(uintptr_t address, int size);
 
 		/// <summary>
 		/// JMP instruction.
@@ -70,7 +70,7 @@ namespace IW3SR::Engine
 		/// <param name="address">The target address.</param>
 		/// <param name="to">The jmp address.</param>
 		/// <param name="size">The bytes size.</param>
-		static inline void JMP(uintptr_t address, uintptr_t to, int size = 5);
+		static void JMP(uintptr_t address, uintptr_t to, int size = 5);
 
 		/// <summary>
 		/// CALL instruction.
@@ -78,21 +78,21 @@ namespace IW3SR::Engine
 		/// <param name="address">The target address.</param>
 		/// <param name="to">The call address.</param>
 		/// <param name="size">The bytes size.</param>
-		static inline void CALL(uintptr_t address, uintptr_t to, int size = 5);
+		static void CALL(uintptr_t address, uintptr_t to, int size = 5);
 
 		/// <summary>
 		/// Convert to little endian.
 		/// </summary>
 		/// <param name="value">The value.</param>
 		/// <returns></returns>
-		static inline uintptr_t LE(uintptr_t value);
+		static uintptr_t LE(uintptr_t value);
 
 		/// <summary>
 		/// Convert to big endian.
 		/// </summary>
 		/// <param name="value">The value.</param>
 		/// <returns></returns>
-		static inline uintptr_t BE(uintptr_t value);
+		static uintptr_t BE(uintptr_t value);
 
 		/// <summary>
 		/// Hex to bytes.

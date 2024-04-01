@@ -1,4 +1,5 @@
 #pragma once
+#include "Game/Base.hpp"
 
 namespace IW3SR::Game
 {

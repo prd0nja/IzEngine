@@ -4,8 +4,7 @@
 #include "Backends/D3D9EX.hpp"
 #include "Drawing/Draw2D.hpp"
 #include "Drawing/Draw3D.hpp"
-#include "Modules/Modules.hpp"
-#include "Settings/Settings.hpp"
+#include "Game/Game.hpp"
 
 namespace IW3SR::Game
 {

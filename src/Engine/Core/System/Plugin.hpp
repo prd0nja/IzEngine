@@ -1,6 +1,6 @@
 #pragma once
+#include "Core/Common.hpp"
 #include "Core/Memory/Function.hpp"
-#include "Engine/Base.hpp"
 
 namespace IW3SR::Engine
 {
@@ -15,7 +15,7 @@ namespace IW3SR::Engine
 		std::string FilePath;
 		bool Loaded = false;
 
-		HINSTANCE Instance = nullptr;
+		void* Instance = nullptr;
 		Function<void(Plugin* plugin)> CallbackInitialize;
 		Function<void()> CallbackRenderer;
 		Function<void()> CallbackShutdown;

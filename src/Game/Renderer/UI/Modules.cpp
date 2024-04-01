@@ -1,4 +1,6 @@
 #include "Modules.hpp"
+#include "Game/Game.hpp"
+
 #include <set>
 
 namespace IW3SR::Game::UC

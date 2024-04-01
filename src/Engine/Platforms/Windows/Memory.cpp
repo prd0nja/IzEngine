@@ -1,5 +1,6 @@
-#include "Core/Memory/Memory.hpp"
 #include "Windows/Base.hpp"
+
+#include "Core/Memory/Memory.hpp"
 
 #pragma warning(push)
 #pragma warning(disable : 6387)

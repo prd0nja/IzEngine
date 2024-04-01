@@ -1,5 +1,6 @@
-#include "Renderer/Resources/Texture.hpp"
 #include "DX9/Device.hpp"
+
+#include "Renderer/Resources/Texture.hpp"
 
 namespace IW3SR::Engine
 {

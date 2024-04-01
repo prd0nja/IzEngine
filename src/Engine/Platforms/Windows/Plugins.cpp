@@ -1,5 +1,7 @@
-#include "Core/System/Plugins.hpp"
+#include "Windows/Base.hpp"
+
 #include "Core/System/Environment.hpp"
+#include "Core/System/Plugins.hpp"
 
 namespace IW3SR::Engine
 {

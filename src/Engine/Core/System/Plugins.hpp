@@ -1,6 +1,8 @@
 #pragma once
 #include "Plugin.hpp"
 
+#include <map>
+
 namespace IW3SR::Engine
 {
 	/// <summary>

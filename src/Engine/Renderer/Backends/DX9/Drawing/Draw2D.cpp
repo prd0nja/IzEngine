@@ -1,5 +1,6 @@
-#include "Renderer/Drawing/Draw2D.hpp"
 #include "DX9/Device.hpp"
+
+#include "Renderer/Drawing/Draw2D.hpp"
 
 namespace IW3SR::Engine
 {

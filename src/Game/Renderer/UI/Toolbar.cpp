@@ -1,5 +1,8 @@
 #include "Toolbar.hpp"
 
+#include "Game/Game.hpp"
+#include "Game/Renderer/GUI.hpp"
+
 namespace IW3SR::Game::UC
 {
 	Toolbar::Toolbar() : Window("Toolbar")

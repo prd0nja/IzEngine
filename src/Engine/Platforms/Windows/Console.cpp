@@ -1,5 +1,6 @@
-#include "Core/Console/Console.hpp"
 #include "Windows/Base.hpp"
+
+#include "Core/Console/Console.hpp"
 
 namespace IW3SR::Engine
 {

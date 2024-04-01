@@ -1,9 +1,10 @@
 #pragma once
-#include "Base.hpp"
+#include "Renderer/Backends/D3D9.hpp"
+#include "Renderer/Modules/Modules.hpp"
+#include "Renderer/Renderer.hpp"
+#include "Renderer/Settings/Settings.hpp"
 
 #include "Player/Player.hpp"
-#include "Renderer/Backends/D3D9.hpp"
-#include "Renderer/Renderer.hpp"
 
 #include "System/Console.hpp"
 #include "System/Patch.hpp"

@@ -21,18 +21,6 @@ namespace IW3SR::Engine
 		~Signature() = default;
 
 		/// <summary>
-		/// Create a new signature from HMODULE.
-		/// </summary>
-		/// <param name="hModule">The module handle.</param>
-		Signature(HMODULE hModule);
-
-		/// <summary>
-		/// Create a new signature from FARPROC.
-		/// </summary>
-		/// <param name="function">The function.</param>
-		Signature(FARPROC function);
-
-		/// <summary>
 		/// Create a new signature and scan the pattern.
 		/// </summary>
 		/// <param name="pattern">The pattern to scan.</param>

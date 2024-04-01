@@ -8,17 +8,18 @@ namespace IW3SR::Engine
 	Plugin::Plugin(std::string filePath)
 	{
 		FilePath = filePath;
-		Instance = LoadLibrary(FilePath.c_str());
+		HINSTANCE instance = LoadLibrary(FilePath.c_str());
 
-		if (!Instance)
+		if (!instance)
 		{
 			Log::WriteLine(Channel::Error, "Invalid plugin {}", filePath);
 			return;
 		}
-		CallbackInitialize < Signature(GetProcAddress(Instance, "Initialize"));
-		CallbackRenderer < Signature(GetProcAddress(Instance, "Renderer"));
-		CallbackShutdown < Signature(GetProcAddress(Instance, "Shutdown"));
+		CallbackInitialize < uintptr_t(GetProcAddress(instance, "Initialize"));
+		CallbackRenderer < uintptr_t(GetProcAddress(instance, "Renderer"));
+		CallbackShutdown < uintptr_t(GetProcAddress(instance, "Shutdown"));
 
+		Instance = instance;
 		Loaded = CallbackInitialize;
 
 		if (CallbackInitialize)
@@ -30,8 +31,11 @@ namespace IW3SR::Engine
 		if (CallbackShutdown)
 			CallbackShutdown();
 
-		FreeLibrary(Instance);
-		Instance = nullptr;
+		if (Instance)
+		{
+			FreeLibrary(reinterpret_cast<HINSTANCE>(Instance));
+			Instance = nullptr;
+		}
 	}
 
 	void Plugin::SetInfos(const std::string& id, const std::string& name)

@@ -1,5 +1,6 @@
-#include "Core/Input/KeyListener.hpp"
 #include "Windows/Base.hpp"
+
+#include "Core/Input/KeyListener.hpp"
 
 namespace IW3SR::Engine
 {

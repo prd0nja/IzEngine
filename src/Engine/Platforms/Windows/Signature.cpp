@@ -1,13 +1,13 @@
-#include "Core/Memory/Signature.hpp"
+#include "Windows/Base.hpp"
+
 #include "Core/Memory/Memory.hpp"
+#include "Core/Memory/Signature.hpp"
 
 #include <Psapi.h>
 
 namespace IW3SR::Engine
 {
 	Signature::Signature(uintptr_t address) : Address(address) { }
-	Signature::Signature(HMODULE hModule) : Address(reinterpret_cast<uintptr_t>(hModule)) { }
-	Signature::Signature(FARPROC function) : Address(reinterpret_cast<uintptr_t>(function)) { }
 	Signature::Signature(const std::string& pattern) : Signature("", pattern) { }
 
 	Signature::Signature(const std::string& moduleName, const std::string& pattern)

@@ -35,7 +35,7 @@ namespace IW3SR::Game
 			return;
 
 		COD4X_BIN = *cod4x;
-		COD4X_HANDLE = Signature(GetModuleHandle(COD4X_BIN.c_str()));
+		COD4X_HANDLE = uintptr_t(GetModuleHandle(COD4X_BIN.c_str()));
 	}
 
 	void Application::Hook()
