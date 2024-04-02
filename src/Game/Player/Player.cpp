@@ -14,6 +14,30 @@ namespace IW3SR::Game
 			Players[i] = CreateRef<Player>(i);
 	}
 
+	void Player::Connect()
+	{
+		CL_Connect_h();
+
+		EventPlayerConnect event;
+		Application::Get().Dispatch(event);
+	}
+	
+	void Player::Disconnect(int localClientNum)
+	{
+		CL_Disconnect_h(localClientNum);
+
+		EventPlayerDisconnect event;
+		Application::Get().Dispatch(event);
+	}
+
+	void Player::Respawn() 
+	{
+		CG_Respawn_h();
+
+		EventPlayerSpawn event;
+		Application::Get().Dispatch(event);
+	}
+
 	bool Player::IsSelf()
 	{
 		return ent->nextState.clientNum == cgs->clientNum;

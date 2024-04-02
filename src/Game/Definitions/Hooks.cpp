@@ -24,7 +24,7 @@ namespace IW3SR::Game
 		MainWndProc_h(0x57BB20, System::MainWndProc);
 
 	Hook<void(int localClientNum, int controllerIndex, char* command)>
-		Cmd_ExecuteSingleCommand_h(0x4F9AB0, Console::ExecuteSingleCommand);
+		Cmd_ExecuteSingleCommand_h(0x4F9AB0, System::ExecuteSingleCommand);
 
 	Hook<void(ConChannel channel, const char* msg, int type)>
 		Com_PrintMessage_h(0x4FCA50, Console::Write);
@@ -34,6 +34,15 @@ namespace IW3SR::Game
 
 	Hook<void(int localClientNum)>
 		CG_PredictPlayerState_Internal_h(0x447260, Player::Predict);
+
+	Hook<void()>
+		CG_Respawn_h(0x445FA0, Player::Respawn);
+
+	Hook<void()>
+		CL_Connect_h(0x471050, Player::Connect);
+
+	Hook<void(int localClientNum)>
+		CL_Disconnect_h(0x4696B0, Player::Disconnect);
 
 	Hook<void(usercmd_s* cmd)>
 		CL_FinishMove_h(0x463A60, PMove::FinishMove);
@@ -55,6 +64,9 @@ namespace IW3SR::Game
 
 	Hook<void(GfxCmdBufInput* cmd, GfxViewInfo* viewInfo, GfxCmdBufSourceState* src, GfxCmdBufState* buf)>
 		RB_EndSceneRendering_h(0x6496EC, GRenderer::Draw3D);
+
+	Hook<void(int localClientNum, itemDef_s *item, const char **args)>
+		Script_ScriptMenuResponse_h(0x54DD90, System::ScriptMenuResponse);
 }
 // clang-format on
 namespace IW3SR::Game

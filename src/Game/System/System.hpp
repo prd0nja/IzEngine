@@ -37,5 +37,21 @@ namespace IW3SR::Game
 		/// <param name="lParam">Additional message-specific information.</param>
 		/// <returns>The result of processing the message.</returns>
 		static LRESULT CALLBACK MainWndProc(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam);
+
+		/// <summary>
+		/// Execute single command.
+		/// </summary>
+		/// <param name="localClientNum">The local client number.</param>
+		/// <param name="controllerIndex">The controller index.</param>
+		/// <param name="command">The command.</param>
+		static void ExecuteSingleCommand(int localClientNum, int controllerIndex, char* command);
+
+		/// <summary>
+		/// Script menu response.
+		/// </summary>
+		/// <param name="localClientNum">The local client number.</param>
+		/// <param name="item">The ui item.</param>
+		/// <param name="args">The args.</param>
+		static void ScriptMenuResponse(int localClientNum, itemDef_s *item, const char **args);
 	};
 }

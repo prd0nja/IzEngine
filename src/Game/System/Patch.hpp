@@ -31,6 +31,11 @@ namespace IW3SR::Game
 		static void Renderer();
 
 		/// <summary>
+		/// Player patch.
+		/// </summary>
+		static void Player();
+
+		/// <summary>
 		/// System patch.
 		/// </summary>
 		static void System();

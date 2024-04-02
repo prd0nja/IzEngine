@@ -9,6 +9,7 @@ namespace IW3SR::Game
 		CoD4X();
 		Definitions();
 		Renderer();
+		Player();
 		System();
 		Hook();
 	}
@@ -36,6 +37,13 @@ namespace IW3SR::Game
 		// Increase fps cap for menus and loadscreen
 		Memory::NOP(0x5001A8, 2);
 		COD4X Memory::NOP(Signature(COD4X_BIN, "72 ?? 83 ?? 00 F9 C5 00 07"), 2);
+	}
+
+	void Patch::Player() 
+	{ 
+		// Hooks
+		COD4X CL_Connect_h < Signature(COD4X_BIN, "55 89 E5 53 81 EC 24 04 00 00 E8");
+		COD4X CG_Respawn_h < Signature(COD4X_BIN, "55 89 E5 83 EC 18 B8 ?? ?? ?? ?? 8B 50 20");
 	}
 
 	void Patch::System()
@@ -70,6 +78,9 @@ namespace IW3SR::Game
 		Com_PrintMessage_h.Install();
 		CG_DrawCrosshair_h.Install();
 		CG_PredictPlayerState_Internal_h.Install();
+		CG_Respawn_h.Install();
+		CL_Connect_h.Install();
+		CL_Disconnect_h.Install();
 		CL_FinishMove_h.Install();
 		PM_WalkMove_h.Install();
 		PM_AirMove_h.Install();
@@ -77,6 +88,7 @@ namespace IW3SR::Game
 		R_RenderAllLeftovers_h.Install();
 		R_Shutdown_h.Install();
 		RB_EndSceneRendering_h.Install();
+		Script_ScriptMenuResponse_h.Install();
 	}
 
 	void Patch::Unhook()
@@ -89,6 +101,9 @@ namespace IW3SR::Game
 		Com_PrintMessage_h.Remove();
 		CG_DrawCrosshair_h.Remove();
 		CG_PredictPlayerState_Internal_h.Remove();
+		CG_Respawn_h.Remove();
+		CL_Connect_h.Remove();
+		CL_Disconnect_h.Remove();
 		CL_FinishMove_h.Remove();
 		PM_WalkMove_h.Remove();
 		PM_AirMove_h.Remove();
@@ -96,5 +111,6 @@ namespace IW3SR::Game
 		R_RenderAllLeftovers_h.Remove();
 		R_Shutdown_h.Remove();
 		RB_EndSceneRendering_h.Remove();
+		Script_ScriptMenuResponse_h.Remove();
 	}
 }

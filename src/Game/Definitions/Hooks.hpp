@@ -25,10 +25,19 @@ namespace IW3SR::Game
 		Com_PrintMessage_h;
 
 	extern Hook<void(int localClientNum)>
-		CG_PredictPlayerState_Internal_h;
+		CG_DrawCrosshair_h;
 
 	extern Hook<void(int localClientNum)>
-		CG_DrawCrosshair_h;
+		CG_PredictPlayerState_Internal_h;
+
+	extern Hook<void()>
+		CG_Respawn_h;
+
+	extern Hook<void()>
+		CL_Connect_h;
+
+	extern Hook<void(int localClientNum)>
+		CL_Disconnect_h;
 
 	extern Hook<void(usercmd_s* cmd)>
 		CL_FinishMove_h;
@@ -50,6 +59,9 @@ namespace IW3SR::Game
 
 	extern Hook<void(GfxCmdBufInput* cmd, GfxViewInfo* viewInfo, GfxCmdBufSourceState* src, GfxCmdBufState* buf)>
 		RB_EndSceneRendering_h;
+
+	extern Hook<void(int localClientNum, itemDef_s *item, const char **args)>
+		Script_ScriptMenuResponse_h;
 }
 // clang-format on
 namespace IW3SR::Game

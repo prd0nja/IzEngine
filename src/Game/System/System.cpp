@@ -35,4 +35,25 @@ namespace IW3SR::Game
 		io.MouseDrawCursor = false;
 		return MainWndProc_h(hWnd, Msg, wParam, lParam);
 	}
+
+	void System::ExecuteSingleCommand(int localClientNum, int controllerIndex, char* command)
+	{
+		if (std::string(command) == "openscriptmenu cj load")
+		{
+			EventPlayerLoadPosition event;
+			Application::Get().Dispatch(event);
+		}
+		Cmd_ExecuteSingleCommand_h(localClientNum, controllerIndex, command);
+	}
+
+	void System::ScriptMenuResponse(int localClientNum, itemDef_s* item, const char** args) 
+	{ 
+		Script_ScriptMenuResponse_h(localClientNum, item, args);
+
+		std::string command;
+		EventScriptMenuResponse event(item->parent->window.name, command);
+		Application::Get().Dispatch(event);
+
+		// Log::WriteLine(Channel::Game, "Response: {} {}", item->parent->window.name, command);
+	}
 }

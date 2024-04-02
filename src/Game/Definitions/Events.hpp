@@ -21,16 +21,16 @@ namespace IW3SR::Game
 		EventRendererRender() = default;
 	};
 
-	class EventPlayerConnected : public Event
+	class EventPlayerConnect : public Event
 	{
-		EVENT_CLASS("player.connected")
-		EventPlayerConnected() = default;
+		EVENT_CLASS("player.connect")
+		EventPlayerConnect() = default;
 	};
 
-	class EventPlayerDisconnected : public Event
+	class EventPlayerDisconnect : public Event
 	{
-		EVENT_CLASS("player.disconnected")
-		EventPlayerDisconnected() = default;
+		EVENT_CLASS("player.disconnect")
+		EventPlayerDisconnect() = default;
 	};
 
 	class EventPlayerSpawn : public Event
@@ -84,5 +84,13 @@ namespace IW3SR::Game
 		EVENT_CLASS("pmove.finish")
 		EventPMoveFinish(usercmd_s* cmd) : cmd(cmd) { }
 		usercmd_s* cmd;
+	};
+
+	class EventScriptMenuResponse : public Event
+	{
+		EVENT_CLASS("script.menu.response")
+		EventScriptMenuResponse(std::string menu, std::string response) : menu(menu), response(response) { }
+		std::string menu;
+		std::string response;
 	};
 }

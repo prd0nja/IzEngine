@@ -55,6 +55,22 @@ namespace IW3SR::Game
 		static void Initialize();
 
 		/// <summary>
+		/// Player connect.
+		/// </summary>
+		static void Connect();
+
+		/// <summary>
+		/// Player disconnect.
+		/// </summary>
+		/// <param name="localClientNum">Local client num.</param>
+		static void Disconnect(int localClientNum);
+
+		/// <summary>
+		/// Player respawn.
+		/// </summary>
+		static void Respawn();
+
+		/// <summary>
 		/// Predict player state.
 		/// </summary>
 		/// <param name="localClientNum">Local client num.</param>
