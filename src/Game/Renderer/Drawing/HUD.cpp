@@ -72,7 +72,6 @@ namespace IW3SR::Game
 		RenderPosition = position;
 		RenderSize = size;
 
-		ImGui::Movable(ID, Position, Size, RenderPosition, RenderSize);
 		GDraw2D::Rect(Material, RenderPosition, RenderSize, Color);
 	}
 }
