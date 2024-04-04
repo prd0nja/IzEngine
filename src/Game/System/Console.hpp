@@ -21,7 +21,7 @@ namespace IW3SR::Game
 	/// <summary>
 	/// Console class.
 	/// </summary>
-	class Console
+	class GConsole
 	{
 	public:
 		/// <summary>
@@ -30,9 +30,9 @@ namespace IW3SR::Game
 		static void Initialize();
 
 		/// <summary>
-		/// Release the console.
+		/// Shutdown the console.
 		/// </summary>
-		static void Release();
+		static void Shutdown();
 
 		/// <summary>
 		/// Write to the console.

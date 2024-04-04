@@ -19,9 +19,9 @@ namespace IW3SR::Engine
 		static void Initialize();
 
 		/// <summary>
-		/// Release the console.
+		/// Shutdown the console.
 		/// </summary>
-		static void Release();
+		static void Shutdown();
 
 		/// <summary>
 		/// Set the console title.

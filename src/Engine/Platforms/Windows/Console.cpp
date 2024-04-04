@@ -19,7 +19,7 @@ namespace IW3SR::Engine
 		SetConsoleMode(OutputHandle, Mode);
 	}
 
-	void Console::Release()
+	void Console::Shutdown()
 	{
 		fclose(stdin);
 		fclose(stdout);

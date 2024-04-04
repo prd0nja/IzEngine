@@ -2,7 +2,7 @@
 
 namespace IW3SR::Game
 {
-	HWND System::CreateMainWindow(DWORD dwExStyle, LPCSTR lpClassName, LPCSTR lpWindowName, DWORD dwStyle, int X, int Y,
+	HWND GSystem::CreateMainWindow(DWORD dwExStyle, LPCSTR lpClassName, LPCSTR lpWindowName, DWORD dwStyle, int X, int Y,
 		int nWidth, int nHeight, HWND hWndParent, HMENU hMenu, HINSTANCE hInstance, LPVOID lpParam)
 	{
 		HWND hwnd = CreateWindowExA_h(dwExStyle, lpClassName, lpWindowName, dwStyle, X, Y, nWidth, nHeight, hWndParent,
@@ -12,10 +12,10 @@ namespace IW3SR::Game
 		if (windowName != "Call of Duty 4" && windowName != "Call of Duty 4 X")
 			return hwnd;
 
-		return reinterpret_cast<HWND>(Engine::System::MainWindow = hwnd);
+		return reinterpret_cast<HWND>(System::MainWindow = hwnd);
 	}
 
-	LRESULT System::MainWndProc(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
+	LRESULT GSystem::MainWndProc(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
 	{
 		auto& UI = UI::Get();
 		KeyListener::Process(Msg, wParam, lParam);
@@ -36,7 +36,7 @@ namespace IW3SR::Game
 		return MainWndProc_h(hWnd, Msg, wParam, lParam);
 	}
 
-	void System::ExecuteSingleCommand(int localClientNum, int controllerIndex, char* cmd)
+	void GSystem::ExecuteSingleCommand(int localClientNum, int controllerIndex, char* cmd)
 	{
 		std::string command = cmd;
 		Cmd_ExecuteSingleCommand_h(localClientNum, controllerIndex, cmd);
@@ -50,8 +50,8 @@ namespace IW3SR::Game
 		Application::Get().Dispatch(event);
 	}
 
-	void System::ScriptMenuResponse(int localClientNum, itemDef_s* item, const char** args) 
-	{ 
+	void GSystem::ScriptMenuResponse(int localClientNum, itemDef_s* item, const char** args)
+	{
 		std::string arguments = *args;
 		const char* data = arguments.data();
 		std::string response = Com_ParseExt(&data, false);

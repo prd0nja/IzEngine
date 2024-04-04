@@ -2,18 +2,18 @@
 
 namespace IW3SR::Game
 {
-	void Console::Initialize()
+	void GConsole::Initialize()
 	{
-		Engine::Console::Initialize();
-		Engine::Console::SetTile("IW3SR");
+		Console::Initialize();
+		Console::SetTile("IW3SR");
 	}
 
-	void Console::Release()
+	void GConsole::Shutdown()
 	{
-		Engine::Console::Release();
+		Console::Shutdown();
 	}
 
-	void Console::Write(ConChannel channel, const char* msg, int type)
+	void GConsole::Write(ConChannel channel, const char* msg, int type)
 	{
 		Log::Write(Q3(msg));
 
@@ -21,7 +21,7 @@ namespace IW3SR::Game
 			Com_PrintMessage_h(channel, msg, type);
 	}
 
-	std::string Console::Q3(const std::string& msg)
+	std::string GConsole::Q3(const std::string& msg)
 	{
 		std::string result;
 		auto size = msg.size();

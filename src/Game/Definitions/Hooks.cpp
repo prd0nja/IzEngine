@@ -15,19 +15,19 @@ namespace IW3SR::Game
 	Hook<HWND STDCALL(DWORD dwExStyle, LPCSTR lpClassName, LPCSTR lpWindowName,
 		DWORD dwStyle, int X, int Y, int nWidth, int nHeight, HWND hWndParent, HMENU hMenu,
 		HINSTANCE hInstance, LPVOID lpParam)>
-		CreateWindowExA_h(CreateWindowExA, System::CreateMainWindow);
+		CreateWindowExA_h(CreateWindowExA, GSystem::CreateMainWindow);
 
 	Hook<IDirect3D9* STDCALL(UINT sdk)>
 		Direct3DCreate9_h(Direct3DCreate9, D3D9::Direct3DCreate9);
 
 	Hook<LRESULT CALLBACK(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)>
-		MainWndProc_h(0x57BB20, System::MainWndProc);
+		MainWndProc_h(0x57BB20, GSystem::MainWndProc);
 
 	Hook<void(int localClientNum, int controllerIndex, char* command)>
-		Cmd_ExecuteSingleCommand_h(0x4F9AB0, System::ExecuteSingleCommand);
+		Cmd_ExecuteSingleCommand_h(0x4F9AB0, GSystem::ExecuteSingleCommand);
 
 	Hook<void(ConChannel channel, const char* msg, int type)>
-		Com_PrintMessage_h(0x4FCA50, Console::Write);
+		Com_PrintMessage_h(0x4FCA50, GConsole::Write);
 
 	Hook<void(int localClientNum)>
 		CG_DrawCrosshair_h(0x4311A0, GRenderer::Draw2D);
@@ -66,7 +66,7 @@ namespace IW3SR::Game
 		RB_EndSceneRendering_h(0x6496EC, GRenderer::Draw3D);
 
 	Hook<void(int localClientNum, itemDef_s *item, const char **args)>
-		Script_ScriptMenuResponse_h(0x54DD90, System::ScriptMenuResponse);
+		Script_ScriptMenuResponse_h(0x54DD90, GSystem::ScriptMenuResponse);
 }
 // clang-format on
 namespace IW3SR::Game

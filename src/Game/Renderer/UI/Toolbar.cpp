@@ -30,7 +30,7 @@ namespace IW3SR::Game::UC
 		ImGui::Tooltip("Modules");
 		ImGui::SameLine();
 
-		if (Engine::System::IsDebug())
+		if (System::IsDebug())
 		{
 			if (ImGui::Button(ICON_FA_ROTATE_RIGHT, "Reload", nullptr, buttonSize))
 				Reload();
@@ -47,7 +47,7 @@ namespace IW3SR::Game::UC
 		ImGui::Tooltip("Binds");
 		ImGui::SameLine();
 
-		if (Engine::System::IsDebug())
+		if (System::IsDebug())
 		{
 			ImGui::Button(ICON_FA_TERMINAL, "Debug", &IsDebug, buttonSize);
 			ImGui::Tooltip("Debug");

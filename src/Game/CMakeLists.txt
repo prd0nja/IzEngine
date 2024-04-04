@@ -2,11 +2,11 @@ add_library(IW3SR.Game OBJECT)
 add_library(IW3SR.API INTERFACE)
 
 add_subdirectory(Definitions)
+add_subdirectory(Math)
 add_subdirectory(Platforms)
 add_subdirectory(Player)
 add_subdirectory(Renderer)
 add_subdirectory(System)
-add_subdirectory(World)
 
 target_precompile_headers(IW3SR.Game PRIVATE
 	Base.hpp

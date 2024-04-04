@@ -15,7 +15,7 @@ namespace IW3SR::Engine
 		Environment::Load();
 
 		Patch::Initialize();
-		Console::Initialize();
+		GConsole::Initialize();
 		Player::Initialize();
 		Plugins::Initialize();
 	}
@@ -24,7 +24,7 @@ namespace IW3SR::Engine
 	{
 		Environment::Save();
 
-		Console::Release();
+		GConsole::Shutdown();
 		Plugins::Shutdown();
 		Patch::Shutdown();
 	}

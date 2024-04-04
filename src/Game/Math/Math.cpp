@@ -1,8 +1,8 @@
-#include "World.hpp"
+#include "Math.hpp"
 
 namespace IW3SR::Game
 {
-	vec2 World::ToScreen(const vec3& position)
+	vec2 GMath::WorldToScreen(const vec3& position)
 	{
 		const vec2 center = vec2(cgs->refdef.width, cgs->refdef.height) / 2.0f;
 		const vec2 tanHalfFov = vec2(cgs->refdef.tanHalfFovX, cgs->refdef.tanHalfFovY);

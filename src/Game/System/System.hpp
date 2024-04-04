@@ -6,7 +6,7 @@ namespace IW3SR::Game
 	/// <summary>
 	/// Game system.
 	/// </summary>
-	class System
+	class GSystem
 	{
 	public:
 		/// <summary>

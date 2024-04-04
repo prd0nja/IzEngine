@@ -4,9 +4,9 @@
 namespace IW3SR::Game
 {
 	/// <summary>
-	/// World class.
+	/// Math class.
 	/// </summary>
-	class API World
+	class API GMath
 	{
 	public:
 		/// <summary>
@@ -14,6 +14,6 @@ namespace IW3SR::Game
 		/// </summary>
 		/// <param name="position">The 3D position.</param>
 		/// <returns></returns>
-		static vec2 ToScreen(const vec3& position);
+		static vec2 WorldToScreen(const vec3& position);
 	};
 }

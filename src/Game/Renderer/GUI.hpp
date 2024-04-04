@@ -16,7 +16,7 @@ namespace IW3SR::Game
 	{
 		CLASS_SINGLETON(GUI)
 	public:
-		Engine::UI& UI;
+		UI& UI;
 
 		UC::About About;
 		UC::Binds Binds;
