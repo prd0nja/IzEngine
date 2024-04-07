@@ -19,8 +19,11 @@ namespace IW3SR::Game
 	Function<char*(const char** pData, bool allowLineBreaks)>
 		Com_ParseExt = 0x570FB0;
 
-	Function<dvar_s* (const char* name)>
+	Function<dvar_s*(const char* name)>
 		Dvar_FindVar = ASM_LOAD(Dvar_FindVar);
+
+	Function<dvar_s*(const char* dvarName, DvarType type, int flags, const char* description, DvarValue value, DvarLimits limits)>
+		Dvar_RegisterVariant = ASM_LOAD(Dvar_RegisterVariant);
 
 	Function<Material* (const char* material, int size)>
 		Material_RegisterHandle = 0x5F2A80;
@@ -82,6 +85,27 @@ namespace IW3SR::Game
 		a.mov(x86::edi, x86::dword_ptr(x86::ebp, 8)); // name
 		a.call(0x56B5D0);
 		a.mov(x86::dword_ptr(x86::esp, 0x1C), x86::eax);
+
+		a.popad();
+		a.pop(x86::ebp);
+		a.ret();
+	}
+
+	ASM_FUNCTION(Dvar_RegisterVariant)
+	{
+		a.push(x86::ebp);
+		a.mov(x86::ebp, x86::esp);
+		a.pushad();
+
+		a.push(x86::dword_ptr(x86::ebp, 0x1C));			 // limits
+		a.push(x86::dword_ptr(x86::ebp, 0x18));			 // value
+		a.push(x86::dword_ptr(x86::ebp, 0x14));			 // description
+		a.push(x86::dword_ptr(x86::ebp, 0x10));			 // flags
+		a.push(x86::dword_ptr(x86::ebp, 0x0C));			 // type
+		a.mov(x86::eax, x86::dword_ptr(x86::ebp, 0x08)); // dvarName
+		a.call(0x56C350);
+		a.mov(x86::dword_ptr(x86::esp, 0x30), x86::eax);
+		a.add(x86::esp, 0x14);
 
 		a.popad();
 		a.pop(x86::ebp);

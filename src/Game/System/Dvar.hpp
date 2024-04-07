@@ -10,6 +10,87 @@ namespace IW3SR::Game
 	{
 	public:
 		/// <summary>
+		/// Register int dvar.
+		/// </summary>
+		/// <param name="name">The dvar name.</param>
+		/// <param name="flags">The dvar flags.</param>
+		/// <param name="description">The description.</param>
+		/// <param name="value">The default value.</param>
+		/// <param name="min">The min value.</param>
+		/// <param name="max">The max value.</param>
+		/// <returns></returns>
+		static dvar_s* RegisterInt(const std::string& name, DvarFlags flags, const std::string& description, int value,
+			int min, int max)
+		{
+			return Dvar_RegisterVariant(name.c_str(), DvarType::INTEGER, flags, description.c_str(),
+				DvarValue{ .integer{ value } }, DvarLimits{ .integer{ min, max } });
+		}
+
+		/// <summary>
+		/// Register float dvar.
+		/// </summary>
+		/// <param name="name">The dvar name.</param>
+		/// <param name="flags">The dvar flags.</param>
+		/// <param name="description">The description.</param>
+		/// <param name="value">The default value.</param>
+		/// <param name="min">The min value.</param>
+		/// <param name="max">The max value.</param>
+		/// <returns></returns>
+		static dvar_s* RegisterFloat(const std::string& name, DvarFlags flags, const std::string& description,
+			float value, float min, float max)
+		{
+			return Dvar_RegisterVariant(name.c_str(), DvarType::VALUE, flags, description.c_str(),
+				DvarValue{ .value{ value } }, DvarLimits{ .value{ min, max } });
+		}
+
+		/// <summary>
+		/// Register string dvar.
+		/// </summary>
+		/// <param name="name">The dvar name.</param>
+		/// <param name="flags">The dvar flags.</param>
+		/// <param name="description">The description.</param>
+		/// <param name="value">The default value.</param>
+		/// <returns></returns>
+		static dvar_s* RegisterString(const std::string& name, DvarFlags flags, const std::string& description,
+			const std::string& value)
+		{
+			return Dvar_RegisterVariant(name.c_str(), DvarType::STRING, flags, description.c_str(),
+				DvarValue{ .string{ value.c_str() } }, DvarLimits{ 0, 0 });
+		}
+
+		/// <summary>
+		/// Register bool dvar.
+		/// </summary>
+		/// <param name="name">The dvar name.</param>
+		/// <param name="flags">The dvar flags.</param>
+		/// <param name="description">The description.</param>
+		/// <param name="value">The default value.</param>
+		/// <returns></returns>
+		static dvar_s* RegisterBool(const std::string& name, DvarFlags flags, const std::string& description,
+			bool value)
+		{
+			return Dvar_RegisterVariant(name.c_str(), DvarType::BOOLEAN, flags, description.c_str(),
+				DvarValue{ .enabled{ value } }, DvarLimits{ .integer{ 0, 0 } });
+		}
+
+		/// <summary>
+		/// Register enum dvar.
+		/// </summary>
+		/// <param name="name">The dvar name.</param>
+		/// <param name="flags">The dvar flags.</param>
+		/// <param name="description">The description.</param>
+		/// <param name="value">The default value.</param>
+		/// <param name="list">The enum list.</param>
+		/// <returns></returns>
+		static dvar_s* RegisterEnum(const std::string& name, DvarFlags flags, const std::string& description, int value,
+			const std::vector<const char*>& list)
+		{
+			return Dvar_RegisterVariant(name.c_str(), DvarType::ENUMERATION, flags, description.c_str(),
+				DvarValue{ .integer{ value } },
+				DvarLimits{ .enumeration{ static_cast<int>(list.size()), const_cast<const char**>(list.data()) } });
+		}
+
+		/// <summary>
 		/// Get dvar.
 		/// </summary>
 		/// <typeparam name="T">The value type.</typeparam>

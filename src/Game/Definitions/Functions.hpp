@@ -26,6 +26,9 @@ namespace IW3SR::Game
 	API extern Function<dvar_s*(const char* name)>
 		Dvar_FindVar;
 
+	API extern Function<dvar_s*(const char* dvarName, DvarType type, int flags, const char* description, DvarValue value, DvarLimits limits)>
+		Dvar_RegisterVariant;
+
 	extern Function<Material*(const char* material, int size)>
 		Material_RegisterHandle;
 
@@ -60,6 +63,7 @@ namespace IW3SR::Game
 {
 	ASM_FUNCTION(BG_EvaluateTrajectory);
 	ASM_FUNCTION(Dvar_FindVar);
+	ASM_FUNCTION(Dvar_RegisterVariant);
 	ASM_FUNCTION(R_AddCmdDrawText);
 	ASM_FUNCTION(R_AddCmdDrawStretchPic);
 	ASM_FUNCTION(R_SetGameTime);
