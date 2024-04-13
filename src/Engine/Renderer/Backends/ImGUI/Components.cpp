@@ -1,7 +1,7 @@
 #include "Components.hpp"
 #include "UI.hpp"
 
-#include "Core/Input/KeyListener.hpp"
+#include "Core/Input/Keyboard.hpp"
 
 namespace ImGui
 {
@@ -161,8 +161,7 @@ namespace ImGui
 
 	void Keybind(const std::string& label, int* key, const ImVec2& defaultSize)
 	{
-		char keyLabel[100];
-		const int keyLabelSize = 100;
+		const auto keyName = Keyboard::GetName(*key);
 		const auto id = GetID(label.c_str());
 
 		float width = 50 * UI::Get().Size;
@@ -171,10 +170,6 @@ namespace ImGui
 		KeepAliveID(id);
 		PushID(id);
 
-		DWORD code = MapVirtualKey(*key, MAPVK_VK_TO_VSC);
-		GetKeyNameText(code << 16, keyLabel, keyLabelSize);
-		CharUpperBuff(keyLabel, keyLabelSize);
-
 		if (GetActiveID() == id)
 		{
 			PushStyleColor(ImGuiCol_Button, GetColorU32(ImGuiCol_ButtonActive));
@@ -182,18 +177,18 @@ namespace ImGui
 			PopStyleColor();
 
 			int k = 0;
-			for (; k < ImGuiKey_COUNT; k++)
+			for (; k < Key_Count; k++)
 			{
-				if (KeyListener::IsPressed(k))
+				if (Keyboard::IsPressed(k))
 				{
 					*key = k;
 					break;
 				}
 			}
-			if (k != ImGuiKey_COUNT || (!IsItemHovered() && IsMouseClicked(ImGuiMouseButton_Left)))
+			if (k != Key_Count || (!IsItemHovered() && IsMouseClicked(ImGuiMouseButton_Left)))
 				ClearActiveID();
 		}
-		else if (Button(keyLabel, size))
+		else if (Button(keyName, size))
 			SetActiveID(id, GetCurrentWindow());
 
 		SameLine();

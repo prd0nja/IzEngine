@@ -32,11 +32,11 @@ namespace IW3SR::Game
 		/// Window procedure for the main window.
 		/// </summary>
 		/// <param name="hWnd">The handle to the window.</param>
-		/// <param name="Msg">The message code.</param>
+		/// <param name="msg">The message code.</param>
 		/// <param name="wParam">Additional message-specific information.</param>
 		/// <param name="lParam">Additional message-specific information.</param>
 		/// <returns>The result of processing the message.</returns>
-		static LRESULT CALLBACK MainWndProc(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam);
+		static LRESULT CALLBACK MainWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 		/// <summary>
 		/// Execute single command.

@@ -30,7 +30,7 @@ namespace IW3SR::Addons
 		Text GroundText;
 		Plots Graph;
 
-		KeyListener KeyReset;
+		Keyboard KeyReset;
 		bool ShowVelocity;
 		bool ShowAverage;
 		bool ShowMax;

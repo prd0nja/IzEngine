@@ -1,7 +1,7 @@
 #pragma once
 #include "ImGUI/Base.hpp"
 
-#include "Core/Input/KeyListener.hpp"
+#include "Core/Input/Keyboard.hpp"
 #include "Core/Screen/VirtualScreen.hpp"
 
 #include "UI/Memory.hpp"
@@ -21,7 +21,7 @@ namespace IW3SR::Engine
 		bool DesignMode = false;
 		VirtualScreen Screen;
 		float Size = 1.0f;
-		KeyListener KeyOpen;
+		Keyboard KeyOpen;
 
 		UC::Memory Memory;
 		UC::Themes Themes;

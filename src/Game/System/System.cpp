@@ -15,25 +15,25 @@ namespace IW3SR::Game
 		return reinterpret_cast<HWND>(System::MainWindow = hwnd);
 	}
 
-	LRESULT GSystem::MainWndProc(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
+	LRESULT GSystem::MainWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	{
 		auto& UI = UI::Get();
-		KeyListener::Process(Msg, wParam, lParam);
+		Keyboard::Process(msg, wParam);
 
 		if (!UI.Active)
-			return MainWndProc_h(hWnd, Msg, wParam, lParam);
+			return MainWndProc_h(hWnd, msg, wParam, lParam);
 
 		ImGuiIO& io = ImGui::GetIO();
 		if (UI.Open)
 		{
-			if (KeyListener::IsPressed(VK_ESCAPE))
+			if (Keyboard::IsPressed(Key_Escape))
 				UI.Open = false;
-			ImGui_ImplWin32_WndProcHandler(hWnd, Msg, wParam, lParam);
+			ImGui_ImplWin32_WndProcHandler(hWnd, msg, wParam, lParam);
 			io.MouseDrawCursor = true;
 			return true;
 		}
 		io.MouseDrawCursor = false;
-		return MainWndProc_h(hWnd, Msg, wParam, lParam);
+		return MainWndProc_h(hWnd, msg, wParam, lParam);
 	}
 
 	void GSystem::ExecuteSingleCommand(int localClientNum, int controllerIndex, char* cmd)

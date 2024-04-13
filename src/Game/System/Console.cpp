@@ -6,6 +6,8 @@ namespace IW3SR::Game
 	{
 		Console::Initialize();
 		Console::SetTile("IW3SR");
+
+		// SetWindowLongPtr(consoleWindowHandle, GWLP_WNDPROC, reinterpret_cast<LONG_PTR>(WndProc));
 	}
 
 	void GConsole::Shutdown()

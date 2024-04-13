@@ -14,6 +14,11 @@
 #ifdef PLATFORM_WINDOWS
 	#include <imgui_impl_win32.h>
 	#include "Windows/Base.hpp"
+
+	#define ImGui_ImplOS_Init(handle) ImGui_ImplWin32_Init(handle)
+	#define ImGui_ImplOS_Shutdown() ImGui_ImplWin32_Shutdown()
+	#define ImGui_ImplOS_NewFrame() ImGui_ImplWin32_NewFrame()
+
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 #endif
 

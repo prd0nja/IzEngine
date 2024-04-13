@@ -8,7 +8,7 @@ namespace IW3SR::Engine
 {
 	UI::UI()
 	{
-		KeyOpen = KeyListener(VK_F10);
+		KeyOpen = Keyboard(Key_F10);
 
 		ImGui::SetAllocatorFunctions(&Allocator, &Free, &Data);
 		Context = ImGui::CreateContext();
