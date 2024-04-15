@@ -61,104 +61,151 @@ namespace IW3SR::Engine
 		if (record.EventType != KEY_EVENT || !record.Event.KeyEvent.bKeyDown)
 			return command;
 
-		static int previousKey = 0;
-		const int key = Keyboard::Map(record.Event.KeyEvent.wVirtualKeyCode);
+		Key = Keyboard::Map(record.Event.KeyEvent.wVirtualKeyCode);
 		const char character = record.Event.KeyEvent.uChar.AsciiChar;
 		const bool print = std::isprint(character);
 
+		switch (Key)
+		{
+		case Key_LeftArrow:
+			InputCursorLeft();
+			break;
+		case Key_RightArrow:
+			InputCursorRight();
+			break;
+		}
 		Hide();
-		if (key == Key_Enter)
-		{
-			command = std::string(InputBuffer.begin(), InputBuffer.end());
-			InputBuffer.clear();
-			History.push_back(command);
-			HistoryIndex = History.size() - 1;
-			Cursor = 0;
-		}
-		else if (key == Key_Backspace || key == Key_Delete)
-		{
-			if (InputBuffer.size() && Cursor)
-				InputBuffer.erase(InputBuffer.begin() + --Cursor);
-		}
-		else if (key == Key_Tab)
-		{
-			if (previousKey != key)
-				AutocompleteBegin = true;
 
-			if (AutocompleteBegin)
-			{
-				Autocomplete = Commands
-					| std::views::filter([&](const auto& command) { return command.starts_with(InputBuffer); })
-					| std::ranges::to<std::vector<std::string>>();
-
-				if (Autocomplete.size())
-				{
-					std::cout << "]" << InputBuffer << "\n";
-					for (const auto& command : Autocomplete)
-						std::cout << "\t" << command << "\n";
-				}
-				AutocompleteIndex = 0;
-				AutocompleteBegin = false;
-			}
-			if (Autocomplete.size())
-			{
-				if (AutocompleteIndex >= Autocomplete.size())
-					AutocompleteIndex = 0;
-
-				InputBuffer = Autocomplete[AutocompleteIndex++];
-				Cursor = InputBuffer.size();
-			}
-		}
-		else if (key == Key_UpArrow && !History.empty())
+		switch (Key)
 		{
-			if (HistoryIndex)
-				HistoryIndex--;
-
-			InputBuffer = History[HistoryIndex];
-			Cursor = InputBuffer.size();
+		case Key_Enter:
+			command = InputEnter();
+			break;
+		case Key_Delete:
+		case Key_Backspace:
+			InputBackspace();
+			break;
+		case Key_Tab:
+			InputAutocomplete();
+			break;
+		case Key_UpArrow:
+			InputHistoryUp();
+			break;
+		case Key_DownArrow:
+			InputHistoryDown();
+			break;
 		}
-		else if (key == Key_DownArrow && !History.empty())
-		{
-			if (HistoryIndex < History.size() - 1)
-				HistoryIndex++;
+		if (print && InputBuffer.size() < 256)
+			InputBuffer.insert(InputBuffer.begin() + Cursor++, character);
 
-			InputBuffer = History[HistoryIndex];
-			Cursor = InputBuffer.size();
-		}
 		Show();
-
-		if (key == Key_LeftArrow && Cursor)
-		{
-			Cursor--;
-			MoveBack();
-		}
-		else if (key == Key_RightArrow && Cursor < InputBuffer.size())
-		{
-			Cursor++;
-			MoveForward();
-		}
-		previousKey = key;
-
-		if (!print || InputBuffer.size() >= 256)
-			return command;
-
-		Hide();
-		InputBuffer.insert(InputBuffer.begin() + Cursor++, character);
-		Show();
+		PreviousKey = Key;
 		return command;
 	}
 
-	void Console::MoveForward()
+	std::string Console::InputEnter()
+	{
+		History.push_back(InputBuffer);
+		HistoryIndex = History.size() - 1;
+
+		InputBuffer.clear();
+		Cursor = 0;
+
+		return History[HistoryIndex];
+	}
+
+	void Console::InputBackspace()
+	{
+		if (InputBuffer.size() && Cursor)
+			InputBuffer.erase(InputBuffer.begin() + --Cursor);
+	}
+
+	void Console::InputAutocomplete()
+	{
+		if (InputBuffer.empty())
+			return;
+
+		if (PreviousKey != Key)
+			AutocompleteBegin = true;
+
+		if (AutocompleteBegin)
+		{
+			Autocomplete = Commands
+				| std::views::filter([&](const auto& command) { return command.starts_with(InputBuffer); })
+				| std::ranges::to<std::vector<std::string>>();
+
+			if (Autocomplete.size())
+			{
+				std::cout << "]" << InputBuffer << "\n";
+				for (const auto& command : Autocomplete)
+					std::cout << "\t" << command << "\n";
+			}
+			AutocompleteIndex = 0;
+			AutocompleteBegin = false;
+		}
+		if (Autocomplete.size())
+		{
+			if (AutocompleteIndex >= Autocomplete.size())
+				AutocompleteIndex = 0;
+
+			InputBuffer = Autocomplete[AutocompleteIndex++];
+			Cursor = InputBuffer.size();
+		}
+	}
+
+	void Console::InputHistoryUp()
+	{
+		if (History.empty())
+			return;
+
+		InputBuffer = History[HistoryIndex];
+		Cursor = InputBuffer.size();
+
+		if (HistoryIndex)
+			HistoryIndex--;
+	}
+
+	void Console::InputHistoryDown()
+	{
+		if (History.empty())
+			return;
+
+		if (HistoryIndex < History.size() - 1)
+			HistoryIndex++;
+
+		InputBuffer = History[HistoryIndex];
+		Cursor = InputBuffer.size();
+	}
+
+	void Console::InputCursorLeft()
+	{
+		if (!Cursor)
+			return;
+
+		Cursor--;
+		PrintBack();
+	}
+
+	void Console::InputCursorRight()
+	{
+		if (Cursor >= InputBuffer.size())
+			return;
+
+		Cursor++;
+		PrintForward();
+	}
+
+	void Console::PrintForward()
 	{
 		std::cout << "\033[C";
 	}
 
-	void Console::MoveBack()
+	void Console::PrintBack()
 	{
 		std::cout << "\033[D";
 	}
 
-	void Console::Backspace()
+	void Console::PrintBreak()
 	{
 		std::cout << "\b \b";
 	}
@@ -167,15 +214,15 @@ namespace IW3SR::Engine
 	{
 		std::cout << "]" << InputBuffer;
 		for (int i = 0; i < InputBuffer.size() - Cursor; ++i)
-			MoveBack();
+			PrintBack();
 	}
 
 	void Console::Hide()
 	{
 		for (int i = Cursor; i < InputBuffer.size(); ++i)
-			MoveForward();
+			PrintForward();
 		for (int i = 0; i < InputBuffer.size() + 1; i++)
-			Backspace();
+			PrintBreak();
 	}
 
 	void Console::Frame()

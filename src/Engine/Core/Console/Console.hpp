@@ -21,6 +21,8 @@ namespace IW3SR::Engine
 		static inline std::vector<std::string> Autocomplete;
 		static inline std::vector<std::string> History;
 
+		static inline int Key = 0;
+		static inline int PreviousKey = 0;
 		static inline int Cursor = 0;
 		static inline int AutocompleteIndex = 0;
 		static inline bool AutocompleteBegin = false;
@@ -71,18 +73,54 @@ namespace IW3SR::Engine
 
 	private:
 		/// <summary>
-		/// Move forward.
+		/// Input enter.
 		/// </summary>
-		static void MoveForward();
+		/// <returns></returns>
+		static std::string InputEnter();
 
 		/// <summary>
-		/// Move back.
+		/// Input backspace.
 		/// </summary>
-		static void MoveBack();
+		static void InputBackspace();
 
 		/// <summary>
-		/// Backspace.
+		/// Input autocomplete.
 		/// </summary>
-		static void Backspace();
+		static void InputAutocomplete();
+
+		/// <summary>
+		/// Input history up.
+		/// </summary>
+		static void InputHistoryUp();
+
+		/// <summary>
+		/// Input history down.
+		/// </summary>
+		static void InputHistoryDown();
+
+		/// <summary>
+		/// Input cursor left.
+		/// </summary>
+		static void InputCursorLeft();
+
+		/// <summary>
+		/// Input cursor right.
+		/// </summary>
+		static void InputCursorRight();
+
+		/// <summary>
+		/// Print forward.
+		/// </summary>
+		static void PrintForward();
+
+		/// <summary>
+		/// Print break.
+		/// </summary>
+		static void PrintBack();
+
+		/// <summary>
+		/// Print break.
+		/// </summary>
+		static void PrintBreak();
 	};
 }
