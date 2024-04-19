@@ -9,7 +9,7 @@ PLUGIN void Initialize(Plugin* plugin)
 	plugin->SetInfos("sr.player", "Player");
 }
 
-PLUGIN void Renderer()
+PLUGIN void Game()
 {
 	UI::InitializeContext();
 

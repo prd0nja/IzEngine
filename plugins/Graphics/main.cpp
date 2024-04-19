@@ -6,7 +6,7 @@ PLUGIN void Initialize(Plugin* plugin)
 	plugin->SetInfos("sr.graphics", "Graphics");
 }
 
-PLUGIN void Renderer()
+PLUGIN void Game()
 {
 	UI::InitializeContext();
 

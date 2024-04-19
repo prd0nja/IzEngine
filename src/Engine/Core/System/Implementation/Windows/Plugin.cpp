@@ -18,7 +18,7 @@ namespace IW3SR::Engine
 			return;
 		}
 		CallbackInitialize < uintptr_t(GetProcAddress(instance, "Initialize"));
-		CallbackRenderer < uintptr_t(GetProcAddress(instance, "Renderer"));
+		CallbackGame < uintptr_t(GetProcAddress(instance, "Game"));
 		CallbackShutdown < uintptr_t(GetProcAddress(instance, "Shutdown"));
 
 		Instance = instance;
@@ -50,7 +50,7 @@ namespace IW3SR::Engine
 	{
 		EventDispatcher dispatcher(event);
 
-		if (CallbackRenderer)
-			dispatcher.Dispatch<EventPluginRenderer>(CallbackRenderer.Func);
+		if (CallbackGame)
+			dispatcher.Dispatch<EventPluginGame>(CallbackGame.Func);
 	}
 }

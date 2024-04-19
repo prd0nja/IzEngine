@@ -8,10 +8,10 @@ namespace IW3SR::Game
 	std::string IW3MP_BIN = "iw3mp.exe";
 	std::string IW3XO_BIN = "iw3xo.dll";
 
-	// Handles
-	uintptr_t COD4X_HANDLE = 0;
-	uintptr_t IW3MP_HANDLE = uintptr_t(GetModuleHandle(IW3MP_BIN.c_str()));
-	uintptr_t IW3XO_HANDLE = uintptr_t(GetModuleHandle(IW3XO_BIN.c_str()));
+	// Base
+	uintptr_t COD4X_BASE = 0;
+	uintptr_t IW3MP_BASE = uintptr_t(GetModuleHandle(IW3MP_BIN.c_str()));
+	uintptr_t IW3XO_BASE = uintptr_t(GetModuleHandle(IW3XO_BIN.c_str()));
 
 	// Game
 	CmdArgs* cmd_args = Signature(0x1410B40);
@@ -21,12 +21,6 @@ namespace IW3SR::Game
 	clientConnection_t& clc = Signature(0x8F4CE0);
 	cg_s* cgs = Signature(0x74E338);
 	centity_s* cg_entities = Signature(0x84F2D8);
-	GfxBuffers* gfx_buf = Signature(0xD2B0840);
-	GfxWorld* gfx_world = Signature(0xD0701E0);
-	GfxScene* scene = Signature(0xCF10280);
-	GfxViewParms* viewParms = Signature(0xD540220);
-	clipMap_t* cm = Signature(0x14098C0);
-	ComWorld* com = Signature(0x1435CB8);
 	int& com_frameTime = Signature(0x1476EFC);
 	float& com_timescaleValue = Signature(0x1435D68);
 	int* g_entities = Signature(0x12885C4);
@@ -35,8 +29,6 @@ namespace IW3SR::Game
 	const char* g_entityBeginParsePoint = Signature(0x1113674);
 	const char* g_entityEndParsePoint = Signature(0x1113678);
 	int* client_activeNumber = Signature(0xCC5FF8);
-	XZone* g_zones = Signature(0xFFEFD0);
-	XAssetEntry* g_assetEntryPool = Signature(0xF0D640);
 	infoParm_t* info_params = Signature(0x71FBD0);
 	WeaponDef** bg_weaponNames = Signature(0x736DB8);
 	dvar_s** dvars = Signature(0xCBA7408);
@@ -53,10 +45,14 @@ namespace IW3SR::Game
 	GfxCmdBufState* gfx_cmdBufState = Signature(0xD5404F0);
 	GfxBackEndData* gfx_frontEndDataOut = Signature(0xCC9827C);
 	GfxBackEndData* gfx_backEndData = Signature(0xD0704BC);
+	GfxBuffers* gfx_buf = Signature(0xD2B0840);
+	GfxWorld* gfx_world = Signature(0xD0701E0);
+	GfxScene* scene = Signature(0xCF10280);
+	GfxViewParms* viewParms = Signature(0xD540220);
+	clipMap_t* cm = Signature(0x14098C0);
+	ComWorld* com = Signature(0x1435CB8);
 	materialCommands_t* tess = Signature(0xD085EE0);
 	r_global_permanent_t* rgp = Signature(0xCC98280);
-	clientDebugLineInfo_t* clientDebugLineInfo_client = Signature(0xC5B054);
-	clientDebugLineInfo_t* clientDebugLineInfo_server = Signature(0xC5B074);
 
 	// UI
 	uintptr_t* ui_white_material = Signature(0xCAF06F0);
@@ -99,9 +95,11 @@ namespace IW3SR::Game
 	// Database
 	HANDLE db_handle = Signature(0x14E89A4);
 	unsigned short* db_hashTable = Signature(0xE62A80);
-	XAssetHeader* db_xassetPool = Signature(0x488F03).Offset(2).DeRef();
+	XAssetHeader* db_xassetPool = Signature(0x7265E0);
+	XZone* g_zones = Signature(0xFFEFD0);
+	XAssetEntry* g_assetEntryPool = Signature(0xF0D640);
 	DB_XAssetSizeHandler_t* db_xassetSizeHandlers = Signature(0x726A10);
-	unsigned int* g_poolSize = Signature(0x488F0D).Offset(2).DeRef();
+	unsigned int* g_poolSize = Signature(0x7263A0);
 	const char** zone_code_post_gfx_mp = Signature(0xCC9D128);
 	const char** zone_localized_code_post_gfx_mp = Signature(0xCC9D134);
 	const char** zone_ui_mp = Signature(0xCC9D12C);

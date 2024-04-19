@@ -8,10 +8,10 @@ namespace IW3SR::Game
 	API extern std::string IW3MP_BIN;
 	API extern std::string IW3XO_BIN;
 
-	// Handles
-	API extern uintptr_t COD4X_HANDLE;
-	API extern uintptr_t IW3MP_HANDLE;
-	API extern uintptr_t IW3XO_HANDLE;
+	// Base
+	API extern uintptr_t COD4X_BASE;
+	API extern uintptr_t IW3MP_BASE;
+	API extern uintptr_t IW3XO_BASE;
 
 	// Game
 	API extern CmdArgs* cmd_args;
@@ -21,12 +21,6 @@ namespace IW3SR::Game
 	API extern clientConnection_t& clc;
 	API extern cg_s* cgs;
 	API extern centity_s* cg_entities;
-	extern GfxBuffers* gfx_buf;
-	extern GfxWorld* gfx_world;
-	extern GfxScene* scene;
-	extern GfxViewParms* viewParms;
-	extern clipMap_t* cm;
-	extern ComWorld* com;
 	extern int& com_frameTime;
 	extern float& com_timescaleValue;
 	API extern int* g_entities;
@@ -35,8 +29,6 @@ namespace IW3SR::Game
 	extern const char* g_entityBeginParsePoint;
 	extern const char* g_entityEndParsePoint;
 	API extern int* clientActiveCmdNumber;
-	extern XZone* g_zones;
-	extern XAssetEntry* g_assetEntryPool;
 	extern infoParm_t* info_params;
 	extern WeaponDef** bg_weaponNames;
 	extern dvar_s** dvars;
@@ -51,12 +43,16 @@ namespace IW3SR::Game
 	extern Material* floatz_display;
 	extern GfxCmdBufSourceState* gfx_cmdBufSourceState;
 	extern GfxCmdBufState* gfx_cmdBufState;
-	extern materialCommands_t* tess;
 	extern GfxBackEndData* gfx_frontEndDataOut;
 	extern GfxBackEndData* gfx_backEndData;
+	extern GfxBuffers* gfx_buf;
+	extern GfxWorld* gfx_world;
+	extern GfxScene* scene;
+	extern GfxViewParms* viewParms;
+	extern clipMap_t* cm;
+	extern ComWorld* com;
+	extern materialCommands_t* tess;
 	extern r_global_permanent_t* rgp;
-	extern clientDebugLineInfo_t* clientDebugLineInfo_client;
-	extern clientDebugLineInfo_t* clientDebugLineInfo_server;
 
 	// UI
 	extern uintptr_t* ui_white_material;
@@ -100,6 +96,8 @@ namespace IW3SR::Game
 	extern HANDLE db_handle;
 	extern unsigned short* db_hashTable;
 	extern XAssetHeader* db_xassetPool;
+	extern XZone* g_zones;
+	extern XAssetEntry* g_assetEntryPool;
 	extern DB_XAssetSizeHandler_t* db_xassetSizeHandlers;
 	extern unsigned int* g_poolSize;
 	extern const char** zone_code_post_gfx_mp;

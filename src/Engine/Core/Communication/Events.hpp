@@ -3,10 +3,10 @@
 
 namespace IW3SR::Engine
 {
-	class EventPluginRenderer : public Event
+	class EventPluginGame : public Event
 	{
-		EVENT_CLASS("plugin.renderer")
-		EventPluginRenderer() = default;
+		EVENT_CLASS("plugin.game")
+		EventPluginGame() = default;
 	};
 
 	class EventConsoleCommand : public Event

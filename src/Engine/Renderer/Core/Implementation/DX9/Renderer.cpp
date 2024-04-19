@@ -17,7 +17,7 @@ namespace IW3SR::Engine
 		ImGui_ImplDX9_Init(Device::D3Device);
 		UI::Get().Initialize();
 
-		EventPluginRenderer event;
+		EventPluginGame event;
 		Plugins::Dispatch(event);
 	}
 

@@ -17,7 +17,7 @@ namespace IW3SR::Engine
 
 		void* Instance = nullptr;
 		Function<void(Plugin* plugin)> CallbackInitialize;
-		Function<void()> CallbackRenderer;
+		Function<void()> CallbackGame;
 		Function<void()> CallbackShutdown;
 		static const char* Extension;
 
