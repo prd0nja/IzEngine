@@ -31,9 +31,9 @@ namespace IW3SR::Game
 		static void Renderer();
 
 		/// <summary>
-		/// XAssets patch.
+		/// Database patch.
 		/// </summary>
-		static void XAssets();
+		static void Database();
 
 		/// <summary>
 		/// Player patch.

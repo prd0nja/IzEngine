@@ -13,7 +13,7 @@ namespace IW3SR::Game
 		CoD4X();
 		Definitions();
 		Renderer();
-		XAssets();
+		Database();
 		Player();
 		System();
 		Hook();
@@ -41,7 +41,7 @@ namespace IW3SR::Game
 		COD4X Memory::NOP(Signature(COD4X_BIN, "72 ?? 83 ?? 00 F9 C5 00 07"), 2);
 	}
 
-	void Patch::XAssets()
+	void Patch::Database()
 	{
 		COD4X db_xassetPool = Signature(0x488F05).DeRef();
 		COD4X g_poolSize = Signature(0x488F0F).DeRef();
