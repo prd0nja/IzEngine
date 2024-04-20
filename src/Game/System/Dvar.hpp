@@ -10,6 +10,11 @@ namespace IW3SR::Game
 	{
 	public:
 		/// <summary>
+		/// Initialize dvars.
+		/// </summary>
+		static void Initialize();
+
+		/// <summary>
 		/// Register int dvar.
 		/// </summary>
 		/// <param name="name">The dvar name.</param>

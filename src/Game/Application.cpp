@@ -14,7 +14,8 @@ namespace IW3SR
 	{
 		Environment::Initialize();
 		Environment::Load();
-
+		Dvar::Initialize();
+		
 		Patch::Initialize();
 		GConsole::Initialize();
 		Player::Initialize();

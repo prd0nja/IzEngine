@@ -2,6 +2,12 @@
 
 namespace IW3SR::Game
 {
+	void Dvar::Initialize()
+	{
+		RegisterString("sr_version", DvarFlags(DVAR_READONLY | DVAR_SERVERINFO), "Client version",
+			CMAKE_PROJECT_VERSION);
+	}
+
 	dvar_s* Dvar::RegisterInt(const char* name, DvarFlags flags, const char* description, int value, int min, int max)
 	{
 		return Dvar_RegisterVariantInt(name, DvarType::INTEGER, flags, description, value, 0, 0, 0, min, max);
