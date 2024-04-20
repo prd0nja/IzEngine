@@ -1,13 +1,22 @@
 #pragma once
+#include "Engine/Base.hpp"
+#include "Function.hpp"
+
 #include <asmjit/asmjit.h>
 #include <stdexcept>
 
-#include "Function.hpp"
-
-#ifndef ASMJIT_NO_X86
+#ifdef PLATFORM_ARCH_X86
+	#if defined(PLATFORM_32)
 namespace arch = asmjit::x86;
-#else
+	#elif defined(PLATFORM_64)
 namespace arch = asmjit::x64;
+	#endif
+#elif PLATFORM_ARCH_ARM
+	#if defined(PLATFORM_32)
+namespace arch = asmjit::arm;
+	#elif defined(PLATFORM_64)
+namespace arch = asmjit::aarch64;
+	#endif
 #endif
 
 #define ASM_FUNCTION(function) void ASM_##function(asmjit::CodeHolder& code, arch::Assembler& a)
