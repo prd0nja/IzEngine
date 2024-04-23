@@ -20,9 +20,14 @@ namespace IzEngine
 		static inline std::filesystem::path ImagesDirectory;
 
 		/// <summary>
-		/// Initialize the environment.
+		/// Environment binary directory.
 		/// </summary>
-		static void Initialize();
+		static void Binary();
+
+		/// <summary>
+		/// Environment local directory.
+		/// </summary>
+		static void Local();
 
 		/// <summary>
 		/// Load settings.
@@ -61,13 +66,13 @@ namespace IzEngine
 
 	private:
 		/// <summary>
-		/// Build the environment.
+		/// Initialize the environment.
 		/// </summary>
-		static void Build();
+		static void Initialize();
 
 		/// <summary>
 		/// Build the modules list.
 		/// </summary>
-		static void BuildModulesList();
+		static void BuildModules();
 	};
 }

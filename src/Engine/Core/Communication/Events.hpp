@@ -3,10 +3,10 @@
 
 namespace IzEngine
 {
-	class EventPluginGame : public Event
+	class EventPluginInitialize : public Event
 	{
-		EVENT_CLASS("plugin.game")
-		EventPluginGame() = default;
+		EVENT_CLASS("plugin.initialize")
+		EventPluginInitialize() = default;
 	};
 
 	class EventConsoleCommand : public Event

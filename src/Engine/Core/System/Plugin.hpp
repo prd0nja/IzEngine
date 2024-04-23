@@ -16,8 +16,8 @@ namespace IzEngine
 		bool Loaded = false;
 
 		void* Instance = nullptr;
-		Function<void(Plugin* plugin)> CallbackInitialize;
-		Function<void()> CallbackGame;
+		Function<void(Plugin* plugin)> CallbackInfo;
+		Function<void()> CallbackInitialize;
 		Function<void()> CallbackShutdown;
 		static const char* Extension;
 

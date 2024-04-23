@@ -7,10 +7,23 @@
 
 namespace IzEngine
 {
+	void Environment::Binary()
+	{
+		TCHAR buffer[MAX_PATH];
+		GetModuleFileName(nullptr, buffer, MAX_PATH);
+		BaseDirectory = std::filesystem::path(buffer).parent_path();
+		Initialize();
+	}
+
+	void Environment::Local() 
+	{
+		BaseDirectory = std::filesystem::path(getenv("LOCALAPPDATA"));
+		Initialize();
+	}
+
 	void Environment::Initialize()
 	{
-		Build();
-		BuildModulesList();
+		BuildModules();
 
 		AppDirectory = BaseDirectory / APPLICATION_ID;
 		PluginsDirectory = AppDirectory / "plugins";
@@ -19,14 +32,7 @@ namespace IzEngine
 		ImagesDirectory = ResourcesDirectory / "images";
 	}
 
-	void Environment::Build()
-	{
-		TCHAR buffer[MAX_PATH];
-		GetModuleFileName(nullptr, buffer, MAX_PATH);
-		BaseDirectory = std::filesystem::path(buffer).parent_path();
-	}
-
-	void Environment::BuildModulesList()
+	void Environment::BuildModules()
 	{
 		HANDLE hSnapshot = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE, GetCurrentProcessId());
 		if (hSnapshot == INVALID_HANDLE_VALUE)

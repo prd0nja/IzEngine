@@ -17,15 +17,15 @@ namespace IzEngine
 			Log::WriteLine(Channel::Error, "Invalid plugin {}", filePath);
 			return;
 		}
+		CallbackInfo < uintptr_t(GetProcAddress(instance, "Info"));
 		CallbackInitialize < uintptr_t(GetProcAddress(instance, "Initialize"));
-		CallbackGame < uintptr_t(GetProcAddress(instance, "Game"));
 		CallbackShutdown < uintptr_t(GetProcAddress(instance, "Shutdown"));
 
 		Instance = instance;
-		Loaded = CallbackInitialize;
+		Loaded = CallbackInfo;
 
-		if (CallbackInitialize)
-			CallbackInitialize(this);
+		if (CallbackInfo)
+			CallbackInfo(this);
 	}
 
 	Plugin::~Plugin()
@@ -50,7 +50,7 @@ namespace IzEngine
 	{
 		EventDispatcher dispatcher(event);
 
-		if (CallbackGame)
-			dispatcher.Dispatch<EventPluginGame>(CallbackGame.Func);
+		if (CallbackInitialize)
+			dispatcher.Dispatch<EventPluginInitialize>(CallbackInitialize.Func);
 	}
 }

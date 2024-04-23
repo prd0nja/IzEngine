@@ -17,7 +17,7 @@ namespace IzEngine
 		ImGui_ImplDX9_Init(Device::D3Device);
 		UI::Get().Initialize();
 
-		EventPluginGame event;
+		EventPluginInitialize event;
 		Plugins::Dispatch(event);
 	}
 
