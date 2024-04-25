@@ -24,6 +24,8 @@ namespace IzEngine
 	class Event
 	{
 	public:
+		bool PreventDefault = false;
+
 		/// <summary>
 		/// Release event.
 		/// </summary>
