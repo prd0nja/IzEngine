@@ -12,8 +12,62 @@
 #define YAW 1
 #define ROLL 2
 
-#define ANGLE2SHORT(x) (static_cast<int>((x) * 65536 / 360) & 65535)
+#define ANGLE2SHORT(x) (static_cast<int>((x)*65536 / 360) & 65535)
 #define SHORT2ANGLE(x) (x * (360.0f / 65536))
+
+#define DotProduct2(a, b) ((a)[0] * (b)[0] + (a)[1] * (b)[1])
+#define DotProduct3(a, b) ((a)[0] * (b)[0] + (a)[1] * (b)[1] + (a)[2] * (b)[2])
+#define DotProduct4(x, y) ((x)[0] * (y)[0] + (x)[1] * (y)[1] + (x)[2] * (y)[2] + (x)[3] * (y)[3])
+
+#define CrossProduct2(a, b, c) ((c) = (a)[0] * (b)[1] - (a)[1] * (b)[0])
+#define CrossProduct3(a, b, c)                                                               \
+	((c)[0] = (a)[1] * (b)[2] - (a)[2] * (b)[1], (c)[1] = (a)[2] * (b)[0] - (a)[0] * (b)[2], \
+		(c)[2] = (a)[0] * (b)[1] - (a)[1] * (b)[0])
+#define CrossProduct4(a, b, c)                                                               \
+	((c)[0] = (a)[1] * (b)[2] - (a)[2] * (b)[1], (c)[1] = (a)[2] * (b)[0] - (a)[0] * (b)[2], \
+		(c)[2] = (a)[0] * (b)[1] - (a)[1] * (b)[0], (c)[3] = 0)
+
+#define VectorAdd2(a, b, c) ((c)[0] = (a)[0] + (b)[0], (c)[1] = (a)[1] + (b)[1])
+#define VectorAdd3(a, b, c) ((c)[0] = (a)[0] + (b)[0], (c)[1] = (a)[1] + (b)[1], (c)[2] = (a)[2] + (b)[2])
+#define VectorAdd4(a, b, c) \
+	((c)[0] = (a)[0] + (b)[0], (c)[1] = (a)[1] + (b)[1], (c)[2] = (a)[2] + (b)[2], (c)[3] = (a)[3] + (b)[3])
+
+#define VectorSubtract2(a, b, c) ((c)[0] = (a)[0] - (b)[0], (c)[1] = (a)[1] - (b)[1])
+#define VectorSubtract3(a, b, c) ((c)[0] = (a)[0] - (b)[0], (c)[1] = (a)[1] - (b)[1], (c)[2] = (a)[2] - (b)[2])
+#define VectorSubtract4(a, b, c) \
+	((c)[0] = (a)[0] - (b)[0], (c)[1] = (a)[1] - (b)[1], (c)[2] = (a)[2] - (b)[2], (c)[3] = (a)[3] - (b)[3])
+
+#define VectorCopy2(a, b) ((b)[0] = (a)[0], (b)[1] = (a)[1])
+#define VectorCopy3(a, b) ((b)[0] = (a)[0], (b)[1] = (a)[1], (b)[2] = (a)[2])
+#define VectorCopy4(a, b) ((b)[0] = (a)[0], (b)[1] = (a)[1], (b)[2] = (a)[2], (b)[3] = (a)[3])
+
+#define VectorScale2(v, s, o) ((o)[0] = (v)[0] * (s), (o)[1] = (v)[1] * (s))
+#define VectorScale3(v, s, o) ((o)[0] = (v)[0] * (s), (o)[1] = (v)[1] * (s), (o)[2] = (v)[2] * (s))
+#define VectorScale4(v, s, o) \
+	((o)[0] = (v)[0] * (s), (o)[1] = (v)[1] * (s), (o)[2] = (v)[2] * (s), (o)[3] = (v)[3] * (s))
+
+#define VectorMultiplyAdd2(v, s, b, o) ((o)[0] = (v)[0] + (b)[0] * (s), (o)[1] = (v)[1] + (b)[1] * (s))
+#define VectorMultiplyAdd3(v, s, b, o) \
+	((o)[0] = (v)[0] + (b)[0] * (s), (o)[1] = (v)[1] + (b)[1] * (s), (o)[2] = (v)[2] + (b)[2] * (s))
+#define VectorMultiplyAdd4(v, s, b, o)                                                               \
+	((o)[0] = (v)[0] + (b)[0] * (s), (o)[1] = (v)[1] + (b)[1] * (s), (o)[2] = (v)[2] + (b)[2] * (s), \
+		(o)[3] = (v)[3] + (b)[3] * (s))
+
+#define VectorLength2(v) (sqrt((v)[0] * (v)[0] + (v)[1] * (v)[1]))
+#define VectorLength3(v) (sqrt((v)[0] * (v)[0] + (v)[1] * (v)[1] + (v)[2] * (v)[2]))
+#define VectorLength4(v) (sqrt((v)[0] * (v)[0] + (v)[1] * (v)[1] + (v)[2] * (v)[2] + (v)[3] * (v)[3]))
+
+#define VectorNegate2(a, b) ((b)[0] = -(a)[0], (b)[1] = -(a)[1])
+#define VectorNegate3(a, b) ((b)[0] = -(a)[0], (b)[1] = -(a)[1], (b)[2] = -(a)[2])
+#define VectorNegate4(a, b) ((b)[0] = -(a)[0], (b)[1] = -(a)[1], (b)[2] = -(a)[2], (b)[3] = -(a)[3])
+
+#define VectorClear2(a) ((a)[0] = (a)[1] = 0)
+#define VectorClear3(a) ((a)[0] = (a)[1] = (a)[2] = 0)
+#define VectorClear4(a) ((a)[0] = (a)[1] = (a)[2] = (a)[3] = 0)
+
+#define VectorSet2(v, x, y) ((v)[0] = (x), (v)[1] = (y))
+#define VectorSet3(v, x, y, z) ((v)[0] = (x), (v)[1] = (y), (v)[2] = (z))
+#define VectorSet4(v, x, y, z, w) ((v)[0] = (x), (v)[1] = (y), (v)[2] = (z), v[3] = (w))
 
 namespace IzEngine
 {
@@ -122,6 +176,31 @@ namespace IzEngine
 		static float AngleDelta(float angle1, float angle2);
 
 		/// <summary>
+		/// Checks if an angle is within the field of view (FOV).
+		/// </summary>
+		/// <param name="angle">Angle to check in radians.</param>
+		/// <param name="tanHalfFov">The fov.</param>
+		/// <returns>True if the angle is within the FOV, false otherwise.</returns>
+		static bool AngleInFov(float angle, float tanHalfFov);
+
+		/// <summary>
+		/// Projects an angle onto the screen for rendering.
+		/// </summary>
+		/// <param name="angle">Angle to project in radians.</param>
+		/// <param name="tanHalfFov">The fov.</param>
+		/// <returns>Screen projection of the angle.</returns>
+		static float AngleScreenProjection(float angle, float tanHalfFov);
+
+		/// <summary>
+		/// Converts a range specified by start and end angles to a range structure based on yaw.
+		/// </summary>
+		/// <param name="start">Starting angle in radians.</param>
+		/// <param name="end">Ending angle in radians.</param>
+		/// <param name="yaw">Yaw angle in radians.</param>
+		/// <param name="tanHalfFov">The fov.</param>
+		static vec3 AnglesToRange(float start, float end, float yaw, float tanHalfFov);
+
+		/// <summary>
 		/// Converts Euler angles to a forward, right, and up vector.
 		/// </summary>
 		/// <param name="angles">Euler angles in radians.</param>
@@ -167,28 +246,19 @@ namespace IzEngine
 		static vec3 VectorToAnglesWithRoll(const vec3& forward, const vec3& up, bool flipPitch);
 
 		/// <summary>
-		/// Checks if an angle is within the field of view (FOV).
+		/// Normalize vector.
 		/// </summary>
-		/// <param name="angle">Angle to check in radians.</param>
-		/// <param name="tanHalfFov">The fov.</param>
-		/// <returns>True if the angle is within the FOV, false otherwise.</returns>
-		static bool AngleInFov(float angle, float tanHalfFov);
+		/// <param name="v">The vector.</param>
+		/// <returns>Length of the original vector.</returns>
+		static float VectorNormalize3(float* v);
 
 		/// <summary>
-		/// Projects an angle onto the screen for rendering.
+		/// Lerp vector.
 		/// </summary>
-		/// <param name="angle">Angle to project in radians.</param>
-		/// <param name="tanHalfFov">The fov.</param>
-		/// <returns>Screen projection of the angle.</returns>
-		static float AngleScreenProjection(float angle, float tanHalfFov);
-
-		/// <summary>
-		/// Converts a range specified by start and end angles to a range structure based on yaw.
-		/// </summary>
-		/// <param name="start">Starting angle in radians.</param>
-		/// <param name="end">Ending angle in radians.</param>
-		/// <param name="yaw">Yaw angle in radians.</param>
-		/// <param name="tanHalfFov">The fov.</param>
-		static vec3 AnglesToRange(float start, float end, float yaw, float tanHalfFov);
+		/// <param name="start">Start value.</param>
+		/// <param name="end">End value.</param>
+		/// <param name="fraction">The fraction.</param>
+		/// <param name="out">The output variable.</param>
+		static void VectorLerp3(const float* start, const float* end, const float fraction, float* out);
 	};
 }

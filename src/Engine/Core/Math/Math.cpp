@@ -46,6 +46,45 @@ namespace IzEngine
 		return AngleNormalize360(angle1 - angle2);
 	}
 
+	bool Math::AngleInFov(float angle, float tanHalfFov)
+	{
+		const float half_fov_x = atan(tanHalfFov);
+		return angle > -half_fov_x && angle < half_fov_x;
+	}
+
+	float Math::AngleScreenProjection(float angle, float tanHalfFov)
+	{
+		const float half_fov_x = atan(tanHalfFov);
+
+		if (angle >= half_fov_x)
+			return 0;
+		if (angle <= -half_fov_x)
+			return SCREEN_WIDTH;
+
+		return (SCREEN_WIDTH / 2.f) * (1.f - tan(angle) / tan(half_fov_x));
+	}
+
+	vec3 Math::AnglesToRange(float start, float end, float yaw, float tanHalfFov)
+	{
+		if (abs(end - start) > 2.f * M_PI)
+			return { 0, SCREEN_WIDTH, 0 };
+		bool split = end > start;
+
+		start = AngleNormalizePI(start - yaw);
+		end = AngleNormalizePI(end - yaw);
+
+		if (end > start)
+		{
+			split = !split;
+			const float tmp = start;
+
+			start = end;
+			end = tmp;
+		}
+		return { AngleScreenProjection(start, tanHalfFov), AngleScreenProjection(end, tanHalfFov),
+			static_cast<float>(split) };
+	}
+
 	void Math::AngleVectors(const vec3& angles, vec3& forward, vec3& right, vec3& up)
 	{
 		float angle;
@@ -227,42 +266,23 @@ namespace IzEngine
 		return angles;
 	}
 
-	bool Math::AngleInFov(float angle, float tanHalfFov)
+	float Math::VectorNormalize3(float* v)
 	{
-		const float half_fov_x = atan(tanHalfFov);
-		return angle > -half_fov_x && angle < half_fov_x;
+		const float len = VectorLength3(v);
+		if (len != 0.0f)
+			VectorScale3(v, 1.0f / len, v);
+		return len;
 	}
 
-	float Math::AngleScreenProjection(float angle, float tanHalfFov)
-	{
-		const float half_fov_x = atan(tanHalfFov);
-
-		if (angle >= half_fov_x)
-			return 0;
-		if (angle <= -half_fov_x)
-			return SCREEN_WIDTH;
-
-		return (SCREEN_WIDTH / 2.f) * (1.f - tan(angle) / tan(half_fov_x));
-	}
-
-	vec3 Math::AnglesToRange(float start, float end, float yaw, float tanHalfFov)
-	{
-		if (abs(end - start) > 2.f * M_PI)
-			return { 0, SCREEN_WIDTH, 0 };
-		bool split = end > start;
-
-		start = AngleNormalizePI(start - yaw);
-		end = AngleNormalizePI(end - yaw);
-
-		if (end > start)
+	void Math::VectorLerp3(const float* start, const float* end, const float fraction, float* out) 
+	{ 
+		if (fraction == 1.0f)
+			VectorCopy3(end, out);
+		else
 		{
-			split = !split;
-			const float tmp = start;
-
-			start = end;
-			end = tmp;
+			out[0] = start[0] + fraction * (end[0] - start[0]);
+			out[1] = start[1] + fraction * (end[1] - start[1]);
+			out[2] = start[2] + fraction * (end[2] - start[2]);
 		}
-		return { AngleScreenProjection(start, tanHalfFov), AngleScreenProjection(end, tanHalfFov),
-			static_cast<float>(split) };
 	}
 }
