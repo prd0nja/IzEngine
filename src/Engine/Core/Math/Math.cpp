@@ -85,7 +85,7 @@ namespace IzEngine
 			static_cast<float>(split) };
 	}
 
-	void Math::AngleVectors(const vec3& angles, vec3& forward, vec3& right, vec3& up)
+	void Math::AngleVectors(const float* angles, float* forward, float* right, float* up)
 	{
 		float angle;
 		float sr, sp, sy, cr, cp, cy;
@@ -122,7 +122,7 @@ namespace IzEngine
 		}
 	}
 
-	vec3 Math::AnglesToUp(const vec3& angles)
+	vec3 Math::AnglesToUp(const float* angles)
 	{
 		float angle;
 		float sr, sp, sy, cr, cp, cy;
@@ -142,7 +142,7 @@ namespace IzEngine
 		return { cr * sp * cy + -sr * -sy, cr * sp * sy + -sr * cy, cr * cp };
 	}
 
-	vec3 Math::AnglesToForward(const vec3& angles)
+	vec3 Math::AnglesToForward(const float* angles)
 	{
 		float angle;
 		float sp, sy, cp, cy;
@@ -158,7 +158,7 @@ namespace IzEngine
 		return { cp * cy, cp * sy, -sp };
 	}
 
-	vec3 Math::AnglesToRight(const vec3& angles)
+	vec3 Math::AnglesToRight(const float* angles)
 	{
 		float angle;
 		float sr, sp, sy, cr, cp, cy;
@@ -178,7 +178,7 @@ namespace IzEngine
 		return { -1 * sr * sp * cy + -1 * cr * -sy, -1 * sr * sp * sy + -1 * cr * cy, -1 * sr * cp };
 	}
 
-	vec3 Math::VectorToAngles(const vec3& v)
+	vec3 Math::VectorToAngles(const float* v)
 	{
 		vec3 angles;
 		float yaw, pitch;
@@ -203,7 +203,7 @@ namespace IzEngine
 			if (yaw < 0)
 				yaw += 360.0f;
 
-			const float forward = v.Length();
+			const float forward = VectorLength3(v);
 			pitch = atan2(v[2], forward) * 180.0f / M_PI;
 
 			if (pitch < 0)
@@ -215,7 +215,7 @@ namespace IzEngine
 		return angles;
 	}
 
-	vec3 Math::VectorToAnglesWithRoll(const vec3& forward, const vec3& up, bool flipPitch)
+	vec3 Math::VectorToAnglesWithRoll(const float* forward, const float* up, bool flipPitch)
 	{
 		vec3 angles;
 		if (forward[0] == 0.0f && forward[1] == 0.0f)
@@ -247,7 +247,7 @@ namespace IzEngine
 				const vec3 tleft = { -sy, cy, 0.0f };
 				const vec3 tup = { (sp * cy), (sp * sy), (cp) };
 
-				angles[ROLL] = -atan2(up.Dot(tleft), up.Dot(tup));
+				angles[ROLL] = -atan2(DotProduct3(up, tleft), DotProduct3(up, tup));
 			}
 			else
 				angles[ROLL] = 0;
@@ -274,7 +274,7 @@ namespace IzEngine
 		return len;
 	}
 
-	void Math::VectorLerp3(const float* start, const float* end, const float fraction, float* out) 
+	void Math::VectorLerp3(const float* start, const float* end, float fraction, float* out) 
 	{ 
 		if (fraction == 1.0f)
 			VectorCopy3(end, out);

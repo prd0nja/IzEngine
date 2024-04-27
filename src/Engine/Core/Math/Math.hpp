@@ -207,35 +207,35 @@ namespace IzEngine
 		/// <param name="forward">Output forward vector.</param>
 		/// <param name="right">Output right vector.</param>
 		/// <param name="up">Output up vector.</param>
-		static void AngleVectors(const vec3& angles, vec3& forward, vec3& right, vec3& up);
+		static void AngleVectors(const float* angles, float* forward, float* right, float* up);
 
 		/// <summary>
 		/// Converts Euler angles to a up vector.
 		/// </summary>
 		/// <param name="angles">Euler angles in radians.</param>
 		/// <returns>Up vector.</returns>
-		static vec3 AnglesToUp(const vec3& angles);
+		static vec3 AnglesToUp(const float* angles);
 
 		/// <summary>
 		/// Converts Euler angles to a forward vector.
 		/// </summary>
 		/// <param name="angles">Euler angles in radians.</param>
 		/// <returns>Forward vector.</returns>
-		static vec3 AnglesToForward(const vec3& angles);
+		static vec3 AnglesToForward(const float* angles);
 
 		/// <summary>
 		/// Converts Euler angles to a right vector.
 		/// </summary>
 		/// <param name="angles">Euler angles in radians.</param>
 		/// <returns>Right vector.</returns>
-		static vec3 AnglesToRight(const vec3& angles);
+		static vec3 AnglesToRight(const float* angles);
 
 		/// <summary>
 		/// Converts a 3D vector to Euler angles (pitch, yaw, and roll) in radians.
 		/// </summary>
 		/// <param name="v">Input vector.</param>
 		/// <returns>Euler angles in radians.</returns>
-		static vec3 VectorToAngles(const vec3& v);
+		static vec3 VectorToAngles(const float* v);
 
 		/// <summary>
 		/// Converts a forward and up vector to Euler angles (pitch, yaw, and roll) in radians.
@@ -243,7 +243,7 @@ namespace IzEngine
 		/// <param name="forward">Forward vector.</param>
 		/// <param name="up">Up vector.</param>
 		/// <param name="flipPitch">True to flip the pitch angle.</param>
-		static vec3 VectorToAnglesWithRoll(const vec3& forward, const vec3& up, bool flipPitch);
+		static vec3 VectorToAnglesWithRoll(const float* forward, const float* up, bool flipPitch);
 
 		/// <summary>
 		/// Normalize vector.
@@ -259,6 +259,6 @@ namespace IzEngine
 		/// <param name="end">End value.</param>
 		/// <param name="fraction">The fraction.</param>
 		/// <param name="out">The output variable.</param>
-		static void VectorLerp3(const float* start, const float* end, const float fraction, float* out);
+		static void VectorLerp3(const float* start, const float* end, float fraction, float* out);
 	};
 }
