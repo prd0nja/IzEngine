@@ -14,12 +14,6 @@ if(MSVC)
 	set(CMAKE_VS_INCLUDE_INSTALL_TO_DEFAULT_BUILD true)
 endif()
 
-# CPack
-set(CPACK_PROJECT_NAME ${PROJECT_NAME})
-set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
-set(CPACK_GENERATOR 7Z)
-include(CPack)
-
 # Dependencies
 find_package(imgui CONFIG REQUIRED)
 find_package(implot CONFIG REQUIRED)
