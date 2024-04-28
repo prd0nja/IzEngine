@@ -58,12 +58,12 @@
 	#error Unsupported address size
 #endif
 
-#ifndef APPLICATION_ID
-	#define APPLICATION_ID ""
-#endif
-
 #ifndef API
 	#define API EXPORT
+#endif
+
+#ifndef APPLICATION_ID
+	#define APPLICATION_ID "izengine"
 #endif
 
 #ifndef CMAKE_BINARY_DIR
@@ -71,7 +71,7 @@
 #endif
 
 #ifndef CMAKE_PROJECT_VERSION
-	#define CMAKE_PROJECT_VERSION ""
+	#define CMAKE_PROJECT_VERSION "undefined"
 #endif
 
 #define CLASS_DISALLOW_COPY_AND_ASSIGN(type) \
