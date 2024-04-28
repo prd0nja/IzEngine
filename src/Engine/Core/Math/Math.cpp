@@ -61,7 +61,7 @@ namespace IzEngine
 		if (angle <= -half_fov_x)
 			return SCREEN_WIDTH;
 
-		return (SCREEN_WIDTH / 2.f) * (1.f - tan(angle) / tan(half_fov_x));
+		return SCREEN_WIDTH / 2.f * (1.f - tan(angle) / tan(half_fov_x));
 	}
 
 	vec3 Math::AnglesToRange(float start, float end, float yaw, float tanHalfFov)
@@ -274,8 +274,8 @@ namespace IzEngine
 		return len;
 	}
 
-	void Math::VectorLerp3(const float* start, const float* end, float fraction, float* out) 
-	{ 
+	void Math::VectorLerp3(const float* start, const float* end, float fraction, float* out)
+	{
 		if (fraction == 1.0f)
 			VectorCopy3(end, out);
 		else

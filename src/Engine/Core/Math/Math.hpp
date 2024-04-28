@@ -53,9 +53,13 @@
 	((o)[0] = (v)[0] + (b)[0] * (s), (o)[1] = (v)[1] + (b)[1] * (s), (o)[2] = (v)[2] + (b)[2] * (s), \
 		(o)[3] = (v)[3] + (b)[3] * (s))
 
-#define VectorLength2(v) (sqrt((v)[0] * (v)[0] + (v)[1] * (v)[1]))
-#define VectorLength3(v) (sqrt((v)[0] * (v)[0] + (v)[1] * (v)[1] + (v)[2] * (v)[2]))
-#define VectorLength4(v) (sqrt((v)[0] * (v)[0] + (v)[1] * (v)[1] + (v)[2] * (v)[2] + (v)[3] * (v)[3]))
+#define VectorLengthSquared2(v) ((v)[0] * (v)[0] + (v)[1] * (v)[1])
+#define VectorLengthSquared3(v) ((v)[0] * (v)[0] + (v)[1] * (v)[1] + (v)[2] * (v)[2])
+#define VectorLengthSquared4(v) ((v)[0] * (v)[0] + (v)[1] * (v)[1] + (v)[2] * (v)[2] + (v)[3] * (v)[3])
+
+#define VectorLength2(v) (sqrt(VectorLengthSquared2(v)))
+#define VectorLength3(v) (sqrt(VectorLengthSquared3(v)))
+#define VectorLength4(v) (sqrt(VectorLengthSquared4(v)))
 
 #define VectorNegate2(a, b) ((b)[0] = -(a)[0], (b)[1] = -(a)[1])
 #define VectorNegate3(a, b) ((b)[0] = -(a)[0], (b)[1] = -(a)[1], (b)[2] = -(a)[2])
