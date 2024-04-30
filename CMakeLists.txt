@@ -8,11 +8,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 include(ClangTools)
 
-# Compilers
-if(MSVC)
-	set(CMAKE_VS_INCLUDE_INSTALL_TO_DEFAULT_BUILD true)
-endif()
-
 # Dependencies
 find_package(imgui CONFIG REQUIRED)
 find_package(implot CONFIG REQUIRED)

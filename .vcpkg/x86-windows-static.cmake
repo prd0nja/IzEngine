@@ -1,5 +1,9 @@
 set(VCPKG_TARGET_TRIPLET x86-windows-static)
 
+if(MSVC)
+	set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+endif()
+
 option(PLATFORM_WINDOWS "Build Windows" OFF)
 if(PLATFORM_WINDOWS)
 	list(APPEND VCPKG_MANIFEST_FEATURES "windows")
