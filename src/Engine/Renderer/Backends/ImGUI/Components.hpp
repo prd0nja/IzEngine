@@ -114,9 +114,10 @@ namespace ImGui
 	/// </summary>
 	/// <param name="label">The description.</param>
 	/// <param name="key">The out key.</param>
+	/// <param name="unbind">Can unbind with right click.</param>
 	/// <param name="size">The button size.</param>
 	/// <returns></returns>
-	API void Keybind(const std::string& label, int* key, const ImVec2& size = ImVec2(0, 0));
+	API void Keybind(const std::string& label, int* key, bool unbind = true, const ImVec2& size = ImVec2(0, 0));
 
 	/// <summary>
 	/// Movable frame.

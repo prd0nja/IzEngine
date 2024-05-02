@@ -159,7 +159,7 @@ namespace ImGui
 		PopStyleVar();
 	}
 
-	void Keybind(const std::string& label, int* key, const ImVec2& defaultSize)
+	void Keybind(const std::string& label, int* key, bool unbind, const ImVec2& defaultSize)
 	{
 		const auto keyName = Keyboard::GetName(*key);
 		const auto id = GetID(label.c_str());
@@ -194,7 +194,7 @@ namespace ImGui
 			Button(keyName, size);
 			if (IsItemClicked(ImGuiMouseButton_Left))
 				SetActiveID(id, GetCurrentWindow());
-			else if (IsItemClicked(ImGuiMouseButton_Right))
+			else if (IsItemClicked(ImGuiMouseButton_Right) && unbind)
 				*key = Key_None;
 		}
 		SameLine();
