@@ -9,8 +9,6 @@ namespace IzEngine
 	class API System
 	{
 	public:
-		static inline void* MainWindow = nullptr;
-
 		/// <summary>
 		/// Execute shell command.
 		/// </summary>

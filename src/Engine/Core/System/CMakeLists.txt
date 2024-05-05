@@ -6,4 +6,5 @@ target_sources(IzEngine PRIVATE
 	Plugin.hpp
 	Plugins.hpp
 	Plugins.cpp
-	System.hpp)
+	System.hpp
+	Window.hpp)
