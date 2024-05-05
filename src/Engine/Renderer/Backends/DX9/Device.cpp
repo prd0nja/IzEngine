@@ -49,5 +49,7 @@ namespace IzEngine
 	{
 		D3D = d3d;
 		D3Device = device;
+
+		CreateScreen();
 	}
 }
