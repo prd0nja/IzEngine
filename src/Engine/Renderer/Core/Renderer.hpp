@@ -27,5 +27,10 @@ namespace IzEngine
 		/// End frame.
 		/// </summary>
 		static void End();
+
+		/// <summary>
+		/// Render frame.
+		/// </summary>
+		static void Frame();
 	};
 }

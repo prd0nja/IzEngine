@@ -3,6 +3,12 @@
 
 namespace IzEngine
 {
+	class EventRendererRender : public Event
+	{
+		EVENT_CLASS("renderer.render")
+		EventRendererRender() = default;
+	};
+
 	class EventPluginInitialize : public Event
 	{
 		EVENT_CLASS("plugin.initialize")
