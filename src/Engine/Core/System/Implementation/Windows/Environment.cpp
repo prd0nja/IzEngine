@@ -38,6 +38,8 @@ namespace IzEngine
 		std::filesystem::create_directory(ReportsDirectory);
 		std::filesystem::create_directory(FontsDirectory);
 		std::filesystem::create_directory(ImagesDirectory);
+
+		Initialized = true;
 	}
 
 	void Environment::BuildModules()

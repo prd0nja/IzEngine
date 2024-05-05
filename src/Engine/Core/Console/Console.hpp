@@ -31,18 +31,13 @@ namespace IzEngine
 		/// <summary>
 		/// Initialize the console.
 		/// </summary>
-		static void Initialize();
+		/// <param name="title">The title.</param>
+		static void Initialize(const std::string& name);
 
 		/// <summary>
 		/// Shutdown the console.
 		/// </summary>
 		static void Shutdown();
-
-		/// <summary>
-		/// Set the console title.
-		/// </summary>
-		/// <param name="title">The title.</param>
-		static void SetTitle(const std::string& title);
 
 		/// <summary>
 		/// Add a command.

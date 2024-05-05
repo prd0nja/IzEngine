@@ -60,6 +60,8 @@ namespace IzEngine
 
 	void Fonts::Initialize()
 	{
+		IZ_ASSERT(Environment::Initialized, "Environment not initialized.");
+
 		Font::Create(Environment::FontsDirectory / "OpenSans-Regular.ttf", 22);
 		Font::Create(Environment::FontsDirectory / "SpaceRanger.ttf", 22);
 

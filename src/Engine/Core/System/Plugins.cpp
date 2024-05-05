@@ -6,6 +6,8 @@ namespace IzEngine
 {
 	void Plugins::Initialize()
 	{
+		IZ_ASSERT(Environment::Initialized, "Environment not initialized.");
+
 		if (!std::filesystem::is_directory(Environment::PluginsDirectory))
 			return;
 

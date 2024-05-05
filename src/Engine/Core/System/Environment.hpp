@@ -9,6 +9,7 @@ namespace IzEngine
 	class API Environment
 	{
 	public:
+		static inline bool Initialized = false;
 		static inline nlohmann::json Settings;
 		static inline std::vector<std::string> Modules;
 

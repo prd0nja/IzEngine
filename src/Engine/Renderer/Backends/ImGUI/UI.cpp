@@ -30,10 +30,12 @@ namespace IzEngine
 
 	void UI::Initialize()
 	{
-		Environment::Deserialize("UI", *this);
+		IZ_ASSERT(!Active, "UI already initialized.");
+		IZ_ASSERT(Environment::Initialized, "Environment not initialized.");
 
-		Active = true;
+		Environment::Deserialize("UI", *this);
 		Themes.Initialize();
+		Active = true;
 	}
 
 	void UI::CreateScreen(const vec2& position, const vec2& size, const vec2& display)
@@ -42,10 +44,13 @@ namespace IzEngine
 		Size = Screen.VirtualToReal.y * Scale;
 	}
 
-	void UI::Release()
+	void UI::Shutdown()
 	{
-		Active = false;
+		IZ_ASSERT(Active, "UI already shutdown.");
+		IZ_ASSERT(Environment::Initialized, "Environment not initialized.");
+
 		Environment::Serialize("UI", *this);
+		Active = false;
 	}
 
 	void UI::Begin()

@@ -13,6 +13,8 @@ namespace IzEngine::UC
 
 	void Themes::Initialize()
 	{
+		IZ_ASSERT(Environment::Initialized, "Environment not initialized.");
+
 		ImGuiIO& io = ImGui::GetIO();
 		io.IniFilename = nullptr;
 

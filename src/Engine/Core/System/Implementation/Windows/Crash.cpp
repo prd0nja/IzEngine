@@ -25,6 +25,8 @@ namespace IzEngine
 
 	void Crash::MiniDump(void *exception)
 	{
+		IZ_ASSERT(Environment::Initialized, "Environment not initialized.");
+
 		EXCEPTION_POINTERS *ex = reinterpret_cast<EXCEPTION_POINTERS *>(exception);
 		const auto path = Environment::ReportsDirectory / (ID.String + "_minidump.dmp");
 		const auto wpath = path.wstring();
@@ -45,8 +47,9 @@ namespace IzEngine
 
 	void Crash::StackTrace(void *exception)
 	{
-		EXCEPTION_POINTERS *ex = reinterpret_cast<EXCEPTION_POINTERS *>(exception);
+		IZ_ASSERT(Environment::Initialized, "Environment not initialized.");
 
+		EXCEPTION_POINTERS *ex = reinterpret_cast<EXCEPTION_POINTERS *>(exception);
 		HANDLE process = GetCurrentProcess();
 		HANDLE thread = GetCurrentThread();
 		CONTEXT *ctx = ex->ContextRecord;

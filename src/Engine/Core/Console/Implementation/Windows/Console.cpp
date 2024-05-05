@@ -5,10 +5,11 @@
 
 namespace IzEngine
 {
-	void Console::Initialize()
+	void Console::Initialize(const std::string& name)
 	{
 		AllocConsole();
 		Handle = GetConsoleWindow();
+		SetConsoleTitle(name.c_str());
 
 		freopen_s(reinterpret_cast<FILE**>(stdin), "CONIN$", "r", stdin);
 		freopen_s(reinterpret_cast<FILE**>(stdout), "CONOUT$", "w", stdout);
@@ -35,11 +36,6 @@ namespace IzEngine
 		FreeConsole();
 	}
 
-	void Console::SetTitle(const std::string& title)
-	{
-		SetConsoleTitle(title.c_str());
-	}
-
 	void Console::AddCommand(const std::string& command)
 	{
 		Commands.push_back(command);
@@ -47,8 +43,9 @@ namespace IzEngine
 
 	std::string Console::Input()
 	{
-		std::string command;
+		IZ_ASSERT(Console::Handle, "Console not initialized.");
 
+		std::string command;
 		DWORD numEventsRead;
 		DWORD lpNumberOfEvents;
 		INPUT_RECORD record;

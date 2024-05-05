@@ -42,7 +42,7 @@ namespace IzEngine
 		/// <summary>
 		/// Release UI.
 		/// </summary>
-		void Release();
+		void Shutdown();
 
 		/// <summary>
 		/// Begin frame.
