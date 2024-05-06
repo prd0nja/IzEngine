@@ -11,20 +11,14 @@ namespace IzEngine
 	class OSWindow
 	{
 	public:
+		static inline void* Handle = nullptr;
 		static inline std::string Name;
 		static inline vec2 Position;
 		static inline vec2 Size;
 
-		static inline void* Handle = nullptr;
-		static inline void* HandleAttach = nullptr;
-
-		static inline std::string AttachName;
-		static inline std::string AttachClassName;
-
 		static inline bool Open = false;
 		static inline bool IsOverlay = false;
 		static inline bool IsCapture = true;
-		static inline bool IsAttach = false;
 
 		/// <summary>
 		/// Initialize window.
@@ -56,13 +50,6 @@ namespace IzEngine
 		static void Capture(bool state);
 
 		/// <summary>
-		/// Attach to another window.
-		/// </summary>
-		/// <param name="name">The window name.</param>
-		/// <param name="className">The window class name.</param>
-		static void Attach(const std::string& name, const std::string& className);
-
-		/// <summary>
 		/// Update callback.
 		/// </summary>
 		/// <param name="handle">The handle.</param>
@@ -82,10 +69,5 @@ namespace IzEngine
 		/// Update overlay.
 		/// </summary>
 		static void UpdateOverlay();
-
-		/// <summary>
-		/// Update attach.
-		/// </summary>
-		static void UpdateAttach();
 	};
 }

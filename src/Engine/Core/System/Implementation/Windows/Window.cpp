@@ -82,17 +82,10 @@ namespace IzEngine
 		IsCapture = state;
 	}
 
-	void OSWindow::Attach(const std::string& name, const std::string& className)
-	{
-		AttachName = name;
-		AttachClassName = className;
-		IsAttach = true;
-	}
-
 	int OSWindow::Update(void* handle, int msg, int wParam, int lParam)
 	{
 		const HWND hwnd = reinterpret_cast<HWND>(handle);
-		auto& UI = UI::Get();
+		const auto& UI = UI::Get();
 
 		switch (msg)
 		{
@@ -135,14 +128,14 @@ namespace IzEngine
 
 	void OSWindow::UpdateOverlay()
 	{
-		auto& UI = UI::Get();
+		const auto& UI = UI::Get();
 		const HWND hwnd = reinterpret_cast<HWND>(Handle);
 
 		const int style = GetWindowLong(hwnd, GWL_EXSTYLE);
 		const int flags = WS_EX_LAYERED;
 		SetWindowLong(hwnd, GWL_EXSTYLE, !UI.Open ? style | flags : style & ~flags);
 
-		if (UI::Get().Active)
+		if (UI.Active)
 		{
 			POINT mouse = { 0 };
 			GetCursorPos(&mouse);
@@ -151,27 +144,12 @@ namespace IzEngine
 			ImGuiIO& io = ImGui::GetIO();
 			io.MousePos.x = mouse.x;
 			io.MousePos.y = mouse.y;
+
+			static bool prevOpen = false;
+			if (UI.Open && !prevOpen)
+				SetForegroundWindow(hwnd);
+			prevOpen = UI.Open;
 		}
-	}
-
-	void OSWindow::UpdateAttach()
-	{
-		const HWND hwnd = reinterpret_cast<HWND>(Handle);
-		const HWND hwndAttach = FindWindow(AttachClassName.c_str(), AttachName.c_str());
-
-		if (!hwndAttach)
-			return;
-
-		RECT rect = { 0 };
-		POINT point = { 0 };
-		GetClientRect(hwndAttach, &rect);
-		ClientToScreen(hwndAttach, &point);
-
-		HandleAttach = hwndAttach;
-		Position = vec2(point.x, point.y);
-		Size = vec2(rect.right, rect.bottom);
-
-		SetWindowPos(hwnd, HWND_TOPMOST, Position.x, Position.y, Size.x, Size.y, SWP_SHOWWINDOW);
 	}
 
 	void OSWindow::Frame()
@@ -186,8 +164,6 @@ namespace IzEngine
 		}
 		if (IsOverlay)
 			UpdateOverlay();
-		if (IsAttach)
-			UpdateAttach();
 
 		SetWindowDisplayAffinity(hwnd, IsCapture ? WDA_NONE : WDA_EXCLUDEFROMCAPTURE);
 	}
