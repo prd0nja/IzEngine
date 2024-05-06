@@ -33,7 +33,7 @@ namespace IzEngine
 		template <typename T>
 		static inline void Set(uintptr_t address, T value)
 		{
-			WriteBytes(address, std::string(reinterpret_cast<char*>(&value), sizeof(T)));
+			Write(address, std::string(reinterpret_cast<char*>(&value), sizeof(T)));
 		}
 
 		/// <summary>
@@ -45,7 +45,7 @@ namespace IzEngine
 		template <typename T>
 		static inline T Get(uintptr_t address, T value)
 		{
-			T value;
+			T value{};
 			Read(address, &value, sizeof(T));
 			return value;
 		}
