@@ -1,6 +1,8 @@
 #include "Device.hpp"
 #include "ImGUI/UI.hpp"
 
+#include "Core/System/Window.hpp"
+
 namespace IzEngine
 {
 	void Device::Initialize()

@@ -3,6 +3,7 @@
 #include "Core/Input/Keyboard.hpp"
 #include "Core/System/Plugins.hpp"
 #include "Core/System/System.hpp"
+#include "Core/System/Window.hpp"
 
 #include "DX9/Device.hpp"
 #include "ImGUI/UI.hpp"

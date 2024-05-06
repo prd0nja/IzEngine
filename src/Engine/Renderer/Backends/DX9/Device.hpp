@@ -1,7 +1,7 @@
 #pragma once
 #include "DX9/Base.hpp"
 
-#include "Core/System/Window.hpp"
+#include "Core/Math.hpp"
 
 namespace IzEngine
 {
