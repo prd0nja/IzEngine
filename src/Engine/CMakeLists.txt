@@ -31,6 +31,7 @@ target_compile_definitions(IzEngine PUBLIC
 
 target_link_libraries(IzEngine PUBLIC
 	$<$<BOOL:${PLATFORM_WINDOWS}>:DbgHelp>
+	$<$<BOOL:${PLATFORM_WINDOWS}>:dwmapi>
 	$<$<BOOL:${GRAPHICS_API_DX9}>:DirectX::SDK>
 	imgui::imgui
 	implot::implot
