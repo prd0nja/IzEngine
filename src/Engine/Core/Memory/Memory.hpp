@@ -41,9 +41,8 @@ namespace IzEngine
 		/// </summary>
 		/// <typeparam name="T">The type to get.</typeparam>
 		/// <param name="address">The address.</param>
-		/// <param name="value">The value.</param>
 		template <typename T>
-		static inline T Get(uintptr_t address, T value)
+		static inline T Get(uintptr_t address)
 		{
 			T value{};
 			Read(address, &value, sizeof(T));
