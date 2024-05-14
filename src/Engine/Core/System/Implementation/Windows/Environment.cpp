@@ -2,7 +2,6 @@
 
 #include "Core/System/Environment.hpp"
 
-#include <TlHelp32.h>
 #include <fstream>
 
 namespace IzEngine
@@ -23,8 +22,6 @@ namespace IzEngine
 
 	void Environment::Initialize()
 	{
-		BuildModules();
-
 		AppDirectory = BaseDirectory / APPLICATION_ID;
 		PluginsDirectory = AppDirectory / "plugins";
 		ResourcesDirectory = AppDirectory / "resources";
@@ -40,25 +37,6 @@ namespace IzEngine
 		std::filesystem::create_directory(ImagesDirectory);
 
 		Initialized = true;
-	}
-
-	void Environment::BuildModules()
-	{
-		HANDLE hSnapshot = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE, GetCurrentProcessId());
-		if (hSnapshot == INVALID_HANDLE_VALUE)
-			return;
-
-		MODULEENTRY32 moduleEntry;
-		moduleEntry.dwSize = sizeof(MODULEENTRY32);
-
-		if (Module32First(hSnapshot, &moduleEntry))
-		{
-			do
-			{
-				Modules.push_back(moduleEntry.szModule);
-			} while (Module32Next(hSnapshot, &moduleEntry));
-		}
-		CloseHandle(hSnapshot);
 	}
 
 	void Environment::Save()

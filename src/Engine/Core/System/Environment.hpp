@@ -11,7 +11,6 @@ namespace IzEngine
 	public:
 		static inline bool Initialized = false;
 		static inline nlohmann::json Settings;
-		static inline std::vector<std::string> Modules;
 
 		static inline std::filesystem::path BaseDirectory;
 		static inline std::filesystem::path AppDirectory;
@@ -71,10 +70,5 @@ namespace IzEngine
 		/// Initialize the environment.
 		/// </summary>
 		static void Initialize();
-
-		/// <summary>
-		/// Build the modules list.
-		/// </summary>
-		static void BuildModules();
 	};
 }
