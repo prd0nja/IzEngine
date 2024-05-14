@@ -4,8 +4,10 @@
 
 namespace IzEngine
 {
-	void Memory::Read(uintptr_t address, void* data, int size)
+	void Memory::Read(uintptr_t address, void* data, size_t size)
 	{
+		IZ_ASSERT(address, "Addresss nullptr.");
+
 		DWORD oldProtect;
 		LPVOID lpAddress = reinterpret_cast<LPVOID>(address);
 
@@ -18,8 +20,7 @@ namespace IzEngine
 
 	void Memory::Write(uintptr_t address, const std::string& bytes)
 	{
-		if (!address)
-			return;
+		IZ_ASSERT(address, "Addresss nullptr.");
 
 		DWORD oldProtect;
 		LPVOID lpAddress = reinterpret_cast<LPVOID>(address);

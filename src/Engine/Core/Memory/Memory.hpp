@@ -15,7 +15,7 @@ namespace IzEngine
 		/// <param name="address">The target address.</param>
 		/// <param name="data">The output buffer.</param>
 		/// <param name="size">The size of bytes.</param>
-		static void Read(uintptr_t address, void* data, int size);
+		static void Read(uintptr_t address, void* data, size_t size);
 
 		/// <summary>
 		/// Write memory.
