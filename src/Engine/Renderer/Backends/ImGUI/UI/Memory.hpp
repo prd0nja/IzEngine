@@ -10,8 +10,8 @@ namespace IzEngine::UC
 	{
 	public:
 		MemoryEditor Editor;
-		int Address = 0x400000;
-		int MaxSize = 0x1000;
+		uintptr_t Address = 0x400000;
+		uintptr_t MaxSize = 0x1000;
 
 		/// <summary>
 		/// Initialize the Memory.

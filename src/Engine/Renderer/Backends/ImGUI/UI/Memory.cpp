@@ -30,13 +30,17 @@ namespace IzEngine::UC
 		if (!Open)
 			return;
 
-		int speed = Editor.Cols * 5;
-		int scroll = ImGui::GetIO().MouseWheel;
-		int direction = scroll ? scroll > 0 ? 1 : -1 : 0;
-		Address += -direction * speed;
+		const int speed = Editor.Cols * 5;
+		const int scroll = ImGui::GetIO().MouseWheel;
+		const int direction = scroll ? scroll > 0 ? 1 : -1 : 0;
+		const int step = 1;
+		const int stepFast = speed * speed;
+		const char* format = sizeof(uintptr_t) == 8 ? "%016X" : "%08X";
+
+		Address += uintptr_t(-direction * speed);
 
 		Begin();
-		ImGui::InputInt("Address", &Address, 1, speed * speed, ImGuiInputTextFlags_CharsHexadecimal);
+		ImGui::InputScalar("Address", ImGuiDataType_U64, &Address, &step, &stepFast, format);
 		Editor.DrawContents(reinterpret_cast<void*>(Address), MaxSize, Address);
 		End();
 	}
