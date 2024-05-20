@@ -12,7 +12,7 @@
 #define YAW 1
 #define ROLL 2
 
-#define ANGLE2SHORT(x) (static_cast<int>((x)*65536 / 360) & 65535)
+#define ANGLE2SHORT(x) (static_cast<int>((x) * 65536 / 360) & 65535)
 #define SHORT2ANGLE(x) (x * (360.0f / 65536))
 
 #define DotProduct2(a, b) ((a)[0] * (b)[0] + (a)[1] * (b)[1])

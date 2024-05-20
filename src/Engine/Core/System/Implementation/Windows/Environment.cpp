@@ -14,7 +14,7 @@ namespace IzEngine
 		Initialize();
 	}
 
-	void Environment::Local() 
+	void Environment::Local()
 	{
 		BaseDirectory = std::filesystem::path(getenv("LOCALAPPDATA"));
 		Initialize();

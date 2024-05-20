@@ -27,7 +27,7 @@ namespace IzEngine
 		CloseHandle(hSnapshot);
 	}
 
-	void System::MapModules(uintptr_t process) 
+	void System::MapModules(uintptr_t process)
 	{
 		Modules.clear();
 
