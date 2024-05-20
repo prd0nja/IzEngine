@@ -39,10 +39,12 @@
 #define ENTRY IZ_C EXPORT
 #define BIT(n) (1U << (n))
 
-#ifdef ENABLE_API
-	#define API EXPORT
-#else
-	#define API
+#ifndef API
+	#ifdef ENABLE_API
+		#define API EXPORT
+	#else
+		#define API
+	#endif
 #endif
 
 #include "Class.hpp"
