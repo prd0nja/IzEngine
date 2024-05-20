@@ -26,7 +26,7 @@ namespace ImGui
 	/// </summary>
 	/// <param name="uuid">The UUID.</param>
 	/// <returns></returns>
-	API inline void PushID(const UUID& uuid);
+	API void PushID(const UUID& uuid);
 
 	/// <summary>
 	/// Create a button.

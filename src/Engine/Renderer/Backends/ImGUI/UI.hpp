@@ -56,19 +56,19 @@ namespace IzEngine
 		/// Get time.
 		/// </summary>
 		/// <returns></returns>
-		inline double Time();
+		double Time();
 
 		/// <summary>
 		/// Get delta time.
 		/// </summary>
 		/// <returns></returns>
-		inline float DeltaTime();
+		float DeltaTime();
 
 		/// <summary>
 		/// Get delta time in milliseconds.
 		/// </summary>
 		/// <returns></returns>
-		inline int DeltaTimeMS();
+		int DeltaTimeMS();
 
 		/// <summary>
 		/// Initialize context.

@@ -1,5 +1,5 @@
 #pragma once
-#include "Macros.hpp"
+#include "Core/Macros/Base.hpp"
 
 #include <cstdint>
 #include <string>

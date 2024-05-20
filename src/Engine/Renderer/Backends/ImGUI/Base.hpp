@@ -3,6 +3,9 @@
 
 #define IMGUI_DEFINE_MATH_OPERATORS
 
+#pragma warning(push)
+#pragma warning(disable : 26495)
+
 #include <imgui.h>
 #include <imgui_internal.h>
 #include <imgui_markdown.h>
@@ -19,9 +22,11 @@
 	#define ImGui_ImplOS_Shutdown() ImGui_ImplWin32_Shutdown()
 	#define ImGui_ImplOS_NewFrame() ImGui_ImplWin32_NewFrame()
 
-extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+extern LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 #endif
 
 #ifdef GRAPHICS_API_DX9
 	#include <imgui_impl_dx9.h>
 #endif
+
+#pragma warning(pop)

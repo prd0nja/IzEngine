@@ -1,8 +1,6 @@
 #pragma once
 #include "Plugin.hpp"
 
-#include <map>
-
 namespace IzEngine
 {
 	/// <summary>

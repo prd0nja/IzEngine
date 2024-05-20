@@ -1,7 +1,12 @@
 #pragma once
 #include "Engine/Base.hpp"
 
+#pragma warning(push)
+#pragma warning(disable : 26819)
+
 #include <nlohmann/json.hpp>
+
+#pragma warning(pop)
 
 namespace IzEngine
 {

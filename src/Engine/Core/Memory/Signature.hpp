@@ -56,7 +56,7 @@ namespace IzEngine
 		/// <summary>
 		/// Get the address.
 		/// </summary>
-		inline operator uintptr_t()
+		operator uintptr_t()
 		{
 			return Address;
 		}
@@ -65,7 +65,7 @@ namespace IzEngine
 		/// Cast to pointer type.
 		/// </summary>
 		template <typename T>
-		inline operator T*()
+		operator T*()
 		{
 			return reinterpret_cast<T*>(Address);
 		}
@@ -74,7 +74,7 @@ namespace IzEngine
 		/// Cast to reference type.
 		/// </summary>
 		template <typename T>
-		inline operator T&()
+		operator T&()
 		{
 			return *reinterpret_cast<T*>(Address);
 		}
