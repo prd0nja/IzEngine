@@ -24,6 +24,7 @@ target_include_directories(IzEngine PUBLIC . ..)
 
 target_compile_definitions(IzEngine PUBLIC
 	APPLICATION_ID="${APPLICATION_ID}"
+	$<$<BOOL:${ENABLE_API}>:ENABLE_API>
 	$<$<BOOL:${PLATFORM_WINDOWS}>:PLATFORM_WINDOWS>
 	$<$<BOOL:${GRAPHICS_API_DX9}>:GRAPHICS_API_DX9>
 	CMAKE_BINARY_DIR="${CMAKE_BINARY_DIR}"
