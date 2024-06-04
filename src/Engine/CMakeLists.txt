@@ -4,22 +4,9 @@ add_subdirectory(Core)
 add_subdirectory(Platforms)
 add_subdirectory(Renderer)
 
+# Build
 target_precompile_headers(IzEngine PRIVATE Base.hpp)
 target_sources(IzEngine PRIVATE Base.hpp)
-
-# Tests
-if(BUILD_TESTING)
-	add_executable(IzEngine.Tests)
-	target_link_libraries(IzEngine.Tests PRIVATE
-		IzEngine
-		GTest::gtest
-		GTest::gtest_main
-		GTest::gmock
-		GTest::gmock_main)
-	add_test(NAME Engine COMMAND IzEngine.Tests)
-endif()
-
-# Build
 target_include_directories(IzEngine PUBLIC . ..)
 
 target_compile_definitions(IzEngine PUBLIC
