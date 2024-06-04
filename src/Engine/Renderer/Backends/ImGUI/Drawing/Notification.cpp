@@ -20,7 +20,7 @@ namespace IzEngine
 
 		for (const auto& notification : List)
 		{
-			Window window(std::format("##Notification {}", count));
+			Window window(UUID().String);
 			window.SetRect(0, position, 140, 20);
 			window.Begin(ImGuiWindowFlags_Notification);
 
@@ -31,7 +31,7 @@ namespace IzEngine
 			draw->AddRectFilled({ pos.x + size.x, pos.y }, { pos.x + size.x + 5, pos.y + size.y },
 				IM_COL32(140, 20, 252, 255));
 
-			ImGui::TextWrapped("IzEngine: %s", notification.message.c_str());
+			ImGui::TextWrapped(notification.message.c_str());
 			window.End();
 
 			position += size.y;
