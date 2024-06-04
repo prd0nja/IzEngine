@@ -16,7 +16,6 @@ namespace IzEngine
 
 		ImDrawList* draw = ImGui::GetBackgroundDrawList();
 		int position = 50;
-		int count = 0;
 
 		for (const auto& notification : List)
 		{
@@ -35,7 +34,6 @@ namespace IzEngine
 			window.End();
 
 			position += size.y;
-			count++;
 		}
 		std::erase_if(List,
 			[](const Notification& notification)
