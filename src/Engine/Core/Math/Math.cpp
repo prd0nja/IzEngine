@@ -178,6 +178,21 @@ namespace IzEngine
 		return { -1 * sr * sp * cy + -1 * cr * -sy, -1 * sr * sp * sy + -1 * cr * cy, -1 * sr * cp };
 	}
 
+	float Math::AngularDistance(float value1, float value2)
+	{
+		float diff = fmod(value2 - value1 + 180, 360) - 180;
+		if (diff < -180)
+			diff += 360;
+		return std::abs(diff);
+	}
+
+	void Math::VectorMA(vec3 veca, float scale, vec3 vecb, vec3 vecc)
+	{
+		vecc[0] = veca[0] + scale * vecb[0];
+		vecc[1] = veca[1] + scale * vecb[1];
+		vecc[2] = veca[2] + scale * vecb[2];
+	}
+
 	vec3 Math::VectorToAngles(const float* v)
 	{
 		vec3 angles;

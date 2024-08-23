@@ -17,11 +17,19 @@ namespace IzEngine
 		ImDrawList* draw = ImGui::GetBackgroundDrawList();
 		int position = 50;
 		int count = 0;
+		int slideDuration = 1;
+		double currentTime = UI::Get().Time();
 
 		for (const auto& notification : List)
 		{
+			float elapsedTime = currentTime - notification.time;
+			int slidePosition = position + count * 30;
+
+			if (elapsedTime < slideDuration)
+				slidePosition = static_cast<int>((elapsedTime / slideDuration) * slidePosition);
+
 			Window window(std::format("##Notification {}", count));
-			window.SetRect(0, position, 140, 20);
+			window.SetRect(0, slidePosition, 140, 20);
 			window.Begin(ImGuiWindowFlags_Notification);
 
 			const ImVec2& pos = window.RenderPosition;
@@ -31,10 +39,10 @@ namespace IzEngine
 			draw->AddRectFilled({ pos.x + size.x, pos.y }, { pos.x + size.x + 5, pos.y + size.y },
 				IM_COL32(140, 20, 252, 255));
 
-			ImGui::TextWrapped("IzEngine: %s", notification.message.c_str());
+			ImGui::TextWrapped("%s", notification.message.c_str());
 			window.End();
 
-			position += size.y;
+			//position += size.y;
 			count++;
 		}
 		std::erase_if(List,
