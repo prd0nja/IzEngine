@@ -4,9 +4,9 @@
 
 namespace IzEngine
 {
-	void Notifications::Push(const std::string& msg, float duration)
+	void Notifications::Push(const std::string& msg)
 	{
-		List.push_back({ msg, duration, UI::Get().Time() });
+		List.push_back({ msg, UI::Get().Time() });
 	}
 
 	void Notifications::Render()
@@ -16,35 +16,38 @@ namespace IzEngine
 
 		ImDrawList* draw = ImGui::GetBackgroundDrawList();
 
-		vec2 position = { 0, 50 };
-		const int slideDuration = 1;
-		const double currentTime = UI::Get().Time();
+		const auto time = UI::Get().Time();
+		const float duration = 4.0f;
+		const float slideDuration = 0.3f;
+		const float leftTime = 3.7f;
+		const float centerTime = 0.3f;
+		int y = 100;
 
 		for (const auto& notification : List)
 		{
-			const float elapsedTime = currentTime - notification.time;
+			const float elapsed = time - notification.time;
+			int x = 0;
 
-			position.x = 0;
-			if (elapsedTime < slideDuration)
-				position.x += elapsedTime / slideDuration;
+			if (elapsed < centerTime)
+				x = std::lerp(-140, 0, elapsed / slideDuration);
+			if (elapsed > leftTime)
+				x = std::lerp(0, -140, (elapsed - leftTime) / slideDuration);
 
 			Window window(UUID().String);
-			window.SetRect(position.x, position.y, 140, 20);
+			window.SetRect(x, y, 140, 20);
 			window.Begin(ImGuiWindowFlags_Notification);
 
 			const ImVec2& pos = window.RenderPosition;
 			const ImVec2& size = window.RenderSize;
 
-			draw->AddRectFilled({ -1, pos.y }, { pos.x + size.x, pos.y + size.y }, IM_COL32(0, 0, 0, 255));
+			draw->AddRectFilled({ 0, pos.y }, { pos.x + size.x, pos.y + size.y }, IM_COL32(0, 0, 0, 255));
 			draw->AddRectFilled({ pos.x + size.x, pos.y }, { pos.x + size.x + 5, pos.y + size.y },
 				IM_COL32(140, 20, 252, 255));
+			draw->AddText({ pos.x, pos.y + (size.y / 6) }, IM_COL32(255, 255, 255, 255), notification.message.c_str());
 
-			ImGui::TextWrapped(notification.message.c_str());
 			window.End();
-
-			position += size.y + 10;
+			y += window.Size.y + 2;
 		}
-		std::erase_if(List, [](const Notification& notification)
-			{ return UI::Get().Time() > notification.time + notification.duration; });
+		std::erase_if(List, [&](const Notification& notification) { return time > notification.time + duration; });
 	}
 }

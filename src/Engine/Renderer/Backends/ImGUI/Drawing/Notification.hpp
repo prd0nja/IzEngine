@@ -15,7 +15,6 @@ namespace IzEngine
 		struct Notification
 		{
 			std::string message;
-			float duration;
 			double time;
 		};
 
@@ -26,8 +25,7 @@ namespace IzEngine
 		/// Create a notification.
 		/// </summary>
 		/// <param name="msg">The message.</param>
-		/// <param name="duration">The duration.</param>
-		static void Push(const std::string& msg, float duration = 5);
+		static void Push(const std::string& msg);
 
 		/// <summary>
 		/// Render the notifications.
