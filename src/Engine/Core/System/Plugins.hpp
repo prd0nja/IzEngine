@@ -9,7 +9,7 @@ namespace IzEngine
 	class Plugins
 	{
 	public:
-		static inline std::map<std::string, Scope<Plugin>> Modules;
+		static inline std::unordered_map<std::string, Scope<Plugin>> Modules;
 		static inline bool IsReloading = false;
 
 		/// <summary>
@@ -21,11 +21,5 @@ namespace IzEngine
 		/// Shutdown the plugins.
 		/// </summary>
 		static void Shutdown();
-
-		/// <summary>
-		/// Dispatch event.
-		/// </summary>
-		/// <param name="event">The event.</param>
-		static void Dispatch(Event& event);
 	};
 }

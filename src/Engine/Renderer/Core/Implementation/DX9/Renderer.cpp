@@ -18,19 +18,16 @@ namespace IzEngine
 		Textures::Initialize();
 		Fonts::Initialize();
 
+		UI::Initialize();
 		ImGui_ImplOS_Init(OSWindow::Handle);
-		ImGui_ImplDX9_Init(Device::D3Device);
-		UI::Get().Initialize();
-
-		EventPluginInitialize event;
-		Plugins::Dispatch(event);
+		ImGui_ImplAPI_Init(Device::D3Device);
 	}
 
 	void Renderer::Shutdown()
 	{
+		ImGui_ImplAPI_Shutdown();
 		ImGui_ImplOS_Shutdown();
-		ImGui_ImplDX9_Shutdown();
-		UI::Get().Shutdown();
+		UI::Shutdown();
 
 		Fonts::Release();
 		Textures::Release();
@@ -45,12 +42,12 @@ namespace IzEngine
 	{
 		ImGui_ImplOS_NewFrame();
 		ImGui_ImplDX9_NewFrame();
-		UI::Get().Begin();
+		UI::Begin();
 	}
 
 	void Renderer::End()
 	{
-		UI::Get().End();
+		UI::End();
 		ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
 		Keyboard::Reset();
 	}
@@ -62,7 +59,7 @@ namespace IzEngine
 		Begin();
 
 		EventRendererRender event;
-		Application::Get().Dispatch(event);
+		Application::Dispatch(event);
 
 		End();
 		Device::D3Device->EndScene();

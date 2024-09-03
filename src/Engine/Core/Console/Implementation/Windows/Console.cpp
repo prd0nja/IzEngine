@@ -43,8 +43,6 @@ namespace IzEngine
 
 	std::string Console::Input()
 	{
-		IZ_ASSERT(Console::Handle, "Console not initialized.");
-
 		std::string command;
 		DWORD numEventsRead;
 		DWORD lpNumberOfEvents;
@@ -224,11 +222,14 @@ namespace IzEngine
 
 	void Console::Frame()
 	{
+		if (!Handle)
+			return;
+
 		const auto command = Console::Input();
 		if (command.empty())
 			return;
 
 		EventConsoleCommand event(command);
-		Application::Get().Dispatch(event);
+		Application::Dispatch(event);
 	}
 }

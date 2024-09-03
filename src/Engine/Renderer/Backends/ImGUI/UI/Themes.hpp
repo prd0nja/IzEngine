@@ -11,14 +11,15 @@ namespace IzEngine::UC
 	class Themes : public Window
 	{
 	public:
+		static inline std::tuple<ImColor, ImColor> Rainbow;
+		static inline ImGui::MarkdownConfig Markdown;
+
+		static inline ImFont* H1 = nullptr;
+		static inline ImFont* H2 = nullptr;
+		static inline ImFont* H3 = nullptr;
+
 		ImGuiStyle Style;
 		ImPlotStyle PlotStyle;
-		std::tuple<ImColor, ImColor> Rainbow;
-		ImGui::MarkdownConfig Markdown;
-
-		ImFont* H1 = nullptr;
-		ImFont* H2 = nullptr;
-		ImFont* H3 = nullptr;
 
 		/// <summary>
 		/// Initialize the themes window.
@@ -29,12 +30,17 @@ namespace IzEngine::UC
 		/// <summary>
 		/// Initialize themes.
 		/// </summary>
-		void Initialize();
+		void Initialize() override;
 
 		/// <summary>
 		/// Render frame.
 		/// </summary>
-		void Render();
+		void OnRender() override;
+
+		/// <summary>
+		/// Compute rainbow color.
+		/// </summary>
+		static void ComputeRainbow();
 
 	private:
 		/// <summary>
@@ -46,11 +52,6 @@ namespace IzEngine::UC
 		/// Apply theme.
 		/// </summary>
 		void Apply();
-
-		/// <summary>
-		/// Compute rainbow color.
-		/// </summary>
-		void ComputeRainbow();
 
 		/// <summary>
 		/// Markdown link callback.

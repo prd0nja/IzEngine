@@ -10,7 +10,6 @@ namespace IzEngine
 	{
 	public:
 		static inline bool Initialized = false;
-		static inline nlohmann::json Settings;
 
 		static inline std::filesystem::path BaseDirectory;
 		static inline std::filesystem::path AppDirectory;
@@ -31,39 +30,18 @@ namespace IzEngine
 		static void Local();
 
 		/// <summary>
-		/// Load settings.
+		/// Load json file.
 		/// </summary>
-		static void Load();
+		/// <param name="json">The json data.</param>
+		/// <param name="filename">The filename.</param>
+		static void Load(nlohmann::json& json, const std::string& filename);
 
 		/// <summary>
-		/// Save environment.
+		/// Save json file.
 		/// </summary>
-		static void Save();
-
-		/// <summary>
-		/// Deserialize the settings.
-		/// </summary>
-		/// <typeparam name="T">The class implementing serialization.</typeparam>
-		/// <param name="id">The settings id.</param>
-		/// <param name="instance">The class instance.</param>
-		template <typename T>
-		static void Deserialize(const std::string& id, T& instance)
-		{
-			if (Settings.contains(id))
-				nlohmann::from_json(Settings[id], instance);
-		}
-
-		/// <summary>
-		/// Serialize the settings.
-		/// </summary>
-		/// <typeparam name="T">The class implementing serialization.</typeparam>
-		/// <param name="id">The settings id.</param>
-		/// <param name="instance">The class instance.</param>
-		template <typename T>
-		static void Serialize(const std::string& id, const T& instance)
-		{
-			nlohmann::to_json(Settings[id], instance);
-		}
+		/// <param name="json">The json data.</param>
+		/// <param name="filename">The filename.</param>
+		static void Save(const nlohmann::json& json, const std::string& filename);
 
 	private:
 		/// <summary>

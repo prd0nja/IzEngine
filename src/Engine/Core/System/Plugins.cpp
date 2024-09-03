@@ -8,28 +8,21 @@ namespace IzEngine
 	{
 		IZ_ASSERT(Environment::Initialized, "Environment not initialized.");
 
-		if (!std::filesystem::is_directory(Environment::PluginsDirectory))
-			return;
-
 		for (const auto& entry : std::filesystem::directory_iterator(Environment::PluginsDirectory))
 		{
 			if (entry.path().extension() != Plugin::Extension)
 				continue;
 
 			auto mod = CreateScope<Plugin>(entry.path().string());
-			if (mod->Loaded)
-				Modules.insert({ entry.path().filename().string(), std::move(mod) });
+			if (!mod->Loaded)
+				continue;
+
+			Modules.insert({ entry.path().filename().string(), std::move(mod) });
 		}
 	}
 
 	void Plugins::Shutdown()
 	{
 		Modules.clear();
-	}
-
-	void Plugins::Dispatch(Event& event)
-	{
-		for (const auto& [_, mod] : Modules)
-			mod->OnEvent(event);
 	}
 }

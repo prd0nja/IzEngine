@@ -6,7 +6,7 @@ namespace IzEngine
 {
 	void Notifications::Push(const std::string& msg)
 	{
-		List.push_back({ msg, UI::Get().Time() });
+		List.push_back({ msg, UI::Time() });
 	}
 
 	void Notifications::Render()
@@ -16,7 +16,7 @@ namespace IzEngine
 
 		ImDrawList* draw = ImGui::GetBackgroundDrawList();
 
-		const auto time = UI::Get().Time();
+		const auto time = UI::Time();
 		const float duration = 4.0f;
 		const float slideDuration = 0.3f;
 		const float leftTime = 3.7f;
@@ -35,7 +35,8 @@ namespace IzEngine
 
 			Window window(UUID().String);
 			window.SetRect(x, y, 140, 20);
-			window.Begin(ImGuiWindowFlags_Notification);
+			window.SetFlags(ImGuiWindowFlags_Notification);
+			window.Begin();
 
 			const ImVec2& pos = window.RenderPosition;
 			const ImVec2& size = window.RenderSize;

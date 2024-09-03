@@ -43,11 +43,5 @@ namespace IzEngine
 		/// <param name="id">The ID.</param>
 		/// <param name="name">The name.</param>
 		void SetInfos(const std::string& id, const std::string& name);
-
-		/// <summary>
-		/// Event dispatch.
-		/// </summary>
-		/// <param name="event">The event.</param>
-		void OnEvent(Event& event) override;
 	};
 }

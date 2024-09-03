@@ -1,5 +1,7 @@
 #include "Components.hpp"
+
 #include "UI.hpp"
+#include "UI/Themes.hpp"
 
 #include "Core/Input/Keyboard.hpp"
 
@@ -164,7 +166,7 @@ namespace ImGui
 		const auto keyName = Keyboard::GetName(*key);
 		const auto id = GetID(label.c_str());
 
-		float width = 50 * UI::Get().Size;
+		float width = 50 * UI::Size;
 		ImVec2 size = CalcItemSize(defaultSize, width, 0);
 
 		KeepAliveID(id);
@@ -205,7 +207,7 @@ namespace ImGui
 
 	void Movable(const UUID& id, vec2& position, vec2& size, vec2& renderPosition, vec2& renderSize)
 	{
-		if (!UI::Get().Open || !UI::Get().DesignMode)
+		if (!UI::Open || !UI::DesignMode)
 			return;
 
 		PushStyleColor(ImGuiCol_Border, { 0.2, 0.2, 0.2, 0.2 });
@@ -219,8 +221,8 @@ namespace ImGui
 
 		if (IsWindowChanged())
 		{
-			position += UI::Get().Screen.RealToVirtual * (framePosition - renderPosition);
-			size += UI::Get().Screen.RealToVirtual * (frameSize - renderSize);
+			position += UI::Screen.RealToVirtual * (framePosition - renderPosition);
+			size += UI::Screen.RealToVirtual * (frameSize - renderSize);
 
 			renderPosition = framePosition;
 			renderSize = frameSize;
@@ -238,13 +240,13 @@ namespace ImGui
 	{
 		ImDrawList* draw = GetForegroundDrawList();
 
-		const auto& [rainbow1, rainbow2] = UI::Get().Themes.Rainbow;
+		const auto& [rainbow1, rainbow2] = UC::Themes::Rainbow;
 		draw->AddRectFilledMultiColor(position, size, rainbow1, rainbow2, rainbow2, rainbow1);
 	}
 
 	void Markdown(const std::string& markdown)
 	{
-		Markdown(markdown.c_str(), markdown.size(), UI::Get().Themes.Markdown);
+		Markdown(markdown.c_str(), markdown.size(), UC::Themes::Markdown);
 	}
 
 	void LoadingIndicator(const std::string& label, const ImVec2& pos, const ImU32& color, bool state)
@@ -263,7 +265,7 @@ namespace ImGui
 		float thickness = 5;
 
 		const ImVec2 size = CalcItemSize(vec2::Zero, width, height);
-		const ImVec2 position = UI::Get().Screen.VirtualToFull * pos;
+		const ImVec2 position = UI::Screen.VirtualToFull * pos;
 
 		const float segments = 15;
 		const float start = abs(sinf(g.Time * 1.8f) * (segments - 5));

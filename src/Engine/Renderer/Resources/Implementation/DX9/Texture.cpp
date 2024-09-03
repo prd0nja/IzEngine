@@ -4,6 +4,14 @@
 
 namespace IzEngine
 {
+	Texture::~Texture()
+	{
+		if (Data)
+			reinterpret_cast<ID3DXFont*>(Data)->Release();
+		if (Surface)
+			reinterpret_cast<ID3DXFont*>(Surface)->Release();
+	}
+
 	Ref<Texture>& Texture::Create(const std::filesystem::path& path)
 	{
 		if (!std::filesystem::exists(path))
@@ -25,14 +33,6 @@ namespace IzEngine
 	Ref<Texture>& Texture::Default()
 	{
 		return Textures::List[TEXTURE_NULL];
-	}
-
-	Texture::~Texture()
-	{
-		if (Data)
-			reinterpret_cast<ID3DXFont*>(Data)->Release();
-		if (Surface)
-			reinterpret_cast<ID3DXFont*>(Surface)->Release();
 	}
 
 	void Textures::Initialize() { }

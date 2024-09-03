@@ -26,6 +26,8 @@ namespace IzEngine
 
 		if (CallbackInfo)
 			CallbackInfo(this);
+		if (CallbackInitialize)
+			CallbackInitialize();
 	}
 
 	Plugin::~Plugin()
@@ -44,13 +46,5 @@ namespace IzEngine
 	{
 		ID = id;
 		Name = name;
-	}
-
-	void Plugin::OnEvent(Event& event)
-	{
-		EventDispatcher dispatcher(event);
-
-		if (CallbackInitialize)
-			dispatcher.Dispatch<EventPluginInitialize>(CallbackInitialize.Func);
 	}
 }

@@ -40,7 +40,7 @@ namespace IzEngine
 		/// Get default font.
 		/// </summary>
 		/// <returns></returns>
-		static inline Ref<Font>& Default();
+		static Ref<Font>& Default();
 	};
 
 	/// <summary>

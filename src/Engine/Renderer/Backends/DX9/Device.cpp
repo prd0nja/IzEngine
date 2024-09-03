@@ -59,7 +59,7 @@ namespace IzEngine
 		const vec2 size(viewport.Width, viewport.Height);
 		const vec2 display(displayMode.Width, displayMode.Height);
 
-		UI::Get().CreateScreen(position, size, display);
+		UI::CreateScreen(position, size, display);
 	}
 
 	void Device::Resize(const vec2& size)

@@ -5,6 +5,12 @@
 
 namespace IzEngine
 {
+	Font::~Font()
+	{
+		if (Data)
+			reinterpret_cast<ID3DXFont*>(Data)->Release();
+	}
+
 	Ref<Font>& Font::Create(const std::string& name, int height)
 	{
 		std::string id = std::format("{}_{}", name, height);
@@ -50,12 +56,6 @@ namespace IzEngine
 	Ref<Font>& Font::Default()
 	{
 		return Fonts::List[FONT_OPENSANS];
-	}
-
-	Font::~Font()
-	{
-		if (Data)
-			reinterpret_cast<ID3DXFont*>(Data)->Release();
 	}
 
 	void Fonts::Initialize()

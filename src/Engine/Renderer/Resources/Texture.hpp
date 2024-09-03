@@ -32,7 +32,7 @@ namespace IzEngine
 		/// Get default texture.
 		/// </summary>
 		/// <returns></returns>
-		static inline Ref<Texture>& Default();
+		static Ref<Texture>& Default();
 	};
 
 	/// <summary>

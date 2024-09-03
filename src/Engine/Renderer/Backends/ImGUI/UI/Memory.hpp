@@ -38,6 +38,6 @@ namespace IzEngine::UC
 		/// <summary>
 		/// Render frame.
 		/// </summary>
-		void Render();
+		void OnRender();
 	};
 }

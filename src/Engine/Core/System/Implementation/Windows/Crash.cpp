@@ -117,7 +117,6 @@ namespace IzEngine
 
 			file << std::format("{:>5}: {}.{}{}[0x{:X}]\n", frame++, module, symbol->Name, traceLine, symbol->Address);
 		}
-		file.close();
 		SymCleanup(process);
 	}
 }

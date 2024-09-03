@@ -25,11 +25,8 @@ namespace IzEngine::UC
 		IzEngine::Memory::Write(reinterpret_cast<uintptr_t>(data + offset), reinterpret_cast<char*>(&value));
 	}
 
-	void Memory::Render()
+	void Memory::OnRender()
 	{
-		if (!Open)
-			return;
-
 		const int speed = Editor.Cols * 5;
 		const int scroll = ImGui::GetIO().MouseWheel;
 		const int direction = scroll ? scroll > 0 ? 1 : -1 : 0;

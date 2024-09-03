@@ -1,8 +1,7 @@
 #pragma once
 #include "ImGUI/Base.hpp"
 
-#include "UI/Memory.hpp"
-#include "UI/Themes.hpp"
+#include "Drawing/Window.hpp"
 
 #include "Core/Screen/VirtualScreen.hpp"
 
@@ -13,21 +12,43 @@ namespace IzEngine
 	/// </summary>
 	class API UI
 	{
-		CLASS_SINGLETON(UI)
 	public:
-		bool Active = false;
-		bool Open = false;
-		bool DesignMode = false;
-		VirtualScreen Screen;
-		float Size = 1.0f;
+		static inline std::unordered_map<std::string, Ref<Window>> Windows;
+		static inline nlohmann::json Serialized;
 
-		UC::Memory Memory;
-		UC::Themes Themes;
+		static inline bool Active = false;
+		static inline bool Open = false;
+		static inline bool DesignMode = false;
+		static inline VirtualScreen Screen;
+		static inline float Size = 1.0f;
 
 		/// <summary>
 		/// Initialize UI.
 		/// </summary>
-		void Initialize();
+		static void Initialize();
+
+		/// <summary>
+		/// Release UI.
+		/// </summary>
+		static void Shutdown();
+
+		/// <summary>
+		/// Load a module.
+		/// </summary>
+		/// <typeparam name="T">The module type.</typeparam>
+		/// <param name="enabled">Is enabled by default.</param>
+		template <class T = Window>
+		static void CreateWindow()
+		{
+			auto window = CreateRef<T>();
+			bool isSerialized = Serialized.contains(window->Name);
+
+			if (isSerialized)
+				window->Deserialize(Serialized[window->Name]);
+			window->Initialize();
+
+			Windows[window->Name] = window;
+		}
 
 		/// <summary>
 		/// Create the screen.
@@ -35,40 +56,35 @@ namespace IzEngine
 		/// <param name="position">The position.</param>
 		/// <param name="size">The size.</param>
 		/// <param name="display">The display size.</param>
-		void CreateScreen(const vec2& position, const vec2& size, const vec2& display);
-
-		/// <summary>
-		/// Release UI.
-		/// </summary>
-		void Shutdown();
+		static void CreateScreen(const vec2& position, const vec2& size, const vec2& display);
 
 		/// <summary>
 		/// Begin frame.
 		/// </summary>
-		void Begin();
+		static void Begin();
 
 		/// <summary>
 		/// End frame.
 		/// </summary>
-		void End();
+		static void End();
 
 		/// <summary>
 		/// Get time.
 		/// </summary>
 		/// <returns></returns>
-		double Time();
+		static double Time();
 
 		/// <summary>
 		/// Get delta time.
 		/// </summary>
 		/// <returns></returns>
-		float DeltaTime();
+		static float DeltaTime();
 
 		/// <summary>
 		/// Get delta time in milliseconds.
 		/// </summary>
 		/// <returns></returns>
-		int DeltaTimeMS();
+		static int DeltaTimeMS();
 
 		/// <summary>
 		/// Initialize context.
@@ -91,18 +107,16 @@ namespace IzEngine
 		/// <param name="data">The data.</param>
 		static void Free(void* ptr, void* data);
 
-	private:
-		void* Data = nullptr;
-		ImGuiContext* Context = nullptr;
-		ImPlotContext* PlotContext = nullptr;
-		float Scale = 1.0f;
-
 		/// <summary>
-		/// Initialize the UI.
+		/// Dispatch event.
 		/// </summary>
-		UI();
-		virtual ~UI();
+		/// <param name="event">The event.</param>
+		static void Dispatch(Event& event);
 
-		SERIALIZE(UI, Scale, Memory, Themes)
+	private:
+		static inline void* Data = nullptr;
+		static inline ImGuiContext* Context = nullptr;
+		static inline ImPlotContext* PlotContext = nullptr;
+		static inline float Scale = 1.0f;
 	};
 }

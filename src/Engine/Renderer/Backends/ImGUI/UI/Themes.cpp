@@ -21,8 +21,8 @@ namespace IzEngine::UC
 		ImGui::GetStyle() = Style;
 		ImPlot::GetStyle() = PlotStyle;
 
-		const float fontSize = 12.f * UI::Get().Size;
-		const float iconSize = 8.f * UI::Get().Size;
+		const float fontSize = 12.f * UI::Size;
+		const float iconSize = 8.f * UI::Size;
 
 		static const ImWchar rangesFa[] = { ICON_MIN_FA, ICON_MAX_FA, 0 };
 		static const ImWchar rangesFab[] = { ICON_MIN_FAB, ICON_MAX_FAB, 0 };
@@ -216,7 +216,7 @@ namespace IzEngine::UC
 
 		Rainbow = std::make_tuple(ImColor::HSV(fmod(offset, 1.0f), 1.0f, 1.0f),
 			ImColor::HSV(fmod(offset + 0.33f, 1.0f), 1.0f, 1.0f));
-		offset += speed * UI::Get().DeltaTime();
+		offset += speed * UI::DeltaTime();
 	}
 
 	void Themes::MarkdownLink(ImGui::MarkdownLinkCallbackData data)
@@ -258,13 +258,8 @@ namespace IzEngine::UC
 		}
 	}
 
-	void Themes::Render()
+	void Themes::OnRender()
 	{
-		ComputeRainbow();
-
-		if (!Open)
-			return;
-
 		Style = ImGui::GetStyle();
 		PlotStyle = ImPlot::GetStyle();
 

@@ -27,6 +27,9 @@ extern LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam
 
 #ifdef GRAPHICS_API_DX9
 	#include <imgui_impl_dx9.h>
+
+	#define ImGui_ImplAPI_Init(device) ImGui_ImplDX9_Init(device)
+	#define ImGui_ImplAPI_Shutdown() ImGui_ImplDX9_Shutdown()
 #endif
 
 #pragma warning(pop)

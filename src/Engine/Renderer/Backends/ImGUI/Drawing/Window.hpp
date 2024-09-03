@@ -17,6 +17,7 @@ namespace IzEngine
 		bool Open = false;
 		bool Designer = false;
 
+		ImGuiWindowFlags Flags = ImGuiWindowFlags_NoCollapse;
 		Horizontal HorizontalAlign = HORIZONTAL_LEFT;
 		Vertical VerticalAlign = VERTICAL_TOP;
 
@@ -24,7 +25,7 @@ namespace IzEngine
 		/// Create a window.
 		/// </summary>
 		Window() = default;
-		virtual ~Window() = default;
+		virtual ~Window();
 
 		/// <summary>
 		/// Create a window.
@@ -33,24 +34,22 @@ namespace IzEngine
 		Window(const std::string& name);
 
 		/// <summary>
-		/// Set designer edition.
+		/// Initialize window.
 		/// </summary>
-		/// <param name="state">The state.</param>
-		void SetDesigner(bool state);
+		virtual void Initialize();
+
+		/// <summary>
+		/// Release window.
+		/// </summary>
+		/// <returns></returns>
+		virtual void Release();
 
 		/// <summary>
 		/// Set the window position and size.
 		/// </summary>
 		/// <param name="position">The position.</param>
 		/// <param name="size">The size.</param>
-		void SetRect(const vec2& position, const vec2& size);
-
-		/// <summary>
-		/// Set the rect alignment.
-		/// </summary>
-		/// <param name="horizontal">Horizontal aligment.</param>
-		/// <param name="vertical">Vertical alignment.</param>
-		void SetRectAlignment(Horizontal horizontal, Vertical vertical);
+		virtual void SetRect(const vec2& position, const vec2& size);
 
 		/// <summary>
 		/// Set the window position and size.
@@ -59,13 +58,26 @@ namespace IzEngine
 		/// <param name="y">Y value.</param>
 		/// <param name="w">The width.</param>
 		/// <param name="h">The height.</param>
-		void SetRect(float x, float y, float w, float h);
+		virtual void SetRect(float x, float y, float w, float h);
 
 		/// <summary>
-		/// Begin drawing.
+		/// Set the rect alignment.
 		/// </summary>
-		/// <param name="flags">Window flags.</param>
-		virtual void Begin(ImGuiWindowFlags flags = 0);
+		/// <param name="horizontal">Horizontal aligment.</param>
+		/// <param name="vertical">Vertical alignment.</param>
+		virtual void SetRectAlignment(Horizontal horizontal, Vertical vertical);
+
+		/// <summary>
+		/// Set designer edition.
+		/// </summary>
+		/// <param name="state">The state.</param>
+		virtual void SetDesigner(bool state);
+
+		/// <summary>
+		/// Set window flags.
+		/// </summary>
+		/// <param name="flags">The window flags.</param>
+		virtual void SetFlags(ImGuiWindowFlags flags);
 
 		/// <summary>
 		/// Render menu.
@@ -75,9 +87,25 @@ namespace IzEngine
 		virtual void Menu(const std::string& label, bool open = false);
 
 		/// <summary>
+		/// Begin drawing.
+		/// </summary>
+		virtual void Begin();
+
+		/// <summary>
 		/// End drawing.
 		/// </summary>
 		virtual void End();
+
+		/// <summary>
+		/// Render frame.
+		/// </summary>
+		virtual void OnRender();
+
+		/// <summary>
+		/// On event.
+		/// </summary>
+		/// <param name="event">The event.</param>
+		virtual void OnEvent(Event& event);
 
 		SERIALIZE_POLY_BASE(Window, Position, Size, Open, HorizontalAlign, VerticalAlign)
 	};

@@ -39,17 +39,16 @@ namespace IzEngine
 		Initialized = true;
 	}
 
-	void Environment::Save()
+	void Environment::Load(nlohmann::json& json, const std::string& filename)
 	{
-		std::ofstream file(Environment::AppDirectory / "application.json");
-		file << Settings.dump(4);
-		file.close();
+		std::ifstream file(Environment::AppDirectory / filename);
+		if (file.peek() != std::ifstream::traits_type::eof())
+			json = nlohmann::json::parse(file);
 	}
 
-	void Environment::Load()
+	void Environment::Save(const nlohmann::json& json, const std::string& filename)
 	{
-		std::ifstream file(Environment::AppDirectory / "application.json");
-		if (file.peek() != std::ifstream::traits_type::eof())
-			Settings = nlohmann::json::parse(file);
+		std::ofstream file(Environment::AppDirectory / filename);
+		file << json.dump(4);
 	}
 }

@@ -10,29 +10,21 @@ namespace IzEngine
 	/// </summary>
 	class Application
 	{
-		CLASS_SINGLETON(Application)
 	public:
 		/// <summary>
 		/// Start the application.
 		/// </summary>
-		void Start();
+		static void Start();
 
 		/// <summary>
 		/// Shutdown the application.
 		/// </summary>
-		void Shutdown();
+		static void Shutdown();
 
 		/// <summary>
 		/// Dispatch event.
 		/// </summary>
 		/// <param name="event">The event.s</param>
-		void Dispatch(Event& event);
-
-	private:
-		/// <summary>
-		/// Initialize the application.
-		/// </summary>
-		Application() = default;
-		~Application() = default;
+		static void Dispatch(Event& event);
 	};
 }

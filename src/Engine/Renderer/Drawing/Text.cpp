@@ -27,7 +27,7 @@ namespace IzEngine
 
 	void Text::SetFont(const std::string& font)
 	{
-		int fontSize = floor(UI::Get().Size * FontSize * FontRescale);
+		int fontSize = floor(UI::Size * FontSize * FontRescale);
 
 		Font = Font::Create(font, fontSize);
 		FontName = font;
@@ -76,13 +76,13 @@ namespace IzEngine
 			SetFont(FontName);
 
 		RenderSize = Draw2D::TextSize(Value, Font);
-		Size = UI::Get().Screen.RealToVirtual * RenderSize;
+		Size = UI::Screen.RealToVirtual * RenderSize;
 
 		vec2 position = Position;
 		vec2 size = Size;
 
 		ComputeAlignment(position);
-		UI::Get().Screen.Apply(position, HorizontalAlign, VerticalAlign);
+		UI::Screen.Apply(position, HorizontalAlign, VerticalAlign);
 		RenderPosition = position;
 
 		ImGui::Movable(ID, Position, Size, RenderPosition, RenderSize);

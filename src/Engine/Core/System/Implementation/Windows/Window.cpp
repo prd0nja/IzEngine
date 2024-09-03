@@ -65,7 +65,6 @@ namespace IzEngine
 	int OSWindow::Update(void* handle, int msg, uintptr_t wParam, uintptr_t lParam)
 	{
 		const HWND hwnd = reinterpret_cast<HWND>(handle);
-		const auto& UI = UI::Get();
 
 		switch (msg)
 		{
@@ -94,13 +93,13 @@ namespace IzEngine
 			Keyboard::Process(msg, wParam);
 			break;
 		}
-		if (!UI.Active)
+		if (!UI::Active)
 			return DefWindowProc(hwnd, msg, wParam, lParam);
 
 		ImGuiIO& io = ImGui::GetIO();
-		io.MouseDrawCursor = UI.Open;
+		io.MouseDrawCursor = UI::Open;
 
-		if (UI.Open && ImGui_ImplWin32_WndProcHandler(hwnd, msg, wParam, lParam))
+		if (UI::Open && ImGui_ImplWin32_WndProcHandler(hwnd, msg, wParam, lParam))
 			return true;
 
 		return DefWindowProc(hwnd, msg, wParam, lParam);

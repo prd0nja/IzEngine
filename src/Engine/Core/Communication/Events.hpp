@@ -9,12 +9,6 @@ namespace IzEngine
 		EventRendererRender() = default;
 	};
 
-	class EventPluginInitialize : public Event
-	{
-		EVENT_CLASS("plugin.initialize")
-		EventPluginInitialize() = default;
-	};
-
 	class EventConsoleCommand : public Event
 	{
 		EVENT_CLASS("console.command")
