@@ -23,35 +23,43 @@ namespace IzEngine
 		bool IsEnabled = false;
 
 		/// <summary>
-		/// Initialize a new Hook instance.
+		/// Initialize a new instance.
+		/// </summary>
+		Hook() = default;
+
+		/// <summary>
+		/// Initialize a new instance.
 		/// </summary>
 		/// <param name="callback">The callback function.</param>
 		Hook(T callback) : Hook(0ull, callback) { }
-		~Hook() = default;
 
 		/// <summary>
-		/// Initialize a new Hook instance.
+		/// Initialize a new instance.
 		/// </summary>
-		/// <param name="target">The target function.</param>
+		/// <param name="address">The target function.</param>
 		/// <param name="callback">The callback function.</param>
-		Hook(T target, T callback) : Hook(reinterpret_cast<uint64_t>(target), callback) { }
+		Hook(T address, T callback) : Hook(reinterpret_cast<uint64_t>(address), callback) { }
 
 		/// <summary>
-		/// Initialize a new Hook instance.
+		/// Initialize a new instance.
 		/// </summary>
-		/// <param name="target">The target address.</param>
+		/// <param name="address">The target address.</param>
 		/// <param name="callback">The callback function.</param>
-		Hook(uint64_t target, T callback) : Hook(target, reinterpret_cast<uint64_t>(callback)) { }
+		Hook(uint64_t address, T callback) : Hook(address, reinterpret_cast<uint64_t>(callback)) { }
 
 		/// <summary>
-		/// Initialize a new Hook instance.
+		/// Initialize a new instance.
 		/// </summary>
-		/// <param name="target">The target address.</param>
+		/// <param name="address">The target address.</param>
 		/// <param name="callback">The callback address.</param>
-		Hook(uint64_t target, uint64_t callback)
+		Hook(uint64_t address, uint64_t callback) : Address(address), Callback(callback) { }
+
+		/// <summary>
+		/// Release hook.
+		/// </summary>
+		~Hook()
 		{
-			Address = target;
-			Callback = callback;
+			Remove();
 		}
 
 		/// <summary>
@@ -113,11 +121,5 @@ namespace IzEngine
 		{
 			return IsEnabled;
 		}
-
-	private:
-		/// <summary>
-		/// Initialize a new Hook instance.
-		/// </summary>
-		Hook() = default;
 	};
 }

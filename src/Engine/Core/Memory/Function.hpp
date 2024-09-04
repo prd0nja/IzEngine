@@ -25,14 +25,14 @@ namespace IzEngine
 		/// <summary>
 		/// Initialize a new function wrapper.
 		/// </summary>
-		/// <param name="address">The target address.</param>
-		Function(uintptr_t address) : Address(address), Func(reinterpret_cast<T*>(address)) { }
+		/// <param name="function">The target function.</param>
+		Function(T function) : Function(reinterpret_cast<uintptr_t>(function)) { }
 
 		/// <summary>
 		/// Initialize a new function wrapper.
 		/// </summary>
-		/// <param name="function">The target function.</param>
-		Function(T function) : Address(reinterpret_cast<uintptr_t>(function)), Func(function) { }
+		/// <param name="address">The target address.</param>
+		Function(uintptr_t address) : Address(address), Func(reinterpret_cast<T*>(address)) { }
 
 		/// <summary>
 		/// Assign address.
