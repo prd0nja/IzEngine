@@ -3,6 +3,8 @@
 
 #include <polyhook2/Detour/NatDetour.hpp>
 
+#define VTABLE(instance, index) (*reinterpret_cast<uintptr_t**>(instance))[index]
+
 namespace IzEngine
 {
 	/// <summary>
@@ -87,6 +89,17 @@ namespace IzEngine
 			Detour = CreateScope<PLH::NatDetour>(Address, Callback, &Trampoline);
 			Detour->hook();
 			Original = reinterpret_cast<T*>(Trampoline);
+		}
+
+		/// <summary>
+		/// Update address.
+		/// </summary>
+		/// <param name="address">The address.</param>
+		void Update(uintptr_t address)
+		{
+			Remove();
+			Address = address;
+			Install();
 		}
 
 		/// <summary>
