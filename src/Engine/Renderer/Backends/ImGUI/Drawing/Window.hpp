@@ -9,7 +9,7 @@ namespace IzEngine
 	class API Window : public IObject
 	{
 	public:
-		std::string Name;
+		std::string Name = UUID();
 		vec2 Position = { 20, 20 };
 		vec2 Size = { 250, 140 };
 		vec2 RenderPosition;

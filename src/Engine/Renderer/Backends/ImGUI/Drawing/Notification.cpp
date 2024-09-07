@@ -33,7 +33,7 @@ namespace IzEngine
 			if (elapsed > leftTime)
 				x = std::lerp(0, -140, (elapsed - leftTime) / slideDuration);
 
-			Window window(UUID().String);
+			Window window;
 			window.SetRect(x, y, 140, 20);
 			window.SetFlags(ImGuiWindowFlags_Notification);
 			window.Begin();

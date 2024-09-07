@@ -56,7 +56,7 @@ namespace IzEngine
 		/// Create an event dispatcher.
 		/// </summary>
 		/// <param name="event">The event.</param>
-		EventDispatcher(Event& event) : _Event(event) { }
+		EventDispatcher(Event& event) : Value(event) { }
 
 		/// <summary>
 		/// Dispatch the event.
@@ -68,16 +68,16 @@ namespace IzEngine
 		template <typename E, typename C>
 		void Dispatch(const C& callback)
 		{
-			if (_Event.GetEventType() != E::GetStaticType())
+			if (Value.GetEventType() != E::GetStaticType())
 				return;
 
 			if constexpr (WithEvent<C, E>)
-				callback(static_cast<E&>(_Event));
+				callback(static_cast<E&>(Value));
 			else
 				callback();
 		}
 
 	private:
-		Event& _Event;
+		Event& Value;
 	};
 }

@@ -2,7 +2,7 @@
 
 namespace IzEngine
 {
-	Widget::Widget() : Window(UUID())
+	Widget::Widget()
 	{
 		SetRect(20, 100, 200, 100);
 		SetRectAlignment(HORIZONTAL_LEFT, VERTICAL_TOP);

@@ -24,7 +24,7 @@ namespace IzEngine
 		/// <summary>
 		/// Dispatch event.
 		/// </summary>
-		/// <param name="event">The event.s</param>
+		/// <param name="event">The event.</param>
 		static void Dispatch(Event& event);
 	};
 }
