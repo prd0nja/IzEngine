@@ -33,6 +33,21 @@ namespace IzEngine
 		VirtualProtect(lpAddress, size, oldProtect, &oldProtect);
 	}
 
+	void Memory::Write(uintptr_t address, const std::vector<uint8_t>& bytes)
+	{
+		IZ_ASSERT(address, "Addresss nullptr.");
+
+		DWORD oldProtect;
+		LPVOID lpAddress = reinterpret_cast<LPVOID>(address);
+		int size = bytes.size();
+
+		if (!VirtualProtect(lpAddress, size, PAGE_READWRITE, &oldProtect))
+			return;
+
+		memcpy(lpAddress, bytes.data(), size);
+		VirtualProtect(lpAddress, size, oldProtect, &oldProtect);
+	}
+
 	void Memory::NOP(uintptr_t address, int size)
 	{
 		Write(address, std::string(size, '\x90'));
@@ -42,7 +57,7 @@ namespace IzEngine
 	{
 		std::string bytes = "\xE9";
 		uintptr_t nearAddress = to - (address + 5);
-		bytes.append(reinterpret_cast<char*>(&nearAddress), sizeof(to));
+		bytes.append(reinterpret_cast<char*>(&nearAddress), sizeof(address));
 
 		NOP(address, size);
 		Write(address, bytes);
@@ -52,7 +67,7 @@ namespace IzEngine
 	{
 		std::string bytes = "\xE8";
 		uintptr_t nearAddress = to - (address + 5);
-		bytes.append(reinterpret_cast<char*>(&nearAddress), sizeof(to));
+		bytes.append(reinterpret_cast<char*>(&nearAddress), sizeof(address));
 
 		NOP(address, size);
 		Write(address, bytes);

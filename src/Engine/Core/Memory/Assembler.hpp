@@ -30,9 +30,6 @@ namespace IzEngine
 	/// </summary>
 	class Assembler
 	{
-	protected:
-		using F = Function<void(asmjit::CodeHolder& code, arch::Assembler& a)>;
-
 	public:
 		static inline asmjit::JitRuntime Runtime;
 
@@ -41,6 +38,7 @@ namespace IzEngine
 		/// </summary>
 		/// <param name="function">The function callback with assembly instructions.</param>
 		/// <returns>The compiled function address.</returns>
+		template <typename F>
 		static uintptr_t NewCode(F function)
 		{
 			asmjit::CodeHolder code;

@@ -25,6 +25,13 @@ namespace IzEngine
 		static void Write(uintptr_t address, const std::string& bytes);
 
 		/// <summary>
+		/// Write memory.
+		/// </summary>
+		/// <param name="address">The target address.</param>
+		/// <param name="bytes">The bytes to write.</param>
+		static void Write(uintptr_t address, const std::vector<uint8_t>& bytes);
+
+		/// <summary>
 		/// Set value.
 		/// </summary>
 		/// <typeparam name="T">The type to set.</typeparam>
