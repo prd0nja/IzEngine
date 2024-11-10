@@ -9,7 +9,7 @@
 	#if defined(PLATFORM_32)
 namespace arch = asmjit::x86;
 	#elif defined(PLATFORM_64)
-namespace arch = asmjit::x64;
+namespace arch = asmjit::x86;
 	#endif
 #elif PLATFORM_ARCH_ARM
 	#if defined(PLATFORM_32)
