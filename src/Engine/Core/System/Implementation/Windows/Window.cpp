@@ -1,7 +1,6 @@
 #include "ImGUI/UI.hpp"
 #include "Windows/Base.hpp"
 
-#include "Core/Input/Keyboard.hpp"
 #include "Core/System/Window.hpp"
 #include "Renderer/Core/Renderer.hpp"
 
@@ -116,5 +115,26 @@ namespace IzEngine
 			DispatchMessage(&msg);
 		}
 		SetWindowDisplayAffinity(hwnd, IsCapture ? WDA_NONE : WDA_EXCLUDEFROMCAPTURE);
+	}
+
+	bool OSWindow::IsWindowed(int value)
+	{
+		const HWND hwnd = reinterpret_cast<HWND>(OSWindow::Handle);
+		const LONG style = GetWindowLongPtr(hwnd, GWL_STYLE);
+		return style == value;
+	}
+
+	bool OSWindow::IsBorderless(int value)
+	{
+		const HWND hwnd = reinterpret_cast<HWND>(OSWindow::Handle);
+		const LONG style = GetWindowLongPtr(hwnd, GWL_STYLE);
+		return style == value;
+	}
+
+	bool OSWindow::IsFullscreen(int value)
+	{
+		const HWND hwnd = reinterpret_cast<HWND>(OSWindow::Handle);
+		const LONG style = GetWindowLongPtr(hwnd, GWL_STYLE);
+		return style == value;
 	}
 }

@@ -4,62 +4,22 @@
 
 namespace IzEngine
 {
-	Keyboard::Keyboard(int key)
-	{
-		Key = key;
-		KeyOS = MapToOS(key);
-	}
-
-	bool Keyboard::IsUp()
-	{
-		return Keys[Key].State == WM_KEYUP;
-	}
-
-	bool Keyboard::IsDown()
-	{
-		return Keys[Key].State == WM_KEYDOWN;
-	}
-
-	bool Keyboard::IsPressed()
-	{
-		return Keys[Key].PrevState == WM_NULL && IsDown();
-	}
-
-	bool Keyboard::IsUpAsync()
-	{
-		if ((GetAsyncKeyState(KeyOS) & 0x8000) == 0)
-			Process(WM_KEYUP, KeyOS);
-		return IsUp();
-	}
-
-	bool Keyboard::IsDownAsync()
-	{
-		if ((GetAsyncKeyState(KeyOS) & 0x8000) != 0)
-			Process(WM_KEYDOWN, KeyOS);
-		return IsDown();
-	}
-
-	bool Keyboard::IsPressedAsync()
-	{
-		return Keys[Key].PrevState == WM_NULL && IsDownAsync();
-	}
-
 	bool Keyboard::IsUp(int key)
 	{
-		return Keyboard(key).IsUp();
+		return Keys[key].State == WM_KEYUP;
 	}
 
 	bool Keyboard::IsDown(int key)
 	{
-		return Keyboard(key).IsDown();
+		return Keys[key].State == WM_KEYDOWN;
 	}
 
 	bool Keyboard::IsPressed(int key)
 	{
-		return Keyboard(key).IsPressed();
+		return Keys[key].PrevState == WM_NULL && IsDown(key);
 	}
 
-	void Keyboard::Process(int msg, int key)
+	void Keyboard::Process(uint64_t msg, uint64_t key)
 	{
 		int index = Map(key);
 		if (!index)

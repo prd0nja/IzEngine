@@ -56,5 +56,26 @@ namespace IzEngine
 		/// Window frame.
 		/// </summary>
 		static void Frame();
+
+		/// <summary>
+		/// Is windowed.
+		/// </summary>
+		/// <param name="value">The style value.</param>
+		/// <returns></returns>
+		static bool IsWindowed(int value);
+
+		/// <summary>
+		/// Is borderless.
+		/// </summary>
+		/// <param name="value">The style value.</param>
+		/// <returns></returns>
+		static bool IsBorderless(int value);
+
+		/// <summary>
+		/// Is fullscreen.
+		/// </summary>
+		/// <param name="value">The style value.</param>
+		/// <returns></returns>
+		static bool IsFullscreen(int value);
 	};
 }

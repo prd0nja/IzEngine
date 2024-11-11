@@ -3,7 +3,9 @@
 
 #include "Drawing/Window.hpp"
 
+#include "Core/Input/Bind.hpp"
 #include "Core/Input/Keyboard.hpp"
+#include "Core/Input/Mouse.hpp"
 #include "Core/Screen/VirtualScreen.hpp"
 
 namespace IzEngine
@@ -16,7 +18,7 @@ namespace IzEngine
 	public:
 		static inline std::unordered_map<std::string, Ref<Window>> Windows;
 		static inline nlohmann::json Serialized;
-		static inline Keyboard KeyOpen;
+		static inline Bind KeyOpen;
 
 		static inline bool Active = false;
 		static inline bool Open = false;

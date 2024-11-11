@@ -1,2 +1,4 @@
 target_sources(IzEngine PRIVATE
-	Keyboard.cpp)
+	Bind.cpp
+	Keyboard.cpp
+	Mouse.cpp)

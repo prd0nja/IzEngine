@@ -18,7 +18,7 @@ namespace IzEngine
 
 		Environment::Load(Serialized, "ui.json");
 
-		KeyOpen = Keyboard(Key_F10);
+		KeyOpen = Bind(Key_F10);
 		if (Serialized.contains("KeyOpen"))
 			KeyOpen = Serialized["KeyOpen"];
 

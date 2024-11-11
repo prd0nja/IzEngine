@@ -13,62 +13,12 @@ namespace IzEngine
 	};
 
 	/// <summary>
-	/// Keyboard input.
+	/// Keyboard class.
 	/// </summary>
 	class API Keyboard
 	{
 	public:
 		static inline std::unordered_map<int, KeyInfo> Keys;
-		int Key = 0;
-		int KeyOS = 0;
-
-		/// <summary>
-		/// Initialize the Keyboard.
-		/// </summary>
-		Keyboard() = default;
-
-		/// <summary>
-		/// Initialize the KeyLister.
-		/// </summary>
-		/// <param name="key">The key.</param>
-		Keyboard(int key);
-		~Keyboard() = default;
-
-		/// <summary>
-		/// Is key up.
-		/// </summary>
-		/// <returns></returns>
-		bool IsUp();
-
-		/// <summary>
-		/// Is key down.
-		/// </summary>
-		/// <returns></returns>
-		bool IsDown();
-
-		/// <summary>
-		/// Is key pressed.
-		/// </summary>
-		/// <returns></returns>
-		bool IsPressed();
-
-		/// <summary>
-		/// Is key up async.
-		/// </summary>
-		/// <returns></returns>
-		bool IsUpAsync();
-
-		/// <summary>
-		/// Is key down async.
-		/// </summary>
-		/// <returns></returns>
-		bool IsDownAsync();
-
-		/// <summary>
-		/// Is key pressed async.
-		/// </summary>
-		/// <returns></returns>
-		bool IsPressedAsync();
 
 		/// <summary>
 		/// Is key up.
@@ -96,7 +46,7 @@ namespace IzEngine
 		/// </summary>
 		/// <param name="msg">The message code.</param>
 		/// <param name="key">The key code.</param>
-		static void Process(int msg, int key);
+		static void Process(uint64_t msg, uint64_t key);
 
 		/// <summary>
 		/// Reset keys.
@@ -123,8 +73,6 @@ namespace IzEngine
 		/// <param name="key">The key code.</param>
 		/// <returns></returns>
 		static const char* GetName(int key);
-
-		SERIALIZE(Keyboard, Key)
 	};
 
 	/// <summary>
