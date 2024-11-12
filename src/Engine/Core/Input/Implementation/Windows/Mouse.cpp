@@ -38,8 +38,8 @@ namespace IzEngine
 			if (raw.header.dwType != RIM_TYPEMOUSE)
 				return;
 
-			X += raw.data.mouse.lLastX;
-			Y += raw.data.mouse.lLastY;
+			DeltaX = raw.data.mouse.lLastX;
+			DeltaY = raw.data.mouse.lLastY;
 			break;
 		}
 		}

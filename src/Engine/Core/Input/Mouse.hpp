@@ -11,6 +11,8 @@ namespace IzEngine
 	public:
 		static inline int X = 0;
 		static inline int Y = 0;
+		static inline int DeltaX = 0;
+		static inline int DeltaY = 0;
 
 		/// <summary>
 		/// Register mouse.
