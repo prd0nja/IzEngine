@@ -155,16 +155,16 @@ namespace ImGui
 	API void LoadingIndicator(const std::string& label, const ImVec2& pos, const ImU32& color, bool state);
 
 	/// <summary>
-	/// Is window resizing.
+	/// Is resizing.
 	/// </summary>
 	/// <returns></returns>
-	API bool IsWindowResizing();
+	API bool IsResizing();
 
 	/// <summary>
-	/// Is window position or scale changed.
+	/// Is moving.
 	/// </summary>
 	/// <returns></returns>
-	API bool IsWindowChanged();
+	API bool IsMoving();
 }
 
 SERIALIZE_NON_INTRUSIVE(ImVec2, x, y)

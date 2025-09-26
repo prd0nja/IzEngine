@@ -11,14 +11,14 @@ namespace IzEngine
 {
 	void Renderer::Initialize()
 	{
-		IZ_ASSERT(OSWindow::Handle, "Window is not initialized.");
+		IZ_ASSERT(Window::Handle, "Window is not initialized.");
 		IZ_ASSERT(Device::D3Device, "Device is not initialized.");
 
 		Textures::Initialize();
 		Fonts::Initialize();
 		UI::Initialize();
 
-		ImGui_ImplOS_Init(OSWindow::Handle);
+		ImGui_ImplOS_Init(Window::Handle);
 		ImGui_ImplAPI_Init(Device::D3Device);
 
 		Plugins::Initialize();

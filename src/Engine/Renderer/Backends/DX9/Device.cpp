@@ -7,7 +7,7 @@ namespace IzEngine
 {
 	void Device::Initialize()
 	{
-		IZ_ASSERT(OSWindow::Handle, "Device needs a main window.");
+		IZ_ASSERT(Window::Handle, "Device needs a main window.");
 
 		Direct3DCreate9Ex(D3D_SDK_VERSION, &D3DEX);
 		D3DEX->QueryInterface(__uuidof(IDirect3D9), reinterpret_cast<void**>(&D3D));
@@ -17,10 +17,10 @@ namespace IzEngine
 		d3dpp.SwapEffect = D3DSWAPEFFECT_DISCARD;
 		d3dpp.BackBufferFormat = D3DFMT_A8R8G8B8;
 		d3dpp.BackBufferCount = 1;
-		d3dpp.BackBufferWidth = OSWindow::Size.x;
-		d3dpp.BackBufferHeight = OSWindow::Size.y;
+		d3dpp.BackBufferWidth = Window::Size.x;
+		d3dpp.BackBufferHeight = Window::Size.y;
 
-		D3DEX->CreateDeviceEx(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, reinterpret_cast<HWND>(OSWindow::Handle),
+		D3DEX->CreateDeviceEx(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, reinterpret_cast<HWND>(Window::Handle),
 			D3DCREATE_HARDWARE_VERTEXPROCESSING | D3DCREATE_MULTITHREADED, &d3dpp, nullptr, &D3DeviceEx);
 		D3DeviceEx->QueryInterface(__uuidof(IDirect3DDevice9), reinterpret_cast<void**>(&D3Device));
 

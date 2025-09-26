@@ -3,7 +3,7 @@
 
 namespace IzEngine::UC
 {
-	Memory::Memory() : Window("Memory")
+	Memory::Memory() : Frame("Memory")
 	{
 		SetRect(20, 20, 240, 350);
 		Editor.OptMidColsCount = 4;

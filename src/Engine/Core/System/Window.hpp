@@ -8,7 +8,7 @@ namespace IzEngine
 	/// <summary>
 	/// Window class.
 	/// </summary>
-	class OSWindow
+	class Window
 	{
 	public:
 		static inline void* Handle = nullptr;

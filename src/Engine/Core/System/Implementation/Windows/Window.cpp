@@ -6,12 +6,12 @@
 
 static LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-	return OSWindow::Update(hWnd, uMsg, wParam, lParam);
+	return Window::Update(hWnd, uMsg, wParam, lParam);
 }
 
 namespace IzEngine
 {
-	void OSWindow::Initialize(const std::string& name)
+	void Window::Initialize(const std::string& name)
 	{
 		HINSTANCE instance = GetModuleHandle(nullptr);
 
@@ -48,7 +48,7 @@ namespace IzEngine
 		Mouse::Register(hwnd);
 	}
 
-	void OSWindow::Swap(void* handle)
+	void Window::Swap(void* handle)
 	{
 		Handle = handle;
 		Open = handle;
@@ -58,18 +58,18 @@ namespace IzEngine
 		Mouse::Register(handle);
 	}
 
-	void OSWindow::Shutdown()
+	void Window::Shutdown()
 	{
 		if (Handle)
 			DestroyWindow(reinterpret_cast<HWND>(Handle));
 	}
 
-	void OSWindow::SetCapture(bool state)
+	void Window::SetCapture(bool state)
 	{
 		IsCapture = state;
 	}
 
-	int OSWindow::Update(void* handle, int msg, uintptr_t wParam, uintptr_t lParam)
+	int Window::Update(void* handle, int msg, uintptr_t wParam, uintptr_t lParam)
 	{
 		const HWND hwnd = reinterpret_cast<HWND>(handle);
 
@@ -116,7 +116,7 @@ namespace IzEngine
 		return DefWindowProc(hwnd, msg, wParam, lParam);
 	}
 
-	void OSWindow::Frame()
+	void Window::Frame()
 	{
 		const HWND hwnd = reinterpret_cast<HWND>(Handle);
 
@@ -129,21 +129,21 @@ namespace IzEngine
 		SetWindowDisplayAffinity(hwnd, IsCapture ? WDA_NONE : WDA_EXCLUDEFROMCAPTURE);
 	}
 
-	bool OSWindow::IsStyle(int value)
+	bool Window::IsStyle(int value)
 	{
-		const HWND hwnd = reinterpret_cast<HWND>(OSWindow::Handle);
+		const HWND hwnd = reinterpret_cast<HWND>(Window::Handle);
 		const LONG style = GetWindowLongPtr(hwnd, GWL_STYLE);
 		return style == value;
 	}
 
-	bool OSWindow::HasStyle(int value)
+	bool Window::HasStyle(int value)
 	{
-		const HWND hwnd = reinterpret_cast<HWND>(OSWindow::Handle);
+		const HWND hwnd = reinterpret_cast<HWND>(Window::Handle);
 		const LONG style = GetWindowLongPtr(hwnd, GWL_STYLE);
 		return style & value;
 	}
 
-	bool OSWindow::IsCursorVisible()
+	bool Window::IsCursorVisible()
 	{
 		CURSORINFO cursor = { 0 };
 		cursor.cbSize = sizeof(CURSORINFO);

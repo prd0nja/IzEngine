@@ -217,7 +217,7 @@ namespace ImGui
 		vec2 framePosition = GetWindowPos();
 		vec2 frameSize = GetWindowSize();
 
-		if (IsWindowChanged())
+		if (IsMoving())
 		{
 			position += UI::Screen.RealToVirtual * (framePosition - renderPosition);
 			size += UI::Screen.RealToVirtual * (frameSize - renderSize);
@@ -280,7 +280,7 @@ namespace ImGui
 		draw->AddText(position + ImVec2{ size.x, -radius }, color, label.c_str());
 	}
 
-	bool IsWindowResizing()
+	bool IsResizing()
 	{
 		ImGuiWindow* window = GetCurrentWindow();
 		ImGuiID active = GetActiveID();
@@ -295,9 +295,9 @@ namespace ImGui
 		return false;
 	}
 
-	bool IsWindowChanged()
+	bool IsMoving()
 	{
-		if (vec2(GetMouseDragDelta()) && (IsWindowHovered() || IsWindowResizing()))
+		if (vec2(GetMouseDragDelta()) && (IsWindowHovered() || IsResizing()))
 		{
 			ResetMouseDragDelta();
 			return true;

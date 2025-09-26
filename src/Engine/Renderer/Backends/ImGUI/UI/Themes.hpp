@@ -1,14 +1,14 @@
 #pragma once
-#include "ImGUI/Drawing/Window.hpp"
+#include "ImGUI/Drawing/Frame.hpp"
 
 #include <tuple>
 
 namespace IzEngine::UC
 {
 	/// <summary>
-	/// Themes window.
+	/// Themes frame.
 	/// </summary>
-	class Themes : public Window
+	class Themes : public Frame
 	{
 	public:
 		static inline std::tuple<ImColor, ImColor> Rainbow;
@@ -22,7 +22,7 @@ namespace IzEngine::UC
 		ImPlotStyle PlotStyle;
 
 		/// <summary>
-		/// Initialize the themes window.
+		/// Initialize the themes frame.
 		/// </summary>
 		Themes();
 		virtual ~Themes() = default;
@@ -73,6 +73,6 @@ namespace IzEngine::UC
 		/// <param name="start">Is the start of the token.</param>
 		static void MarkdownFormat(const ImGui::MarkdownFormatInfo& info, bool start);
 
-		SERIALIZE_POLY(Themes, Window, Style, PlotStyle)
+		SERIALIZE_POLY(Themes, Frame, Style, PlotStyle)
 	};
 }

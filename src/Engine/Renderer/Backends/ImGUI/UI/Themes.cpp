@@ -6,7 +6,7 @@
 
 namespace IzEngine::UC
 {
-	Themes::Themes() : Window("Themes")
+	Themes::Themes() : Frame("Themes")
 	{
 		Default();
 	}

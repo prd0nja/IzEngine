@@ -22,8 +22,8 @@ namespace IzEngine
 		if (Serialized.contains("KeyOpen"))
 			KeyOpen = Serialized["KeyOpen"];
 
-		CreateWindow<UC::Themes>();
-		CreateWindow<UC::Memory>();
+		Add<UC::Themes>();
+		Add<UC::Memory>();
 
 		Active = true;
 	}
@@ -43,14 +43,14 @@ namespace IzEngine
 		ImGui::DestroyContext(Context);
 		ImPlot::DestroyContext(PlotContext);
 
-		for (const auto& [_, window] : Windows)
+		for (const auto& [_, frame] : Frames)
 		{
-			window->Serialize(Serialized[window->Name]);
-			window->Release();
+			frame->Serialize(Serialized[frame->Name]);
+			frame->Release();
 		}
 		Serialized["KeyOpen"] = KeyOpen;
 		Environment::Save(Serialized, "ui.json");
-		Windows.clear();
+		Frames.clear();
 
 		Active = false;
 	}
@@ -106,7 +106,7 @@ namespace IzEngine
 
 	void UI::Dispatch(Event& event)
 	{
-		for (const auto& [_, window] : Windows)
-			window->OnEvent(event);
+		for (const auto& [_, frame] : Frames)
+			frame->OnEvent(event);
 	}
 }

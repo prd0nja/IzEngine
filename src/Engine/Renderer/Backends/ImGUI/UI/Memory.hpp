@@ -1,12 +1,12 @@
 #pragma once
-#include "ImGUI/Drawing/Window.hpp"
+#include "ImGUI/Drawing/Frame.hpp"
 
 namespace IzEngine::UC
 {
 	/// <summary>
-	/// Memory editor.
+	/// Memory editor frame.
 	/// </summary>
-	class Memory : public Window
+	class Memory : public Frame
 	{
 	public:
 		MemoryEditor Editor;
@@ -14,7 +14,7 @@ namespace IzEngine::UC
 		uintptr_t MaxSize = 0x1000;
 
 		/// <summary>
-		/// Initialize the Memory.
+		/// Initialize the memory frame.
 		/// </summary>
 		Memory();
 		virtual ~Memory() = default;

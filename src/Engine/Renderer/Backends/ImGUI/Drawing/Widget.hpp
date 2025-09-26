@@ -1,12 +1,12 @@
 #pragma once
-#include "ImGUI/Drawing/Window.hpp"
+#include "ImGUI/Drawing/Frame.hpp"
 
 namespace IzEngine
 {
 	/// <summary>
 	/// Widget class.
 	/// </summary>
-	class API Widget : public Window
+	class API Widget : public Frame
 	{
 	public:
 		/// <summary>

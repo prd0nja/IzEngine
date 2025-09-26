@@ -1,7 +1,7 @@
 #pragma once
 #include "ImGUI/Base.hpp"
 
-#include "Drawing/Window.hpp"
+#include "Drawing/Frame.hpp"
 
 #include "Core/Input/Bind.hpp"
 #include "Core/Input/Keyboard.hpp"
@@ -16,7 +16,7 @@ namespace IzEngine
 	class API UI
 	{
 	public:
-		static inline std::unordered_map<std::string, Ref<Window>> Windows;
+		static inline std::unordered_map<std::string, Ref<Frame>> Frames;
 		static inline nlohmann::json Serialized;
 		static inline Bind KeyOpen;
 
@@ -43,21 +43,20 @@ namespace IzEngine
 		static void Shutdown();
 
 		/// <summary>
-		/// Load a module.
+		/// Add a frame.
 		/// </summary>
-		/// <typeparam name="T">The module type.</typeparam>
-		/// <param name="enabled">Is enabled by default.</param>
-		template <class T = Window>
-		static void CreateWindow()
+		/// <typeparam name="T">The frame class.</typeparam>
+		template <class T = Frame>
+		static void Add()
 		{
-			auto window = CreateRef<T>();
-			bool isSerialized = Serialized.contains(window->Name);
+			auto frame = CreateRef<T>();
+			bool isSerialized = Serialized.contains(frame->Name);
 
 			if (isSerialized)
-				window->Deserialize(Serialized[window->Name]);
-			window->Initialize();
+				frame->Deserialize(Serialized[frame->Name]);
+			frame->Initialize();
 
-			Windows[window->Name] = window;
+			Frames[frame->Name] = frame;
 		}
 
 		/// <summary>

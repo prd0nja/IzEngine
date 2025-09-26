@@ -13,7 +13,7 @@ namespace IzEngine
 	void Widget::Begin()
 	{
 		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, { 0, 0 });
-		Window::Begin();
+		Frame::Begin();
 		ImGui::PopStyleVar();
 	}
 }
