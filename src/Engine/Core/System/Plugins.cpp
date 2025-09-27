@@ -6,9 +6,7 @@ namespace IzEngine
 {
 	void Plugins::Initialize()
 	{
-		IZ_ASSERT(Environment::Initialized, "Environment not initialized.");
-
-		for (const auto& entry : std::filesystem::directory_iterator(Environment::PluginsDirectory))
+		for (const auto& entry : std::filesystem::directory_iterator(Environment::Path(Directory::Plugins)))
 		{
 			if (entry.path().extension() != Plugin::Extension)
 				continue;

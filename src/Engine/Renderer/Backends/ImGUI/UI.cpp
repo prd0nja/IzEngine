@@ -119,10 +119,10 @@ namespace IzEngine
 		ImGuiIO& io = ImGui::GetIO();
 		io.IniFilename = nullptr;
 
-		const auto openSans = Environment::FontsDirectory / "OpenSans-Regular.ttf";
-		const auto faRegular = Environment::FontsDirectory / "fa-regular-400.ttf";
-		const auto faSolid = Environment::FontsDirectory / "fa-solid-900.ttf";
-		const auto faBrands = Environment::FontsDirectory / "fa-brands-400.ttf";
+		const auto openSans = Environment::Path(Directory::Fonts) / "OpenSans-Regular.ttf";
+		const auto faRegular = Environment::Path(Directory::Fonts) / "fa-regular-400.ttf";
+		const auto faSolid = Environment::Path(Directory::Fonts) / "fa-solid-900.ttf";
+		const auto faBrands = Environment::Path(Directory::Fonts) / "fa-brands-400.ttf";
 
 		const float fontSize = 12.f * UI::Size;
 		const float iconSize = 8.f * UI::Size;

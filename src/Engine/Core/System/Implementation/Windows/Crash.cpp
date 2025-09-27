@@ -25,10 +25,8 @@ namespace IzEngine
 
 	void Crash::MiniDump(void *exception)
 	{
-		IZ_ASSERT(Environment::Initialized, "Environment not initialized.");
-
 		EXCEPTION_POINTERS *ex = reinterpret_cast<EXCEPTION_POINTERS *>(exception);
-		const auto path = Environment::ReportsDirectory / (ID.String + "_minidump.dmp");
+		const auto path = Environment::Path(Directory::Reports) / (ID.String + "_minidump.dmp");
 		const auto wpath = path.wstring();
 		HANDLE file = CreateFileW(wpath.c_str(), GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 
@@ -47,8 +45,6 @@ namespace IzEngine
 
 	void Crash::StackTrace(void *exception)
 	{
-		IZ_ASSERT(Environment::Initialized, "Environment not initialized.");
-
 		EXCEPTION_POINTERS *ex = reinterpret_cast<EXCEPTION_POINTERS *>(exception);
 		HANDLE process = GetCurrentProcess();
 		HANDLE thread = GetCurrentThread();
@@ -94,7 +90,7 @@ namespace IzEngine
 		SymSetOptions(SYMOPT_UNDNAME | SYMOPT_DEFERRED_LOADS);
 		SymInitialize(process, nullptr, true);
 
-		const auto path = Environment::ReportsDirectory / (ID.String + "_stacktrace.log");
+		const auto path = Environment::Path(Directory::Reports) / (ID.String + "_stacktrace.log");
 		Log::WriteLine(Channel::Info, "Stacktrace: {}", path.string());
 		std::ofstream file(path);
 

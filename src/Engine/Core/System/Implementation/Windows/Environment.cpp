@@ -10,45 +10,52 @@ namespace IzEngine
 	{
 		TCHAR buffer[MAX_PATH];
 		GetModuleFileName(nullptr, buffer, MAX_PATH);
-		BaseDirectory = std::filesystem::path(buffer).parent_path();
+		Directories.insert({ Directory::Base, std::filesystem::path(buffer).parent_path() });
 		Initialize();
 	}
 
 	void Environment::Local()
 	{
-		BaseDirectory = std::filesystem::path(getenv("LOCALAPPDATA"));
+		Directories.insert({ Directory::Base, std::filesystem::path(getenv("LOCALAPPDATA")) });
 		Initialize();
 	}
 
 	void Environment::Initialize()
 	{
-		AppDirectory = BaseDirectory / APPLICATION_ID;
-		PluginsDirectory = AppDirectory / "plugins";
-		ResourcesDirectory = AppDirectory / "resources";
-		ReportsDirectory = AppDirectory / "reports";
-		FontsDirectory = ResourcesDirectory / "fonts";
-		ImagesDirectory = ResourcesDirectory / "images";
+		Directories.insert({ Directory::App, Directories[Directory::Base] / APPLICATION_ID });
+		Directories.insert({ Directory::Plugins, Directories[Directory::App] / "plugins" });
+		Directories.insert({ Directory::Resources, Directories[Directory::App] / "resources" });
+		Directories.insert({ Directory::Reports, Directories[Directory::App] / "reports" });
+		Directories.insert({ Directory::Fonts, Directories[Directory::Resources] / "fonts" });
+		Directories.insert({ Directory::Images, Directories[Directory::Resources] / "images" });
 
-		std::filesystem::create_directory(AppDirectory);
-		std::filesystem::create_directory(PluginsDirectory);
-		std::filesystem::create_directory(ResourcesDirectory);
-		std::filesystem::create_directory(ReportsDirectory);
-		std::filesystem::create_directory(FontsDirectory);
-		std::filesystem::create_directory(ImagesDirectory);
+		for (const auto& [_, path] : Directories)
+			std::filesystem::create_directory(path);
 
 		Initialized = true;
 	}
 
 	void Environment::Load(nlohmann::json& json, const std::string& filename)
 	{
-		std::ifstream file(Environment::AppDirectory / filename);
+		IZ_ASSERT(Environment::Initialized, "Environment not initialized.");
+
+		std::ifstream file(Path(Directory::App) / filename);
 		if (file.peek() != std::ifstream::traits_type::eof())
 			json = nlohmann::json::parse(file);
 	}
 
 	void Environment::Save(const nlohmann::json& json, const std::string& filename)
 	{
-		std::ofstream file(Environment::AppDirectory / filename);
+		IZ_ASSERT(Environment::Initialized, "Environment not initialized.");
+
+		std::ofstream file(Path(Directory::App) / filename);
 		file << json.dump(4);
+	}
+
+	const std::filesystem::path& Environment::Path(Directory directory)
+	{
+		IZ_ASSERT(Environment::Initialized, "Environment not initialized.");
+
+		return Directories[directory];
 	}
 }

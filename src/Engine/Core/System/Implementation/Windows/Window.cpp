@@ -45,8 +45,8 @@ namespace IzEngine
 		Open = Handle;
 
 		Input::Initialize();
-		Keyboard::Register(hwnd);
-		Mouse::Register(hwnd);
+		Keyboard::Register();
+		Mouse::Register();
 	}
 
 	void Window::Swap(void* handle)
@@ -55,8 +55,8 @@ namespace IzEngine
 		Open = handle;
 
 		Input::Initialize();
-		Keyboard::Register(handle);
-		Mouse::Register(handle);
+		Keyboard::Register();
+		Mouse::Register();
 	}
 
 	void Window::Shutdown()

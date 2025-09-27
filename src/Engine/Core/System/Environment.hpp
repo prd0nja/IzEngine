@@ -4,20 +4,26 @@
 namespace IzEngine
 {
 	/// <summary>
+	/// Environment directories.
+	/// </summary>
+	enum class Directory
+	{
+		Base,
+		App,
+		Plugins,
+		Resources,
+		Reports,
+		Fonts,
+		Images,
+	};
+
+	/// <summary>
 	/// System environment.
 	/// </summary>
 	class API Environment
 	{
 	public:
 		static inline bool Initialized = false;
-
-		static inline std::filesystem::path BaseDirectory;
-		static inline std::filesystem::path AppDirectory;
-		static inline std::filesystem::path PluginsDirectory;
-		static inline std::filesystem::path ResourcesDirectory;
-		static inline std::filesystem::path ReportsDirectory;
-		static inline std::filesystem::path FontsDirectory;
-		static inline std::filesystem::path ImagesDirectory;
 
 		/// <summary>
 		/// Environment binary directory.
@@ -43,7 +49,16 @@ namespace IzEngine
 		/// <param name="filename">The filename.</param>
 		static void Save(const nlohmann::json& json, const std::string& filename);
 
+		/// <summary>
+		/// Get path.
+		/// </summary>
+		/// <param name="directory">The directory.</param>
+		/// <returns></returns>
+		static const std::filesystem::path& Path(Directory directory);
+
 	private:
+		static inline std::unordered_map<Directory, std::filesystem::path> Directories;
+
 		/// <summary>
 		/// Initialize the environment.
 		/// </summary>
