@@ -55,6 +55,7 @@ namespace IzEngine
 		Environment::Save(Serialized, "ui.json");
 		Frames.clear();
 
+		Open = false;
 		Active = false;
 	}
 

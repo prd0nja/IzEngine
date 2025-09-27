@@ -34,11 +34,9 @@ namespace IzEngine
 			if (raw.header.dwType != RIM_TYPEMOUSE)
 				return;
 
-			DeltaX = raw.data.mouse.lLastX;
-			DeltaY = raw.data.mouse.lLastY;
-
-			X += DeltaX;
-			Y += DeltaY;
+			Delta = vec2(raw.data.mouse.lLastX, raw.data.mouse.lLastY);
+			Position.x += Delta.x;
+			Position.y += Delta.y;
 
 			if (raw.data.mouse.usButtonFlags & RI_MOUSE_BUTTON_1_DOWN)
 				Input::Inputs[Button_Left].State = INPUT_DOWN;

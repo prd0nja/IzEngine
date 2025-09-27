@@ -1,5 +1,6 @@
 #pragma once
 #include "Core/Base.hpp"
+#include "Core/Math.hpp"
 
 namespace IzEngine
 {
@@ -9,10 +10,8 @@ namespace IzEngine
 	class API Mouse
 	{
 	public:
-		static inline int X = 0;
-		static inline int Y = 0;
-		static inline int DeltaX = 0;
-		static inline int DeltaY = 0;
+		static inline vec2 Position = { 0, 0 };
+		static inline vec2 Delta = { 0, 0 };
 
 		/// <summary>
 		/// Register mouse.

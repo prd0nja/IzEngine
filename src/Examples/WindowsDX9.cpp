@@ -1,15 +1,12 @@
-#include "Base.hpp"
-
 #include "Core/Console/Console.hpp"
 #include "Core/System/Crash.hpp"
 #include "Core/System/Environment.hpp"
 #include "Core/System/System.hpp"
 #include "Core/System/Window.hpp"
 
-#include "ImGUI/Common.hpp"
 #include "DX9/Common.hpp"
+#include "ImGUI/Common.hpp"
 #include "Renderer/Common.hpp"
-#include "Windows/Base.hpp"
 
 class Toolbar : public Frame
 {
@@ -18,7 +15,8 @@ public:
 	{
 		Open = true;
 		SetRectAlignment(HORIZONTAL_FULLSCREEN, VERTICAL_FULLSCREEN);
-		SetFlags(ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoMove);
+		SetFlags(ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar
+			| ImGuiWindowFlags_NoMove);
 	}
 
 	void OnRender() override
@@ -63,8 +61,8 @@ void Application::Start()
 {
 	Crash::Setup();
 	Environment::Local();
-	Console::Initialize("Example");
-	Window::Initialize("Example");
+	Console::Initialize("IzEngine");
+	Window::Initialize("IzEngine");
 
 	Device::Initialize();
 	Renderer::Initialize();

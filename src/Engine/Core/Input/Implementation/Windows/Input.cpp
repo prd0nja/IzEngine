@@ -138,7 +138,7 @@ namespace IzEngine
 
 	bool Input::IsPressed(InputEnum input)
 	{
-		return Inputs[input].PrevState == INPUT_NONE && IsDown(input);
+		return Inputs[input].PrevState == INPUT_NONE && Inputs[input].State == INPUT_DOWN;
 	}
 
 	InputEnum Input::Map(int input)
