@@ -5,7 +5,7 @@
 
 namespace IzEngine
 {
-	void Keyboard::Register(void* window) { }
+	void Keyboard::Register() { }
 
 	void Keyboard::Process(uint64_t msg, uint64_t input)
 	{

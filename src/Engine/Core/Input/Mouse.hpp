@@ -16,8 +16,7 @@ namespace IzEngine
 		/// <summary>
 		/// Register mouse.
 		/// </summary>
-		/// <param name="window">The window handle.</param>
-		static void Register(void* window);
+		static void Register();
 
 		/// <summary>
 		/// Process raw input.

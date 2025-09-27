@@ -12,8 +12,7 @@ namespace IzEngine
 		/// <summary>
 		/// Register keyboard.
 		/// </summary>
-		/// <param name="window">The window handle.</param>
-		static void Register(void* window);
+		static void Register();
 
 		/// <summary>
 		/// Process inputs.
