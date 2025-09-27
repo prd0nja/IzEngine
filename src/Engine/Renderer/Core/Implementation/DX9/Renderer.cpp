@@ -11,6 +11,7 @@ namespace IzEngine
 {
 	void Renderer::Initialize()
 	{
+		IZ_ASSERT(!Active, "Renderer already initialized.");
 		IZ_ASSERT(Window::Handle, "Window is not initialized.");
 		IZ_ASSERT(Device::D3Device, "Device is not initialized.");
 
@@ -22,10 +23,14 @@ namespace IzEngine
 		ImGui_ImplAPI_Init(Device::D3Device);
 
 		Plugins::Initialize();
+
+		Active = true;
 	}
 
 	void Renderer::Shutdown()
 	{
+		IZ_ASSERT(Active, "Renderer already shutdown.");
+
 		Plugins::Shutdown();
 
 		ImGui_ImplAPI_Shutdown();
@@ -34,11 +39,15 @@ namespace IzEngine
 		UI::Shutdown();
 		Fonts::Release();
 		Textures::Release();
+
+		Active = false;
 	}
 
 	void Renderer::Resize(const vec2& size)
 	{
 		Device::Resize(size);
+		UI::Resize(size);
+		Frame();
 	}
 
 	void Renderer::Begin()
@@ -61,6 +70,9 @@ namespace IzEngine
 
 	void Renderer::Frame()
 	{
+		if (!Active)
+			return;
+
 		Begin();
 
 		EventRendererRender event;

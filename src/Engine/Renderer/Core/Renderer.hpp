@@ -9,6 +9,8 @@ namespace IzEngine
 	class Renderer
 	{
 	public:
+		static inline bool Active = false;
+
 		/// <summary>
 		/// Initialize renderer.
 		/// </summary>
