@@ -48,15 +48,15 @@ namespace IzEngine
 	{
 		ImGuiIO& io = ImGui::GetIO();
 		io.IniFilename = nullptr;
-		ImGui::GetStyle().FontScaleMain = Size / 2;
 
 		const auto openSans = Environment::Path(Directory::Fonts) / "OpenSans-Regular.ttf";
 		const auto faRegular = Environment::Path(Directory::Fonts) / "fa-regular-400.ttf";
 		const auto faSolid = Environment::Path(Directory::Fonts) / "fa-solid-900.ttf";
 		const auto faBrands = Environment::Path(Directory::Fonts) / "fa-brands-400.ttf";
 
-		const float fontSize = ImGui::GetFontSize();
-		const float iconSize = ImGui::GetFontSize();
+		ImGui::GetStyle().FontScaleMain = Size / 2;
+		const float fontSize = 16;
+		const float iconSize = fontSize * 0.8;
 
 		ImFontConfig iconConfig;
 		iconConfig.MergeMode = true;
@@ -73,9 +73,9 @@ namespace IzEngine
 			io.Fonts->AddFontFromFileTTF(faBrands.string().c_str(), iconSize, &iconConfig);
 		if (std::filesystem::exists(openSans))
 		{
-			ImGui::H1 = io.Fonts->AddFontFromFileTTF(openSans.string().c_str(), fontSize * 1.5);
-			ImGui::H2 = io.Fonts->AddFontFromFileTTF(openSans.string().c_str(), fontSize * 1.25);
-			ImGui::H3 = io.Fonts->AddFontFromFileTTF(openSans.string().c_str(), fontSize * 1.125);
+			ImGui::H1 = io.Fonts->AddFontFromFileTTF(openSans.string().c_str(), fontSize * 4);
+			ImGui::H2 = io.Fonts->AddFontFromFileTTF(openSans.string().c_str(), fontSize * 3);
+			ImGui::H3 = io.Fonts->AddFontFromFileTTF(openSans.string().c_str(), fontSize * 2);
 		}
 		ImGui::MarkConfig.linkIcon = ICON_FA_LINK;
 		ImGui::MarkConfig.linkCallback = MarkdownLink;
