@@ -17,6 +17,7 @@ namespace IzEngine
 
 		Screen = VirtualScreen(Window::Size);
 		Size = Screen.VirtualToReal.y * Scale;
+
 		Context = ImGui::CreateContext();
 		PlotContext = ImPlot::CreateContext();
 		InitializeContext();
@@ -47,6 +48,7 @@ namespace IzEngine
 	{
 		ImGuiIO& io = ImGui::GetIO();
 		io.IniFilename = nullptr;
+		ImGui::GetStyle().FontScaleMain = Size / 2;
 
 		const auto openSans = Environment::Path(Directory::Fonts) / "OpenSans-Regular.ttf";
 		const auto faRegular = Environment::Path(Directory::Fonts) / "fa-regular-400.ttf";
@@ -58,7 +60,7 @@ namespace IzEngine
 
 		ImFontConfig iconConfig;
 		iconConfig.MergeMode = true;
-		iconConfig.GlyphMinAdvanceX = iconSize * 2;
+		iconConfig.GlyphMinAdvanceX = iconSize;
 
 		io.Fonts->Clear();
 		if (std::filesystem::exists(openSans))
@@ -156,6 +158,9 @@ namespace IzEngine
 	{
 		Screen = VirtualScreen(size);
 		Size = Screen.VirtualToReal.y * Scale;
+
+		if (Active)
+			ImGui::GetStyle().FontScaleMain = Size / 2;
 	}
 
 	void UI::Dispatch(Event& event)

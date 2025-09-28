@@ -23,7 +23,7 @@ public:
 	{
 		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, { 0, 0 });
 		ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, { 0, 0 });
-		SetRect(0, 0, 640, 20);
+		SetRect(0, 0, 640, 14);
 
 		Begin();
 
