@@ -47,7 +47,6 @@ namespace IzEngine
 	{
 		Device::Resize(size);
 		UI::Resize(size);
-		Frame();
 	}
 
 	void Renderer::Begin()

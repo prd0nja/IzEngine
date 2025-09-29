@@ -104,6 +104,7 @@ namespace IzEngine
 		case WM_SIZE:
 			Size = vec2(LOWORD(lParam), HIWORD(lParam));
 			Renderer::Resize(Size);
+			Renderer::Frame();
 			break;
 
 		case WM_CLOSE:
