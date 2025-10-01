@@ -12,6 +12,7 @@ namespace IzEngine
 	public:
 		static inline vec2 Position = { 0, 0 };
 		static inline vec2 Delta = { 0, 0 };
+		static inline vec2 AccumulatedDelta = { 0, 0 };
 
 		/// <summary>
 		/// Register mouse.

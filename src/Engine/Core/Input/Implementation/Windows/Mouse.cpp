@@ -41,6 +41,8 @@ namespace IzEngine
 				return;
 
 			Delta = vec2(raw.data.mouse.lLastX, raw.data.mouse.lLastY);
+			AccumulatedDelta.x += Delta.x;
+			AccumulatedDelta.y += Delta.y;
 
 			POINT position;
 			GetCursorPos(&position);
