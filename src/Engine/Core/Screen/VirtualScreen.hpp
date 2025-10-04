@@ -6,7 +6,7 @@ namespace IzEngine
 	/// <summary>
 	/// Virtual screen.
 	/// </summary>
-	class VirtualScreen
+	class API VirtualScreen
 	{
 	public:
 		vec2 Position;

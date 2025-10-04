@@ -29,6 +29,25 @@ namespace IzEngine
 		static Ref<Texture>& Create(const std::filesystem::path& path);
 
 		/// <summary>
+		/// Create a texture.
+		/// </summary>
+		/// <param name="id">The texture id.</param>
+		/// <param name="size">The size.</param>
+		/// <returns></returns>
+		static Ref<Texture>& Create(const std::string& id, const vec2& size);
+
+		/// <summary>
+		/// Create a texture.
+		/// </summary>
+		/// <param name="id">The texture id.</param>
+		/// <param name="size">The size.</param>
+		/// <param name="level">The level.</param>
+		/// <param name="usage">The usage.</param>
+		/// <param name="pool">The pool.</param>
+		/// <returns></returns>
+		static Ref<Texture>& Create(const std::string& id, const vec2& size, int level, int usage, int pool);
+
+		/// <summary>
 		/// Get default texture.
 		/// </summary>
 		/// <returns></returns>
