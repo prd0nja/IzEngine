@@ -46,6 +46,5 @@ namespace IzEngine
 	private:
 		Function<void()> CallbackInitialize;
 		Function<void()> CallbackShutdown;
-
 	};
 }
