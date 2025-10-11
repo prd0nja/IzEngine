@@ -40,7 +40,7 @@ namespace IzEngine
 		IZ_ASSERT(Environment::Initialized, "Environment not initialized.");
 
 		std::ifstream file(Path(Directory::App) / filename);
-		if (file.peek() != std::ifstream::traits_type::eof())
+		if (file.is_open() && file.peek() != std::ifstream::traits_type::eof())
 			json = nlohmann::json::parse(file);
 	}
 
