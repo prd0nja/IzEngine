@@ -15,9 +15,9 @@ namespace IzEngine
 		std::string Value;
 		vec2 Position;
 		vec2 Size;
-		vec2 Scale = vec2::One;
 		vec2 RenderPosition;
 		vec2 RenderSize;
+		vec2 Skew;
 		vec4 Color = vec4::One;
 
 		Horizontal HorizontalAlign = HORIZONTAL_LEFT;
@@ -87,7 +87,7 @@ namespace IzEngine
 		/// <param name="position">The position.</param>
 		void ComputeAlignment(vec2& position);
 
-		SERIALIZE_POLY_BASE(Text, Value, Position, Color, HorizontalAlign, VerticalAlign, AlignX, AlignY, FontName,
+		SERIALIZE_POLY_BASE(Text, Value, Position, Skew, Color, HorizontalAlign, VerticalAlign, AlignX, AlignY, FontName,
 			FontSize)
 	};
 }

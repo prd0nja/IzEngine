@@ -11,6 +11,7 @@ namespace IzEngine
 		Position = { x, y };
 		Color = color;
 		FontName = font;
+		FontSize = size;
 	}
 
 	void Text::SetRectAlignment(Horizontal horizontal, Vertical vertical)
@@ -55,6 +56,7 @@ namespace IzEngine
 		ImGui::PushID(label.c_str());
 
 		ImGui::DragFloat2("Position", Position);
+		ImGui::DragFloat2("Skew", Skew, 0.01, -0.5, 0.5);
 		ImGui::ColorEdit4("Color", Color, ImGuiColorEditFlags_Float);
 
 		if (ImGui::InputFloat("Font Size", &FontSize, 0.1))
@@ -86,6 +88,6 @@ namespace IzEngine
 		RenderPosition = position;
 
 		ImGui::Movable(ID, Position, Size, RenderPosition, RenderSize);
-		Draw2D::Text(Value, Font, RenderPosition, RenderSize, Color);
+		Draw2D::Text(Value, Font, RenderPosition, RenderSize, Skew, Color);
 	}
 }

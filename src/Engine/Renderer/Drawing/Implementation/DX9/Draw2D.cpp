@@ -12,6 +12,27 @@ namespace IzEngine
 		data->DrawTextA(nullptr, text.c_str(), -1, &rect, DT_NOCLIP, color.BGRA());
 	}
 
+	void Draw2D::Text(const std::string& text, const Ref<Font>& font, const vec2& position, const vec2& size,
+		const vec2& skew, const vec4& color)
+	{
+		static ID3DXSprite* sprite = nullptr;
+		if (!sprite)
+			D3DXCreateSprite(Device::D3Device, &sprite);
+
+		auto data = reinterpret_cast<ID3DXFont*>(font->Data);
+		RECT rect = { static_cast<int>(position.x), static_cast<int>(position.y), 0, 0 };
+
+		D3DXMATRIX matrix;
+		D3DXMatrixIdentity(&matrix);
+		matrix._21 = skew.x;
+		matrix._12 = skew.y;
+
+		sprite->Begin(D3DXSPRITE_ALPHABLEND);
+		sprite->SetTransform(&matrix);
+		data->DrawTextA(sprite, text.c_str(), -1, &rect, DT_NOCLIP, color.BGRA());
+		sprite->End();
+	}
+
 	vec2 Draw2D::TextSize(const std::string& text, const Ref<Font>& font)
 	{
 		RECT rect = { 0 };
@@ -24,7 +45,7 @@ namespace IzEngine
 	{
 		DWORD oldFVF;
 		Device::D3Device->GetFVF(&oldFVF);
-		 
+
 		auto tex = reinterpret_cast<IDirect3DTexture9*>(texture->Data);
 		Device::D3Device->SetTexture(0, tex);
 		Device::D3Device->SetFVF(D3DFVF_XYZRHW | D3DFVF_TEX1);

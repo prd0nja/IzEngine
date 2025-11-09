@@ -24,6 +24,18 @@ namespace IzEngine
 			const vec4& color);
 
 		/// <summary>
+		/// Draw text.
+		/// </summary>
+		/// <param name="text">The text.</param>
+		/// <param name="font">The font.</param>
+		/// <param name="position">The position.</param>
+		/// <param name="size">The size.</param>
+		/// <param name="skew">The skew.</param>
+		/// <param name="color">The color.</param>
+		static void Text(const std::string& text, const Ref<Font>& font, const vec2& position, const vec2& size,
+			const vec2& skew, const vec4& color);
+
+		/// <summary>
 		/// Get the text size.
 		/// </summary>
 		/// <param name="text">The text.</param>
