@@ -32,10 +32,10 @@ namespace IzEngine
 		static void Initialize();
 
 		/// <summary>
-		/// Initialize context.
+		/// Update context.
 		/// </summary>
 		/// <remarks>Share context with DLLs.</remarks>
-		static void InitializeContext();
+		static void UpdateContext();
 
 		/// <summary>
 		/// Initialize fonts.

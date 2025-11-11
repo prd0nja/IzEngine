@@ -20,7 +20,7 @@ namespace IzEngine
 
 		Context = ImGui::CreateContext();
 		PlotContext = ImPlot::CreateContext();
-		InitializeContext();
+		UpdateContext();
 
 		Environment::Load(Serialized, "ui.json");
 
@@ -36,7 +36,7 @@ namespace IzEngine
 		Active = true;
 	}
 
-	void UI::InitializeContext()
+	void UI::UpdateContext()
 	{
 		ImGui::SetAllocatorFunctions(Allocator, Free, &Data);
 		ImGui::SetCurrentContext(Context);
@@ -92,9 +92,6 @@ namespace IzEngine
 	{
 		IZ_ASSERT(Active, "UI already shutdown.");
 
-		ImGui::DestroyContext(Context);
-		ImPlot::DestroyContext(PlotContext);
-
 		for (const auto& [_, frame] : Frames)
 		{
 			frame->Serialize(Serialized[frame->Name]);
@@ -103,6 +100,12 @@ namespace IzEngine
 		Serialized["KeyOpen"] = KeyOpen;
 		Environment::Save(Serialized, "ui.json");
 		Frames.clear();
+
+		UpdateContext();
+		ImGui::DestroyContext(Context);
+		ImPlot::DestroyContext(PlotContext);
+		Context = nullptr;
+		PlotContext = nullptr;
 
 		Open = false;
 		Active = false;
