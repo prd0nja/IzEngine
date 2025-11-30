@@ -40,14 +40,13 @@ namespace IzEngine
 			if (raw.header.dwType != RIM_TYPEMOUSE)
 				return;
 
-			Delta = vec2(raw.data.mouse.lLastX, raw.data.mouse.lLastY);
-			AccumulatedDelta.x += Delta.x;
-			AccumulatedDelta.y += Delta.y;
+			Delta = { raw.data.mouse.lLastX, raw.data.mouse.lLastY };
+			AccumulatedDelta += Delta;
 
 			POINT position;
 			GetCursorPos(&position);
 			ScreenToClient(hWnd, &position);
-			Position = vec2(position.x, position.y);
+			Position = { position.x, position.y };
 
 			if (raw.data.mouse.usButtonFlags & RI_MOUSE_BUTTON_1_DOWN)
 				Input::Inputs[Button_Left].State = INPUT_DOWN;

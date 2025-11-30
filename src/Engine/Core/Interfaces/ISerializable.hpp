@@ -1,6 +1,8 @@
 #pragma once
 #include "Engine/Base.hpp"
 
+#include "Core/Base/Log.hpp"
+
 #pragma warning(push)
 #pragma warning(disable : 26819)
 
@@ -20,13 +22,13 @@ namespace IzEngine
 		/// Serialize to json.
 		/// </summary>
 		/// <param name="json">The json object.</param>
-		virtual void Serialize(nlohmann::json& json) { };
+		virtual void Serialize(nlohmann::json& json) {};
 
 		/// <summary>
 		/// Deserialize to json.
 		/// </summary>
 		/// <param name="json">The json object.</param>
-		virtual void Deserialize(const nlohmann::json& json) { };
+		virtual void Deserialize(const nlohmann::json& json) {};
 
 		/// <summary>
 		/// Assign value from json.
@@ -54,7 +56,7 @@ namespace IzEngine
 			{
 				json.get_to(value);
 			}
-			catch (const std::exception& e) 
+			catch (const std::exception& e)
 			{
 				Log::WriteLine(Channel::Error, "{}", e.what());
 			}
@@ -86,7 +88,7 @@ namespace IzEngine
 			{
 				json = value;
 			}
-			catch (const std::exception& e) 
+			catch (const std::exception& e)
 			{
 				Log::WriteLine(Channel::Error, "{}", e.what());
 			}

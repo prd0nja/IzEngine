@@ -1,6 +1,5 @@
 #pragma once
 #include "Engine/Base.hpp"
-#include "Function.hpp"
 
 #include <asmjit/asmjit.h>
 #include <stdexcept>

@@ -1,7 +1,5 @@
 #pragma once
-#include "Engine/Base.hpp"
-
-#include "Core/Communication/Events.hpp"
+#include "Core/Communication/Event.hpp"
 
 namespace IzEngine
 {

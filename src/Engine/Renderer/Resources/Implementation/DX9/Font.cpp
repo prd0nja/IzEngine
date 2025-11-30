@@ -1,7 +1,8 @@
-#include "DX9/Device.hpp"
+#include "DX9/Common.hpp"
+
+#include "Renderer/Resources/Font.hpp"
 
 #include "Core/System/Environment.hpp"
-#include "Renderer/Resources/Font.hpp"
 
 namespace IzEngine
 {

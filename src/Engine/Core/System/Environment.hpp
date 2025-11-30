@@ -1,5 +1,11 @@
 #pragma once
-#include "Core/Base.hpp"
+#include "Engine/Base.hpp"
+
+#include "Core/Interfaces/ISerializable.hpp"
+
+#include <filesystem>
+#include <string>
+#include <unordered_map>
 
 namespace IzEngine
 {

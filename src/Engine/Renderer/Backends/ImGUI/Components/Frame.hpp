@@ -1,5 +1,5 @@
 #pragma once
-#include "ImGUI/Components.hpp"
+#include "ImGUI/Base.hpp"
 
 namespace IzEngine
 {
@@ -18,8 +18,8 @@ namespace IzEngine
 		bool Designer = false;
 
 		ImGuiWindowFlags Flags = ImGuiWindowFlags_NoCollapse;
-		Horizontal HorizontalAlign = HORIZONTAL_LEFT;
-		Vertical VerticalAlign = VERTICAL_TOP;
+		Horizontal HorizontalAlign = Horizontal::Left;
+		Vertical VerticalAlign = Vertical::Top;
 
 		/// <summary>
 		/// Create a frame.

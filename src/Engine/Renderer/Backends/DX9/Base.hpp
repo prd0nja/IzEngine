@@ -1,5 +1,5 @@
 #pragma once
-#include "Engine/Base.hpp"
+#include "Core/Common.hpp"
 
 #ifdef PLATFORM_WINDOWS
 	#include "Windows/Base.hpp"

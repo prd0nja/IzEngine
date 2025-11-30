@@ -1,6 +1,7 @@
 #pragma once
-#include "Core/Base.hpp"
 #include "Core/Memory/Function.hpp"
+
+#include <string>
 
 namespace IzEngine
 {

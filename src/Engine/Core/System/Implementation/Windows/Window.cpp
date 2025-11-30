@@ -1,9 +1,10 @@
-#include "ImGUI/UI.hpp"
 #include "Windows/Base.hpp"
+
+#include "ImGUI/Common.hpp"
+#include "Renderer/Common.hpp"
 
 #include "Core/Communication/Actions.hpp"
 #include "Core/System/Window.hpp"
-#include "Renderer/Core/Renderer.hpp"
 
 namespace IzEngine
 {

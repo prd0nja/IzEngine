@@ -1,8 +1,9 @@
 #pragma once
-#include "Components.hpp"
-#include "UI.hpp"
+#include "Components/Components.hpp"
+#include "Components/Frame.hpp"
+#include "Components/Notification.hpp"
+#include "Components/Plots.hpp"
+#include "Components/Widget.hpp"
+#include "UI/UI.hpp"
 
-#include "Drawing/Frame.hpp"
-#include "Drawing/Notification.hpp"
-#include "Drawing/Plots.hpp"
-#include "Drawing/Widget.hpp"
+#include "Core/UI/VirtualScreen.hpp"

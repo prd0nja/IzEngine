@@ -1,73 +1,77 @@
 #include "Math.hpp"
 
-#include "Matrix3.hpp"
-#include "Vector2.hpp"
-#include "Vector3.hpp"
-#include "Vector4.hpp"
+#include "Core/UI/VirtualScreen.hpp"
 
 namespace IzEngine
 {
 	float Math::RadToDeg(float radians)
 	{
-		return radians * (180.0f / M_PI);
+		return radians * (180.f / M_PI);
 	}
 
 	float Math::DegToRad(float degrees)
 	{
-		return degrees * M_PI / 180.0f;
+		return degrees * (M_PI / 180.f);
 	}
 
-	float Math::AngleNormalize90(float angle)
+	float Math::AngleNormalize360(float angle)
 	{
-		return fmod(angle + 180 + 90, 180) - 90;
+		angle = std::fmod(angle, 360.f);
+		return angle < 0.f ? angle + 360.f : angle;
 	}
 
 	float Math::AngleNormalize180(float angle)
 	{
 		angle = AngleNormalize360(angle);
-		if (angle > 180.0)
-			angle -= 360.0;
-		return angle;
+		return angle > 180.f ? angle - 360.f : angle;
 	}
 
-	float Math::AngleNormalize360(float angle)
+	float Math::AngleNormalize90(float angle)
 	{
-		return (360.0f / 65536) * (static_cast<int>(angle * (65536 / 360.0f)) & 65535);
+		angle = std::fmod(angle, 180.f);
+		if (angle > 90.f)
+			angle -= 180.f;
+		if (angle < -90.f)
+			angle += 180.f;
+		return angle;
 	}
 
 	float Math::AngleNormalizePI(float angle)
 	{
-		const float tAngle = fmod(angle + M_PI, 2 * M_PI);
-		return tAngle < 0 ? tAngle + M_PI : tAngle - M_PI;
+		angle = std::fmod(angle + M_PI, 2.f * M_PI);
+		if (angle < 0.f)
+			angle += 2.f * M_PI;
+		return angle - M_PI;
 	}
 
 	float Math::AngleDelta(float angle1, float angle2)
 	{
-		return AngleNormalize360(angle1 - angle2);
+		return AngleNormalize180(angle1 - angle2);
 	}
 
 	bool Math::AngleInFov(float angle, float tanHalfFov)
 	{
-		const float half_fov_x = atan(tanHalfFov);
+		const float half_fov_x = std::atan(tanHalfFov);
 		return angle > -half_fov_x && angle < half_fov_x;
 	}
 
 	float Math::AngleScreenProjection(float angle, float tanHalfFov)
 	{
-		const float half_fov_x = atan(tanHalfFov);
+		const float half_fov_x = std::atan(tanHalfFov);
 
 		if (angle >= half_fov_x)
 			return 0;
 		if (angle <= -half_fov_x)
 			return SCREEN_WIDTH;
 
-		return SCREEN_WIDTH / 2.f * (1.f - tan(angle) / tan(half_fov_x));
+		return SCREEN_WIDTH * 0.5f * (1.f - std::tan(angle) / std::tan(half_fov_x));
 	}
 
 	vec3 Math::AnglesToRange(float start, float end, float yaw, float tanHalfFov)
 	{
-		if (abs(end - start) > 2.f * M_PI)
+		if (std::abs(end - start) > 2.f * M_PI)
 			return { 0, SCREEN_WIDTH, 0 };
+
 		bool split = end > start;
 
 		start = AngleNormalizePI(start - yaw);
@@ -76,221 +80,150 @@ namespace IzEngine
 		if (end > start)
 		{
 			split = !split;
-			const float tmp = start;
-
-			start = end;
-			end = tmp;
+			std::swap(start, end);
 		}
+
 		return { AngleScreenProjection(start, tanHalfFov), AngleScreenProjection(end, tanHalfFov),
 			static_cast<float>(split) };
 	}
 
-	void Math::AngleVectors(const float* angles, float* forward, float* right, float* up)
+	void Math::AngleVectors(const vec3& angles, vec3& forward, vec3& right, vec3& up)
 	{
 		float angle;
 		float sr, sp, sy, cr, cp, cy;
 
-		angle = angles[YAW] * (M_PI * 2.0f / 360.0f);
-		sy = sin(angle);
-		cy = cos(angle);
+		angle = angles[YAW] * (M_PI * 2.f / 360.f);
+		sy = std::sin(angle);
+		cy = std::cos(angle);
 
-		angle = angles[PITCH] * (M_PI * 2.0f / 360.0f);
-		sp = sin(angle);
-		cp = cos(angle);
+		angle = angles[PITCH] * (M_PI * 2.f / 360.f);
+		sp = std::sin(angle);
+		cp = std::cos(angle);
 
-		angle = angles[ROLL] * (M_PI * 2.0f / 360.0f);
-		sr = sin(angle);
-		cr = cos(angle);
+		angle = angles[ROLL] * (M_PI * 2.f / 360.f);
+		sr = std::sin(angle);
+		cr = std::cos(angle);
 
-		if (forward)
-		{
-			forward[0] = cp * cy;
-			forward[1] = cp * sy;
-			forward[2] = -sp;
-		}
-		if (right)
-		{
-			right[0] = -1 * sr * sp * cy + -1 * cr * -sy;
-			right[1] = -1 * sr * sp * sy + -1 * cr * cy;
-			right[2] = -1 * sr * cp;
-		}
-		if (up)
-		{
-			up[0] = cr * sp * cy + -sr * -sy;
-			up[1] = cr * sp * sy + -sr * cy;
-			up[2] = cr * cp;
-		}
+		forward[0] = cp * cy;
+		forward[1] = cp * sy;
+		forward[2] = -sp;
+
+		right[0] = -sr * sp * cy + -cr * -sy;
+		right[1] = -sr * sp * sy + -cr * cy;
+		right[2] = -sr * cp;
+
+		up[0] = cr * sp * cy + -sr * -sy;
+		up[1] = cr * sp * sy + -sr * cy;
+		up[2] = cr * cp;
 	}
 
-	vec3 Math::AnglesToUp(const float* angles)
+	vec3 Math::AnglesToUp(const vec3& angles)
 	{
 		float angle;
 		float sr, sp, sy, cr, cp, cy;
 
-		angle = angles[YAW] * (M_PI * 2.0f / 360.0f);
-		sy = sin(angle);
-		cy = cos(angle);
+		angle = angles[YAW] * (M_PI * 2.f / 360.f);
+		sy = std::sin(angle);
+		cy = std::cos(angle);
 
-		angle = angles[PITCH] * (M_PI * 2.0f / 360.0f);
-		sp = sin(angle);
-		cp = cos(angle);
+		angle = angles[PITCH] * (M_PI * 2.f / 360.f);
+		sp = std::sin(angle);
+		cp = std::cos(angle);
 
-		angle = angles[ROLL] * (M_PI * 2.0f / 360.0f);
-		sr = sin(angle);
-		cr = cos(angle);
+		angle = angles[ROLL] * (M_PI * 2.f / 360.f);
+		sr = std::sin(angle);
+		cr = std::cos(angle);
 
 		return { cr * sp * cy + -sr * -sy, cr * sp * sy + -sr * cy, cr * cp };
 	}
 
-	vec3 Math::AnglesToForward(const float* angles)
+	vec3 Math::AnglesToForward(const vec3& angles)
 	{
 		float angle;
 		float sp, sy, cp, cy;
 
-		angle = angles[YAW] * (M_PI * 2.0f / 360.0f);
-		sy = sin(angle);
-		cy = cos(angle);
+		angle = angles[YAW] * (M_PI * 2.f / 360.f);
+		sy = std::sin(angle);
+		cy = std::cos(angle);
 
-		angle = angles[PITCH] * (M_PI * 2.0f / 360.0f);
-		sp = sin(angle);
-		cp = cos(angle);
+		angle = angles[PITCH] * (M_PI * 2.f / 360.f);
+		sp = std::sin(angle);
+		cp = std::cos(angle);
 
 		return { cp * cy, cp * sy, -sp };
 	}
 
-	vec3 Math::AnglesToRight(const float* angles)
+	vec3 Math::AnglesToRight(const vec3& angles)
 	{
 		float angle;
 		float sr, sp, sy, cr, cp, cy;
 
-		angle = angles[YAW] * (M_PI * 2.0f / 360.0f);
-		sy = sin(angle);
-		cy = cos(angle);
+		angle = angles[YAW] * (M_PI * 2.f / 360.f);
+		sy = std::sin(angle);
+		cy = std::cos(angle);
 
-		angle = angles[PITCH] * (M_PI * 2.0f / 360.0f);
-		sp = sin(angle);
-		cp = cos(angle);
+		angle = angles[PITCH] * (M_PI * 2.f / 360.f);
+		sp = std::sin(angle);
+		cp = std::cos(angle);
 
-		angle = angles[ROLL] * (M_PI * 2.0f / 360.0f);
-		sr = sin(angle);
-		cr = cos(angle);
+		angle = angles[ROLL] * (M_PI * 2.f / 360.f);
+		sr = std::sin(angle);
+		cr = std::cos(angle);
 
-		return { -1 * sr * sp * cy + -1 * cr * -sy, -1 * sr * sp * sy + -1 * cr * cy, -1 * sr * cp };
+		return { -sr * sp * cy + -cr * -sy, -sr * sp * sy + -cr * cy, -sr * cp };
 	}
 
 	float Math::AngularDistance(float value1, float value2)
 	{
-		float diff = fmod(value2 - value1 + 180, 360) - 180;
-		if (diff < -180)
-			diff += 360;
+		float diff = std::fmod(value2 - value1 + 180.f, 360.f) - 180.f;
+		if (diff < -180.f)
+			diff += 360.f;
 		return std::abs(diff);
 	}
 
-	vec3 Math::VectorToAngles(const float* v)
+	vec3 Math::VectorToAngles(const vec3& v)
 	{
 		vec3 angles;
 		float yaw, pitch;
 
-		if (v[1] == 0.0f && v[0] == 0.0f)
+		if (v[0] == 0.f && v[1] == 0.f)
 		{
-			yaw = 0.0f;
-			if (v[2] > 0)
-				pitch = 90.0f;
-			else
-				pitch = 270.0f;
+			yaw = 0.f;
+			pitch = v[2] > 0.f ? 90.f : 270.f;
 		}
 		else
 		{
-			if (v[0])
-				yaw = atan2(v[1], v[0]) * 180.0f / M_PI;
-			else if (v[1] > 0)
-				yaw = 90.0f;
-			else
-				yaw = 270.0f;
+			yaw = std::atan2(v[1], v[0]) * 180.f / M_PI;
+			if (yaw < 0.f)
+				yaw += 360.f;
 
-			if (yaw < 0)
-				yaw += 360.0f;
-
-			const float forward = VectorLength3(v);
-			pitch = atan2(v[2], forward) * 180.0f / M_PI;
-
-			if (pitch < 0)
-				pitch += 360.0f;
+			pitch = std::atan2(v[2], glm::length(vec2(v))) * 180.f / M_PI;
+			if (pitch < 0.f)
+				pitch += 360.f;
 		}
 		angles[PITCH] = -pitch;
 		angles[YAW] = yaw;
-		angles[ROLL] = 0.0f;
+		angles[ROLL] = 0.f;
 		return angles;
 	}
 
-	vec3 Math::VectorToAnglesWithRoll(const float* forward, const float* up, bool flipPitch)
+	int Math::BGRA(const vec4& v)
 	{
-		vec3 angles;
-		if (forward[0] == 0.0f && forward[1] == 0.0f)
-		{
-			if (forward[2] > 0.0f)
-			{
-				angles[PITCH] = -M_PI * 0.5f;
-				angles[YAW] = up[0] ? atan2(-up[1], -up[0]) : 0.0f;
-			}
-			else
-			{
-				angles[PITCH] = M_PI * 0.5f;
-				angles[YAW] = up[0] ? atan2(up[1], up[0]) : 0.0f;
-			}
-			angles[ROLL] = 0.0f;
-		}
-		else
-		{
-			angles[YAW] = atan2(forward[1], forward[0]);
-			angles[PITCH] = -atan2(forward[2], sqrt(forward[0] * forward[0] + forward[1] * forward[1]));
-
-			if (up[0])
-			{
-				const float cp = cos(angles[PITCH]);
-				const float sp = sin(angles[PITCH]);
-				const float cy = cos(angles[YAW]);
-				const float sy = sin(angles[YAW]);
-
-				const vec3 tleft = { -sy, cy, 0.0f };
-				const vec3 tup = { (sp * cy), (sp * sy), (cp) };
-
-				angles[ROLL] = -atan2(DotProduct3(up, tleft), DotProduct3(up, tup));
-			}
-			else
-				angles[ROLL] = 0;
-		}
-		angles *= 180.0f / M_PI;
-
-		if (flipPitch)
-			angles[PITCH] *= -1.0f;
-		if (angles[PITCH] < 0)
-			angles[PITCH] += 360.0f;
-		if (angles[YAW] < 0)
-			angles[YAW] += 360.0f;
-		if (angles[ROLL] < 0)
-			angles[ROLL] += 360.0f;
-
-		return angles;
+		int color = 0;
+		color |= (int(v.w * 255.f) & 0xFF) << 24;
+		color |= (int(v.x * 255.f) & 0xFF) << 16;
+		color |= (int(v.y * 255.f) & 0xFF) << 8;
+		color |= (int(v.z * 255.f) & 0xFF);
+		return color;
 	}
 
-	float Math::VectorNormalize3(float* v)
+	int Math::RGBA(const vec4& v)
 	{
-		const float len = VectorLength3(v);
-		if (len != 0.0f)
-			VectorScale3(v, 1.0f / len, v);
-		return len;
-	}
-
-	void Math::VectorLerp3(const float* start, const float* end, float fraction, float* out)
-	{
-		if (fraction == 1.0f)
-			VectorCopy3(end, out);
-		else
-		{
-			out[0] = start[0] + fraction * (end[0] - start[0]);
-			out[1] = start[1] + fraction * (end[1] - start[1]);
-			out[2] = start[2] + fraction * (end[2] - start[2]);
-		}
+		int color = 0;
+		color |= (int(v.w * 255.f) & 0xFF) << 24;
+		color |= (int(v.z * 255.f) & 0xFF) << 16;
+		color |= (int(v.y * 255.f) & 0xFF) << 8;
+		color |= (int(v.x * 255.f) & 0xFF);
+		return color;
 	}
 }

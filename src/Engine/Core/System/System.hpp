@@ -1,6 +1,9 @@
 #pragma once
 #include "Engine/Base.hpp"
 
+#include <map>
+#include <string>
+
 namespace IzEngine
 {
 	/// <summary>

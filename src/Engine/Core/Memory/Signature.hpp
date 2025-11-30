@@ -1,6 +1,8 @@
 #pragma once
 #include "Engine/Base.hpp"
 
+#include <string>
+
 namespace IzEngine
 {
 	/// <summary>

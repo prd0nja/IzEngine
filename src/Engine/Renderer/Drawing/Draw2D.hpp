@@ -1,5 +1,5 @@
 #pragma once
-#include "Core/Math.hpp"
+#include "Core/Common.hpp"
 
 #include "Renderer/Resources/Font.hpp"
 #include "Renderer/Resources/Texture.hpp"

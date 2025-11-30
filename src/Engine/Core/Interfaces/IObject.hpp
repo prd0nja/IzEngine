@@ -1,7 +1,8 @@
 #pragma once
 #include "ISerializable.hpp"
 
-#include "Core/Communication/Events.hpp"
+#include "Core/Base/UUID.hpp"
+#include "Core/Communication/Event.hpp"
 
 namespace IzEngine
 {
@@ -29,7 +30,7 @@ namespace IzEngine
 		/// Create a new object.
 		/// </summary>
 		/// <param name="id">The object ID.</param>
-		IObject(const UUID& id) : ID(id){};
+		IObject(const UUID& id) : ID(id) {};
 
 		/// <summary>
 		/// Release the object.

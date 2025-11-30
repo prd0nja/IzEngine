@@ -1,6 +1,6 @@
 #include "Notification.hpp"
 
-#include "ImGUI/UI.hpp"
+#include "ImGUI/Common.hpp"
 
 namespace IzEngine
 {
@@ -38,8 +38,8 @@ namespace IzEngine
 			frame.SetFlags(ImGuiWindowFlags_Notification);
 			frame.Begin();
 
-			const ImVec2& pos = frame.RenderPosition;
-			const ImVec2& size = frame.RenderSize;
+			const auto& pos = frame.RenderPosition;
+			const auto& size = frame.RenderSize;
 
 			draw->AddRectFilled({ 0, pos.y }, { pos.x + size.x, pos.y + size.y }, IM_COL32(0, 0, 0, 255));
 			draw->AddRectFilled({ pos.x + size.x, pos.y }, { pos.x + size.x + 5, pos.y + size.y },

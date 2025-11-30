@@ -1,8 +1,9 @@
 target_precompile_headers(IzEngine PRIVATE
-	Base.hpp)
+	Base.hpp
+	Common.hpp)
 
 target_sources(IzEngine PRIVATE
-	Common.hpp
 	Base.hpp
+	Common.hpp
 	Device.cpp
 	Device.hpp)

@@ -1,5 +1,5 @@
 #pragma once
-#include "Engine/Base.hpp"
+#include "Core/Base/UUID.hpp"
 
 namespace IzEngine
 {

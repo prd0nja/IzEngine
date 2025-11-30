@@ -14,7 +14,7 @@ public:
 	Toolbar() : Frame("Toolbar")
 	{
 		Open = true;
-		SetRectAlignment(HORIZONTAL_FULLSCREEN, VERTICAL_FULLSCREEN);
+		SetRectAlignment(Horizontal::Fullscreen, Vertical::Fullscreen);
 		SetFlags(ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar
 			| ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoBackground);
 	}
@@ -28,12 +28,12 @@ public:
 		Begin();
 
 		static bool isDebug = false;
-		const vec2& position = RenderPosition;
-		const vec2& size = RenderSize;
+		const vec2 position = RenderPosition;
+		const vec2 size = RenderSize;
 		const vec2 buttonSize = { size.y, size.y };
 
 		ImDrawList* draw = ImGui::GetBackgroundDrawList();
-		draw->AddRectFilled(position, vec2(position + size), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_FrameBg)));
+		draw->AddRectFilled(position, { position + size }, ImColor(ImGui::GetStyleColorVec4(ImGuiCol_FrameBg)));
 
 		ImGui::Rainbow(position + vec2{ 0, size.y }, position + vec2{ size.x, size.y + 2 });
 		ImGui::ButtonToggle(ICON_FA_GRIP, "Design", &UI::DesignMode, buttonSize);

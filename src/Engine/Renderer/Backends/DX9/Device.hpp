@@ -1,8 +1,6 @@
 #pragma once
 #include "DX9/Base.hpp"
 
-#include "Core/Math.hpp"
-
 namespace IzEngine
 {
 	/// <summary>

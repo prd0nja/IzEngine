@@ -1,4 +1,4 @@
-#include "DX9/Device.hpp"
+#include "DX9/Common.hpp"
 
 #include "Renderer/Resources/Texture.hpp"
 

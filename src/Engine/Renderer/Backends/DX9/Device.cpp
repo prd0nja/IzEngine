@@ -1,5 +1,5 @@
 #include "Device.hpp"
-#include "Renderer/Core/Renderer.hpp"
+#include "Renderer/Common.hpp"
 
 #include "Core/System/Window.hpp"
 

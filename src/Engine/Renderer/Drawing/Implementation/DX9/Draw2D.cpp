@@ -1,4 +1,4 @@
-#include "DX9/Device.hpp"
+#include "DX9/Common.hpp"
 
 #include "Renderer/Drawing/Draw2D.hpp"
 
@@ -9,7 +9,7 @@ namespace IzEngine
 	{
 		auto data = reinterpret_cast<ID3DXFont*>(font->Data);
 		RECT rect = { static_cast<int>(position.x), static_cast<int>(position.y), 0, 0 };
-		data->DrawTextA(nullptr, text.c_str(), -1, &rect, DT_NOCLIP, color.BGRA());
+		data->DrawTextA(nullptr, text.c_str(), -1, &rect, DT_NOCLIP, Math::BGRA(color));
 	}
 
 	void Draw2D::Text(const std::string& text, const Ref<Font>& font, const vec2& position, const vec2& size,
@@ -29,7 +29,7 @@ namespace IzEngine
 
 		sprite->Begin(D3DXSPRITE_ALPHABLEND);
 		sprite->SetTransform(&matrix);
-		data->DrawTextA(sprite, text.c_str(), -1, &rect, DT_NOCLIP, color.BGRA());
+		data->DrawTextA(sprite, text.c_str(), -1, &rect, DT_NOCLIP, Math::BGRA(color));
 		sprite->End();
 	}
 

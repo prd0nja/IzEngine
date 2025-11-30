@@ -1,6 +1,9 @@
 #pragma once
 #include "Plugin.hpp"
 
+#include <string>
+#include <unordered_map>
+
 namespace IzEngine
 {
 	/// <summary>

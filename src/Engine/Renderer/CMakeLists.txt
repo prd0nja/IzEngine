@@ -1,5 +1,5 @@
 add_subdirectory(Backends)
-add_subdirectory(Core)
+add_subdirectory(Base)
 add_subdirectory(Drawing)
 add_subdirectory(Resources)
 

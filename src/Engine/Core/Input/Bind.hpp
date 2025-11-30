@@ -1,7 +1,7 @@
 #pragma once
-#include "Core/Base.hpp"
+#include "Core/Common.hpp"
 
-#include "Core/Input/Input.hpp"
+#include "Input.hpp"
 
 namespace IzEngine
 {

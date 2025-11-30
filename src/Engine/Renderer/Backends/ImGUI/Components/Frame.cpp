@@ -1,5 +1,6 @@
 #include "Frame.hpp"
-#include "ImGUI/UI.hpp"
+
+#include "ImGUI/Common.hpp"
 
 namespace IzEngine
 {
@@ -50,8 +51,8 @@ namespace IzEngine
 
 		ImGui::PushID(label.c_str());
 
-		ImGui::DragFloat2("Position", Position);
-		ImGui::DragFloat2("Size", Size);
+		ImGui::DragFloat2("Position", &Position.x);
+		ImGui::DragFloat2("Size", &Size.x);
 		ImGui::ComboAlignRect(&HorizontalAlign, &VerticalAlign);
 
 		ImGui::PopID();

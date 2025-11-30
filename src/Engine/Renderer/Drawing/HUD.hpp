@@ -1,7 +1,7 @@
 #pragma once
-#include "Core/Base.hpp"
-#include "Core/Math.hpp"
+#include "Core/Common.hpp"
 
+#include "Core/UI/VirtualScreen.hpp"
 #include "Renderer/Resources/Texture.hpp"
 
 namespace IzEngine
@@ -16,12 +16,12 @@ namespace IzEngine
 		vec2 Size;
 		vec2 RenderPosition;
 		vec2 RenderSize;
-		vec4 Color = vec4::One;
+		vec4 Color;
 
-		Horizontal HorizontalAlign = HORIZONTAL_LEFT;
-		Vertical VerticalAlign = VERTICAL_TOP;
-		Alignment AlignX = ALIGN_LEFT;
-		Alignment AlignY = ALIGN_TOP;
+		Horizontal HorizontalAlign = Horizontal::Left;
+		Vertical VerticalAlign = Vertical::Top;
+		Alignment AlignX = Alignment::Left;
+		Alignment AlignY = Alignment::Top;
 
 		std::string TextureName;
 
