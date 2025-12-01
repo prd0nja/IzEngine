@@ -8,9 +8,6 @@
 
 namespace IzEngine
 {
-	/// <summary>
-	/// Channels.
-	/// </summary>
 	enum class Channel
 	{
 		Log,
@@ -25,9 +22,6 @@ namespace IzEngine
 		Audio
 	};
 
-	/// <summary>
-	/// Log ANSI colors.
-	/// </summary>
 	enum class LogColor
 	{
 		Default = 0,
@@ -43,49 +37,23 @@ namespace IzEngine
 		Black = 90,
 	};
 
-	/// <summary>
-	/// Log class.
-	/// </summary>
 	class API Log
 	{
 	public:
-		/// <summary>
-		/// Write to the console.
-		/// </summary>
-		/// <param name="msg">The string.</param>
 		static void Write(const std::string& msg);
 
-		/// <summary>
-		/// Write to the console.
-		/// </summary>
-		/// <typeparam name="...Args">The format arguments.</typeparam>
-		/// <param name="fmt">The format string.</param>
-		/// <param name="...args">The format arguments.</param>
 		template <typename... Args>
 		static void Write(std::format_string<Args...> fmt, Args&&... args)
 		{
 			Write(std::format(fmt, std::forward<Args>(args)...));
 		}
 
-		/// <summary>
-		/// Write line to the console.
-		/// </summary>
-		/// <typeparam name="...Args">The format arguments.</typeparam>
-		/// <param name="fmt">The format string.</param>
-		/// <param name="...args">The format arguments.</param>
 		template <typename... Args>
 		static void WriteLine(std::format_string<Args...> fmt, Args&&... args)
 		{
 			Write(std::format(fmt, std::forward<Args>(args)...) + '\n');
 		}
 
-		/// <summary>
-		/// Write line to the console.
-		/// </summary>
-		/// <typeparam name="...Args">The format arguments.</typeparam>
-		/// <param name="channel">The log channel.</param>
-		/// <param name="fmt">The format string.</param>
-		/// <param name="...args">The format arguments.</param>
 		template <typename... Args>
 		static void WriteLine(Channel channel, std::format_string<Args...> fmt, Args&&... args)
 		{
@@ -95,47 +63,24 @@ namespace IzEngine
 		}
 
 	private:
-		/// <summary>
-		/// Channel info.
-		/// </summary>
 		struct Info
 		{
 			std::string name;
 			LogColor color;
 		};
 
-		// clang-format off
-		/// <summary>
-		/// Channels.
-		/// </summary>
-		static inline std::unordered_map<Channel, Info> Channels = {
-			{ Channel::Log, { "Log", LogColor::Default } },
-			{ Channel::Debug, { "Debug", LogColor::Gray } },
-			{ Channel::Warning, { "Warning", LogColor::Yellow } },
-			{ Channel::Error, { "Error", LogColor::Red } },
-			{ Channel::Info, { "Info", LogColor::Cyan } },
-			{ Channel::Verbose, { "Verbose", LogColor::Green } },
-			{ Channel::System, { "System", LogColor::Dodger } },
-			{ Channel::Engine, { "Engine", LogColor::Dodger } },
-			{ Channel::Game, { "Game", LogColor::Cyan } },
-			{ Channel::Audio, { "Audio", LogColor::Magenta } }
-		};
-		// clang-format on
+		static inline std::unordered_map<Channel, Info> Channels = { { Channel::Log, { "Log", LogColor::Default } },
+			{ Channel::Debug, { "Debug", LogColor::Gray } }, { Channel::Warning, { "Warning", LogColor::Yellow } },
+			{ Channel::Error, { "Error", LogColor::Red } }, { Channel::Info, { "Info", LogColor::Cyan } },
+			{ Channel::Verbose, { "Verbose", LogColor::Green } }, { Channel::System, { "System", LogColor::Dodger } },
+			{ Channel::Engine, { "Engine", LogColor::Dodger } }, { Channel::Game, { "Game", LogColor::Cyan } },
+			{ Channel::Audio, { "Audio", LogColor::Magenta } } };
 
-		/// <summary>
-		/// Format channel name.
-		/// </summary>
-		/// <param name="channel">The channel name.</param>
-		/// <returns></returns>
 		static inline std::string FormatChannel(const std::string& name)
 		{
 			return std::format("[{}] ", name);
 		}
 
-		/// <summary>
-		/// Format color.
-		/// </summary>
-		/// <param name="color">The color.</param>
 		static inline std::string FormatColor(LogColor color)
 		{
 			return std::format("\x1b[{}m", static_cast<int>(color));

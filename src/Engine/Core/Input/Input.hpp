@@ -7,9 +7,6 @@
 
 namespace IzEngine
 {
-	/// <summary>
-	/// Input enumeration.
-	/// </summary>
 	enum InputEnum : int
 	{
 		Input_None = 0,
@@ -161,71 +158,29 @@ namespace IzEngine
 		Input_Count,
 	};
 
-	/// <summary>
-	/// Input info.
-	/// </summary>
 	struct InputInfo
 	{
 		InputEnum ID = InputEnum::Input_None;
 		int OS = 0;
 		std::string Name;
-
 		int State = 0;
 		int PrevState = 0;
 	};
 
-	/// <summary>
-	/// Input class.
-	/// </summary>
 	class API Input
 	{
 	public:
 		static inline std::unordered_map<InputEnum, InputInfo> Inputs;
 		static inline std::unordered_map<int, InputEnum> OSToID;
 
-		/// <summary>
-		/// Initialize input maps.
-		/// </summary>
 		static void Initialize();
-
-		/// <summary>
-		/// Reset inputs.
-		/// </summary>
 		static void Reset();
 
-		/// <summary>
-		/// Is input up.
-		/// </summary>
-		/// <param name="input">The input code.</param>
-		/// <returns></returns>
 		static bool IsUp(InputEnum input);
-
-		/// <summary>
-		/// Is input down.
-		/// </summary>
-		/// <param name="input">The input code.</param>
-		/// <returns></returns>
 		static bool IsDown(InputEnum input);
-
-		/// <summary>
-		/// Is input pressed.
-		/// </summary>
-		/// <param name="input">The input code.</param>
-		/// <returns></returns>
 		static bool IsPressed(InputEnum input);
 
-		/// <summary>
-		/// Map OS to input.
-		/// </summary>
-		/// <param name="input">The OS input code.</param>
-		/// <returns></returns>
 		static InputEnum Map(int input);
-
-		/// <summary>
-		/// Get input name.
-		/// </summary>
-		/// <param name="input">The input code.</param>
-		/// <returns></returns>
 		static const char* GetName(InputEnum input);
 	};
 }

@@ -6,9 +6,6 @@
 
 namespace IzEngine
 {
-	/// <summary>
-	/// Text element.
-	/// </summary>
 	class API Text : public IObject
 	{
 	public:
@@ -30,61 +27,20 @@ namespace IzEngine
 		float FontSize = 1.4;
 		int FontIndex = 0;
 
-		/// <summary>
-		/// Create a text.
-		/// </summary>
 		Text() = default;
+		Text(const std::string& text, const std::string& font, float x, float y, float size, const vec4& color);
 		virtual ~Text() = default;
 
-		/// <summary>
-		/// Create a text.
-		/// </summary>
-		/// <param name="text">The text.</param>
-		/// <param name="font">The font.</param>
-		/// <param name="x">X value.</param>
-		/// <param name="y">Y value.</param>
-		/// <param name="size">Font size.</param>
-		/// <param name="color">The color.</param>
-		Text(const std::string& text, const std::string& font, float x, float y, float size, const vec4& color);
-
-		/// <summary>
-		/// Set the rect alignment.
-		/// </summary>
-		/// <param name="horizontal">Horizontal aligment.</param>
-		/// <param name="vertical">Vertical alignment.</param>
 		void SetRectAlignment(Horizontal horizontal, Vertical vertical);
-
-		/// <summary>
-		/// Set the element alignment.
-		/// </summary>
-		/// <param name="horizontal">Horizontal aligment.</param>
-		/// <param name="vertical">Vertical aligment.</param>
 		void SetAlignment(Alignment horizontal, Alignment vertical);
-
-		/// <summary>
-		/// Set/update font.
-		/// </summary>
 		void SetFont(const std::string& font);
 
-		/// <summary>
-		/// Render menu.
-		/// </summary>
-		/// <param name="label">The label.</param>
-		/// <param name="open">Default open.</param>
 		void Menu(const std::string& label, bool open = false);
-
-		/// <summary>
-		/// Render text.
-		/// </summary>
 		void Render();
 
 	private:
 		Ref<Font> Font = nullptr;
 
-		/// <summary>
-		/// Compute the alignment.
-		/// </summary>
-		/// <param name="position">The position.</param>
 		void ComputeAlignment(vec2& position);
 
 		SERIALIZE_POLY_BASE(Text, Value, Position, Skew, Color, HorizontalAlign, VerticalAlign, AlignX, AlignY,

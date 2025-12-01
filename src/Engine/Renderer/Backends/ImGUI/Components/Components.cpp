@@ -95,13 +95,13 @@ namespace ImGui
 		return clicked;
 	}
 
-	bool Combo(const std::string& label, int* item, const std::vector<std::string>& items, int maxHeightInItems)
+	bool Combo(const std::string& label, int* item, const std::vector<std::string>& items, int maxHeight)
 	{
 		std::vector<const char*> list;
 		for (const auto& item : items)
 			list.push_back(item.c_str());
 
-		return Combo(label.c_str(), item, list.data(), list.size(), maxHeightInItems);
+		return Combo(label.c_str(), item, list.data(), list.size(), maxHeight);
 	}
 
 	bool ComboAlign(Alignment* x, Alignment* y)

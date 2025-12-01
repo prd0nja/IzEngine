@@ -74,11 +74,6 @@ namespace IzEngine
 			DestroyWindow(reinterpret_cast<HWND>(Handle));
 	}
 
-	void Window::SetCapture(bool state)
-	{
-		IsCapture = state;
-	}
-
 	int Window::Update(void* handle, int msg, uintptr_t arg1, uintptr_t arg2)
 	{
 		const HWND hwnd = reinterpret_cast<HWND>(handle);
@@ -158,6 +153,11 @@ namespace IzEngine
 	{
 		const HWND hwnd = reinterpret_cast<HWND>(Window::Handle);
 		SetWindowLongPtr(hwnd, GWL_STYLE, value);
+	}
+
+	void Window::SetCapture(bool state)
+	{
+		IsCapture = state;
 	}
 
 	bool Window::IsStyle(int value)

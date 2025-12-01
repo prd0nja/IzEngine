@@ -7,21 +7,10 @@
 
 namespace IzEngine
 {
-	/// <summary>
-	/// Atomic actions.
-	/// </summary>
 	class API Actions
 	{
 	public:
-		/// <summary>
-		/// Add action.
-		/// </summary>
-		/// <param name="func">The action function.</param>
 		static void Add(const std::function<void()>& func);
-
-		/// <summary>
-		/// Submit actions.
-		/// </summary>
 		static void Submit();
 
 	private:

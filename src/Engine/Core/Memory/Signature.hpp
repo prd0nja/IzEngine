@@ -5,9 +5,6 @@
 
 namespace IzEngine
 {
-	/// <summary>
-	/// Signature class.
-	/// </summary>
 	class API Signature
 	{
 	public:
@@ -15,66 +12,26 @@ namespace IzEngine
 		std::string Module;
 		std::string Pattern;
 
-		/// <summary>
-		/// Create a new signature from an address.
-		/// </summary>
-		/// <param name="address">The address.</param>
 		Signature(uintptr_t address);
+		Signature(const std::string& pattern);
+		Signature(const std::string& moduleName, const std::string& pattern);
 		~Signature() = default;
 
-		/// <summary>
-		/// Create a new signature and scan the pattern.
-		/// </summary>
-		/// <param name="pattern">The pattern to scan.</param>
-		Signature(const std::string& pattern);
-
-		/// <summary>
-		/// Create a new signature and scan the pattern.
-		/// </summary>
-		/// <param name="moduleName">The module name.</param>
-		/// <param name="pattern">The pattern to scan.</param>
-		Signature(const std::string& moduleName, const std::string& pattern);
-
-		/// <summary>
-		/// Add an offset to the address.
-		/// </summary>
-		/// <param name="offset">The offset.</param>
-		/// <returns></returns>
 		Signature& Offset(uintptr_t offset);
-
-		/// <summary>
-		/// Deref the address.
-		/// </summary>
-		/// <returns></returns>
 		Signature& DeRef();
-
-		/// <summary>
-		/// Memory scan all results.
-		/// </summary>
-		/// <param name="first">Stop scanning on the first result.</param>
-		/// <returns></returns>
 		std::vector<uintptr_t> ScanAll(bool first = false);
 
-		/// <summary>
-		/// Get the address.
-		/// </summary>
 		operator uintptr_t()
 		{
 			return Address;
 		}
 
-		/// <summary>
-		/// Cast to pointer type.
-		/// </summary>
 		template <typename T>
 		operator T*()
 		{
 			return reinterpret_cast<T*>(Address);
 		}
 
-		/// <summary>
-		/// Cast to reference type.
-		/// </summary>
 		template <typename T>
 		operator T&()
 		{
@@ -82,15 +39,7 @@ namespace IzEngine
 		}
 
 	private:
-		/// <summary>
-		/// Create a new signature.
-		/// </summary>
 		Signature() = default;
-
-		/// <summary>
-		/// Memory scan.
-		/// </summary
-		/// <returns></returns>
 		uintptr_t Scan();
 	};
 }

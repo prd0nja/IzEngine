@@ -18,53 +18,25 @@ public:                                                    \
 
 namespace IzEngine
 {
-	/// <summary>
-	/// Event class.
-	/// </summary>
 	class Event
 	{
 	public:
 		bool PreventDefault = false;
 
-		/// <summary>
-		/// Release event.
-		/// </summary>
 		virtual ~Event() = default;
-
-		/// <summary>
-		/// Get the event type.
-		/// </summary>
-		/// <returns></returns>
 		virtual std::string_view GetEventType() const = 0;
 	};
 
-	/// <summary>
-	/// Callable with event.
-	/// </summary>
 	template <typename C, typename E>
 	concept WithEvent = requires(C callback, E& event) {
 		{ callback(event) } -> std::same_as<void>;
 	};
 
-	/// <summary>
-	/// Event dispatcher.
-	/// </summary>
 	class EventDispatcher
 	{
 	public:
-		/// <summary>
-		/// Create an event dispatcher.
-		/// </summary>
-		/// <param name="event">The event.</param>
 		EventDispatcher(Event& event) : Value(event) { }
 
-		/// <summary>
-		/// Dispatch the event.
-		/// </summary>
-		/// <typeparam name="E">The event.</typeparam>
-		/// <typeparam name="C">The callback.</typeparam>
-		/// <param name="callback">The callback.</param>
-		/// <returns></returns>
 		template <typename E, typename C>
 		void Dispatch(const C& callback)
 		{

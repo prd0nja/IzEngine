@@ -24,19 +24,11 @@ namespace arch = asmjit::aarch64;
 
 namespace IzEngine
 {
-	/// <summary>
-	/// Just-in-time assembler.
-	/// </summary>
 	class Assembler
 	{
 	public:
 		static inline asmjit::JitRuntime Runtime;
 
-		/// <summary>
-		/// Create a new code.
-		/// </summary>
-		/// <param name="function">The function callback with assembly instructions.</param>
-		/// <returns>The compiled function address.</returns>
 		template <typename F>
 		static uintptr_t NewCode(F function)
 		{

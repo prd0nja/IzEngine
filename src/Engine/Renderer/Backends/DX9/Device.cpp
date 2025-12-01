@@ -25,6 +25,18 @@ namespace IzEngine
 		D3DeviceEx->QueryInterface(__uuidof(IDirect3DDevice9), reinterpret_cast<void**>(&D3Device));
 	}
 
+	void Device::Swap(IDirect3D9* d3d, IDirect3DDevice9* device)
+	{
+		Swapped = true;
+
+		D3D = d3d;
+		D3Device = device;
+
+		IDirect3DSwapChain9* swapChain;
+		device->GetSwapChain(0, &swapChain);
+		swapChain->GetPresentParameters(&PresentParameters);
+	}
+
 	void Device::Shutdown()
 	{
 		if (D3Device)
@@ -68,17 +80,5 @@ namespace IzEngine
 
 		D3Device->EndScene();
 		D3Device->Present(nullptr, nullptr, nullptr, nullptr);
-	}
-
-	void Device::Swap(IDirect3D9* d3d, IDirect3DDevice9* device)
-	{
-		Swapped = true;
-
-		D3D = d3d;
-		D3Device = device;
-
-		IDirect3DSwapChain9* swapChain;
-		device->GetSwapChain(0, &swapChain);
-		swapChain->GetPresentParameters(&PresentParameters);
 	}
 }

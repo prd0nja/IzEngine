@@ -7,10 +7,6 @@
 
 namespace IzEngine
 {
-	/// <summary>
-	/// Hook class.
-	/// </summary>
-	/// <typeparam name="T">The hook function definition.</typeparam>
 	template <typename T>
 	class Hook
 	{
@@ -24,60 +20,22 @@ namespace IzEngine
 		Scope<PLH::NatDetour> Detour = nullptr;
 		bool IsEnabled = false;
 
-		/// <summary>
-		/// Initialize a new instance.
-		/// </summary>
 		Hook() = default;
-
-		/// <summary>
-		/// Initialize a new instance.
-		/// </summary>
-		/// <param name="callback">The callback function.</param>
 		Hook(T callback) : Hook(0ull, callback) { }
-
-		/// <summary>
-		/// Initialize a new instance.
-		/// </summary>
-		/// <param name="address">The target function.</param>
-		/// <param name="callback">The callback function.</param>
 		Hook(T address, T callback) : Hook(reinterpret_cast<uint64_t>(address), callback) { }
-
-		/// <summary>
-		/// Initialize a new instance.
-		/// </summary>
-		/// <param name="address">The target address.</param>
-		/// <param name="callback">The callback function.</param>
 		Hook(uint64_t address, T callback) : Hook(address, reinterpret_cast<uint64_t>(callback)) { }
-
-		/// <summary>
-		/// Initialize a new instance.
-		/// </summary>
-		/// <param name="address">The target address.</param>
-		/// <param name="callback">The callback address.</param>
 		Hook(uint64_t address, uint64_t callback) : Address(address), Callback(callback) { }
 
-		/// <summary>
-		/// Release hook.
-		/// </summary>
 		~Hook()
 		{
 			Remove();
 		}
 
-		/// <summary>
-		/// Assign address.
-		/// </summary>
-		/// <param name="address">The target address.</param>
-		/// <returns></returns>
 		void operator<(uintptr_t address)
 		{
 			Address = address;
 		}
 
-		/// <summary>
-		/// Install the hook.
-		/// </summary>
-		/// <returns></returns>
 		void Install()
 		{
 			IZ_ASSERT(Address, "Hook address is nullptr.");
@@ -91,10 +49,6 @@ namespace IzEngine
 			Original = reinterpret_cast<T*>(Trampoline);
 		}
 
-		/// <summary>
-		/// Update address.
-		/// </summary>
-		/// <param name="address">The address.</param>
 		void Update(uintptr_t address)
 		{
 			Remove();
@@ -102,9 +56,6 @@ namespace IzEngine
 			Install();
 		}
 
-		/// <summary>
-		/// Remove the hook.
-		/// </summary>
 		void Remove()
 		{
 			if (!IsEnabled)
@@ -115,21 +66,12 @@ namespace IzEngine
 			Detour.reset();
 		}
 
-		/// <summary>
-		/// Call the trampoline function.
-		/// </summary>
-		/// <typeparam name="...Args">The function args.</typeparam>
-		/// <param name="...args">The function args.</param>
-		/// <returns></returns>
 		template <typename... Args>
 		inline R operator()(Args&&... args)
 		{
 			return Original(args...);
 		}
 
-		/// <summary>
-		/// Is hook enabled.
-		/// </summary>
 		inline operator bool() const
 		{
 			return IsEnabled;

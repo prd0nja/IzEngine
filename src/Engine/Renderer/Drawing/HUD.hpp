@@ -6,9 +6,6 @@
 
 namespace IzEngine
 {
-	/// <summary>
-	/// HUD element.
-	/// </summary>
 	class API HUD : public IObject
 	{
 	public:
@@ -22,65 +19,22 @@ namespace IzEngine
 		Vertical VerticalAlign = Vertical::Top;
 		Alignment AlignX = Alignment::Left;
 		Alignment AlignY = Alignment::Top;
-
 		std::string TextureName;
 
-		/// <summary>
-		/// Create a HUD.
-		/// </summary>
 		HUD() = default;
+		HUD(const std::string& texture, float x, float y, float w, float h, const vec4& color);
 		virtual ~HUD() = default;
 
-		/// <summary>
-		/// Create a HUD.
-		/// </summary>
-		/// <param name="texture">The texture path.</param>
-		/// <param name="x">X position.</param>
-		/// <param name="y">Y position.</param>
-		/// <param name="w">The width.</param>
-		/// <param name="h">The height.</param>
-		/// <param name="color">The color.</param>
-		HUD(const std::string& texture, float x, float y, float w, float h, const vec4& color);
-
-		/// <summary>
-		/// Set the rect alignment.
-		/// </summary>
-		/// <param name="horizontal">Horizontal aligment.</param>
-		/// <param name="vertical">Vertical alignment.</param>
 		void SetRectAlignment(Horizontal horizontal, Vertical vertical);
-
-		/// <summary>
-		/// Set the element alignment.
-		/// </summary>
-		/// <param name="horizontal">Horizontal aligment.</param>
-		/// <param name="vertical">Vertical aligment.</param>
 		void SetAlignment(Alignment horizontal, Alignment vertical);
-
-		/// <summary>
-		/// Set the texture.
-		/// </summary>
-		/// <param name="texture">The texture path.</param>
 		void SetTexture(const std::string& texture);
 
-		/// <summary>
-		/// Render menu.
-		/// </summary>
-		/// <param name="label">The label.</param>
-		/// <param name="open">Default open.</param>
 		void Menu(const std::string& label, bool open = false);
-
-		/// <summary>
-		/// Render HUD.
-		/// </summary>
 		void Render();
 
 	private:
 		Ref<Texture> Texture = nullptr;
 
-		/// <summary>
-		/// Compute the alignment.
-		/// </summary>
-		/// <param name="position">The position.</param>
 		void ComputeAlignment(vec2& position);
 
 		SERIALIZE_POLY_BASE(HUD, Position, Size, Color, HorizontalAlign, VerticalAlign, AlignX, AlignY, TextureName)
