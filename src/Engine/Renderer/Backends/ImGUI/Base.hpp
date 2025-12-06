@@ -1,6 +1,8 @@
 #pragma once
 #include "Core/Common.hpp"
 
+#include "Renderer/UI/VirtualScreen.hpp"
+
 #define IMGUI_DEFINE_MATH_OPERATORS
 
 #pragma warning(push)

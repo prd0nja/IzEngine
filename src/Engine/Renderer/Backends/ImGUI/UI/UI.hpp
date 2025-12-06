@@ -5,7 +5,6 @@
 #include "Core/Input/Bind.hpp"
 #include "Core/Input/Keyboard.hpp"
 #include "Core/Input/Mouse.hpp"
-#include "Core/UI/VirtualScreen.hpp"
 
 namespace IzEngine
 {

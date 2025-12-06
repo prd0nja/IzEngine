@@ -1,6 +1,6 @@
 #include "Math.hpp"
 
-#include "Core/UI/VirtualScreen.hpp"
+#include "Renderer/UI/VirtualScreen.hpp"
 
 namespace IzEngine
 {

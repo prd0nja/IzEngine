@@ -10,7 +10,6 @@ add_subdirectory(Macros)
 add_subdirectory(Math)
 add_subdirectory(Memory)
 add_subdirectory(System)
-add_subdirectory(UI)
 
 if(BUILD_TESTING)
 	add_subdirectory(Tests)

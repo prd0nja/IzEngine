@@ -5,5 +5,3 @@
 #include "Components/Plots.hpp"
 #include "Components/Widget.hpp"
 #include "UI/UI.hpp"
-
-#include "Core/UI/VirtualScreen.hpp"

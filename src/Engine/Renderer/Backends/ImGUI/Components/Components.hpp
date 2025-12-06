@@ -5,7 +5,6 @@
 
 #include "Core/Containers/CircularBuffer.hpp"
 #include "Core/Input/Input.hpp"
-#include "Core/UI/VirtualScreen.hpp"
 
 constexpr ImGuiWindowFlags ImGuiWindowFlags_Widget = ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize
 	| ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoBackground;

@@ -1,7 +1,6 @@
 #pragma once
 #include "Core/Common.hpp"
 
-#include "Core/UI/VirtualScreen.hpp"
 #include "Renderer/Resources/Font.hpp"
 
 namespace IzEngine
