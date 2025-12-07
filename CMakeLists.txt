@@ -19,6 +19,10 @@ if(GRAPHICS_API_DX9)
 	find_package(DirectXSDK REQUIRED)
 endif()
 
+if(BUILD_CEF)
+	find_package(CEF REQUIRED)
+endif()
+
 # Tests
 if(BUILD_TESTING)
 	include(CTest)

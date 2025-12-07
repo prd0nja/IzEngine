@@ -21,6 +21,7 @@ target_link_libraries(IzEngine PUBLIC
 	$<$<BOOL:${PLATFORM_WINDOWS}>:DbgHelp>
 	$<$<BOOL:${PLATFORM_WINDOWS}>:dwmapi>
 	$<$<BOOL:${GRAPHICS_API_DX9}>:DirectX::SDK>
+	$<$<BOOL:${BUILD_CEF}>:CEF::CEF>
 	imgui::imgui
 	implot::implot
 	nlohmann_json::nlohmann_json

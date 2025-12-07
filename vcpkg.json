@@ -3,7 +3,7 @@
 	"version": "1.0.0",
 	"description": "A modern cross-platform engine framework for creating modded game clients.",
   	"homepage": "https://github.com/Iswenzz/IzEngine",
-	  "features": {
+	"features": {
 		"windows": {
 			"description": "Build Windows",
 			"dependencies": [
@@ -16,6 +16,10 @@
 				{ "name": "imgui", "features": ["dx9-binding"] },
 				"directxsdk"
 			]
+		},
+		"cef": {
+			"description": "Build CEF",
+			"dependencies": ["cef"]
 		},
 		"tests": {
 			"description": "Build tests",
@@ -30,6 +34,7 @@
 		"glm"
 	],
 	"overrides": [
+		{ "name": "cef", "version": "142.0.17" },
         { "name": "imgui", "version": "1.92.3#1" },
         { "name": "implot", "version": "0.16#1" },
         { "name": "directxsdk", "version-string": "jun10#8" },
