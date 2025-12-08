@@ -41,10 +41,8 @@ namespace IzEngine
 		static inline CefRefPtr<BrowserClient> Client;
 		static inline Ref<Texture> Texture;
 		static inline std::mutex TextureMutex;
-		static inline bool Active = false;
 
 		static void Initialize();
 		static void Shutdown();
-		static void Frame();
 	};
 }

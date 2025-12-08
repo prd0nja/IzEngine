@@ -9,11 +9,6 @@ namespace IzEngine
 {
 	void Browser::Initialize()
 	{
-		if (Active)
-			return;
-
-		Log::WriteLine(Channel::Verbose, "Browser initialized");
-
 		CefMainArgs args(GetModuleHandle(nullptr));
 		int code = CefExecuteProcess(args, nullptr, nullptr);
 		if (code >= 0)
@@ -49,39 +44,17 @@ namespace IzEngine
 		//const auto url = "https://youtu.be/UgQFcvYg9Kk?t=90";
 		const auto url = "https://sr.iswenzz.com";
 		CefBrowserHost::CreateBrowser(windowInfo, Client, url, browserSettings, nullptr, nullptr);
-
-		Active = true;
 	}
 
 	void Browser::Shutdown()
 	{
-		//if (!Active)
-		return;
-
 		if (Instance)
 		{
 			Instance->GetHost()->CloseBrowser(true);
 			Instance = nullptr;
 		}
 		Client = nullptr;
-		Active = false;
-		Log::WriteLine(Channel::Verbose, "Browser shutdown");
-		CefShutdown();
-	}
-
-	void Browser::Frame()
-	{
-		if (!Texture)
-			return;
-
-		std::scoped_lock lock(TextureMutex);
-		//Material* mtl = Material_RegisterHandle("black", 3);
-		//if (!mtl)
-		//return;
-
-		//auto texture = reinterpret_cast<IDirect3DTexture9*>(Browser::Texture->Data);
-		//mtl->textureTable->u.image->texture.map = texture;
-		Draw2D::Rect(Texture, { 0, 0 }, Window::Size);
+		//CefShutdown();
 	}
 
 	void BrowserRenderHandler::GetViewRect(CefRefPtr<CefBrowser> browser, CefRect& rect)
