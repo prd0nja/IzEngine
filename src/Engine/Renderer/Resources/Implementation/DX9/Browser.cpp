@@ -53,7 +53,7 @@ namespace IzEngine
 
 	void Browser::Start()
 	{
-		if (Instance)
+		if (!Active || Instance)
 			return;
 
 		CefBrowserSettings browserSettings;
@@ -69,7 +69,7 @@ namespace IzEngine
 
 	void Browser::Stop()
 	{
-		if (!Instance)
+		if (!Active || !Instance)
 			return;
 
 		Instance->GetHost()->CloseBrowser(false);
