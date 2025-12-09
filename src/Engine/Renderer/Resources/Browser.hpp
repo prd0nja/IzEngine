@@ -6,30 +6,31 @@
 #include <cef_app.h>
 #include <cef_browser.h>
 #include <cef_client.h>
+#include <latch>
 
 namespace IzEngine
 {
-	class BrowserRenderHandler : public CefRenderHandler
+	class BrowserApp : public CefApp
 	{
-	public:
-		void GetViewRect(CefRefPtr<CefBrowser> browser, CefRect& rect) override;
-		void OnPaint(CefRefPtr<CefBrowser> browser, PaintElementType type, const RectList& dirtyRects,
-			const void* buffer, int width, int height) override;
-
-		IMPLEMENT_REFCOUNTING(BrowserRenderHandler);
+		IMPLEMENT_REFCOUNTING(BrowserApp);
 	};
 
-	class BrowserClient : public CefClient, public CefLifeSpanHandler
+	class BrowserClient : public CefClient, public CefLifeSpanHandler, public CefRenderHandler
 	{
 	public:
-		BrowserClient(CefRefPtr<BrowserRenderHandler> renderHandler);
-
 		CefRefPtr<CefRenderHandler> GetRenderHandler() override;
 		CefRefPtr<CefLifeSpanHandler> GetLifeSpanHandler() override;
+		void GetViewRect(CefRefPtr<CefBrowser> browser, CefRect& rect) override;
+
+		void OnPaint(CefRefPtr<CefBrowser> browser, PaintElementType type, const RectList& dirtyRects,
+			const void* buffer, int width, int height) override;
 		void OnAfterCreated(CefRefPtr<CefBrowser> browser) override;
+		void OnBeforeClose(CefRefPtr<CefBrowser> browser) override;
+		bool IsClosed();
 
 	private:
-		CefRefPtr<BrowserRenderHandler> RenderHandler;
+		std::atomic<bool> Painted;
+		std::atomic<bool> Closed;
 
 		IMPLEMENT_REFCOUNTING(BrowserClient);
 	};
@@ -38,6 +39,7 @@ namespace IzEngine
 	{
 	public:
 		static inline CefRefPtr<CefBrowser> Instance;
+		static inline CefRefPtr<BrowserApp> App;
 		static inline CefRefPtr<BrowserClient> Client;
 		static inline Ref<Texture> Texture;
 		static inline std::mutex TextureMutex;

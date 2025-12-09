@@ -10,7 +10,8 @@ namespace IzEngine
 	void Browser::Initialize()
 	{
 		CefMainArgs args(GetModuleHandle(nullptr));
-		int code = CefExecuteProcess(args, nullptr, nullptr);
+		App = new BrowserApp();
+		int code = CefExecuteProcess(args, App, nullptr);
 		if (code >= 0)
 			return;
 
@@ -32,62 +33,27 @@ namespace IzEngine
 		CefString(&settings.log_file).FromString(pathLog.string());
 		CefString(&settings.browser_subprocess_path).FromString(pathSubProcess.string());
 
-		if (!CefInitialize(args, settings, nullptr, nullptr))
+		if (!CefInitialize(args, settings, App, nullptr))
 			return;
 
 		CefBrowserSettings browserSettings;
 		CefWindowInfo windowInfo;
 		windowInfo.SetAsWindowless(nullptr);
 
-		CefRefPtr<BrowserRenderHandler> renderHandler = new BrowserRenderHandler();
-		Client = new BrowserClient(renderHandler);
+		Client = new BrowserClient();
 		//const auto url = "https://youtu.be/UgQFcvYg9Kk?t=90";
-		const auto url = "https://sr.iswenzz.com";
+		const auto url = "https://youtube.com";
 		CefBrowserHost::CreateBrowser(windowInfo, Client, url, browserSettings, nullptr, nullptr);
 	}
 
 	void Browser::Shutdown()
 	{
-		if (Instance)
-		{
-			Instance->GetHost()->CloseBrowser(true);
-			Instance = nullptr;
-		}
-		Client = nullptr;
-		//CefShutdown();
-	}
-
-	void BrowserRenderHandler::GetViewRect(CefRefPtr<CefBrowser> browser, CefRect& rect)
-	{
-		rect = CefRect(0, 0, Window::Size.x, Window::Size.y);
-	}
-
-	void BrowserRenderHandler::OnPaint(CefRefPtr<CefBrowser> browser, PaintElementType type, const RectList& dirtyRects,
-		const void* buffer, int width, int height)
-	{
-		if (!buffer)
-			return;
-
-		std::scoped_lock lock(Browser::TextureMutex);
-
-		if (!Browser::Texture)
-			Browser::Texture = Texture::Create("browser", Window::Size);
-
-		IDirect3DTexture9* texture = reinterpret_cast<IDirect3DTexture9*>(Browser::Texture->Data);
-		D3DLOCKED_RECT rect;
-		texture->LockRect(0, &rect, nullptr, 0);
-		memcpy(rect.pBits, buffer, width * height * 4);
-		texture->UnlockRect(0);
-	}
-
-	BrowserClient::BrowserClient(CefRefPtr<BrowserRenderHandler> renderHandler)
-	{
-		RenderHandler = renderHandler;
+		CefShutdown();
 	}
 
 	CefRefPtr<CefRenderHandler> BrowserClient::GetRenderHandler()
 	{
-		return RenderHandler;
+		return this;
 	}
 
 	CefRefPtr<CefLifeSpanHandler> BrowserClient::GetLifeSpanHandler()
@@ -95,8 +61,41 @@ namespace IzEngine
 		return this;
 	}
 
+	void BrowserClient::GetViewRect(CefRefPtr<CefBrowser> browser, CefRect& rect)
+	{
+		rect = CefRect(0, 0, Window::Size.x, Window::Size.y);
+	}
+
+	void BrowserClient::OnPaint(CefRefPtr<CefBrowser> browser, PaintElementType type, const RectList& dirtyRects,
+		const void* buffer, int width, int height)
+	{
+		//if (!buffer)
+			//return;
+
+		//std::scoped_lock lock(Browser::TextureMutex);
+
+		//if (!Browser::Texture)
+			//Browser::Texture = Texture::Create("browser", Window::Size);
+
+		//IDirect3DTexture9* texture = reinterpret_cast<IDirect3DTexture9*>(Browser::Texture->Data);
+		//D3DLOCKED_RECT rect;
+		//texture->LockRect(0, &rect, nullptr, 0);
+		//memcpy(rect.pBits, buffer, width * height * 4);
+		//texture->UnlockRect(0);
+	}
+
 	void BrowserClient::OnAfterCreated(CefRefPtr<CefBrowser> browser)
 	{
 		Browser::Instance = browser;
+	}
+
+	void BrowserClient::OnBeforeClose(CefRefPtr<CefBrowser> browser)
+	{
+		Closed.store(true);
+	}
+
+	bool BrowserClient::IsClosed()
+	{
+		return Closed.load();
 	}
 }
