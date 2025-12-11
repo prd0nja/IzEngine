@@ -48,6 +48,10 @@ namespace IzEngine
 			ScreenToClient(hWnd, &position);
 			Position = { position.x, position.y };
 
+			ScrollDelta = 0;
+			if (raw.data.mouse.usButtonFlags & RI_MOUSE_WHEEL)
+				ScrollDelta = static_cast<short>(raw.data.mouse.usButtonData) / WHEEL_DELTA;
+
 			if (raw.data.mouse.usButtonFlags & RI_MOUSE_BUTTON_1_DOWN)
 				Input::Inputs[Button_Left].State = INPUT_DOWN;
 			if (raw.data.mouse.usButtonFlags & RI_MOUSE_BUTTON_1_UP)
