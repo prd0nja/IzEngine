@@ -57,8 +57,11 @@ namespace IzEngine
 			return;
 
 		CefBrowserSettings browserSettings;
+		browserSettings.windowless_frame_rate = 120;
+
 		CefWindowInfo windowInfo;
 		windowInfo.SetAsWindowless(nullptr);
+
 		CefBrowserHost::CreateBrowser(windowInfo, Client, "about:blank", browserSettings, nullptr, nullptr);
 
 		while (!Client->IsOpened())
@@ -86,6 +89,12 @@ namespace IzEngine
 		Instance->GetMainFrame()->LoadURL(url);
 	}
 
+	void BrowserApp::OnBeforeCommandLineProcessing(const CefString& processType, CefRefPtr<CefCommandLine> commandLine)
+	{
+		if (processType.empty())
+			commandLine->AppendSwitchWithValue("autoplay-policy", "no-user-gesture-required");
+	}
+
 	CefRefPtr<CefRenderHandler> BrowserClient::GetRenderHandler()
 	{
 		return this;
@@ -104,19 +113,32 @@ namespace IzEngine
 	void BrowserClient::OnPaint(CefRefPtr<CefBrowser> browser, PaintElementType type, const RectList& dirtyRects,
 		const void* buffer, int width, int height)
 	{
-		if (!buffer)
+		if (!buffer || dirtyRects.empty())
 			return;
 
 		std::scoped_lock lock(Browser::TextureMutex);
-
 		if (!Browser::Texture || !Browser::Texture->Data)
 			Browser::Texture = Texture::Create("browser", Browser::Size);
 
 		IDirect3DTexture9* texture = reinterpret_cast<IDirect3DTexture9*>(Browser::Texture->Data);
-		D3DLOCKED_RECT rect;
-		texture->LockRect(0, &rect, nullptr, 0);
-		memcpy(rect.pBits, buffer, width * height * 4);
-		texture->UnlockRect(0);
+
+		for (const auto& dirtyRect : dirtyRects)
+		{
+			D3DLOCKED_RECT lockedRect;
+			RECT rect = { dirtyRect.x, dirtyRect.y, dirtyRect.x + dirtyRect.width, dirtyRect.y + dirtyRect.height };
+			texture->LockRect(0, &lockedRect, &rect, 0);
+
+			const uint8_t* src = reinterpret_cast<const uint8_t*>(buffer) + (dirtyRect.y * width + dirtyRect.x) * 4;
+			uint8_t* dst = reinterpret_cast<uint8_t*>(lockedRect.pBits);
+
+			for (int y = 0; y < dirtyRect.height; ++y)
+			{
+				std::memcpy(dst, src, dirtyRect.width * 4);
+				src += width * 4;
+				dst += lockedRect.Pitch;
+			}
+			texture->UnlockRect(0);
+		}
 	}
 
 	void BrowserClient::OnAfterCreated(CefRefPtr<CefBrowser> browser)

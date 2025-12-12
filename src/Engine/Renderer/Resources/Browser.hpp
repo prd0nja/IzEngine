@@ -12,6 +12,10 @@ namespace IzEngine
 {
 	class BrowserApp : public CefApp
 	{
+	public:
+		void OnBeforeCommandLineProcessing(const CefString& processType,
+			CefRefPtr<CefCommandLine> commandLine) override;
+
 		IMPLEMENT_REFCOUNTING(BrowserApp);
 	};
 
