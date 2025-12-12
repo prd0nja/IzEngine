@@ -14,6 +14,8 @@ namespace IzEngine
 		Font() = default;
 		virtual ~Font();
 
+		void Release();
+
 		static Ref<Font>& Create(const std::string& name, int height);
 		static Ref<Font>& Create(const std::filesystem::path& path, int height);
 		static Ref<Font>& Default();

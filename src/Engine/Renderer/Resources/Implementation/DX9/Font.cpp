@@ -8,8 +8,16 @@ namespace IzEngine
 {
 	Font::~Font()
 	{
+		Release();
+	}
+
+	void Font::Release()
+	{
 		if (Data)
+		{
 			reinterpret_cast<ID3DXFont*>(Data)->Release();
+			Data = nullptr;
+		}
 	}
 
 	Ref<Font>& Font::Default()
@@ -81,6 +89,9 @@ namespace IzEngine
 
 	void Fonts::Shutdown()
 	{
+		for (auto& [id, font] : List)
+			font->Release();
+
 		List.clear();
 		Names.clear();
 	}

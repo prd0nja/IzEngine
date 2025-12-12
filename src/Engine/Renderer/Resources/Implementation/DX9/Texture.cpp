@@ -6,10 +6,29 @@ namespace IzEngine
 {
 	Texture::~Texture()
 	{
+		Release();
+	}
+
+	void Texture::Release()
+	{
 		if (Data)
+		{
 			reinterpret_cast<IDirect3DTexture9*>(Data)->Release();
+			Data = nullptr;
+		}
 		if (Surface)
+		{
 			reinterpret_cast<IDirect3DSurface9*>(Surface)->Release();
+			Surface = nullptr;
+		}
+	}
+
+	vec2 Texture::GetSize()
+	{
+		IDirect3DTexture9* texture = reinterpret_cast<IDirect3DTexture9*>(Data);
+		D3DSURFACE_DESC desc;
+		texture->GetLevelDesc(0, &desc);
+		return { desc.Width, desc.Height };
 	}
 
 	Ref<Texture>& Texture::Default()
@@ -19,7 +38,7 @@ namespace IzEngine
 
 	Ref<Texture>& Texture::Create(const std::filesystem::path& path)
 	{
-		std::string id = path.stem().filename().string();
+		std::string id = std::filesystem::absolute(path).string();
 
 		if (auto cache = Textures::List.find(id); cache != Textures::List.end())
 			return cache->second;
@@ -86,18 +105,13 @@ namespace IzEngine
 		return Textures::List[id] = texture;
 	}
 
-	vec2 Texture::GetSize()
-	{
-		IDirect3DTexture9* texture = reinterpret_cast<IDirect3DTexture9*>(Data);
-		D3DSURFACE_DESC desc;
-		texture->GetLevelDesc(0, &desc);
-		return { desc.Width, desc.Height };
-	}
-
 	void Textures::Initialize() { }
 
 	void Textures::Shutdown()
 	{
+		for (auto& [id, texture] : List)
+			texture->Release();
+
 		List.clear();
 	}
 }
