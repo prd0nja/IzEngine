@@ -109,7 +109,7 @@ namespace IzEngine
 
 		std::scoped_lock lock(Browser::TextureMutex);
 
-		if (!Browser::Texture || Browser::Texture->GetSize() != vec2{ width, height })
+		if (!Browser::Texture || !Browser::Texture->Data)
 			Browser::Texture = Texture::Create("browser", Browser::Size);
 
 		IDirect3DTexture9* texture = reinterpret_cast<IDirect3DTexture9*>(Browser::Texture->Data);

@@ -43,7 +43,7 @@ namespace IzEngine
 		static inline CefRefPtr<CefBrowser> Instance;
 		static inline CefRefPtr<BrowserApp> App;
 		static inline CefRefPtr<BrowserClient> Client;
-		static inline Ref<Texture> Texture;
+		static inline Ref<Texture> Texture = nullptr;
 		static inline std::mutex TextureMutex;
 		static inline vec2 Size = { 1920, 1080 };
 		static inline bool Active = false;
