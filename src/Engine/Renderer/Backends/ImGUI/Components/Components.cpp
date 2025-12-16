@@ -203,9 +203,11 @@ namespace ImGui
 			else if (IsItemClicked(ImGuiMouseButton_Right) && unbind)
 				*key = Input_None;
 		}
-		SameLine();
-		Text(label.c_str());
-
+		if (!label.starts_with("##"))
+		{
+			SameLine();
+			Text(label.c_str());
+		}
 		PopID();
 	}
 
