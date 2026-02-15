@@ -31,11 +31,6 @@ namespace IzEngine
 			Remove();
 		}
 
-		void operator<(uintptr_t address)
-		{
-			Address = address;
-		}
-
 		void Install()
 		{
 			IZ_ASSERT(Address, "Hook address is nullptr.");

@@ -18,8 +18,8 @@ namespace IzEngine
 			Log::WriteLine(Channel::Error, "Invalid plugin {}", filePath);
 			return;
 		}
-		CallbackInitialize < uintptr_t(GetProcAddress(mod, "Initialize"));
-		CallbackShutdown < uintptr_t(GetProcAddress(mod, "Shutdown"));
+		CallbackInitialize.Update(uintptr_t(GetProcAddress(mod, "Initialize")));
+		CallbackShutdown.Update(uintptr_t(GetProcAddress(mod, "Shutdown")));
 
 		if (!CallbackInitialize || !CallbackShutdown)
 		{

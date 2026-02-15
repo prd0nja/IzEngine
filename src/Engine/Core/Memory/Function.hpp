@@ -24,7 +24,7 @@ namespace IzEngine
 			return *this;
 		}
 
-		void operator<(uintptr_t address)
+		void Update(uintptr_t address)
 		{
 			Address = address;
 			Func = reinterpret_cast<T*>(address);
