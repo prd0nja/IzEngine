@@ -3,6 +3,7 @@
 #include "Renderer/Resources/Browser.hpp"
 
 #include "Core/System/Environment.hpp"
+#include "Core/System/System.hpp"
 #include "Core/System/Window.hpp"
 
 namespace IzEngine
@@ -53,7 +54,7 @@ namespace IzEngine
 
 	void Browser::Start()
 	{
-		if (!Active || Instance)
+		if (!Active || Open)
 			return;
 
 		CefBrowserSettings browserSettings;
@@ -64,23 +65,35 @@ namespace IzEngine
 
 		CefBrowserHost::CreateBrowser(windowInfo, Client, "about:blank", browserSettings, nullptr, nullptr);
 
+		auto start = std::chrono::steady_clock::now();
 		while (!Client->IsOpened())
-			std::this_thread::sleep_for(std::chrono::milliseconds(10));
+		{
+			auto elapsed = std::chrono::steady_clock::now() - start;
+			if (elapsed > std::chrono::seconds(3))
+				return;
 
+			std::this_thread::sleep_for(std::chrono::milliseconds(10));
+		}
 		Open = true;
 	}
 
 	void Browser::Stop()
 	{
-		if (!Active || !Instance)
+		if (!Active || !Open)
 			return;
 
-		Instance->GetHost()->CloseBrowser(false);
+		Instance->GetHost()->CloseBrowser(true);
 		Instance = nullptr;
 
+		auto start = std::chrono::steady_clock::now();
 		while (!Client->IsClosed())
-			std::this_thread::sleep_for(std::chrono::milliseconds(10));
+		{
+			auto elapsed = std::chrono::steady_clock::now() - start;
+			if (elapsed > std::chrono::seconds(3))
+				break;
 
+			std::this_thread::sleep_for(std::chrono::milliseconds(10));
+		}
 		Open = false;
 	}
 
