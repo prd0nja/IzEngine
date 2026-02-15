@@ -23,11 +23,11 @@ namespace IzEngine
 	void Environment::Initialize()
 	{
 		Directories.insert({ Directory::App, Directories[Directory::Base] / APPLICATION_ID });
-		Directories.insert({ Directory::Plugins, Directories[Directory::App] / "plugins" });
-		Directories.insert({ Directory::Resources, Directories[Directory::App] / "resources" });
-		Directories.insert({ Directory::Reports, Directories[Directory::App] / "reports" });
-		Directories.insert({ Directory::Fonts, Directories[Directory::Resources] / "fonts" });
-		Directories.insert({ Directory::Images, Directories[Directory::Resources] / "images" });
+		Directories.insert({ Directory::Plugins, Directories[Directory::App] / "Plugins" });
+		Directories.insert({ Directory::Resources, Directories[Directory::App] / "Resources" });
+		Directories.insert({ Directory::Reports, Directories[Directory::App] / "Reports" });
+		Directories.insert({ Directory::Fonts, Directories[Directory::Resources] / "Fonts" });
+		Directories.insert({ Directory::Images, Directories[Directory::Resources] / "Images" });
 
 		for (const auto& [_, path] : Directories)
 			std::filesystem::create_directory(path);
