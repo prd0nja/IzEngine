@@ -86,6 +86,7 @@ namespace IzEngine
 			Mouse::Process(msg, lParam);
 			break;
 
+		case WM_CHAR:
 		case WM_KEYDOWN:
 		case WM_KEYUP:
 		case WM_SYSKEYDOWN:

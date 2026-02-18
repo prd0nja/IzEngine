@@ -4,6 +4,11 @@
 
 namespace IzEngine
 {
+	bool Math::Contains(const vec2& point, const vec2& size)
+	{
+		return point.x >= 0.0f && point.x < size.x && point.y >= 0.0f && point.y < size.y;
+	}
+
 	float Math::RadToDeg(float radians)
 	{
 		return radians * (180.f / M_PI);

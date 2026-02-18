@@ -53,14 +53,14 @@ namespace IzEngine
 			{ Key_KeypadMultiply, InputInfo(Key_KeypadMultiply, VK_MULTIPLY, "Keypad Multiply") },
 			{ Key_KeypadSubtract, InputInfo(Key_KeypadSubtract, VK_SUBTRACT, "Keypad Subtract") },
 			{ Key_KeypadAdd, InputInfo(Key_KeypadAdd, VK_ADD, "Keypad Add") },
-			{ Key_LeftShift, InputInfo(Key_LeftShift, VK_LSHIFT, "Left Shift") },
-			{ Key_LeftCtrl, InputInfo(Key_LeftCtrl, VK_LCONTROL, "Left Ctrl") },
-			{ Key_LeftAlt, InputInfo(Key_LeftAlt, VK_LMENU, "Left Alt") },
-			{ Key_LeftSuper, InputInfo(Key_LeftSuper, VK_LWIN, "Left Super") },
+			{ Key_Shift, InputInfo(Key_Shift, VK_SHIFT, "Shift") },
+			{ Key_Ctrl, InputInfo(Key_Ctrl, VK_CONTROL, "Ctrl") },
+			{ Key_Alt, InputInfo(Key_Alt, VK_MENU, "Alt") },
+			{ Key_Super, InputInfo(Key_Super, VK_LWIN, "Windows") },
 			{ Key_RightShift, InputInfo(Key_RightShift, VK_RSHIFT, "Right Shift") },
 			{ Key_RightCtrl, InputInfo(Key_RightCtrl, VK_RCONTROL, "Right Ctrl") },
 			{ Key_RightAlt, InputInfo(Key_RightAlt, VK_RMENU, "Right Alt") },
-			{ Key_RightSuper, InputInfo(Key_RightSuper, VK_RWIN, "Right Super") },
+			{ Key_RightSuper, InputInfo(Key_RightSuper, VK_RWIN, "Right Windows") },
 			{ Key_Menu, InputInfo(Key_Menu, VK_APPS, "Menu") },
 			{ Key_0, InputInfo(Key_0, '0', "0") },
 			{ Key_1, InputInfo(Key_1, '1', "1") },
@@ -126,6 +126,9 @@ namespace IzEngine
 			if (input.State == INPUT_UP)
 				input.State = INPUT_NONE;
 		}
+		Mouse::Delta = { 0, 0 };
+		Mouse::ScrollDelta = 0;
+		Keyboard::Char = 0;
 	}
 
 	bool Input::IsUp(InputEnum input)

@@ -38,6 +38,8 @@ namespace IzEngine
 	class API Math
 	{
 	public:
+		static bool Contains(const vec2& point, const vec2& size);
+
 		static float RadToDeg(float radians);
 		static float DegToRad(float degrees);
 
