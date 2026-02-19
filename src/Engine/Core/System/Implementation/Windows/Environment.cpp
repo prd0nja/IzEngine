@@ -24,6 +24,7 @@ namespace IzEngine
 	void Environment::Initialize()
 	{
 		Directories.insert({ Directory::App, Directories[Directory::Base] / APPLICATION_ID });
+		Directories.insert({ Directory::Bin, Directories[Directory::App] / "Bin" });
 		Directories.insert({ Directory::Configs, Directories[Directory::App] / "Configs" });
 		Directories.insert({ Directory::Plugins, Directories[Directory::App] / "Plugins" });
 		Directories.insert({ Directory::Resources, Directories[Directory::App] / "Resources" });

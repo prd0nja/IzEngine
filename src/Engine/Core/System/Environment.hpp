@@ -13,6 +13,7 @@ namespace IzEngine
 	{
 		Base,
 		App,
+		Bin,
 		Configs,
 		Plugins,
 		Resources,

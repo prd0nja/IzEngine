@@ -18,11 +18,11 @@ namespace IzEngine
 		if (code >= 0)
 			return;
 
-		const auto pathResources = Environment::Path(Directory::App);
-		const auto pathLocales = Environment::Path(Directory::App);
+		const auto pathResources = Environment::Path(Directory::Bin);
+		const auto pathLocales = Environment::Path(Directory::Bin);
 		const auto pathCache = Environment::Path(Directory::App) / "Cache";
 		const auto pathLog = Environment::Path(Directory::App) / "Logs" / "cef.log";
-		const auto pathSubProcess = Environment::Path(Directory::App) / "CEF.exe";
+		const auto pathSubProcess = Environment::Path(Directory::Bin) / "CEF.exe";
 
 		CefSettings settings;
 		settings.log_severity = LOGSEVERITY_ERROR;
