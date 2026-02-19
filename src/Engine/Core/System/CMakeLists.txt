@@ -7,4 +7,6 @@ target_sources(IzEngine PRIVATE
 	Plugins.hpp
 	Plugins.cpp
 	System.hpp
+	ThreadPool.hpp
+	ThreadPool.cpp
 	Window.hpp)
