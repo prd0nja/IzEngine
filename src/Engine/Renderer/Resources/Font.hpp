@@ -1,6 +1,8 @@
 #pragma once
 #include "Core/Common.hpp"
 
+#include "Core/IO/File.hpp"
+
 #define FONT_OPENSANS "OpenSans-Regular"
 #define FONT_SPACERANGER "Space Ranger"
 
@@ -16,8 +18,8 @@ namespace IzEngine
 
 		void Release();
 
+		static Ref<Font>& Create(const File& file, int height);
 		static Ref<Font>& Create(const std::string& name, int height);
-		static Ref<Font>& Create(const std::filesystem::path& path, int height);
 		static Ref<Font>& Default();
 	};
 

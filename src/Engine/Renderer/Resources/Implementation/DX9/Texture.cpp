@@ -33,26 +33,33 @@ namespace IzEngine
 
 	Ref<Texture>& Texture::Default()
 	{
-		return Textures::List[TEXTURE_NULL];
+		IZ_ASSERT(Textures::List[TEXTURE_BLACK], "Default texture not found");
+
+		if (!Textures::List[TEXTURE_BLACK])
+		{
+			Log::WriteLine(Channel::Error, "Default texture not found");
+			exit(-1);
+		}
+		return Textures::List[TEXTURE_BLACK];
 	}
 
-	Ref<Texture>& Texture::Create(const std::filesystem::path& path)
+	Ref<Texture>& Texture::Create(const File& file)
 	{
-		std::string id = std::filesystem::absolute(path).string();
+		std::string id = file.Path.string();
 
 		if (auto cache = Textures::List.find(id); cache != Textures::List.end())
 			return cache->second;
 
-		if (!std::filesystem::exists(path))
+		if (!file.IsValid())
 		{
-			Log::WriteLine(Channel::Error, "Texture not found: {}", path.string());
+			Log::WriteLine(Channel::Error, "Texture not found: {}", file.Path.string());
 			return Default();
 		}
 		Ref<Texture> texture = CreateRef<Texture>();
 		IDirect3DTexture9* dTexture = nullptr;
 		IDirect3DSurface9* dSurface = nullptr;
 
-		if (FAILED(D3DXCreateTextureFromFile(Device::D3Device, path.string().c_str(), &dTexture)))
+		if (FAILED(D3DXCreateTextureFromFileInMemory(Device::D3Device, file.Data.data(), file.Data.size(), &dTexture)))
 			return Default();
 
 		if (FAILED(dTexture->GetSurfaceLevel(0, &dSurface)))

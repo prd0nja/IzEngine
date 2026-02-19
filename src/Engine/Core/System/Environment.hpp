@@ -13,11 +13,10 @@ namespace IzEngine
 	{
 		Base,
 		App,
+		Configs,
 		Plugins,
 		Resources,
 		Reports,
-		Fonts,
-		Images,
 	};
 
 	class API Environment

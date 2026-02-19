@@ -1,9 +1,10 @@
 #pragma once
 #include "Core/Common.hpp"
 
-#define TEXTURE_NULL "null"
-#define TEXTURE_WHITE "white"
+#include "Core/IO/File.hpp"
+
 #define TEXTURE_BLACK "black"
+#define TEXTURE_WHITE "white"
 
 namespace IzEngine
 {
@@ -19,7 +20,7 @@ namespace IzEngine
 		void Release();
 		vec2 GetSize();
 
-		static Ref<Texture>& Create(const std::filesystem::path& path);
+		static Ref<Texture>& Create(const File& file);
 		static Ref<Texture>& Create(const std::string& id, const vec2& size);
 		static Ref<Texture>& Create(const std::string& id, const vec2& size, int level, int usage, int pool);
 		static Ref<Texture>& Default();

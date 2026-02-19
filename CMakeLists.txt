@@ -9,10 +9,12 @@ set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 include(ClangTools)
 
 # Dependencies
+find_package(CURL REQUIRED)
+find_package(glm CONFIG REQUIRED)
 find_package(imgui CONFIG REQUIRED)
 find_package(implot CONFIG REQUIRED)
+find_package(libzippp CONFIG REQUIRED)
 find_package(nlohmann_json CONFIG REQUIRED)
-find_package(glm CONFIG REQUIRED)
 find_package(PolyHook_2 CONFIG REQUIRED)
 
 if(GRAPHICS_API_DX9)

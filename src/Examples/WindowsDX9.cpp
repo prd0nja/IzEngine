@@ -8,58 +8,6 @@
 #include "ImGUI/Common.hpp"
 #include "Renderer/Common.hpp"
 
-class Toolbar : public Frame
-{
-public:
-	Toolbar() : Frame("Toolbar")
-	{
-		Open = true;
-		SetRectAlignment(Horizontal::Fullscreen, Vertical::Fullscreen);
-		SetFlags(ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar
-			| ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoBackground);
-	}
-
-	void OnRender() override
-	{
-		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, { 0, 0 });
-		ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, { 0, 0 });
-		SetRect(0, 0, 640, 16);
-
-		Begin();
-
-		static bool isDebug = false;
-		const vec2 position = RenderPosition;
-		const vec2 size = RenderSize;
-		const vec2 buttonSize = { size.y, size.y };
-
-		ImDrawList* draw = ImGui::GetBackgroundDrawList();
-		draw->AddRectFilled(position, { position + size }, ImColor(ImGui::GetStyleColorVec4(ImGuiCol_FrameBg)));
-
-		ImGui::Rainbow(position + vec2{ 0, size.y }, position + vec2{ size.x, size.y + 2 });
-		ImGui::ButtonToggle(ICON_FA_GRIP, "Design", &UI::DesignMode, buttonSize);
-		ImGui::Tooltip("Design mode");
-		ImGui::SameLine();
-		ImGui::Button(ICON_FA_PAINTBRUSH, "Themes", &UI::Frames["Themes"]->Open, buttonSize);
-		ImGui::Tooltip("Themes");
-		ImGui::SameLine();
-		ImGui::Button(ICON_FA_TERMINAL, "Debug", &isDebug, buttonSize);
-		ImGui::Tooltip("Debug");
-		ImGui::SameLine();
-
-		if (isDebug)
-		{
-			ImGui::ShowDebugLogWindow(&isDebug);
-			ImGui::ShowStackToolWindow(&isDebug);
-		}
-		ImGui::Button(ICON_FA_MEMORY, "Memory", &UI::Frames["Memory"]->Open, buttonSize);
-		ImGui::Tooltip("Memory");
-		ImGui::SameLine();
-
-		End();
-		ImGui::PopStyleVar(2);
-	}
-};
-
 void Application::Start()
 {
 	Crash::Setup();
@@ -71,7 +19,7 @@ void Application::Start()
 	Renderer::Initialize();
 
 	UI::Open = true;
-	UI::Add<Toolbar>();
+	UI::Frames["Memory"]->Open = true;
 
 	while (Window::Open)
 	{

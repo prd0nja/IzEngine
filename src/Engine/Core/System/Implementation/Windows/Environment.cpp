@@ -1,5 +1,6 @@
 #include "Windows/Base.hpp"
 
+#include "Core/IO/VFS.hpp"
 #include "Core/System/Environment.hpp"
 
 #include <fstream>
@@ -23,14 +24,15 @@ namespace IzEngine
 	void Environment::Initialize()
 	{
 		Directories.insert({ Directory::App, Directories[Directory::Base] / APPLICATION_ID });
+		Directories.insert({ Directory::Configs, Directories[Directory::App] / "Configs" });
 		Directories.insert({ Directory::Plugins, Directories[Directory::App] / "Plugins" });
 		Directories.insert({ Directory::Resources, Directories[Directory::App] / "Resources" });
 		Directories.insert({ Directory::Reports, Directories[Directory::App] / "Reports" });
-		Directories.insert({ Directory::Fonts, Directories[Directory::Resources] / "Fonts" });
-		Directories.insert({ Directory::Images, Directories[Directory::Resources] / "Images" });
 
 		for (const auto& [_, path] : Directories)
 			std::filesystem::create_directory(path);
+
+		VFS::Index(Directories[Directory::Resources].string(), ".zip");
 
 		Initialized = true;
 	}
@@ -39,7 +41,7 @@ namespace IzEngine
 	{
 		IZ_ASSERT(Environment::Initialized, "Environment not initialized.");
 
-		std::ifstream file(Path(Directory::App) / filename);
+		std::ifstream file(Path(Directory::Configs) / filename);
 		if (file.is_open() && file.peek() != std::ifstream::traits_type::eof())
 			json = nlohmann::json::parse(file);
 	}
@@ -48,7 +50,7 @@ namespace IzEngine
 	{
 		IZ_ASSERT(Environment::Initialized, "Environment not initialized.");
 
-		std::ofstream file(Path(Directory::App) / filename);
+		std::ofstream file(Path(Directory::Configs) / filename);
 		file << json.dump(4);
 	}
 

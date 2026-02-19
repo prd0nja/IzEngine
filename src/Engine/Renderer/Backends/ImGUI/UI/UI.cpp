@@ -5,6 +5,7 @@
 
 #include "ImGUI/Common.hpp"
 
+#include "Core/IO/VFS.hpp"
 #include "Core/System/Environment.hpp"
 #include "Core/System/System.hpp"
 #include "Core/System/Window.hpp"
@@ -50,33 +51,37 @@ namespace IzEngine
 		ImGuiIO& io = ImGui::GetIO();
 		io.IniFilename = nullptr;
 
-		const auto openSans = Environment::Path(Directory::Fonts) / "OpenSans-Regular.ttf";
-		const auto faRegular = Environment::Path(Directory::Fonts) / "fa-regular-400.ttf";
-		const auto faSolid = Environment::Path(Directory::Fonts) / "fa-solid-900.ttf";
-		const auto faBrands = Environment::Path(Directory::Fonts) / "fa-brands-400.ttf";
+		auto openSans = VFS::GetFile("Fonts/OpenSans-Regular.ttf");
+		auto faRegular = VFS::GetFile("Fonts/fa-regular-400.ttf");
+		auto faSolid = VFS::GetFile("Fonts/fa-solid-900.ttf");
+		auto faBrands = VFS::GetFile("Fonts/fa-brands-400.ttf");
 
 		ImGui::GetStyle().FontScaleMain = Size / 2;
 		const float fontSize = 16;
 		const float iconSize = fontSize * 0.8;
 
+		ImFontConfig config;
+		config.FontDataOwnedByAtlas = false;
+
 		ImFontConfig iconConfig;
 		iconConfig.MergeMode = true;
 		iconConfig.GlyphMinAdvanceX = iconSize;
+		iconConfig.FontDataOwnedByAtlas = false;
 
-		io.Fonts->Clear();
-		if (std::filesystem::exists(openSans))
-			io.Fonts->AddFontFromFileTTF(openSans.string().c_str());
-		if (std::filesystem::exists(faRegular))
-			io.Fonts->AddFontFromFileTTF(faRegular.string().c_str(), iconSize, &iconConfig);
-		if (std::filesystem::exists(faSolid))
-			io.Fonts->AddFontFromFileTTF(faSolid.string().c_str(), iconSize, &iconConfig);
-		if (std::filesystem::exists(faBrands))
-			io.Fonts->AddFontFromFileTTF(faBrands.string().c_str(), iconSize, &iconConfig);
-		if (std::filesystem::exists(openSans))
+		if (openSans.IsValid())
 		{
-			ImGui::H1 = io.Fonts->AddFontFromFileTTF(openSans.string().c_str(), fontSize * 4);
-			ImGui::H2 = io.Fonts->AddFontFromFileTTF(openSans.string().c_str(), fontSize * 3);
-			ImGui::H3 = io.Fonts->AddFontFromFileTTF(openSans.string().c_str(), fontSize * 2);
+			io.Fonts->Clear();
+			io.Fonts->AddFontFromMemoryTTF(openSans.Data.data(), openSans.Data.size(), 0, &config);
+			io.Fonts->AddFontFromMemoryTTF(faRegular.Data.data(), faRegular.Data.size(), iconSize, &iconConfig);
+			io.Fonts->AddFontFromMemoryTTF(faSolid.Data.data(), faSolid.Data.size(), iconSize, &iconConfig);
+			io.Fonts->AddFontFromMemoryTTF(faBrands.Data.data(), faBrands.Data.size(), iconSize, &iconConfig);
+
+			ImGui::H1 =
+				io.Fonts->AddFontFromMemoryTTF(openSans.Data.data(), openSans.Data.size(), fontSize * 4, &config);
+			ImGui::H2 =
+				io.Fonts->AddFontFromMemoryTTF(openSans.Data.data(), openSans.Data.size(), fontSize * 3, &config);
+			ImGui::H3 =
+				io.Fonts->AddFontFromMemoryTTF(openSans.Data.data(), openSans.Data.size(), fontSize * 2, &config);
 		}
 		ImGui::MarkConfig.linkIcon = ICON_FA_LINK;
 		ImGui::MarkConfig.linkCallback = MarkdownLink;

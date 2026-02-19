@@ -18,16 +18,18 @@ target_compile_definitions(IzEngine PUBLIC
 	CMAKE_BINARY_DIR="${CMAKE_BINARY_DIR}")
 
 target_link_libraries(IzEngine PUBLIC
-	$<$<BOOL:${PLATFORM_WINDOWS}>:DbgHelp>
-	$<$<BOOL:${PLATFORM_WINDOWS}>:dwmapi>
-	$<$<BOOL:${GRAPHICS_API_DX9}>:DirectX::SDK>
-	$<$<BOOL:${BUILD_CEF}>:CEF::CEF>
-	imgui::imgui
-	implot::implot
-	nlohmann_json::nlohmann_json
-	glm::glm
-	asmjit::asmjit
-	PolyHook_2::PolyHook_2)
+    asmjit::asmjit
+    CURL::libcurl
+    glm::glm
+    imgui::imgui
+    implot::implot
+    libzippp::libzippp
+    nlohmann_json::nlohmann_json
+    PolyHook_2::PolyHook_2
+    $<$<BOOL:${BUILD_CEF}>:CEF::CEF>
+    $<$<BOOL:${GRAPHICS_API_DX9}>:DirectX::SDK>
+    $<$<BOOL:${PLATFORM_WINDOWS}>:DbgHelp>
+    $<$<BOOL:${PLATFORM_WINDOWS}>:dwmapi>)
 
 # Tree
 get_target_property(SOURCES IzEngine SOURCES)
