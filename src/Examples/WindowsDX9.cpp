@@ -11,10 +11,10 @@
 void Application::Start()
 {
 	Crash::Setup();
-	Environment::Local();
+	Environment::Binary();
+
 	Console::Initialize("IzEngine");
 	Window::Initialize("IzEngine");
-
 	Device::Initialize();
 	Renderer::Initialize();
 
