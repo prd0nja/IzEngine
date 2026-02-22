@@ -4,14 +4,24 @@
 
 #include <curl/curl.h>
 
+static size_t WriteCallback(char* ptr, size_t size, size_t nmemb, std::string* data)
+{
+	data->append(ptr, size * nmemb);
+	return size * nmemb;
+}
+
+static int ProgressCallback(void* clientp, curl_off_t dltotal, curl_off_t dlnow, curl_off_t, curl_off_t)
+{
+	if (dltotal > 0)
+	{
+		auto* cb = reinterpret_cast<std::function<void(float)>*>(clientp);
+		(*cb)(static_cast<float>(dlnow) / static_cast<float>(dltotal));
+	}
+	return 0;
+}
+
 namespace IzEngine
 {
-	static size_t WriteCallback(char* ptr, size_t size, size_t nmemb, std::string* data)
-	{
-		data->append(ptr, size * nmemb);
-		return size * nmemb;
-	}
-
 	void HTTP::Initialize()
 	{
 		curl_global_init(CURL_GLOBAL_ALL);
@@ -47,6 +57,14 @@ namespace IzEngine
 					curl_easy_setopt(curl, CURLOPT_POST, 1L);
 					curl_easy_setopt(curl, CURLOPT_POSTFIELDS, Body.c_str());
 				}
+				if (OnProgress)
+				{
+					curl_easy_setopt(curl, CURLOPT_NOPROGRESS, 0L);
+					curl_easy_setopt(curl, CURLOPT_XFERINFOFUNCTION, ProgressCallback);
+					curl_easy_setopt(curl, CURLOPT_XFERINFODATA, &OnProgress);
+				}
+				curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
+				curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, 0L);
 				curl_easy_perform(curl);
 				curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &response.Code);
 
@@ -65,8 +83,6 @@ namespace IzEngine
 		request->URL = url;
 		request->Method = "GET";
 		request->Callback = callback;
-		Requests.push_back(request);
-		request->Send();
 		return request;
 	}
 
@@ -78,8 +94,6 @@ namespace IzEngine
 		request->Method = "POST";
 		request->Body = body;
 		request->Callback = callback;
-		Requests.push_back(request);
-		request->Send();
 		return request;
 	}
 }

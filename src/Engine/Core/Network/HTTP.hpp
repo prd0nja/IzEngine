@@ -18,6 +18,7 @@ namespace IzEngine
 		std::string Body;
 		std::unordered_map<std::string, std::string> Headers;
 		std::function<void(const HTTPResponse&)> Callback;
+		std::function<void(float)> OnProgress;
 
 		void Send();
 	};
@@ -31,7 +32,5 @@ namespace IzEngine
 		static HTTPRequest* Get(const std::string& url, std::function<void(const HTTPResponse&)> callback);
 		static HTTPRequest* Post(const std::string& url, const std::string& body,
 			std::function<void(const HTTPResponse&)> callback);
-
-		static inline std::vector<HTTPRequest*> Requests;
 	};
 }

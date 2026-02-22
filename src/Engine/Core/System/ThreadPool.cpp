@@ -23,6 +23,7 @@ namespace IzEngine
 
 	void ThreadPool::Queue(std::function<void()> task)
 	{
+		IZ_ASSERT(Running, "ThreadPool is not active");
 		{
 			std::scoped_lock lock(Mutex);
 			Tasks.push(std::move(task));
